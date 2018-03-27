@@ -39,7 +39,7 @@
             <!-- /.box-header -->
             <!-- form start -->
             {{--  <form role="form">  --}}
-            {!! Form::open(['action' => 'ProductsController@store', 'method' => 'POST', 'enctype' => 'multipart/data']) !!}
+            {!! Form::open(['action' => 'ProductsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
               <div class="box-body">
                 <div class="form-group">
                   <label for="category">Categorie</label>
