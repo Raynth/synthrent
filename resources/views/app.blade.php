@@ -220,7 +220,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HOOFD NAVIGATIE</li>
-        <li class="treeview">
+        <li>
           <a href="{{ route('products.index') }}">
             <i class="fa fa-dashboard"></i> <span>Producten</span>
           </a>

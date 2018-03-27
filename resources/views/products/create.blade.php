@@ -10,8 +10,8 @@
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Producten</a></li>
+        <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('products.index') }}">Producten</a></li>
         <li class="active">Toevoegen</li>
       </ol>
     </section>
@@ -20,7 +20,17 @@
     <section class="content">
       <div class="row">
         <!-- left column -->
-        <div class="col-md-12">
+        <div class="col-md-8 col-md-offset-2">
+          <!-- Display validation errors -->
+          @if ($errors->any())
+              <div class="callout callout-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -28,31 +38,37 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            {{--  <form role="form">  --}}
+            {!! Form::open(['action' => 'ProductsController@store', 'method' => 'POST', 'enctype' => 'multipart/data']) !!}
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Categorie</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Voer categorie in">
+                  <label for="category">Categorie</label>
+                  <select class="form-control select2" style="width: 100% id="category" name="category_id";">
+                    @foreach ($categories as $category)
+                      <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                  <label for="product_name">Product naam</label>
+                  <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Voor product naam in">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Product naam</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Voor product naam in">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Huurprijs per dag</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Voer huurprijs per dag in">
+                  <label for="rent_money">Huurprijs per dag</label>
+                  <input type="text" class="form-control" id="rent_money" name="rent_money" placeholder="Voer huurprijs per dag in">
                 </div>
                 <div class="form-group">
                   <label>Omschrijving</label>
-                  <textarea class="form-control" rows="3" placeholder="Voer een omschrijving in"></textarea>
+                  <textarea class="form-control" rows="3" name="description" placeholder="Voer een omschrijving in"></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputFile">Afbeelding invoer</label>
-                  <input type="file" id="exampleInputFile">
+                  <label for="cover_image">Afbeelding invoer</label>
+                  <input type="file" id="cover_image" name="cover_image">
                 </div>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox"> Online
+                    <input type="checkbox" name="online"> Online
                   </label>
                 </div>
               </div>
@@ -60,9 +76,10 @@
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                <button type="submit" class="btn btn-default">Annuleren</button>
+                <button type="button" class="btn btn-default">Annuleren</button>
               </div>
-            </form>
+            {{--  </form>  --}}
+            {!! Form::close() !!}
           </div>
           <!-- /.box -->
         </div>

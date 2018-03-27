@@ -15,8 +15,8 @@
         <small>overzicht van alle producten</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Producten</a></li>
+        <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('products.index') }}">Producten</a></li>
         <li class="active">Overzicht</li>
       </ol>
     </section>
@@ -91,6 +91,7 @@
     <script>
     $(function () {
         $('#example1').DataTable( {
+            "ordening": false,
             "language": {
                 processing:     "Bezig...",
                 search:         "Zoeken:",

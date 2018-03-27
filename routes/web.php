@@ -13,6 +13,6 @@
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::resource('products', 'ProductsController');
