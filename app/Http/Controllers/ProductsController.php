@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Category;
 use App\Product;
 
@@ -28,7 +29,8 @@ class ProductsController extends Controller
     public function create()
     {
         $categories = Category::orderBy('category_name')->get();
-        return view('products.create')->with('categories', $categories);
+
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -89,7 +91,9 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -100,7 +104,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::orderBy('category_name')->get();
+
+        return view('products.edit', compact('product', 'categories')); 
     }
 
     /**
@@ -112,7 +119,46 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'category_id' => 'required',
+            'product_name' => 'required',
+            'rent_money' => 'required',
+            'description' => 'required',
+            'cover_image' => 'image|nullable|max:1999'
+        ]);
+        
+        // Handle File Upload
+        if($request->hasFile('cover_image')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+        }
+
+        // Update Post
+        $product = Product::find($id);
+        $product->category_id = $request->input('category_id');
+        $product->product_name = $request->input('product_name');
+        $product->rent_money = $request->input('rent_money');
+        $product->description = $request->input('description');
+        if($request->hasFile('cover_image')) {
+            $post->cover_image = $fileNameToStore;
+        }
+        $product->online = $request->input('online');
+        if (null !== $request->input('online')) {
+            $product->online = 1;
+        } else {
+            $product->online = 0;
+        };
+        $product->save();
+
+        return redirect('/products')->with('success', 'Product bijgewerkt');
     }
 
     /**
@@ -123,6 +169,14 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+
+        if($product->cover_image != 'noimage.jpg'){
+            // Delete Image
+            Storage::delete('public/cover_images/'.$product->cover_image);
+        }
+
+        $product->delete();
+        return redirect('/products')->with('success', 'Product verwijderd');
     }
 }

@@ -45,7 +45,7 @@
                   <th>Product naam</th>
                   <th>Huurprijs</th>
                   <th>Online</th>
-                  <th>Edit | Delete</th>
+                  <th>Actie</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,13 @@
                                     <span class="fa fa-check"></span>
                                 @endif
                             </td>
-                            <td><a href=""><span class="fa fa-edit"> Edit</a> | <a href=""><span class="fa fa-trash"> Delete</a></td>
+                            <td>
+                              <a href="/products/{{ $product->id }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                              <a href="/products/{{ $product->id }}/edit" class="btn btn-warning"><span class="fa fa-edit"></a>
+                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
+                                <span class="fa fa-trash">
+                              </button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -71,7 +77,7 @@
                   <th>Product naam</th>
                   <th>Huurprijs</th>
                   <th>Online</th>
-                  <th>Edit | Delete</th>
+                  <th>Actie</th>
                 </tr>
                 </tfoot>
               </table>
@@ -87,6 +93,32 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <!-- Popup verschijnt ter bevestiging verwijderen record -->
+  <div class="modal fade" id="modal-default">
+      <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Product verwijderen</h4>
+          </div>
+          <div class="modal-body">
+          <p>Weet u zeker dat u deze product wilt verwijderen?</p>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Sluiten</button>
+          {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+              {{Form::hidden('_method', 'DELETE')}}
+              {{Form::submit('Verwijderen', ['class' => 'btn btn-danger'])}}
+          {!!Form::close()!!}
+        </div>
+      </div>
+      <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 @endsection
 
 @section('footerSection')
