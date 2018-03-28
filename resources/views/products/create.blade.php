@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-group">
                   <label>Omschrijving</label>
-                  <textarea class="form-control" rows="3" name="description" placeholder="Voer een omschrijving in"></textarea>
+                  <textarea class="form-control" rows="3" id="article-ckeditor" name="description" placeholder="Voer een omschrijving in"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="cover_image">Afbeelding invoer</label>
@@ -76,7 +76,7 @@
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                <button type="button" class="btn btn-default">Annuleren</button>
+                <a href="{{ route('products.index') }}" class="btn btn-default">Annuleren</a>
               </div>
             {{--  </form>  --}}
             {!! Form::close() !!}

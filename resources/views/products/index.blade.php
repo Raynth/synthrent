@@ -25,6 +25,11 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
+          @if(session('success'))
+            <div class="alert alert-success">
+                {{session('success')}}
+            </div>
+          @endif
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Overzicht producten</h3>
