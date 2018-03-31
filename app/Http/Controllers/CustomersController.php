@@ -15,7 +15,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = Customer::orderBy('created_at', 'ASC')->get();
+        $customers = Customer::get();
 
         return view('customers.index', compact('customers'));
     }
@@ -27,8 +27,6 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        $categories = Category::orderBy('category_name')->get();
-
         return view('customers.create', compact('categories'));
     }
 
@@ -41,21 +39,28 @@ class CustomersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'category_id' => 'required',
-            'customer_name' => 'required',
-            'rent_money' => 'required',
-            'description' => 'required',
-            'cover_image' => 'image|nullable|max:1999'
+            'forename' => 'required',
+            'lastname' => 'required',
+            'street' => 'required',
+            'number' => 'required',
+            'zipcode' => 'required',
+            'city' => 'required',
+            'account_number' => 'required',
+            'identification' => 'required'
         ]);
 
         // Creeer customer
         $customer = new Customer;
-        $customer->category_id = $request->input('category_id');
-        $customer->customer_name = $request->input('customer_name');
-        $customer->rent_money = $request->input('rent_money');
-        $customer->description = $request->input('description');
-        $customer->cover_image = $fileNameToStore;
-        $customer->online = $request->input('online');
+        $customer->forename = $request->input('forename');
+        $customer->lastname = $request->input('lastname');
+        $customer->street = $request->input('street');
+        $customer->number = $request->input('number');
+        $customer->zipcode = $request->input('zipcode');
+        $customer->city = $request->input('city');
+        $customer->account_number = $request->input('account_number');
+        $customer->identification = $request->input('identification');
+        $customer->discount = $request->input('discount');
+        $customer->comment = $request->input('comment');
         $customer->save();
 
         return redirect('/customers')->with('success', 'Klant toegevoegd');
@@ -97,20 +102,28 @@ class CustomersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'category_id' => 'required',
-            'customer_name' => 'required',
-            'rent_money' => 'required',
-            'description' => 'required',
-            'cover_image' => 'image|nullable|max:1999'
+           'forename' => 'required',
+            'lastname' => 'required',
+            'street' => 'required',
+            'number' => 'required',
+            'zipcode' => 'required',
+            'city' => 'required',
+            'account_number' => 'required',
+            'identification' => 'required'
         ]);
         
         // Update Customer
         $customer = Customer::find($id);
-        $customer->category_id = $request->input('category_id');
-        $customer->customer_name = $request->input('customer_name');
-        $customer->rent_money = $request->input('rent_money');
-        $customer->description = $request->input('description');
-        $customer->online = $request->input('online');
+        $customer->forename = $request->input('forename');
+        $customer->lastname = $request->input('lastname');
+        $customer->street = $request->input('street');
+        $customer->number = $request->input('number');
+        $customer->zipcode = $request->input('zipcode');
+        $customer->city = $request->input('city');
+        $customer->account_number = $request->input('account_number');
+        $customer->identification = $request->input('identification');
+        $customer->discount = $request->input('discount');
+        $customer->comment = $request->input('comment');
         $customer->save();
 
         return redirect('/customers')->with('success', 'Klant bijgewerkt');

@@ -32,7 +32,7 @@
           @endif
           <!-- Als er records in de klanten-tabel staan, toon tabel -->
           <!-- Als er geen records in de klanten-tabel staan, toon melding -->
-          @if (count($customers) > 0)
+          @if (count($categories) > 0)
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Overzicht categorieën</h3>

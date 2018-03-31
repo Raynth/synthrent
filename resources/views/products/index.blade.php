@@ -93,7 +93,7 @@
               <h4>Geen producten in het bestand!</h4>
               <p>Op dit moment bevinden er zich geen producten in het bestand.</p>
           </div>
-          <a href="{{ route('customers.create') }}" class="btn btn-primary">Toevoegen</a>
+          <a href="{{ route('products.create') }}" class="btn btn-primary">Toevoegen</a>
         @endif
         </div>
         <!-- /.col -->

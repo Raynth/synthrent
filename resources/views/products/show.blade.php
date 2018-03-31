@@ -72,10 +72,15 @@
                 </div>
                 
                 
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="online"> Online
-                  </label>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Online</h3>
+                  </div>
+                  <div class="panel-body">
+                    @if ($product->online == 1)
+                        <span class="fa fa-check"></span>
+                    @endif
+                  </div>
                 </div>
               {{--  </div>  --}}
               <!-- /.box-body -->

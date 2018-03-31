@@ -22,11 +22,6 @@
         <!-- left column -->
         <div class="col-md-8 col-md-offset-2">
           <!-- general form elements -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Bekijk een categorie</h3>
-            </div>
-            <!-- /.box-header -->
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Categorie</h3>
@@ -46,15 +41,10 @@
                 @endif
               </div>
             </div>
-              </div>
-              <!-- /.box-body -->
 
-              <div class="box-footer">
               <a href="/categories/{{ $category->id }}/edit" class="btn btn-warning">Bewerken</a>
-                <a href="{{ route('categories.index') }}" class="btn btn-default">Annuleren</a>
-              </div>
-          </div>
-          <!-- /.box -->
+              <a href="{{ route('categories.index') }}" class="btn btn-default">Annuleren</a>
+
         </div>
         <!--/.col (right) -->
       </div>
