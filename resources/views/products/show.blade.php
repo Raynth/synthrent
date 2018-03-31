@@ -20,48 +20,71 @@
     <section class="content">
       <div class="row">
         <!-- left column -->
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
           <!-- general form elements -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Bekijk een product</h3>
-            </div>
+          {{--  <div class="box box-primary">  --}}
+            {{--  <div class="box-header with-border">  --}}
+              {{--  <h3 class="box-title">Bekijk een product</h3>  --}}
+            {{--  </div>  --}}
             <!-- /.box-header -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="category">Categorie</label>
-                  {{ $product->category->category_name }}
+              {{--  <div class="box-body">  --}}
+                <div class="panel panel-default">
+                  <div class="panel-heading">Categorie</div>
+                  <div class="panel-body">
+                    {{ $product->category->category_name }}
+                  </div>
                 </div>
-                <!-- /.form-group -->
-                <div class="form-group">
-                  <label for="product_name">Product naam</label>
-                  {{ $product->name }}
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Product naam</h3>
+                  </div>
+                  <div class="panel-body">
+                    {{ $product->product_name }}
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="rent_money">Huurprijs per dag</label>
-                  &euro; {{ number_format($product->rent_money, 2, ',', '.') }}
+                
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Huurprijs per dag</h3>
+                  </div>
+                  <div class="panel-body">
+                    &euro; {{ number_format($product->rent_money, 2, ',', '.') }}
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Omschrijving</label>
-                  {{ $product->description }}
+                
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Omschrijving</h3>
+                  </div>
+                  <div class="panel-body">
+                    {!! $product->description !!}
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="cover_image">Afbeelding invoer</label>
-                  <input type="file" id="cover_image" name="cover_image">
+                
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Afbeelding</h3>
+                  </div>
+                  <div class="panel-body">
+                    <img src="{{ asset('storage/cover_images/'.$product->cover_image) }}">
+                  </div>
                 </div>
+                
+                
                 <div class="checkbox">
                   <label>
                     <input type="checkbox" name="online"> Online
                   </label>
                 </div>
-              </div>
+              {{--  </div>  --}}
               <!-- /.box-body -->
 
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Toevoegen</button>
+              {{--  <div class="box-footer">  --}}
+                <a href="/products/{{ $product->id }}/edit" class="btn btn-warning">Bewerken</a>
                 <a href="{{ route('products.index') }}" class="btn btn-default">Annuleren</a>
-              </div>
-          </div>
+              {{--  </div>  --}}
+          {{--  </div>  --}}
           <!-- /.box -->
         </div>
         <!--/.col (right) -->

@@ -11,12 +11,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Producten
-        <small>overzicht van alle producten</small>
+        Klanten
+        <small>overzicht van alle klanten</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('products.index') }}">Producten</a></li>
+        <li><a href="{{ route('customers.index') }}">Klanten</a></li>
         <li class="active">Overzicht</li>
       </ol>
     </section>
@@ -32,70 +32,72 @@
           @endif
           <!-- Als er records in de klanten-tabel staan, toon tabel -->
           <!-- Als er geen records in de klanten-tabel staan, toon melding -->
-          @if (count($products) > 0)
+          @if (count($customers) > 0)
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Overzicht producten</h3>
-              <a href="{{ route('products.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+              <h3 class="box-title">Overzicht klaten</h3>
+              <a href="{{ route('customers.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Categorie</th>
-                  <th>Product naam</th>
-                  <th>Huurprijs</th>
-                  <th>Online</th>
-                  <th>Actie</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach ($products as $product)
-                        <tr>
-                            <td>{{ $product->id }}</td>
-                            <td>{{ $product->category->category_name }}</td>
-                            <td>{{ $product->product_name }}</td>
-                            <td>&euro; {{ number_format($product->rent_money, 2, ',', '.') }}</td>
-                            <td>
-                                @if ($product->online == 1)
-                                    <span class="fa fa-check"></span>
-                                @endif
-                            </td>
-                            <td>
-                              <a href="/products/{{ $product->id }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                              <a href="/products/{{ $product->id }}/edit" class="btn btn-warning"><span class="fa fa-edit"></a>
-                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
-                                <span class="fa fa-trash">
-                              </button>
-                            </td>
-                        </tr>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Voornaam</th>
+                    <th>Achternaam</th>
+                    <th>Straat</th>
+                    <th>Nummer</th>
+                    <th>Postcode</th>
+                    <th>Woonplaats</th>
+                    <th>Actie</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($customers as $customer)
+                      <tr>
+                          <td>{{ $customer->id }}</td>
+                          <td>{{ $customer->forename }}</td>
+                          <td>{{ $customer->lastname }}</td>
+                          <td>{{ $customer->street }}</td>
+                          <td>{{ $customer->number }}</td>
+                          <td>{{ $customer->zipcode }}</td>
+                          <td>{{ $customer->city }}</td>
+                          <td>
+                            <a href="/customers/{{ $customer->id }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                            <a href="/customers/{{ $customer->id }}/edit" class="btn btn-warning"><span class="fa fa-edit"></a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
+                              <span class="fa fa-trash">
+                            </button>
+                          </td>
+                      </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Id</th>
-                  <th>Categorie</th>
-                  <th>Product naam</th>
-                  <th>Huurprijs</th>
-                  <th>Online</th>
+                <th>Id</th>
+                  <th>Voornaam</th>
+                  <th>Achternaam</th>
+                  <th>Straat</th>
+                  <th>Nummer</th>
+                  <th>Postcode</th>
+                  <th>Woonplaats</th>
                   <th>Actie</th>
                 </tr>
                 </tfoot>
               </table>
             </div>
             <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-          @else
+        </div>
+        <!-- /.box -->
+        @else
           <div class="callout callout-info">
-              <h4>Geen producten in het bestand!</h4>
-              <p>Op dit moment bevinden er zich geen producten in het bestand.</p>
+              <h4>Geen klanten in het bestand!</h4>
+              <p>Op dit moment bevinden er zich geen klanten in het bestand.</p>
           </div>
           <a href="{{ route('customers.create') }}" class="btn btn-primary">Toevoegen</a>
         @endif
-        </div>
+    </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -111,14 +113,14 @@
           <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Product verwijderen</h4>
+          <h4 class="modal-title">Klant verwijderen</h4>
           </div>
           <div class="modal-body">
-          <p>Weet u zeker dat u deze product wilt verwijderen?</p>
+          <p>Weet u zeker dat u deze klant wilt verwijderen?</p>
           </div>
           <div class="modal-footer">
-          @if (count($products) > 0)
-                <form action="{{ route('products.destroy', $product->id) }}" method="post" class="pull-left">
+            @if (count($customers) > 0)
+                <form action="{{ route('customers.destroy', $customer->id) }}" method="post" class="pull-left">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <button type="submit" class="btn btn-danger">Verwijderen</button>
@@ -132,10 +134,12 @@
       <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
+  
 @endsection
 
 @section('footerSection')
-    <!-- DataTables -->
+
+<!-- DataTables -->
     <script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>

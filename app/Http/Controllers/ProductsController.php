@@ -18,7 +18,7 @@ class ProductsController extends Controller
     {
         $products = Product::orderBy('created_at', 'ASC')->get();
         // return $products;
-        return view('products.index')->with('products', $products);
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -50,19 +50,11 @@ class ProductsController extends Controller
         ]);
 
         // Handle File Upload
-        if($request->hasFile('cover_image')) {
-            // Get filename with the extension
-            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('cover_image')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+        if ($request->hasFile('cover_image')) {
+            $filename = $request->cover_image->getClientOriginalName();
+            $request->cover_image->storeAs('public/cover_images', $filename);
         } else {
-            $fileNameToStore = 'noimage.jpg';
+            $filename = 'noimage.jpg';
         }
 
         // Creeer product
@@ -71,7 +63,7 @@ class ProductsController extends Controller
         $product->product_name = $request->input('product_name');
         $product->rent_money = $request->input('rent_money');
         $product->description = $request->input('description');
-        $product->cover_image = $fileNameToStore;
+        $product->cover_image = $filename;
         $product->online = $request->input('online');
         if (null !== $request->input('online')) {
             $product->online = 1;
@@ -128,17 +120,9 @@ class ProductsController extends Controller
         ]);
         
         // Handle File Upload
-        if($request->hasFile('cover_image')) {
-            // Get filename with the extension
-            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('cover_image')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+        if ($request->hasFile('cover_image')) {
+            $filename = $request->cover_image->getClientOriginalName();
+            $request->cover_image->storeAs('public/cover_images', $filename);
         }
 
         // Update Post
@@ -147,8 +131,8 @@ class ProductsController extends Controller
         $product->product_name = $request->input('product_name');
         $product->rent_money = $request->input('rent_money');
         $product->description = $request->input('description');
-        if($request->hasFile('cover_image')) {
-            $post->cover_image = $fileNameToStore;
+        if ($request->hasFile('cover_image')) {
+            $product->cover_image = $filename;
         }
         $product->online = $request->input('online');
         if (null !== $request->input('online')) {

@@ -11,12 +11,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Producten
-        <small>overzicht van alle producten</small>
+        Categorieën
+        <small>overzicht van alle categorieën</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('products.index') }}">Producten</a></li>
+        <li><a href="{{ route('categories.index') }}">Categorieën</a></li>
         <li class="active">Overzicht</li>
       </ol>
     </section>
@@ -32,11 +32,11 @@
           @endif
           <!-- Als er records in de klanten-tabel staan, toon tabel -->
           <!-- Als er geen records in de klanten-tabel staan, toon melding -->
-          @if (count($products) > 0)
+          @if (count($customers) > 0)
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Overzicht producten</h3>
-              <a href="{{ route('products.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+              <h3 class="box-title">Overzicht categorieën</h3>
+              <a href="{{ route('categories.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -44,28 +44,24 @@
                 <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Categorie</th>
-                  <th>Product naam</th>
-                  <th>Huurprijs</th>
+                  <th>Categorie naam</th>
                   <th>Online</th>
                   <th>Actie</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($categories as $category)
                         <tr>
-                            <td>{{ $product->id }}</td>
-                            <td>{{ $product->category->category_name }}</td>
-                            <td>{{ $product->product_name }}</td>
-                            <td>&euro; {{ number_format($product->rent_money, 2, ',', '.') }}</td>
+                            <td>{{ $category->id }}</td>
+                            <td>{{ $category->category_name }}</td>
                             <td>
-                                @if ($product->online == 1)
+                                @if ($category->online == 1)
                                     <span class="fa fa-check"></span>
                                 @endif
                             </td>
                             <td>
-                              <a href="/products/{{ $product->id }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                              <a href="/products/{{ $product->id }}/edit" class="btn btn-warning"><span class="fa fa-edit"></a>
+                              <a href="/categories/{{ $category->id }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                              <a href="/categories/{{ $category->id }}/edit" class="btn btn-warning"><span class="fa fa-edit"></a>
                               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                 <span class="fa fa-trash">
                               </button>
@@ -76,9 +72,7 @@
                 <tfoot>
                 <tr>
                   <th>Id</th>
-                  <th>Categorie</th>
-                  <th>Product naam</th>
-                  <th>Huurprijs</th>
+                  <th>Categorie naam</th>
                   <th>Online</th>
                   <th>Actie</th>
                 </tr>
@@ -90,8 +84,8 @@
           <!-- /.box -->
           @else
           <div class="callout callout-info">
-              <h4>Geen producten in het bestand!</h4>
-              <p>Op dit moment bevinden er zich geen producten in het bestand.</p>
+              <h4>Geen categorieën in het bestand!</h4>
+              <p>Op dit moment bevinden er zich geen categorieën in het bestand.</p>
           </div>
           <a href="{{ route('customers.create') }}" class="btn btn-primary">Toevoegen</a>
         @endif
@@ -111,14 +105,14 @@
           <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Product verwijderen</h4>
+          <h4 class="modal-title">Categorie verwijderen</h4>
           </div>
           <div class="modal-body">
-          <p>Weet u zeker dat u deze product wilt verwijderen?</p>
+          <p>Weet u zeker dat u deze categorie wilt verwijderen?</p>
           </div>
           <div class="modal-footer">
-          @if (count($products) > 0)
-                <form action="{{ route('products.destroy', $product->id) }}" method="post" class="pull-left">
+          @if (count($categories) > 0)
+                <form action="{{ route('categories.destroy', $category->id) }}" method="post" class="pull-left">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <button type="submit" class="btn btn-danger">Verwijderen</button>
@@ -141,7 +135,7 @@
     <script>
     $(function () {
         $('#example1').DataTable( {
-          "order": [[2, "asc"]],
+            "order": [[1, "asc"]],
             "language": {
                 processing:     "Bezig...",
                 search:         "Zoeken:",

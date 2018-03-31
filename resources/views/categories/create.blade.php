@@ -6,12 +6,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Product toevoegen
+        Categorie toevoegen
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('products.index') }}">Producten</a></li>
+        <li><a href="{{ route('categories.index') }}">Categorieën</a></li>
         <li class="active">Toevoegen</li>
       </ol>
     </section>
@@ -34,14 +34,13 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Voeg een product toe</h3>
+              <h3 class="box-title">Voeg een categorie toe</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             {{--  <form role="form">  --}}
-            <form action="{{ route('products.store') }}" enctype="multipart/form-data" method="post">
-              {{ csrf_field() }}
-                <div class="box-body">
+            {!! Form::open(['action' => 'CategoriesController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+              <div class="box-body">
                 <div class="form-group">
                   <label for="category">Categorie</label>
                   <select class="form-control select2" style="width: 100% id="category" name="category_id";">
@@ -52,20 +51,8 @@
                 </div>
                 <!-- /.form-group -->
                 <div class="form-group">
-                  <label for="product_name">Product naam</label>
-                  <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Voor product naam in">
-                </div>
-                <div class="form-group">
-                  <label for="rent_money">Huurprijs per dag</label>
-                  <input type="text" class="form-control" id="rent_money" name="rent_money" placeholder="Voer huurprijs per dag in">
-                </div>
-                <div class="form-group">
-                  <label>Omschrijving</label>
-                  <textarea class="form-control" rows="3" id="article-ckeditor" name="description" placeholder="Voer een omschrijving in"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="cover_image">Afbeelding invoer</label>
-                  <input type="file" id="cover_image" name="cover_image">
+                  <label for="category_name">Categorie naam</label>
+                  <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Voor category naam in">
                 </div>
                 <div class="checkbox">
                   <label>
@@ -77,9 +64,10 @@
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                <a href="{{ route('products.index') }}" class="btn btn-default">Annuleren</a>
+                <a href="{{ route('categories.index') }}" class="btn btn-default">Annuleren</a>
               </div>
-            </form>
+            {{--  </form>  --}}
+            {!! Form::close() !!}
           </div>
           <!-- /.box -->
         </div>

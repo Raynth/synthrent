@@ -225,7 +225,16 @@
             <i class="fa fa-dashboard"></i> <span>Producten</span>
           </a>
         </li>
-        <li class="treeview">
+        <li>
+          <a href="{{ route('categories.index') }}">
+            <i class="fa fa-dashboard"></i> <span>Categorieën</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('customers.index') }}">
+            <i class="fa fa-dashboard"></i> <span>Klanten</span>
+          </a>
+        </li><li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
@@ -336,7 +345,7 @@
             </span>
           </a>
         </li>
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Examples</span>
             <span class="pull-right-container">
@@ -631,6 +640,21 @@
 <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
 <script>
     CKEDITOR.replace( 'article-ckeditor' );
+</script>
+<!-- Active menu -->
+<script>
+    /** add active class and stay opened when selected */
+    var url = window.location;
+
+    // for sidebar menu entirely but not cover treeview
+    $('ul.sidebar-menu a').filter(function() {
+      return this.href == url;
+    }).parent().addClass('active');
+
+    // for treeview
+    $('ul.treeview-menu a').filter(function() {
+      return this.href == url;
+    }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
 </script>
 </body>
 </html>
