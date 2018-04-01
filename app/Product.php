@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    /**
-     * Get the comments for the blog post.
-     */
     public function category()
     {
         return $this->belongsTo('App\Category');
+    }
+
+    public function rentals()
+    {
+        return $this->hasMany('App\Rental');
     }
 }

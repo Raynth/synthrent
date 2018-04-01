@@ -96,6 +96,26 @@
                   </div>
                   <!-- /.col -->                  
                 </div>
+                <!-- /.row -->
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="phone">Telefoonnummer</label>
+                      <input type="text" class="form-control" id="phone" name="phone" placeholder="Voor telefoonnummer in">
+                    </div>
+                    <!-- /.form-group -->                    
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-7">
+                    <div class="form-group">
+                      <label for="email">Emailadres</label>
+                      <input type="text" class="form-control" id="email" name="email" placeholder="Voor emailadres in">
+                    </div>
+                    <!-- /.form-group -->                    
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->  
                 <div class="row">
                   <div class="col-md-5">
                     <div class="form-group">

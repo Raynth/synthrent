@@ -221,6 +221,10 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HOOFD NAVIGATIE</li>
         <li>
+          <a href="{{ route('rentals.index') }}">
+            <i class="fa fa-dashboard"></i> <span>Verhuren</span>
+          </a>
+        </li><li>
           <a href="{{ route('products.index') }}">
             <i class="fa fa-dashboard"></i> <span>Producten</span>
           </a>

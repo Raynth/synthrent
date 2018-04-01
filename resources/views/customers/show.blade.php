@@ -37,7 +37,10 @@
                       <div class="col-md-6">
                         <p>{{ $customer->forename }} {{ $customer->lastname }}<br>
                         {{ $customer->street }} {{ $customer->number }}<br>
-                        {{ $customer->zipcode}} {{ $customer->city }}</p>
+                        {{ $customer->zipcode}} {{ $customer->city }}</br>
+                        <br>
+                        {{ $customer->phone}}<br>
+                        {{ $customer->email}}
                       </div>
                       <div class="col-md-6">
                         <table>
@@ -59,7 +62,7 @@
                     <div class="row">
                       <div class="col-md-12">
                         <p><b>Opmerking:</b><br>
-                        {{ $customer->comment }}</p>
+                        {!! $customer->comment !!}</p>
                       </div>
                     </div>
                   </div>

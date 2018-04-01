@@ -16,8 +16,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('created_at', 'ASC')->get();
-        // return $products;
+        $products = Product::all();
+        
         return view('products.index', compact('products'));
     }
 
@@ -28,7 +28,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Category::orderBy('category_name')->get();
+        // $categories = Category::all();
 
         return view('products.create', compact('categories'));
     }

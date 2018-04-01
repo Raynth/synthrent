@@ -57,6 +57,8 @@ class CustomersController extends Controller
         $customer->number = $request->input('number');
         $customer->zipcode = $request->input('zipcode');
         $customer->city = $request->input('city');
+        $customer->phone = $request->input('phone');
+        $customer->email = $request->input('email');
         $customer->account_number = $request->input('account_number');
         $customer->identification = $request->input('identification');
         $customer->discount = $request->input('discount');
@@ -120,6 +122,8 @@ class CustomersController extends Controller
         $customer->number = $request->input('number');
         $customer->zipcode = $request->input('zipcode');
         $customer->city = $request->input('city');
+        $customer->phone = $request->input('phone');
+        $customer->email = $request->input('email');
         $customer->account_number = $request->input('account_number');
         $customer->identification = $request->input('identification');
         $customer->discount = $request->input('discount');

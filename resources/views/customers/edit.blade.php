@@ -96,6 +96,22 @@
                     </div>
                     <!-- /.form-group -->                    
                   </div>
+                  <!-- /.col -->
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <label for="phone">Telefoonnummer</label>
+                      <input type="text" class="form-control" id="phone" name="phone" value="{{ $customer->phone }}" placeholder="Voor telefoonnummer in">
+                    </div>
+                    <!-- /.form-group -->                    
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <label for="email">Emailadres</label>
+                      <input type="text" class="form-control" id="email" name="email" value="{{ $customer->email }}" placeholder="Voor emailadres in">
+                    </div>
+                    <!-- /.form-group -->                    
+                  </div>
                   <!-- /.col -->                  
                 </div>
                 <div class="row">
