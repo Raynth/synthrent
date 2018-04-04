@@ -48,13 +48,7 @@ class RentalsController extends Controller
         $rental->product_id = $request->input('product_id');
         $rental->date_from = $request->input('date_from');
         $rental->date_to = $request->input('date_to');
-        // Berekening aantal dagen tussen 'date_from' en 'date_to'
-        $dateFrom = new DateTime($rental->date_from);
-        $dateTo = new DateTime($rental->date_to);
-        $interval = $dateFrom->diff($dateTo);
-        $days = $interval->format('%a');
-        // Berekening totaal huurprijs
-        $rental->total_rent_money = 0;
+        $rental->total_rent_money = $request->input('total_rent_money');
         $rental->bring_back = 0;
         $rental->save();
 
@@ -69,7 +63,9 @@ class RentalsController extends Controller
      */
     public function show($id)
     {
-        //
+        $rental = Rental::find($id);
+
+        return view('rentals.show', compact('rental'));
     }
 
     /**
@@ -80,7 +76,11 @@ class RentalsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $rental = Rental::find($id);
+        $customers = Customer::all();
+        $products = Product::all();
+
+        return view('rentals.edit', compact('rental', 'customers', 'products')); 
     }
 
     /**
@@ -92,7 +92,20 @@ class RentalsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rental = Rental::find($id);
+        $rental->customer_id = $request->input('customer_id');
+        $rental->product_id = $request->input('product_id');
+        $rental->date_from = $request->input('date_from');
+        $rental->date_to = $request->input('date_to');
+        $rental->total_rent_money = $request->input('total_rent_money');
+        if (null !== $request->input('bring_back')) {
+            $rental->bring_back = 1;
+        } else {
+            $rental->bring_back = 0;
+        };
+        $rental->save();
+
+        return redirect('/rentals')->with('success', 'Verhuur bijgewerkt');
     }
 
     /**

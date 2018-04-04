@@ -61,7 +61,7 @@
                             <td>{{ $rental->product->product_name }}</td>
                             <td>{{ $rental->date_from }}</td>
                             <td>{{ $rental->date_to }}</td>
-                            <td>&euro; {{ number_format($rental->rent_money, 2, ',', '.') }}</td>
+                            <td>&euro; {{ number_format($rental->total_rent_money, 2, ',', '.') }}</td>
                             <td>
                                 @if ($rental->online == 1)
                                     <span class="fa fa-check"></span>
@@ -79,7 +79,6 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Id</th>
                   <th>Id</th>
                   <th>Klant</th>
                   <th>Product</th>

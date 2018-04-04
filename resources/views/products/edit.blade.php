@@ -44,7 +44,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="category">Categorie</label>
-                  <select class="form-control select2" style="width: 100% id="category" name="category_id";">
+                  <select class="form-control select2" style="width: 100%;" id="category" name="category_id">
                     @foreach ($categories as $category)
                       <option value="{{ $category->id }}" {{ ($product->category_id == $category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>
                     @endforeach

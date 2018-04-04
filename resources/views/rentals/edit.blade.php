@@ -11,13 +11,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Verhuur toevoegen
+        Verhuur bewerken
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ route('rentals.index') }}">Verhuren</a></li>
-        <li class="active">Toevoegen</li>
+        <li class="active">Bewerken</li>
       </ol>
     </section>
 
@@ -39,71 +39,93 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Voeg een verhuur toe</h3>
+              <h3 class="box-title">Een verhuur bewerken</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             {{--  <form role="form">  --}}
-            <form action="{{ route('rentals.store') }}" enctype="multipart/form-data" method="post">
-              {{ csrf_field() }}
+            {!! Form::open(['action' => ['RentalsController@update', $rental->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+              <input type="hidden" name="_method" value="put">
               <div class="box-body">
-                <div class="form-group col-md-12">
-                  <label for="customer">Klant</label>
-                  <select class="form-control select2" style="width: 100%;" id="customer" name="customer_id">
-                    @foreach ($customers as $customer)
-                      <option value="{{ $customer->id }}">{{ $customer->forename }} {{ $customer->lastname }}</option>
-                    @endforeach
-                  </select>
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label for="customer">Klant</label>
+                    <select class="form-control select2" style="width: 100%;" id="customer" name="customer_id">
+                      @foreach ($customers as $customer)
+                        <option value="{{ $customer->id }}" {{ ($rental->customer_id == $customer->id) ? 'selected' : '' }}>{{$customer->forename }} {{ $customer->lastname }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <!-- /.form-group -->
                 </div>
-                <!-- /.form-group -->
-                <div class="form-group col-md-12">
-                  <label for="product">Product</label>
-                  <select class="form-control select2" style="width: 100%;" id="product" name="product_id">
-                    @foreach ($products as $product)
-                      <option value="{{ $product->id }}">{{ $product->product_name }}</option>
-                    @endforeach
-                  </select>
+                <!-- /.row -->
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label for="product">Product</label>
+                    <select class="form-control select2" style="width: 100%;" id="product" name="product_id">
+                      @foreach ($products as $product)
+                        <option value="{{ $product->id }}" {{ ($rental->product_id == $product->id) ? 'selected' : '' }}>{{ $product->product_name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <!-- /.form-group -->
                 </div>
-                <!-- /.form-group -->
-                <div class="form-group col-md-6">
-                  <label for="date_from">Datum: vanaf</label>
-                  <div class="input-group date">
-                    <div class="input-group-addon">
-                      <i class="fa fa-calendar"></i>
+                <!-- /.row -->
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="date_from">Datum: vanaf</label>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="datepicker1" name="date_from" value="{{ $rental->date_from }}">
                     </div>
-                    <input type="text" class="form-control pull-right" id="datepicker1" name="date_from">
+                    <!-- /.input group -->
                   </div>
-                  <!-- /.input group -->
-                </div>
-                <!-- /.form group -->
-                <div class="form-group col-md-6">
-                  <label for="date_to">Datum: tot</label>
-                  <div class="input-group date">
-                    <div class="input-group-addon">
-                      <i class="fa fa-calendar"></i>
+                  <!-- /.form group -->
+                  <div class="form-group col-md-6">
+                    <label for="date_to">Datum: tot</label>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="datepicker2" name="date_to" value="{{ $rental->date_to }}">
                     </div>
-                    <input type="text" class="form-control pull-right" id="datepicker2" name="date_to">
+                    <!-- /.input group -->
                   </div>
-                  <!-- /.input group -->
+                  <!-- /.form group -->
                 </div>
-                <!-- /.form group -->
-                <div class="form-group col-md-12">
-                  <label for="total_rent_money">Huurprijs</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">&euro;</span>
-                    <input type="number" class="form-control" id="total_rent_money" name="total_rent_money" step="0.05" onfocus="calculateRental()">
+                <!-- /.row -->
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="total_rent_money">Huurprijs</label>
+                    <div class="input-group">
+                      <span class="input-group-addon">&euro;</span>
+                      <input type="number" class="form-control" id="total_rent_money" name="total_rent_money" value="{{ $rental->total_rent_money }}" step="0.05" onfocus="calculateRental()">
+                    </div>
+                    <!-- /.input-group -->
                   </div>
-                  <!-- /.input-group -->
+                  <!-- /.form-group -->
+                  <div class="form-group col-md-6">
+                    <div class="form-group checkbox">
+                      <label for="bring_back">
+                        <input type="checkbox" id="bring_back" name="bring_back" value="$product->bring_back" {{ ($product->bring_back == 1) ? 'checked' : '' }}> Teruggebracht
+                      </label>
+                    </div>
+                    <!-- /.checkbox -->
+                  </div>
+                  <!-- /.form-group -->
                 </div>
-                <!-- /.form-group -->
+                <!-- /.row -->
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Toevoegen</button>
+                <button type="submit" class="btn btn-primary">Bewerken</button>
                 <a href="{{ route('rentals.index') }}" class="btn btn-default">Annuleren</a>
               </div>
               <!-- /.box-footer -->
-            </form>
+            {{--  </form>  --}}
+            {!! Form::close() !!}
           </div>
           <!-- /.box -->
         </div>
@@ -114,6 +136,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
   <script>
     // Bereken totaal huurprijs: aantal dagen x huurprijs
     function calculateRental() {
@@ -142,7 +165,7 @@
       document.getElementById("total_rent_money").value = totalRentMoney.toFixed(2)
     }
   </script>
-  
+
   @endsection
 
   @section('footerSection')
