@@ -11,12 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Route::get('/', function () {
+//     return view('home');
+// })->name('home');
 
-Route::resource('products', 'ProductsController');
-Route::resource('categories', 'CategoriesController');
-Route::resource('customers', 'CustomersController');
-Route::resource('rentals', 'RentalsController');
-Route::resource('dashboard', 'DashboardController');
+// Admin Routes
+Route::group(['namespace' => 'Admin'], function(){
+    Route::get('admin', 'DashboardController@index')->name('home');    
+    Route::get('admin/index', 'DashboardController@index')->name('admin.index');
+    Route::get('dashboard/index', 'DashboardController@index')->name('dashboard.index');
+    // Route::get('admin/calculateRentalsPerMonth', 'DashboardController@calculateRentalsPerMonth')->name('admin.calculateRentalsPerMonth');
+    Route::resource('admin/products', 'ProductsController');
+    Route::resource('admin/categories', 'CategoriesController');
+    Route::resource('admin/customers', 'CustomersController');
+    Route::resource('admin/rentals', 'RentalsController');
+});
