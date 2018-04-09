@@ -64,7 +64,7 @@
                     <label for="product">Product</label>
                     <select class="form-control select2" style="width: 100%;" id="product" name="product_id">
                       @foreach ($products as $product)
-                        <option value="{{ $product->id }}" {{ ($rental->product_id == $product->id) ? 'selected' : '' }}>{{ $product->product_name }}</option>
+                        <option value="{{ $product->id }}" {{ ($rental->product_id == $product->id) ? 'selected' : '' }}>{{ $product->product_mark->product_mark_name }} {{ $product->product_name }}</option>
                       @endforeach
                     </select>
                   </div>
@@ -169,6 +169,11 @@
   @endsection
 
   @section('footerSection')
+    <!-- CKEditor -->
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
     <!-- bootstrap datepicker -->
     <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js') }}" charset="UTF-8"></script>

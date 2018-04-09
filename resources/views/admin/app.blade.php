@@ -153,6 +153,11 @@
           </a>
         </li>
         <li>
+          <a href="{{ route('productmarks.index') }}">
+            <i class="fa fa-dashboard"></i> <span>Productmerken</span>
+          </a>
+        </li>
+        <li>
           <a href="{{ route('categories.index') }}">
             <i class="fa fa-dashboard"></i> <span>Categorieën</span>
           </a>
@@ -395,11 +400,6 @@
 </script>
 @section('footerSection')
   @show
-<!-- CKEditor -->
-<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace( 'article-ckeditor' );
-</script>
 <!-- Active menu -->
 <script>
     /** add active class and stay opened when selected */

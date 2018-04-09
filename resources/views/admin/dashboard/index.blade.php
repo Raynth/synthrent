@@ -215,9 +215,47 @@
 
     </div>
     <!-- /.content-wrapper -->
+
+    <script>
+        var url = {{ route('dashboard.chartsales') }};
+        console.log(url);
+        var Months = new Array();
+        var Labels = new Array();
+        var Sales = new Array();
+        $(document).ready(function(){
+            $.get(url, function(response){
+                response.forEach(function(data){
+                    Months.push(data.month);
+                    // Labels.push(data.stockName);
+                    Sales.push(data.sum);
+                });
+                var ctx = document.getElementById("salesChart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Labels,
+                        datasets: [{
+                            label: 'Infosys Price',
+                            data: Prices,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
 
 @section('footerSection')
     <!-- ChartJS -->
-    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="{{ asset('admin/bower_components/Chart.js/Chart.js') }}"></script>
 @endsection

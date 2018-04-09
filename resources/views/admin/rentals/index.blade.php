@@ -58,7 +58,7 @@
                         <tr>
                             <td>{{ $rental->id }}</td>
                             <td>{{ $rental->customer->forename }} {{ $rental->customer->lastname }}</td>
-                            <td>{{ $rental->product->product_name }}</td>
+                            <td>{{ $rental->product->product_mark->product_mark_name }} {{ $rental->product->product_name }}</td>
                             <td>{{ $rental->date_from }}</td>
                             <td>{{ $rental->date_to }}</td>
                             <td>&euro; {{ number_format($rental->total_rent_money, 2, ',', '.') }}</td>

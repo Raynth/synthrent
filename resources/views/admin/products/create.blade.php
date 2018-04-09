@@ -52,16 +52,32 @@
                 </div>
                 <!-- /.form-group -->
                 <div class="form-group">
+                  <label for="category">Productmerk</label>
+                  <select class="form-control select2" style="width: 100%;" id="mark" name="mark_id">
+                    @foreach ($productMarks as $productMark)
+                      <option value="{{ $productMark->id }}">{{ $productMark->product_mark_name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
                   <label for="product_name">Product naam</label>
                   <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Voor product naam in">
                 </div>
                 <div class="form-group">
                   <label for="rent_money">Huurprijs per dag</label>
-                  <input type="text" class="form-control" id="rent_money" name="rent_money" placeholder="Voer huurprijs per dag in">
+                  <div class="input-group">
+                    <span class="input-group-addon">&euro;</span>
+                    <input type="number" class="form-control" id="rent_money" name="rent_money" step="0.05" placeholder="Voer huurprijs per dag in">
+                  </div>
                 </div>
                 <div class="form-group">
                   <label>Omschrijving</label>
-                  <textarea class="form-control" rows="3" id="article-ckeditor" name="description" placeholder="Voer een omschrijving in"></textarea>
+                  <textarea class="form-control" id="description" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Details</label>
+                  <textarea class="form-control" id="details" name="details"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="cover_image">Afbeelding invoer</label>
@@ -91,3 +107,12 @@
   </div>
   <!-- /.content-wrapper -->
   @endsection
+
+@section('footerSection')
+    <!-- CKEditor -->
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace( 'details' );
+    </script>
+@endsection

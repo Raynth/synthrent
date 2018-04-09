@@ -45,6 +45,7 @@
                 <tr>
                   <th>Id</th>
                   <th>Categorie</th>
+                  <th>Product merk</th>
                   <th>Product naam</th>
                   <th>Huurprijs</th>
                   <th>Online</th>
@@ -56,6 +57,7 @@
                         <tr>
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->category->category_name }}</td>
+                            <td>{{ $product->product_mark->product_mark_name }}</td>
                             <td>{{ $product->product_name }}</td>
                             <td>&euro; {{ number_format($product->rent_money, 2, ',', '.') }}</td>
                             <td>
@@ -77,6 +79,7 @@
                 <tr>
                   <th>Id</th>
                   <th>Categorie</th>
+                  <th>Product merk</th>
                   <th>Product naam</th>
                   <th>Huurprijs</th>
                   <th>Online</th>
@@ -141,7 +144,7 @@
     <script>
     $(function () {
         $('#example1').DataTable( {
-          "order": [[2, "asc"]],
+          "order": [[2, "asc"], [3, "asc"]],
             "language": {
                 processing:     "Bezig...",
                 search:         "Zoeken:",

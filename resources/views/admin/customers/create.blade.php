@@ -173,3 +173,11 @@
   </div>
   <!-- /.content-wrapper -->
   @endsection
+  
+@section('footerSection')
+    <!-- CKEditor -->
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
+@endsection

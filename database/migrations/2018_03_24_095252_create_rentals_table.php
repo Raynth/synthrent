@@ -20,6 +20,7 @@ class CreateRentalsTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->decimal('total_rent_money', 5, 2);
+            $table->boolean('bring_back');
             $table->timestamps();
         });
     }

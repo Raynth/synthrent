@@ -11,18 +11,24 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
+
+
+// Customer Routes
+Route::group(['namespace' => 'Customer'], function(){
+    Route::get('/', 'ProductsController@index')->name('home');
+    Route::get('producten', 'ProductsController@index')->name('producten.index');
+    Route::get('producten/{product}', 'ProductsController@show')->name('producten.show');
+});
 
 // Admin Routes
 Route::group(['namespace' => 'Admin'], function(){
-    Route::get('admin', 'DashboardController@index')->name('home');    
-    Route::get('admin/index', 'DashboardController@index')->name('admin.index');
-    Route::get('dashboard/index', 'DashboardController@index')->name('dashboard.index');
-    // Route::get('admin/calculateRentalsPerMonth', 'DashboardController@calculateRentalsPerMonth')->name('admin.calculateRentalsPerMonth');
+    Route::get('admin/dashboard', 'DashboardController@index')->name('admin.home');    
+    // Route::get('admin/dashboard', 'DashboardController@index')->name('admin');
+    Route::get('admin/dashboard/index', 'DashboardController@index')->name('dashboard.index');
+    Route::get('admin/dashboard/chartsales', 'DashboardController@chartSales')->name('dashboard.chartsales');
     Route::resource('admin/products', 'ProductsController');
     Route::resource('admin/categories', 'CategoriesController');
     Route::resource('admin/customers', 'CustomersController');
     Route::resource('admin/rentals', 'RentalsController');
+    Route::resource('admin/productmarks', 'ProductMarksController');
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Model\admin\Category;
 use App\Model\admin\Customer;
 use App\Model\admin\Product;
@@ -18,10 +19,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        // Tel totaal aantal rijen van elke tabel
         $categories = Category::count();
         $customers = Customer::count();
         $products = Product::count();
         $rentals = Rental::count();
+
         return view('admin.dashboard.index', compact('categories', 'customers', 'products', 'rentals'));
     }
 
@@ -30,21 +33,11 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function calculateRentalsPerMonth()
+    public function chartSales()
     {
-        $dateFrom = '2018-04-05';
-        echo $dateFrom;
-        $monthFrom = date("m",strtotime($dateFrom));
-        echo $maand;
-        $dateTo = '2018-05-02';
-        echo $dateTo;
-        $monthTo = date("m",strtotime($dateTo));
-        
-        // if (date_from en date_to zijn in dezelfde maand)
-
-        // elseif (date_from en date_to zijn in 2 maanden)
-
-        // else (date_from en date_to zijn over 3 of meerdere maanden)
+        // Query voor omzet per maand voor gebruik Chart.js
+        $result = DB::table('rentals')->select(DB::raw('MONTH(created_at) AS month, SUM(total_rent_money) AS sum'))->groupBy('month')->get();
+        return response()-> json($result);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Model\admin\Category;
 use App\Model\admin\Product;
+use App\Model\admin\ProductMark;
 
 class ProductsController extends Controller
 {
@@ -18,7 +19,6 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::all();
-        
         return view('admin.products.index', compact('products'));
     }
 
@@ -29,9 +29,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        // $categories = Category::all();
+        $categories = Category::orderBy('category_name')->get();
+        $productMarks = ProductMark::orderBy('product_mark_name')->get();
 
-        return view('admin.products.create', compact('categories'));
+        return view('admin.products.create', compact('categories', 'productMarks'));
     }
 
     /**
@@ -44,6 +45,7 @@ class ProductsController extends Controller
     {
         $this->validate($request, [
             'category_id' => 'required',
+            'product_mark_id' => 'required',
             'product_name' => 'required',
             'rent_money' => 'required',
             'description' => 'required',
@@ -61,6 +63,7 @@ class ProductsController extends Controller
         // Creeer product
         $product = new Product;
         $product->category_id = $request->input('category_id');
+        $product->product_mark_id = $request->input('product_mark_id');
         $product->product_name = $request->input('product_name');
         $product->rent_money = $request->input('rent_money');
         $product->description = $request->input('description');
@@ -73,7 +76,7 @@ class ProductsController extends Controller
         };
         $product->save();
 
-        return redirect('/products')->with('success', 'Product toegevoegd');
+        return redirect()->route('proudcts.index')->with('success', 'Product toegevoegd');
     }
 
     /**
@@ -85,8 +88,8 @@ class ProductsController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-
-        return view('products.show', compact('product'));
+        
+        return view('admin.products.show', compact('product'));
     }
 
     /**
@@ -99,8 +102,9 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         $categories = Category::orderBy('category_name')->get();
-
-        return view('admin.products.edit', compact('product', 'categories')); 
+        $productMarks = ProductMark::orderBy('product_mark_name')->get();
+        
+        return view('admin.products.edit', compact('product', 'categories', 'productMarks')); 
     }
 
     /**
@@ -114,6 +118,7 @@ class ProductsController extends Controller
     {
         $this->validate($request, [
             'category_id' => 'required',
+            'product_mark_id' => 'required',
             'product_name' => 'required',
             'rent_money' => 'required',
             'description' => 'required',
@@ -129,6 +134,7 @@ class ProductsController extends Controller
         // Update Post
         $product = Product::find($id);
         $product->category_id = $request->input('category_id');
+        $product->product_mark_id = $request->input('product_mark_id');
         $product->product_name = $request->input('product_name');
         $product->rent_money = $request->input('rent_money');
         $product->description = $request->input('description');
@@ -143,7 +149,7 @@ class ProductsController extends Controller
         };
         $product->save();
 
-        return redirect('/products')->with('success', 'Product bijgewerkt');
+        return redirect()->route('proudcts.index')->with('success', 'Product bijgewerkt');
     }
 
     /**
@@ -162,6 +168,23 @@ class ProductsController extends Controller
         }
 
         $product->delete();
-        return redirect('/products')->with('success', 'Product verwijderd');
+        return redirect()->route('proudcts.index')->with('success', 'Product verwijderd');
+    }
+
+    // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is
+    public function isProductRented($customer_id, Request $request)
+    {
+        $dateFrom = $request->input('dateFrom');
+        $dateTo = $request->input('dateTo');
+        $customer = new Customer();
+        $product = new Product();
+
+        $data = [];
+        $data['dateFrom'] = $dateFrom;
+        $data['dateTo'] = $dateTo;
+        $data['products']= $product->isProductRented($dateFrom, $dateTo);
+        $data['customer'] = $customer->find($customer_id);
+
+        return view('rooms/checkAvailableRooms', $data);
     }
 }

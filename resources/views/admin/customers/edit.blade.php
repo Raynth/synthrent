@@ -39,7 +39,7 @@
             <!-- /.box-header -->
             <!-- form start -->
             {{--  <form role="form">  --}}
-            {!! Form::open(['action' => ['CustomersController@update', $customer->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['action' => ['Admin\CustomersController@update', $customer->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
               <input type="hidden" name="_method" value="put">
               <div class="box-body">
                 <div class="row">
@@ -172,3 +172,11 @@
   </div>
   <!-- /.content-wrapper -->
   @endsection
+
+@section('footerSection')
+    <!-- CKEditor -->
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'comment' );
+    </script>
+@endsection

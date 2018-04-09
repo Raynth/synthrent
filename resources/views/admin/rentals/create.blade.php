@@ -36,6 +36,12 @@
                   </ul>
               </div>
           @endif
+          <!-- Geef melding als het product verhuurd is -->
+          @if (session('productRented'))
+              <div class="alert alert-warning">
+                  {!! session('productRented') !!}
+              </div>
+          @endif
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -146,6 +152,11 @@
   @endsection
 
   @section('footerSection')
+    <!-- CKEditor -->
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
     <!-- bootstrap datepicker -->
     <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js') }}" charset="UTF-8"></script>

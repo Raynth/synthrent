@@ -21,8 +21,11 @@ class CreateCustomersTable extends Migration
             $table->integer('number');
             $table->string('zipcode');
             $table->string('city');
+            $table->string('phone');
+            $table->string('email');
             $table->string('account_number');
             $table->string('identification');
+            $table->integer('discount');
             $table->timestamps();
         });
     }

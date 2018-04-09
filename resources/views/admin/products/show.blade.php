@@ -29,9 +29,20 @@
             <!-- /.box-header -->
               {{--  <div class="box-body">  --}}
                 <div class="panel panel-default">
-                  <div class="panel-heading">Categorie</div>
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Categorie</h3>
+                  </div>  
                   <div class="panel-body">
                     {{ $product->category->category_name }}
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Productmerk</h3>
+                  </div>
+                  <div class="panel-body">
+                    {{ $product->product_mark->product_mark_name }}
                   </div>
                 </div>
 
@@ -64,10 +75,19 @@
                 
                 <div class="panel panel-default">
                   <div class="panel-heading">
+                    <h3 class="panel-title">Details</h3>
+                  </div>
+                  <div class="panel-body">
+                    {!! $product->details !!}
+                  </div>
+                </div>
+                
+                <div class="panel panel-default">
+                  <div class="panel-heading">
                     <h3 class="panel-title">Afbeelding</h3>
                   </div>
                   <div class="panel-body">
-                    <img src="{{ asset('storage/cover_images/'.$product->cover_image) }}">
+                    <img src="{{ asset('storage/cover_images/'.$product->cover_image) }}" width="100%">
                   </div>
                 </div>
                 

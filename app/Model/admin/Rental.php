@@ -15,4 +15,9 @@ class Rental extends Model
     {
         return $this->belongsTo('App\Model\admin\Product');
     }
+
+    public function product_mark()
+    {
+        return $this->belongsTo('App\Model\admin\ProductMark');
+    }
 }

@@ -18,7 +18,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::orderBy('category_name', 'ASC')->get();
-        // return $categories;
+        
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -54,7 +54,7 @@ class CategoriesController extends Controller
         };
         $category->save();
 
-        return redirect('/categories')->with('success', 'Categorie toegevoegd');
+        return redirect()->route('categories.index')->with('success', 'Categorie toegevoegd');
     }
 
     /**
@@ -67,7 +67,7 @@ class CategoriesController extends Controller
     {
         $category = Category::find($id);
 
-        return view('categories.show', compact('category'));
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -106,7 +106,7 @@ class CategoriesController extends Controller
         };
         $category->save();
 
-        return redirect('/categories')->with('success', 'Categorie bijgewerkt');
+        return redirect()->route('categories.index')->with('success', 'Categorie bijgewerkt');
     }
 
     /**
@@ -120,6 +120,6 @@ class CategoriesController extends Controller
         $category = Category::find($id);
         $category->delete();
         
-        return redirect('/categories')->with('success', 'Categorie verwijderd');
+        return redirect()->route('categories.index')->with('success', 'Categorie verwijderd');
     }
 }
