@@ -10,6 +10,12 @@ use App\Model\admin\Rental;
 
 class CustomersController extends Controller
 {
+    // Deze construct zorgt ervoor dat de Klanten-pagina alleen benaderd kan worden als men is ingelogd.
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     /**
      * Display a listing of the resource.
      *

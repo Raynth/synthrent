@@ -10,6 +10,12 @@ use App\Model\admin\ProductMark;
 
 class ProductMarksController extends Controller
 {
+    // Deze construct zorgt ervoor dat de Productmerken-pagina alleen benaderd kan worden als men is ingelogd.
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     /**
      * Display a listing of the resource.
      *

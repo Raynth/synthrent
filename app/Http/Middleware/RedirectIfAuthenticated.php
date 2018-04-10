@@ -17,8 +17,18 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+        switch ($guard) {
+            case 'admin':
+                // Als de administrator is ingelogd, dan wordt via admin-login direct doorverwezen naar admin/home
+                if (Auth::guard($guard)->check()) {
+                    return redirect('admin/home');
+                }
+                break;
+            default:
+                // Als de klant is ingelogd, dan wordt via login direct doorverwezen naar /home
+                if (Auth::guard($guard)->check()) {
+                    return redirect('/home');
+                }
         }
 
         return $next($request);

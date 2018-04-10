@@ -12,6 +12,12 @@ use App\Model\admin\Rental;
 
 class DashboardController extends Controller
 {
+    // Deze construct zorgt ervoor dat de Dashboard-pagina alleen benaderd kan worden als men is ingelogd.
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     /**
      * Display a listing of the resource.
      *

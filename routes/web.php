@@ -22,7 +22,7 @@ Route::group(['namespace' => 'User'], function(){
 
 // Admin Routes
 Route::group(['namespace' => 'Admin'], function(){
-    Route::get('admin/dashboard', 'DashboardController@index')->name('admin.home');    
+    Route::get('admin/home', 'DashboardController@index')->name('admin.home');    
     // Route::get('admin/dashboard', 'DashboardController@index')->name('admin');
     Route::get('admin/dashboard/index', 'DashboardController@index')->name('dashboard.index');
     Route::get('admin/dashboard/chartsales', 'DashboardController@chartSales')->name('dashboard.chartsales');
@@ -31,6 +31,9 @@ Route::group(['namespace' => 'Admin'], function(){
     Route::resource('admin/customers', 'CustomersController');
     Route::resource('admin/rentals', 'RentalsController');
     Route::resource('admin/productmarks', 'ProductMarksController');
+    // Admin Auth Routes
+    Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login');
+    Route::post('admin-login', 'Auth\LoginController@login');
 });
 Auth::routes();
 
