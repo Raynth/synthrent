@@ -14,8 +14,8 @@
 
 
 // Customer Routes
-Route::group(['namespace' => 'Customer'], function(){
-    Route::get('/', 'ProductsController@index')->name('home');
+Route::group(['namespace' => 'User'], function(){
+    Route::get('/', 'HomeController@index')->name('home');
     Route::get('producten', 'ProductsController@index')->name('producten.index');
     Route::get('producten/{product}', 'ProductsController@show')->name('producten.show');
 });

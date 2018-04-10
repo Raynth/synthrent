@@ -208,7 +208,7 @@
                                             <img src="{{ asset('storage/cover_images/'.$product->cover_image) }}" alt="">
                                         </div>
                                         <div class="product-body">
-                                            <h3 class="product-price">&euro;{{ number_format($product->rent_money, 2, ',', '.') }} <del class="product-old-price">$45.00</del></h3>
+                                            <h3 class="product-price">&euro; {{ number_format($product->rent_money, 2, ',', '.') }} <del class="product-old-price">$45.00</del></h3>
                                             <div class="product-rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>

@@ -19,6 +19,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::all();
+        
         return view('admin.products.index', compact('products'));
     }
 
@@ -88,7 +89,7 @@ class ProductsController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-        
+
         return view('admin.products.show', compact('product'));
     }
 

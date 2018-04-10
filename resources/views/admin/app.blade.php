@@ -400,6 +400,11 @@
 </script>
 @section('footerSection')
   @show
+<!-- CKEditor -->
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'article-ckeditor' );
+</script>
 <!-- Active menu -->
 <script>
     /** add active class and stay opened when selected */

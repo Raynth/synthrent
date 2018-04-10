@@ -59,7 +59,7 @@ class RentalsController extends Controller
         $rental->date_to = $request->input('date_to');
         $rental->total_rent_money = $request->input('total_rent_money');
         $rental->bring_back = 0;
-
+        
         $product = new Product();
         $productRented = $product->isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
         if ($productRented)
@@ -70,9 +70,9 @@ class RentalsController extends Controller
             }
             return redirect()->route('rentals.create')->with('productRented', $message);
         }
-        // $rental->save();
+        $rental->save();
 
-        // return redirect()->route('rentals.index')->with('success', 'Verhuur toegevoegd');
+        return redirect()->route('rentals.index')->with('success', 'Verhuur toegevoegd');
     }
 
     /**
