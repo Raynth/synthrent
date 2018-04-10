@@ -17,7 +17,13 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				Raymond van Kouwen
+				@if (session('status'))
+					<div class="alert alert-success">
+						{{ session('status') }}
+					</div>
+				@endif
+
+				You are logged in!
 			</div>
 			<!-- /row -->
 		</div>

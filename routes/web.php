@@ -32,3 +32,6 @@ Route::group(['namespace' => 'Admin'], function(){
     Route::resource('admin/rentals', 'RentalsController');
     Route::resource('admin/productmarks', 'ProductMarksController');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
