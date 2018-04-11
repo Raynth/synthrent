@@ -66,7 +66,7 @@ class RentalsController extends Controller
         $rental->total_rent_money = $request->input('total_rent_money');
         $rental->bring_back = 0;
         
-        $product = new Product();
+        // Controle of het gekozen product al is verhuurd in de gekozen periode
         $productRented = $product->isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
         if ($productRented)
         {
@@ -138,6 +138,17 @@ class RentalsController extends Controller
         } else {
             $rental->bring_back = 0;
         };
+
+        // Controle of het gekozen product al is verhuurd in de gekozen periode
+        $productRented = $product->isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
+        if ($productRented)
+        {
+            $message = Product::find($rental->product_id)->product_name.' is al '.$productRented->count().' keer verhuurd.<br>';
+            foreach($productRented as $productRent){
+                $message .= 'Van '.date("d-m-Y", strtotime($productRent->date_from)).' tot '.date("d-m-Y", strtotime($productRent->date_to)).'.<br>';
+            }
+            return redirect()->route('rentals.create')->with('productRented', $message);
+        }
         $rental->save();
 
         return redirect('/rentals')->with('success', 'Verhuur bijgewerkt');

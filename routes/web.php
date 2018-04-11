@@ -31,6 +31,7 @@ Route::group(['namespace' => 'Admin'], function(){
     Route::resource('admin/customers', 'CustomersController');
     Route::resource('admin/rentals', 'RentalsController');
     Route::resource('admin/productmarks', 'ProductMarksController');
+    Route::resource('admin/users', 'UsersMarksController');
     // Admin Auth Routes
     Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('admin-login', 'Auth\LoginController@login');
