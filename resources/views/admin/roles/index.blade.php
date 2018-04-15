@@ -5,17 +5,17 @@
 @endsection
 
 @section('main-content')
-<!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Categorieën
-                <small>overzicht van alle categorieën</small>
+                Rollen
+                <small>overzicht van alle rollen</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('categories.index') }}">Categorieën</a></li>
+                <li><a href="{{ route('roles.index') }}">Rollen</a></li>
                 <li class="active">Overzicht</li>
             </ol>
         </section>
@@ -31,11 +31,11 @@
                     @endif
                     <!-- Als er records in de klanten-tabel staan, toon tabel -->
                     <!-- Als er geen records in de klanten-tabel staan, toon melding -->
-                    @if (count($categories) > 0)
+                    @if (count($roles) > 0)
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Overzicht categorieën</h3>
-                                <a href="{{ route('categories.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                                <h3 class="box-title">Overzicht rollen</h3>
+                                <a href="{{ route('roles.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -43,24 +43,18 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Categorie naam</th>
-                                            <th>Online</th>
+                                            <th>Rol titel</th>
                                             <th>Actie</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $category)
+                                        @foreach ($roles as $role)
                                             <tr>
-                                                <td>{{ $category->id }}</td>
-                                                <td>{{ $category->category_name }}</td>
+                                                <td>{{ $role->id }}</td>
+                                                <td>{{ $role->name }}</td>
                                                 <td>
-                                                    @if ($category->online == 1)
-                                                        <span class="fa fa-check"></span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('categories.show', $category->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
+                                                    <a href="{{ route('roles.show', $role->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                                                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                                         <span class="fa fa-trash">
                                                     </button>
@@ -71,8 +65,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Categorie naam</th>
-                                            <th>Online</th>
+                                            <th>Rol titel</th>
                                             <th>Actie</th>
                                         </tr>
                                     </tfoot>
@@ -83,10 +76,10 @@
                         <!-- /.box -->
                     @else
                         <div class="callout callout-info">
-                            <h4>Geen categorieën in het bestand!</h4>
-                            <p>Op dit moment bevinden er zich geen categorieën in het bestand.</p>
+                            <h4>Geen rollen in het bestand!</h4>
+                            <p>Op dit moment bevinden er zich geen rollen in het bestand.</p>
                         </div>
-                        <a href="{{ route('categories.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('roles.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->
@@ -105,15 +98,15 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">Categorie verwijderen</h4>
+                    <h4 class="modal-title">Rol verwijderen</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Weet u zeker dat u deze categorie wilt verwijderen?</p>
+                    <p>Weet u zeker dat u deze rol wilt verwijderen?</p>
                 </div>
                 <div class="modal-footer">
-                    @if (count($categories) > 0)
-                        <form action="{{ route('categories.destroy', $category->id) }}" method="post" class="pull-left">
-                            {{ csrf_field() }}
+                    @if (count($roles) > 0)
+                        <form action="{{ route('roles.destroy', $role->id) }}" method="post" class="pull-left">
+                            @csrf
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Verwijderen</button>
                         </form>
@@ -133,32 +126,32 @@
     <script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
-    $(function () {
-        $('#example1').DataTable( {
-            "order": [[1, "asc"]],
-            "language": {
-                processing:     "Bezig...",
-                search:         "Zoeken:",
-                lengthMenu:     "_MENU_ resultaten weergeven",
-                info:           "Er worden _START_ tot _END_ van _TOTAL_ resultaten weergegeven",
-                infoEmpty:      "Geen resultaten om weer te geven",
-                infoFiltered:   " (gefilterd uit _MAX_ resultaten)",
-                infoPostFix:    "",
-                loadingRecords: "Een moment geduld aub - bezig met laden...",
-                zeroRecords:    "Geen overeenkomende resultaten gevonden",
-                emptyTable:     "Geen resultaten aanwezig in de tabel",
-                paginate: {
-                    first:      "Eerste",
-                    previous:   "Vorige",
-                    next:       "Volgende",
-                    last:       "Laatste"
-                },
-                aria: {
-                    sortAscending:  ": activeer om kolom oplopend te sorteren",
-                    sortDescending: ": activeer om kolom aflopend te sorteren"
+        $(function () {
+            $('#example1').DataTable( {
+                "order": [[0, "asc"]],
+                "language": {
+                    processing:     "Bezig...",
+                    search:         "Zoeken:",
+                    lengthMenu:     "_MENU_ resultaten weergeven",
+                    info:           "Er worden _START_ tot _END_ van _TOTAL_ resultaten weergegeven",
+                    infoEmpty:      "Geen resultaten om weer te geven",
+                    infoFiltered:   " (gefilterd uit _MAX_ resultaten)",
+                    infoPostFix:    "",
+                    loadingRecords: "Een moment geduld aub - bezig met laden...",
+                    zeroRecords:    "Geen overeenkomende resultaten gevonden",
+                    emptyTable:     "Geen resultaten aanwezig in de tabel",
+                    paginate: {
+                        first:      "Eerste",
+                        previous:   "Vorige",
+                        next:       "Volgende",
+                        last:       "Laatste"
+                    },
+                    aria: {
+                        sortAscending:  ": activeer om kolom oplopend te sorteren",
+                        sortDescending: ": activeer om kolom aflopend te sorteren"
+                    }
                 }
-            }
+            });
         });
-    });
     </script>
 @endsection

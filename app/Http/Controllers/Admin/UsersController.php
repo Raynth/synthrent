@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Model\admin\User;
-use App\Model\admin\Rental;
+use App\Model\admin\Admin;
 
 class UsersController extends Controller
 {
@@ -23,7 +22,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::get();
+        $users = Admin::get();
 
         return view('admin.users.index', compact('users'));
     }
@@ -35,7 +34,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create', compact('categories'));
+        return view('admin.users.create');
     }
 
     /**
@@ -47,30 +46,20 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'forename' => 'required',
-            'lastname' => 'required',
-            'street' => 'required',
-            'number' => 'required',
-            'zipcode' => 'required',
-            'city' => 'required',
-            'account_number' => 'required',
-            'identification' => 'required'
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'phone' => 'required',
+            'status' => 'required'
         ]);
 
         // Creeer user
         $user = new User;
-        $user->forename = $request->input('forename');
-        $user->lastname = $request->input('lastname');
-        $user->street = $request->input('street');
-        $user->number = $request->input('number');
-        $user->zipcode = $request->input('zipcode');
-        $user->city = $request->input('city');
-        $user->phone = $request->input('phone');
+        $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->account_number = $request->input('account_number');
-        $user->identification = $request->input('identification');
-        $user->discount = $request->input('discount');
-        $user->comment = $request->input('comment');
+        $user->password = $request->input('password');
+        $user->phone = $request->input('phone');
+        $user->status = $request->input('status');
         $user->save();
 
         return redirect('/users')->with('success', 'Gebruiker toegevoegd');
@@ -84,10 +73,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        $rentals = Rental::where('user_id', $id)->get();
+        $user = Admin::find($id);
 
-        return view('admin.users.show', compact('user', 'rentals'));
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -98,9 +86,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = Admin::find($id);
 
-        return view('admin.users.edit', compact('user', 'categories')); 
+        return view('admin.users.edit', compact('user')); 
     }
 
     /**
@@ -113,30 +101,20 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-           'forename' => 'required',
-            'lastname' => 'required',
-            'street' => 'required',
-            'number' => 'required',
-            'zipcode' => 'required',
-            'city' => 'required',
-            'account_number' => 'required',
-            'identification' => 'required'
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'phone' => 'required',
+            'status' => 'required'
         ]);
         
         // Update User
-        $user = User::find($id);
-        $user->forename = $request->input('forename');
-        $user->lastname = $request->input('lastname');
-        $user->street = $request->input('street');
-        $user->number = $request->input('number');
-        $user->zipcode = $request->input('zipcode');
-        $user->city = $request->input('city');
-        $user->phone = $request->input('phone');
+        $user = Admin::find($id);
+        $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->account_number = $request->input('account_number');
-        $user->identification = $request->input('identification');
-        $user->discount = $request->input('discount');
-        $user->comment = $request->input('comment');
+        $user->password = $request->input('password');
+        $user->phone = $request->input('phone');
+        $user->status = $request->input('status');
         $user->save();
 
         return redirect('/users')->with('success', 'Gebruiker bijgewerkt');
@@ -150,7 +128,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = Admin::find($id);
         $user->delete();
 
         return redirect('/users')->with('success', 'Gebruiker verwijderd');

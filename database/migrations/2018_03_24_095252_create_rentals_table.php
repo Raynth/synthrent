@@ -17,8 +17,8 @@ class CreateRentalsTable extends Migration
             $table->increments('id');
             $table->integer('customer_id');
             $table->integer('product_id');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('date_from');
+            $table->date('date_to');
             $table->decimal('total_rent_money', 5, 2);
             $table->boolean('bring_back');
             $table->timestamps();

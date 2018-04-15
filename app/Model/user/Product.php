@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Model\admin;
+namespace App\Model\user;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Carbon\Carbon;
 
 class Product extends Model
 {
@@ -20,6 +21,17 @@ class Product extends Model
     public function rentals()
     {
         return $this->hasMany('App\Model\admin\Rental');
+    }
+
+    // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is 
+    public static function allProductRented( $id ) 
+    { 
+        $product_available = DB::table('rentals') 
+                        ->where('product_id', $id)
+                        ->whereDate('date_to', '>', Carbon::now())
+                        ->get() 
+        ; 
+        return $product_available; 
     }
 
     // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is 

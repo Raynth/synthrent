@@ -4,7 +4,10 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\admin\Product;
+use App\Model\user\Product;
+use App\Model\admin\ProductMark;
+use App\Model\user\Cart;
+use Session;
 
 class ProductsController extends Controller
 {
@@ -30,23 +33,73 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
 
-        return view('product', compact('product'));
+        // Controle of het gekozen product al is verhuurd in de gekozen periode
+        $productRented = Product::allProductRented($id);
+
+        return view('product', compact('product', 'productRented'));
     }
 
-    // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is
-    public function isProductRented($customer_id, Request $request)
+    public function addToCart(Request $request, $id)
     {
-        $dateFrom = $request->input('dateFrom');
-        $dateTo = $request->input('dateTo');
-        $customer = new Customer();
-        $product = new Product();
+        $this->validate($request, [
+            'date_from' => 'required',
+            'date_to' => 'required'
+        ]);
 
-        $data = [];
-        $data['dateFrom'] = $dateFrom;
-        $data['dateTo'] = $dateTo;
-        $data['products']= $product->isProductRented($dateFrom, $dateTo);
-        $data['customer'] = $customer->find($customer_id);
+        $dateFrom = $request->input('date_from');
+        $dateTo = $request->input('date_to');
+        
+        // Controle of het gekozen product al is verhuurd in de gekozen periode
+        $productRented = Product::isProductRented($id, $dateFrom, $dateTo);
+        if ($productRented->count() > 0)
+        {
+            $message = Product::find($id)->product_name.' is in de gekozen periode van '.date("d-m-Y", strtotime($dateFrom)).' tot '.date("d-m-Y", strtotime($dateTo)).' verhuurd. Zie bovenstaande gegevens.';
+            return redirect()->route('producten.show', $id)->with('productRented', $message);
+        }
 
-        return view('rooms/checkAvailableRooms', $data);
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id, $dateFrom, $dateTo);
+        $request->session()->put('cart', $cart);
+        return redirect()->route('producten.index');
+    }
+
+    public function removeItem($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($id);
+
+        if ($cart->totalQuantity > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+        }
+        
+        return redirect()->route('producten.cart');
+        
+    }
+
+    public function cart()
+    {
+        if (!Session::has('cart')) {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        // dd($cart->items[1]->totalRentMoney);
+        return view('shop.shopping-cart', ['items' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+    public function getCheckout()
+    {
+        if (!Session::has('cart')) {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $total = $cart->totalPrice;
+        return view('shop.checkout', ['total' => $total]);
     }
 }

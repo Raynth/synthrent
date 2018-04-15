@@ -215,9 +215,13 @@
 
     </div>
     <!-- /.content-wrapper -->
+@endsection
 
+@section('footerSection')
+    <!-- ChartJS -->
+    <script src="{{ asset('admin/bower_components/Chart.js/Chart.js') }}"></script>
     <script>
-        var url = {{ route('dashboard.chartsales') }};
+        var url = '{{ route('dashboard.chartsales') }}'
         console.log(url);
         var Months = new Array();
         var Labels = new Array();
@@ -233,10 +237,10 @@
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: Labels,
+                        labels: Months,
                         datasets: [{
                             label: 'Infosys Price',
-                            data: Prices,
+                            data: Sales,
                             borderWidth: 1
                         }]
                     },
@@ -253,9 +257,4 @@
             });
         });
     </script>
-@endsection
-
-@section('footerSection')
-    <!-- ChartJS -->
-    <script src="{{ asset('admin/bower_components/Chart.js/Chart.js') }}"></script>
 @endsection

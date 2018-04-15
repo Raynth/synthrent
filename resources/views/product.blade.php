@@ -1,5 +1,10 @@
 @extends('app')
 
+@section('headSection')
+	<!-- bootstrap datepicker -->
+  	<link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+@endsection
+
 @section('main-content')
     <!-- BREADCRUMB -->
 	<div id="breadcrumb">
@@ -30,53 +35,69 @@
 					</div>
 					<div class="col-md-6">
 						<div class="product-body">
-							<div class="product-label">
-								<span>Nieuw</span>
-								<span class="sale">-20%</span>
-							</div>
-							<h2 class="product-name">{{ $product->product_mark->product_mark_name }} {{ $product->product_name }}</h2>
-							<h3 class="product-price">&euro; {{ $product->rent_money }}</h3>
-							<div>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o empty"></i>
+							<!-- Label 'Nieuw' wordt alleen getoond als het product binnen 60 dagen is toegevoegd -->
+							@if (((time() - strtotime($product->created_at)) / (60 * 60 * 24)) < 60)
+								<div class="product-label">
+									<span>Nieuw</span>
 								</div>
-								<a href="#">3 Review(s) / Add Review</a>
-							</div>
-							<p><strong>Availability:</strong> In Stock</p>
+							@endif
+							<h2 class="product-name">{{ $product->product_mark->product_mark_name }} {{ $product->product_name }}</h2>
+							<h3 class="product-price">&euro; {{ number_format($product->rent_money, 2, ',', '.') }}<small> per dag</small></h3>
 							<p><strong>Merk:</strong> {{ $product->product_mark->product_mark_name }}</p>
-							<p>{!! str_limit($product->description, 750) !!}</p>
 							<div class="product-options">
-								<ul class="size-option">
-									<li><span class="text-uppercase">Size:</span></li>
-									<li class="active"><a href="#">S</a></li>
-									<li><a href="#">XL</a></li>
-									<li><a href="#">SL</a></li>
-								</ul>
-								<ul class="color-option">
-									<li><span class="text-uppercase">Color:</span></li>
-									<li class="active"><a href="#" style="background-color:#475984;"></a></li>
-									<li><a href="#" style="background-color:#8A2454;"></a></li>
-									<li><a href="#" style="background-color:#BF6989;"></a></li>
-									<li><a href="#" style="background-color:#9A54D8;"></a></li>
-								</ul>
+								@if ($productRented->count() > 0)
+									<p style="color: #F8694A">Dit product is al {{ $productRented->count() }} keer verhuurd:</p>
+									@foreach ($productRented as $rented)
+										<p style="color: #F8694A">Van {{ date("d-m-Y", strtotime($rented->date_from)) }} tot {{ date("d-m-Y", strtotime($rented->date_to)) }}.</p>
+									@endforeach
+								@endif
 							</div>
 
-							<div class="product-btns">
-								<div class="qty-input">
-									<span class="text-uppercase">QTY: </span>
-									<input class="input" type="number">
+							<!-- form start -->
+							<form action="{{ route('producten.addtocart', ['id' => $product->id]) }}" enctype="multipart/form-data" method="post">
+								{{ csrf_field() }}
+								<div class="form-group col-md-6">
+									<label for="date_from">Datum: vanaf</label>
+									<div class="input-group date">
+										<div class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right" id="datepicker1" name="date_from">
+									</div>
+									<!-- /.input group -->
 								</div>
-								<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Huren</button>
-								<div class="pull-right">
-									<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-									<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-									<button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+								<!-- /.form group -->
+								<div class="form-group col-md-6">
+									<label for="date_to">Datum: tot</label>
+									<div class="input-group date">
+										<div class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right" id="datepicker2" name="date_to">
+									</div>
+									<!-- /.input group -->
 								</div>
-							</div>
+								<!-- /.form group -->
+								<div class="form-group">
+									<button type="submit" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Huren</button>
+								</div>
+							</form>
+							<!-- Display validation errors -->
+							@if ($errors->any())
+								<div class="callout callout-danger">
+									<ul>
+										@foreach ($errors->all() as $error)
+											<li>{{ $error }}</li>
+										@endforeach
+									</ul>
+								</div>
+							@endif
+							<!-- Geef melding als het product verhuurd is -->
+							@if (session('productRented'))
+								<div class="alert alert-warning">
+									{!! session('productRented') !!}
+								</div>
+							@endif
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -206,4 +227,30 @@
 	</div>
 	<!-- /section -->
 
+@endsection
+
+@section('footerSection')
+    <!-- bootstrap datepicker -->
+    <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js') }}" charset="UTF-8"></script>
+    <script>
+        $(function () {
+            //Date picker 1
+            $('#datepicker1').datepicker({
+                autoclose: true,
+                startDate: '+1d',
+                format: 'yyyy-mm-dd',
+                language: 'nl'
+            })
+			$('#datepicker1').change(function() {
+  				// Date picker 2
+				$('#datepicker2').datepicker({
+					autoclose: true,
+					startDate: new Date($(datepicker1).val()),
+					format: 'yyyy-mm-dd',
+					language: 'nl'
+				})
+			})
+        })
+    </script>
 @endsection

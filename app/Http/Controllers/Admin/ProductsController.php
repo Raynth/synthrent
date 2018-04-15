@@ -55,8 +55,7 @@ class ProductsController extends Controller
             'product_mark_id' => 'required',
             'product_name' => 'required',
             'rent_money' => 'required',
-            'description' => 'required',
-            'cover_image' => 'image|nullable|max:1999'
+            'description' => 'required'
         ]);
 
         // Handle File Upload
@@ -74,6 +73,7 @@ class ProductsController extends Controller
         $product->product_name = $request->input('product_name');
         $product->rent_money = $request->input('rent_money');
         $product->description = $request->input('description');
+        $product->details = $request->input('details');
         $product->cover_image = $filename;
         $product->online = $request->input('online');
         if (null !== $request->input('online')) {
@@ -83,7 +83,7 @@ class ProductsController extends Controller
         };
         $product->save();
 
-        return redirect()->route('proudcts.index')->with('success', 'Product toegevoegd');
+        return redirect()->route('products.index')->with('success', 'Product toegevoegd');
     }
 
     /**
@@ -128,8 +128,7 @@ class ProductsController extends Controller
             'product_mark_id' => 'required',
             'product_name' => 'required',
             'rent_money' => 'required',
-            'description' => 'required',
-            'cover_image' => 'image|nullable|max:1999'
+            'description' => 'required'
         ]);
         
         // Handle File Upload
@@ -145,6 +144,7 @@ class ProductsController extends Controller
         $product->product_name = $request->input('product_name');
         $product->rent_money = $request->input('rent_money');
         $product->description = $request->input('description');
+        $product->details = $request->input('details');
         if ($request->hasFile('cover_image')) {
             $product->cover_image = $filename;
         }
@@ -156,7 +156,7 @@ class ProductsController extends Controller
         };
         $product->save();
 
-        return redirect()->route('proudcts.index')->with('success', 'Product bijgewerkt');
+        return redirect()->route('products.index')->with('success', 'Product bijgewerkt');
     }
 
     /**
@@ -175,23 +175,6 @@ class ProductsController extends Controller
         }
 
         $product->delete();
-        return redirect()->route('proudcts.index')->with('success', 'Product verwijderd');
-    }
-
-    // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is
-    public function isProductRented($customer_id, Request $request)
-    {
-        $dateFrom = $request->input('dateFrom');
-        $dateTo = $request->input('dateTo');
-        $customer = new Customer();
-        $product = new Product();
-
-        $data = [];
-        $data['dateFrom'] = $dateFrom;
-        $data['dateTo'] = $dateTo;
-        $data['products']= $product->isProductRented($dateFrom, $dateTo);
-        $data['customer'] = $customer->find($customer_id);
-
-        return view('rooms/checkAvailableRooms', $data);
+        return redirect()->route('products.index')->with('success', 'Product verwijderd');
     }
 }

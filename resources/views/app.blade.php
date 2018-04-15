@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>E-SHOP HTML Template</title>
+	<title>SynthRENT</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
@@ -46,29 +46,13 @@
 		<div id="top-header">
 			<div class="container">
 				<div class="pull-left">
-					<span>Welcome to E-shop!</span>
+					<span>Welkom bij SynthRENT!</span>
 				</div>
 				<div class="pull-right">
 					<ul class="header-top-links">
 						<li><a href="#">Store</a></li>
 						<li><a href="#">Newsletter</a></li>
 						<li><a href="#">FAQ</a></li>
-						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">ENG <i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="#">English (ENG)</a></li>
-								<li><a href="#">Russian (Ru)</a></li>
-								<li><a href="#">French (FR)</a></li>
-								<li><a href="#">Spanish (Es)</a></li>
-							</ul>
-						</li>
-						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">USD <i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="#">USD ($)</a></li>
-								<li><a href="#">EUR (€)</a></li>
-							</ul>
-						</li>
 					</ul>
 				</div>
 			</div>
@@ -86,20 +70,6 @@
 						</a>
 					</div>
 					<!-- /Logo -->
-
-					<!-- Search -->
-					<div class="header-search">
-						<form>
-							<input class="input search-input" type="text" placeholder="Enter your keyword">
-							<select class="input search-categories">
-								<option value="0">All Categories</option>
-								<option value="1">Category 01</option>
-								<option value="1">Category 02</option>
-							</select>
-							<button class="search-btn"><i class="fa fa-search"></i></button>
-						</form>
-					</div>
-					<!-- /Search -->
 				</div>
 				<div class="pull-right">
 					<ul class="header-btns">
@@ -109,28 +79,26 @@
 								<div class="header-btns-icon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
+								<strong class="text-uppercase">Mijn Account <i class="fa fa-caret-down"></i></strong>
 							</div>
 							@guest
-								<a href="{{ route('login') }}" class="text-uppercase">Login</a> / <a href="{{ route('register') }}" class="text-uppercase">Join</a>
+								<a href="{{ route('login') }}" class="text-uppercase">Inloggen</a> / <a href="{{ route('register') }}" class="text-uppercase">Registreren</a>
 							@else
 								<a href="{{ route('logout') }}" class="text-uppercase" onclick="event.preventDefault();
-													 document.getElementById('logout-form').submit();">Logout</a>
+													 document.getElementById('logout-form').submit();">Uitloggen</a>
 								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 									@csrf
 								</form>
 							@endguest
 							<ul class="custom-menu">
-								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-								<li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
+								<li><a href="#"><i class="fa fa-user-o"></i> Mijn Account</a></li>
 								<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
 								@guest
-									<li><a href="{{ route('login') }}"><i class="fa fa-unlock-alt"></i> Login</a></li>
-									<li><a href="{{ route('register') }}"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+									<li><a href="{{ route('login') }}"><i class="fa fa-unlock-alt"></i> Inloggen</a></li>
+									<li><a href="{{ route('register') }}"><i class="fa fa-user-plus"></i> Registreren</a></li>
 								@else
 									<li><a href="{{ route('logout') }}"><i class="fa fa-lock" onclick="event.preventDefault();
-													 document.getElementById('logout-form').submit();"></i> Logout</a></li>
+													 document.getElementById('logout-form').submit();"></i> Uitloggen</a></li>
 									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 										@csrf
 									</form>
@@ -144,39 +112,35 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<div class="header-btns-icon">
 									<i class="fa fa-shopping-cart"></i>
-									<span class="qty">3</span>
+									@if (Session::has('cart'))
+										<span class="qty">{{ Session::get('cart')->totalQuantity }}</span>
+									@endif
 								</div>
-								<strong class="text-uppercase">My Cart:</strong>
+								<strong class="text-uppercase">Mijn Winkelwagen:</strong>
 								<br>
-								<span>35.20$</span>
+								<span>&euro; {{ Session::has('cart') ? number_format(Session::get('cart')->totalPrice, 2, ',', '.') : 0 }}</span>
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="{{ asset('img/thumb-product01.jpg') }}" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div>
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="{{ asset('img/thumb-product01.jpg') }}" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div>
+										@if (Session::has('cart'))
+											@foreach(Session::get('cart')->items as $item)
+												<div class="product product-widget">
+													<div class="product-thumb">
+														<img src="{{ asset('storage/cover_images/'.$item->cover_image) }}" alt="">
+													</div>
+													<div class="product-body">
+														<h3 class="product-price">&euro; {{ number_format($item->totalRentMoney, 2, ',', '.') }}</h3>
+														<h2 class="product-name"><a href="#">{{ $item->productMarkName }} {{ $item->product_name }}</a></h2>
+													</div>
+													<button class="cancel-btn"><i class="fa fa-trash"></i></button>
+												</div>
+											@endforeach
+										@endif
 									</div>
 									<div class="shopping-cart-btns">
-										<button class="main-btn">View Cart</button>
-										<button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+										<a href="{{ route('producten.cart') }}" class="main-btn">Bekijk Winkelwagen</a>
+										<a href="{{ route('producten.checkout') }}" class="primary-btn">Bevestig Huren <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 							</div>
@@ -216,7 +180,7 @@
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Producten</a></li>
+						<li><a href="{{ route('producten.index') }}">Producten</a></li>
 					</ul>
 				</div>
 				<!-- menu nav -->
@@ -265,13 +229,11 @@
 				<!-- footer widget -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">My Account</h3>
+						<h3 class="footer-header">Mijn Account</h3>
 						<ul class="list-links">
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">My Wishlist</a></li>
-							<li><a href="#">Compare</a></li>
+							<li><a href="#">Mijn Account</a></li>
 							<li><a href="#">Checkout</a></li>
-							<li><a href="{{ route('login') }}">Login</a></li>
+							<li><a href="{{ route('login') }}">Inloggen</a></li>
 						</ul>
 					</div>
 				</div>
@@ -282,11 +244,10 @@
 				<!-- footer widget -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">Customer Service</h3>
+						<h3 class="footer-header">Klanten Service</h3>
 						<ul class="list-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Shiping & Return</a></li>
-							<li><a href="#">Shiping Guide</a></li>
+							<li><a href="#">Over Ons</a></li>
+							<li><a href="#">Algemene Voorwaarden</a></li>
 							<li><a href="#">FAQ</a></li>
 						</ul>
 					</div>

@@ -67,8 +67,8 @@ class RentalsController extends Controller
         $rental->bring_back = 0;
         
         // Controle of het gekozen product al is verhuurd in de gekozen periode
-        $productRented = $product->isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
-        if ($productRented)
+        $productRented = Product::isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
+        if ($productRented->count() > 0)
         {
             $message = Product::find($rental->product_id)->product_name.' is al '.$productRented->count().' keer verhuurd.<br>';
             foreach($productRented as $productRent){
@@ -140,7 +140,7 @@ class RentalsController extends Controller
         };
 
         // Controle of het gekozen product al is verhuurd in de gekozen periode
-        $productRented = $product->isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
+        $productRented = $Product::isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
         if ($productRented)
         {
             $message = Product::find($rental->product_id)->product_name.' is al '.$productRented->count().' keer verhuurd.<br>';
