@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Model\admin\Category;
-use App\Model\admin\Customer;
+use App\Model\user\User;
 use App\Model\admin\Product;
 use App\Model\admin\Rental;
+use DateTime;
 
 class DashboardController extends Controller
 {
@@ -27,16 +28,27 @@ class DashboardController extends Controller
     {
         // Tel totaal aantal rijen van elke tabel
         $categories = Category::count();
-        $customers = Customer::count();
+        $customers = User::count();
         $products = Product::count();
         $rentals = Rental::count();
+        
         return view('admin.dashboard.index', compact('categories', 'customers', 'products', 'rentals'));
     }
 
     public function chartSales()
     {
         // Query voor omzet per maand voor gebruik Chart.js
-        $result = DB::table('rentals')->select(DB::raw('MONTH(created_at) AS month, SUM(total_rent_money) AS sum'))->groupBy('month')->get();
-        return response()-> json($result);
+        $date = date('Y-m-d H:i:s', strtotime('first day of 5 month ago midnight'));
+        $result = DB::table('rentals')
+                    ->selectRaw('MONTH(created_at) AS month')
+                    ->selectRaw('YEAR(created_at) AS year')
+                    ->selectRaw('SUM(total_rent_money) AS sum')
+                    ->groupBy('month')
+                    ->orderBy('year', 'asc')
+                    ->orderBy('month', 'asc')
+                    ->whereDate('created_at', '>=', $date)
+                    ->get();
+        
+        return response()->json($result);
     }
 }

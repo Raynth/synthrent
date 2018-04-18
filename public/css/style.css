@@ -1575,6 +1575,10 @@ textarea.input {
   font-size: 18px;
 }
 
+.shopping-cart-table>tbody>tr>.days {
+  font-size: 18px;
+}
+
 .shopping-cart-table>tbody>tr>.total {
   font-size: 18px;
 }

@@ -21,8 +21,11 @@ Route::group(['namespace' => 'User'], function(){
     Route::post('voeg-item-toe/{id}', 'ProductsController@addTocart')->name('producten.addtocart');
     Route::get('winkelwagen', 'ProductsController@cart')->name('producten.cart');
     Route::get('kassa', 'ProductsController@getCheckout')->middleware('auth')->name('producten.checkout');
-    Route::post('kassa', 'ProductsController@postCheckout')->name('producten.checkout');
+    Route::post('kassa', 'ProductsController@postCheckout')->middleware('auth')->name('producten.checkout');
     Route::get('verwijder-item/{id}', 'ProductsController@removeItem')->name('producten.removeitem');
+    Route::get('account', 'CustomerAccountController@index')->name('account.index');
+    Route::get('account-bewerken', 'CustomerAccountController@edit')->name('account.edit');
+    Route::post('account-bewerken/{id}', 'CustomerAccountController@update')->name('account.update');
 });
 
 // Admin Routes

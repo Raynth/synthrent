@@ -105,109 +105,25 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <p class="text-center">
-                                        <strong>Verhuur: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                                        <strong>Verhuur: <span id="firstPeriod"></span> - <span id="lastPeriod"></span></strong>
                                     </p>
     
                                     <div class="chart">
                                         <!-- Sales Chart Canvas -->
-                                        <canvas id="salesChart" style="height: 180px;"></canvas>
+                                        <canvas id="salesChart" ></canvas>
                                     </div>
                                     <!-- /.chart-responsive -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-md-4">
-                                    <p class="text-center">
-                                        <strong>Goal Completion</strong>
-                                    </p>
-    
-                                    <div class="progress-group">
-                                        <span class="progress-text">Add Products to Cart</span>
-                                        <span class="progress-number"><b>160</b>/200</span>
-    
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.progress-group -->
-                                    <div class="progress-group">
-                                        <span class="progress-text">Complete Purchase</span>
-                                        <span class="progress-number"><b>310</b>/400</span>
-    
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.progress-group -->
-                                    <div class="progress-group">
-                                        <span class="progress-text">Visit Premium Page</span>
-                                        <span class="progress-number"><b>480</b>/800</span>
-    
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.progress-group -->
-                                    <div class="progress-group">
-                                        <span class="progress-text">Send Inquiries</span>
-                                        <span class="progress-number"><b>250</b>/500</span>
-    
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.progress-group -->
                                 </div>
                                 <!-- /.col -->
                             </div>
                             <!-- /.row -->
                         </div>
                         <!-- ./box-body -->
-                        <div class="box-footer">
-                            <div class="row">
-                                <div class="col-sm-3 col-xs-6">
-                                    <div class="description-block border-right">
-                                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                                        <h5 class="description-header">$35,210.43</h5>
-                                        <span class="description-text">TOTAL REVENUE</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-3 col-xs-6">
-                                    <div class="description-block border-right">
-                                        <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                                        <h5 class="description-header">$10,390.90</h5>
-                                        <span class="description-text">TOTAL COST</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-3 col-xs-6">
-                                    <div class="description-block border-right">
-                                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                                        <h5 class="description-header">$24,813.53</h5>
-                                        <span class="description-text">TOTAL PROFIT</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-3 col-xs-6">
-                                    <div class="description-block">
-                                        <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                                        <h5 class="description-header">1200</h5>
-                                        <span class="description-text">GOAL COMPLETIONS</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.box-footer -->
                     </div>
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
+
             </div>
             <!-- /.row -->
         </section>
@@ -219,41 +135,63 @@
 
 @section('footerSection')
     <!-- ChartJS -->
-    <script src="{{ asset('admin/bower_components/Chart.js/Chart.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
     <script>
-        var url = '{{ route('dashboard.chartsales') }}'
-        console.log(url);
-        var Months = new Array();
-        var Labels = new Array();
-        var Sales = new Array();
         $(document).ready(function(){
-            $.get(url, function(response){
-                response.forEach(function(data){
-                    Months.push(data.month);
-                    // Labels.push(data.stockName);
-                    Sales.push(data.sum);
-                });
-                var ctx = document.getElementById("salesChart").getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: Months,
-                        datasets: [{
-                            label: 'Infosys Price',
-                            data: Sales,
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true
-                                }
-                            }]
-                        }
+            $.ajax({
+                url: '{{ route('dashboard.chartsales') }}',
+                method: "GET",
+                success: function(data) {
+                    var month = []
+                    var year = []
+                    var sum = []
+                    var monthName = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'october', 'november', 'december']
+                    
+                    for(var i in data) {
+                        month.push(monthName[data[i].month-1])
+                        year.push(data[i].year)
+                        sum.push(data[i].sum)
                     }
-                });
+                    var firstMonth = month[0]
+                    var firstMonthYear = year[0]
+                    var lastMonth = monthName[new Date().getMonth()]
+                    var lastMonthYear = new Date().getFullYear()
+                    
+                    document.getElementById("firstPeriod").innerHTML = firstMonth+' '+firstMonthYear
+                    document.getElementById("lastPeriod").innerHTML = lastMonth+' '+lastMonthYear
+                    var chartdata = {
+                        labels: month,
+                        datasets : [
+                            {
+                                label: 'Omzet',
+                                backgroundColor: 'rgba(200, 200, 200, 0.75)',
+                                borderColor: 'rgba(200, 200, 200, 0.75)',
+                                hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+                                hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                                data: sum
+                            },
+                        ]
+                    };
+
+                    var ctx = $("#salesChart");
+
+                    var barGraph = new Chart(ctx, {
+                        type: 'bar',
+                        data: chartdata,
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                },
+                error: function(data) {
+                    console.log(data);
+                }
             });
         });
     </script>

@@ -24,7 +24,7 @@
                         <div class="section-title">
                             <h3 class="title">Kassa</h3>
                         </div>
-                        <h4>Uw totaalbedrag: &euro; {{ $total }}</h4>
+                        <h4>Uw totaalbedrag: &euro; {{ number_format($total, 2, ',', '.') }}</h4>
                         <form action="{{ route('producten.checkout') }}" method="post" id="checkout-form" class="clearfix">
                             @csrf
                             <div class="form-group">

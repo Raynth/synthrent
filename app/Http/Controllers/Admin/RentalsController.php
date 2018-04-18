@@ -25,7 +25,7 @@ class RentalsController extends Controller
     public function index()
     {
         $rentals = Rental::all();
-        
+        dd($rentals);
         return view('admin.rentals.index', compact('rentals'));
     }
 

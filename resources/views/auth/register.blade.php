@@ -23,14 +23,23 @@
                     @csrf
 
                     <div class="form-group">
-                        <input id="name" type="text" class="input{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="Naam" value="{{ old('name') }}" required autofocus>
-                        @if ($errors->has('name'))
+                        <input id="forename" type="text" class="input{{ $errors->has('forename') ? ' is-invalid' : '' }}" name="forename" placeholder="Voornaam" value="{{ old('forename') }}" required autofocus>
+                        @if ($errors->has('forename'))
                             <span class="invalid-feedback">
-                                <strong>{{ $errors->first('name') }}</strong>
+                                <strong>{{ $errors->first('forename') }}</strong>
                             </span>
                         @endif
                     </div>
 
+                    <div class="form-group">
+                        <input id="lastname" type="text" class="input{{ $errors->has('lastname') ? ' is-invalid' : '' }}" name="lastname" placeholder="Achternaam" value="{{ old('lastname') }}" required autofocus>
+                        @if ($errors->has('lastname'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('lastname') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    
                     <div class="form-group">
                         <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="E-mail adres" value="{{ old('email') }}" required>
                         @if ($errors->has('email'))

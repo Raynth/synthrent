@@ -42,14 +42,14 @@
                                             <tr>
                                                 <td class="thumb"><img src="{{ asset('storage/cover_images/'.$item->cover_image) }}" alt=""></td>
                                                 <td class="details">
-                                                    <a href="#">{{ $item->productMarkName }} {{ $item->product_name }}</a>
+                                                    <a href="{{ route('producten.show', $item->id) }}">{{ $item->productMarkName }} {{ $item->product_name }}</a>
                                                     <ul>
                                                         <li><span>Van: {{ date("d-m-Y", strtotime($item->dateFrom)) }}</span></li>
                                                         <li><span>Tot: {{ date("d-m-Y", strtotime($item->dateTo)) }}</span></li>
                                                     </ul>
                                                 </td>
                                                 <td class="price text-center"><strong>&euro; {{ number_format($item->rent_money, 2, ',', '.') }}</strong></td>
-                                                <td class="qty text-center"><strong>{{ $item->totalDays }}</strong></td>
+                                                <td class="days text-center"><strong>{{ $item->totalDays }}</strong></td>
                                                 <td class="total text-center"><strong class="primary-color">&euro; {{ number_format($item->totalRentMoney, 2, ',', '.') }}</strong></td>
                                                 <td class="text-right"><a href="{{ route('producten.removeitem', $key) }}" class="main-btn icon-btn"><i class="fa fa-close"></i></a></td>
                                             </tr>

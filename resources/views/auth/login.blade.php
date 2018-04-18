@@ -55,6 +55,7 @@
                         <a class="btn btn-link" href="{{ route('password.request') }}">
                             Wachtwoord vergeten?
                         </a>
+                        <p>Heeft u geen account? <a  class="btn btn-link" href="{{ route('register') }}">Aanmelden!</a><p>
                     </div>
                     
                 </form>
