@@ -91,8 +91,10 @@
 								</form>
 							@endguest
 							<ul class="custom-menu">
-								<li><a href="{{ route('account.index') }}"><i class="fa fa-user-o"></i> Mijn Account</a></li>
-								<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
+								@auth
+									<li><a href="{{ route('account.index') }}"><i class="fa fa-user-o"></i> Mijn Account</a></li>
+									<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
+								@endauth
 								@guest
 									<li><a href="{{ route('login') }}"><i class="fa fa-unlock-alt"></i> Inloggen</a></li>
 									<li><a href="{{ route('register') }}"><i class="fa fa-user-plus"></i> Registreren</a></li>
