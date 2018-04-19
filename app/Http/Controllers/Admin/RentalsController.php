@@ -151,7 +151,7 @@ class RentalsController extends Controller
         }
         $rental->save();
 
-        return redirect('/rentals')->with('success', 'Verhuur bijgewerkt');
+        return redirect()->route('rentals.index')->with('success', 'Verhuur bijgewerkt');
     }
 
     /**
@@ -165,6 +165,6 @@ class RentalsController extends Controller
         $rental = Rental::find($id);
         $rental->delete();
 
-        return redirect('/rentals')->with('success', 'Verhuur verwijderd');
+        return redirect()->route('rentals.index')->with('success', 'Verhuur verwijderd');
     }
 }
