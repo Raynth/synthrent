@@ -26,6 +26,8 @@ Route::group(['namespace' => 'User'], function(){
     Route::get('account', 'CustomerAccountController@index')->name('account.index');
     Route::get('account-bewerken', 'CustomerAccountController@edit')->name('account.edit');
     Route::post('account-bewerken/{id}', 'CustomerAccountController@update')->name('account.update');
+    Route::get('wachtwoord-bewerken', 'CustomerAccountController@editPassword')->name('account.edit-password');
+    Route::post('wachtwoord-bewerken/{id}', 'CustomerAccountController@updatePassword')->name('account.update-password');
 });
 
 // Admin Routes

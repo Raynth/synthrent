@@ -148,25 +148,6 @@
                         </div>
                     </div>
 
-                    <div class="row">    
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input id="password" type="password" class="input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Wachtwoord" required>
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input id="password-confirm" type="password" class="input" name="password_confirmation" placeholder="Bevestig wachtwoord" required>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <button type="submit" class="primary-btn">
                             Wijzigen

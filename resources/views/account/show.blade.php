@@ -79,7 +79,8 @@
 			<div class="row">
 				<!-- colomn -->
 				<div class="col-md-12">
-					<a href="{{ route('account.edit') }}" class="primary-btn">Gegevens wijzigen</a>
+					<a href="{{ route('account.edit', Auth::id()) }}" class="primary-btn">Gegevens wijzigen</a>
+					<a href="{{ route('account.edit-password', Auth::id()) }}" class="primary-btn pull-right">Wachtwoord wijzigen</a>
 				</div>
 				<!-- /column -->
 			</div>

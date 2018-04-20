@@ -22,7 +22,7 @@ class CustomerAccountController extends Controller
     {
         $rented = Rental::where('customer_id', Auth::id())->get();
         
-        return view('account.show', compact('rented'));
+        return view('account.show', compact('customer', 'rented'));
     }
 
     // Het wijzigen van klant account gegevens
@@ -33,21 +33,19 @@ class CustomerAccountController extends Controller
         return view('account.edit', compact('customer'));
     }
 
-    //
+    // Het opslaan van de gewijzigde klant account gegevens
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'forename' => 'required',
             'lastname' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'email' => 'required'
         ]);
 
         $customer = User::find($id);
         $customer->forename = $request->input('forename');
         $customer->lastname = $request->input('lastname');
         $customer->email = $request->input('email');
-        $customer->password = Hash::make($request->input('password'));
         $customer->street = $request->input('street');
         $customer->number = $request->input('number');
         $customer->zipcode = $request->input('zipcode');
@@ -58,6 +56,47 @@ class CustomerAccountController extends Controller
         $customer->discount = $request->input('discount');
         $customer->save();
 
-        return redirect()->route('account.index')->with('success', 'Gegevens bijgewerkt');
+        return redirect()->route('account.index')->with('success', 'Gegevens gewijzigd');
+    }
+
+    // Het wijzigen van het wachtwoord van de klant
+    public function editPassword()
+    {
+        $customer = User::find(Auth::id());
+        
+        return view('account.edit-password', compact('customer'));
+    }
+
+    // Het opslaan van de gewijzigde wachtwoord van de klant
+    public function updatePassword(Request $request, $id)
+    {
+        $this->validate($request, [
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'new_password_confirmation' => 'required'
+        ]);
+        
+        $customer = User::find($id);
+
+        // Controle oud en nieuw wachtwoord
+        $old_password = $request->input('old_password');
+        $new_password = $request->input('new_password');
+        $new_password_confirmation = $request->input('new_password_confirmation');
+        
+        if (!Hash::check($old_password, $customer->password)) {
+            dd($old_password, $customer->password);
+            // return redirect()->route('account.edit-password', compact('password', 'id'))->with('error', 'Oud wachtwoord is onjuist!');
+        }
+        if ($old_password == $new_password) {
+            return redirect()->route('account.edit-password', compact('password', 'id'))->with('error', 'Oud en nieuw wachtwoord zijn niet verschillend!');            
+        }
+        if ($new_password != $new_password_confirmation) {
+            return redirect()->route('account.edit-password', compact('password', 'id'))->with('error', 'Nieuw wachtwoord is niet juist bevestigd!');            
+        }
+
+        $customer->password = Hash::make($new_password);
+        $customer->save();
+
+        return redirect()->route('account.index')->with('success', 'Wachtwoord gewijzigd');
     }
 }
