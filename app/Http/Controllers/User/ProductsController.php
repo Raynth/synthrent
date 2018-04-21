@@ -18,7 +18,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::where('online', 1)->paginate(9);
+        $products = Product::where('online', 1)->paginate(12);
         $productMarks = ProductMark::orderBy('product_mark_name')->get();
         
         return view('products', compact('products', 'productMarks'));
@@ -40,12 +40,17 @@ class ProductsController extends Controller
         return view('product', compact('product', 'productRented'));
     }
 
-    // Laat alle producten van de geselecteerde productmerk zien
+    /*
+    * Laat alle producten van de geselecteerde productmerk zien
+    */
     public function productMarkShow($slug)
     {
-
+        
     }
 
+    /*
+    * Voeg een verhuur toe aan de winkelwagen
+    */
     public function addToCart(Request $request, $id)
     {
         $this->validate($request, [

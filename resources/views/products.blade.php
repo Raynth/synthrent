@@ -104,17 +104,20 @@
 					<!-- STORE -->
 					<div id="store">
 						<!-- row -->
-						<div class="row">
+						<div class="row clearfix-product">
                             @foreach($products as $product)
                                 <!-- Product Single -->
                                 <div class="col-md-4 col-sm-6 col-xs-6">
                                     <div class="product product-single">
                                         <div class="product-thumb">
-                                            <div class="product-label">
-                                                <span>Nieuw</span>
-                                            </div>
+											<!-- Label 'Nieuw' verschijnt alleen als het product binnen 2 maanden is toegevoegd -->
+											@if (((strtotime(date('Y-m-d H:i:s')) - strtotime($product->created_at)) / 2592000) < 2)
+												<div class="product-label">
+													<span>Nieuw</span>
+												</div>
+											@endif
                                             <button class="main-btn quick-view" onclick="window.location.href='{{ route('producten.show', $product->id) }}'"><i class="fa fa-search-plus"></i> Bekijk product</button>
-                                            <img src="{{ asset('storage/cover_images/'.$product->cover_image) }}" alt="">
+                                            <img src="{{ asset('storage/cover_images/'.$product->cover_image) }}" alt="Afbeelding van {{ $product->product_name }}">
                                         </div>
                                         <div class="product-body">
                                             <h3 class="product-price">&euro; {{ number_format($product->rent_money, 2, ',', '.') }}</h3>
@@ -130,7 +133,6 @@
                                 <!-- /Product Single -->
                             @endforeach
 
-							<div class="clearfix visible-md visible-lg"></div>
 
 						</div>
 						<!-- /row -->
