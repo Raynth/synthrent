@@ -22,12 +22,11 @@
 				<div id="aside" class="col-md-3">
 					<!-- aside widget -->
 					<div class="aside">
-						<h3 class="aside-title">Filter by Brand</h3>
+						<h3 class="aside-title">Filter op merk</h3>
 						<ul class="list-links">
-							<li><a href="#">Nike</a></li>
-							<li><a href="#">Adidas</a></li>
-							<li><a href="#">Polo</a></li>
-							<li><a href="#">Lacost</a></li>
+							@foreach($productMarks as $productMark)
+								<li><a href="{{ route('productmerk.show', str_slug($productMark->product_mark_name)) }}">{{ $productMark->product_mark_name }}</a></li>
+							@endforeach
 						</ul>
 					</div>
 					<!-- /aside widget -->
