@@ -9,6 +9,7 @@ use App\Model\admin\Category;
 use App\Model\admin\ProductMark;
 use App\Model\user\Cart;
 use Session;
+use Mollie;
 
 class ProductsController extends Controller
 {
@@ -95,7 +96,7 @@ class ProductsController extends Controller
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id, $dateFrom, $dateTo);
         $request->session()->put('cart', $cart);
-        return redirect()->route('producten.index');
+        return redirect()->route('producten.cart');
     }
 
     public function removeItem($id)
