@@ -169,14 +169,16 @@
 		<div class="container">
 			<div id="responsive-nav">
 				<!-- category nav -->
-				<div class="category-nav show-on-click">
-					<span class="category-header">Categorieën <i class="fa fa-list"></i></span>
-					<ul class="category-list">
-						@foreach ($categories as $category)
-							<li><a href="{{ route('categorie.show', str_slug($category->category_name)) }}">{{ $category->category_name }}</a></li>
-						@endforeach
-					</ul>
-				</div>
+				@if (isset($categories))
+					<div class="category-nav show-on-click">
+						<span class="category-header">Categorieën <i class="fa fa-list"></i></span>
+						<ul class="category-list">
+							@foreach ($categories as $category)
+								<li><a href="{{ route('categorie.show', str_slug($category->category_name)) }}">{{ $category->category_name }}</a></li>
+							@endforeach
+						</ul>
+					</div>
+				@endif
 				<!-- /category nav -->
 
 				<!-- menu nav -->

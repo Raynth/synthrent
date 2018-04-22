@@ -35,11 +35,12 @@ class ProductsController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        $categories = Category::orderBy('category_name')->get();
 
         // Controle of het gekozen product al is verhuurd in de gekozen periode
         $productRented = Product::allProductRented($id);
 
-        return view('product', compact('product', 'productRented'));
+        return view('product', compact('product', 'productRented', 'categories'));
     }
 
     /*
@@ -120,8 +121,9 @@ class ProductsController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        // dd($cart->items[1]->totalRentMoney);
-        return view('shop.shopping-cart', ['items' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        $categories = Category::orderBy('category_name')->get();
+
+        return view('shop.shopping-cart', ['items' => $cart->items, 'totalPrice' => $cart->totalPrice, 'categories' => $categories]);
     }
 
     public function getCheckout()
