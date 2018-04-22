@@ -22,7 +22,7 @@ Route::group(['namespace' => 'User'], function(){
     Route::get('categorie/{categorie}', 'ProductsController@categoryShow')->name('categorie.show');
     Route::post('voeg-item-toe/{id}', 'ProductsController@addTocart')->name('producten.addtocart');
     Route::get('winkelwagen', 'ProductsController@cart')->name('producten.cart');
-    Route::get('kassa', 'ProductsController@getCheckout')->middleware('auth')->name('producten.checkout');
+    Route::get('kassa', 'PaymentsController@getPayment')->middleware('auth')->name('kassa.betalen');
     Route::post('kassa', 'ProductsController@postCheckout')->middleware('auth')->name('producten.checkout');
     Route::get('verwijder-item/{id}', 'ProductsController@removeItem')->name('producten.removeitem');
     Route::get('account', 'CustomerAccountController@index')->name('account.index');

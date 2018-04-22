@@ -148,6 +148,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
+        Mollie\Laravel\MollieServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -198,6 +199,7 @@ return [
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
+        'Mollie' => Mollie\Laravel\Facades\Mollie::class,   
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
