@@ -91,10 +91,10 @@
 								</form>
 							@endguest
 							<ul class="custom-menu">
-								@auth
-									<li><a href="{{ route('account.index') }}"><i class="fa fa-user-o"></i> Mijn Account</a></li>
-									<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-								@endauth
+								<li><a href="{{ route('account.index') }}"><i class="fa fa-user-o"></i> Mijn Account</a></li>
+								@if (Session::has('cart'))
+									<li><a href="#"><i class="fa fa-check"></i> Betalen</a></li>
+								@endif
 								@guest
 									<li><a href="{{ route('login') }}"><i class="fa fa-unlock-alt"></i> Inloggen</a></li>
 									<li><a href="{{ route('register') }}"><i class="fa fa-user-plus"></i> Registreren</a></li>
@@ -237,9 +237,13 @@
 					<div class="footer">
 						<h3 class="footer-header">Mijn Account</h3>
 						<ul class="list-links">
-							<li><a href="#">Mijn Account</a></li>
-							<li><a href="#">Checkout</a></li>
-							<li><a href="{{ route('login') }}">Inloggen</a></li>
+							<li><a href="{{ route('account.index') }}">Mijn Account</a></li>
+							@if (Session::has('cart'))
+								<li><a href="#">Betalen</a></li>
+							@endif
+							@guest
+								<li><a href="{{ route('login') }}">Inloggen</a></li>
+							@endguest
 						</ul>
 					</div>
 				</div>
