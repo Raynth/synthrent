@@ -53,6 +53,7 @@ class ProductMarksController extends Controller
         // Creeer Productmerk
         $productMark = new ProductMark;
         $productMark->product_mark_name = $request->input('product_mark_name');
+        $productMark->slug = str_slug($productMark->product_mark_name);
         if (null !== $request->input('online')) {
             $productMark->online = 1;
         } else {
@@ -105,6 +106,7 @@ class ProductMarksController extends Controller
         // Update Productmerk
         $productMark = ProductMark::find($id);
         $productMark->product_mark_name = $request->input('product_mark_name');
+        $productMark->slug = str_slug($productMark->product_mark_name);
         if (null !== $request->input('online')) {
             $productMark->online = 1;
         } else {

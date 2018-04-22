@@ -45,7 +45,11 @@ class ProductsController extends Controller
     */
     public function productMarkShow($slug)
     {
+        $selectedProductMark = ProductMark::where('slug', $slug)->first();
+        $products = Product::where('product_mark_id', $selectedProductMark->id)->where('online', 1)->paginate(12);
+        $productMarks = ProductMark::orderBy('product_mark_name')->get();
         
+        return view('productmark', compact('products', 'selectedProductMark', 'productMarks'));
     }
 
     /*

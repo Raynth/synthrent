@@ -15,4 +15,5 @@ class ProductMark extends Model
     {
         return $this->hasMany('App\Model\admin\Rental');
     }
+
 }
