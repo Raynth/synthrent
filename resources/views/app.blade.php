@@ -172,7 +172,9 @@
 				<div class="category-nav show-on-click">
 					<span class="category-header">Categorieën <i class="fa fa-list"></i></span>
 					<ul class="category-list">
-						<li><a href="#">Men’s Clothing</a></li>
+						@foreach ($categories as $category)
+							<li><a href="{{ route('categorie.show', str_slug($category->category_name)) }}">{{ $category->category_name }}</a></li>
+						@endforeach
 					</ul>
 				</div>
 				<!-- /category nav -->

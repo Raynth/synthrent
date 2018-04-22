@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\user\Product;
+use App\Model\admin\Category;
 use App\Model\admin\ProductMark;
 use App\Model\user\Cart;
 use Session;
@@ -20,8 +21,9 @@ class ProductsController extends Controller
     {
         $products = Product::where('online', 1)->paginate(12);
         $productMarks = ProductMark::orderBy('product_mark_name')->get();
+        $categories = Category::orderBy('category_name')->get();
         
-        return view('products', compact('products', 'productMarks'));
+        return view('products', compact('products', 'productMarks', 'categories'));
     }
 
     /**
@@ -48,8 +50,22 @@ class ProductsController extends Controller
         $selectedProductMark = ProductMark::where('slug', $slug)->first();
         $products = Product::where('product_mark_id', $selectedProductMark->id)->where('online', 1)->paginate(12);
         $productMarks = ProductMark::orderBy('product_mark_name')->get();
+        $categories = Category::orderBy('category_name')->get();
         
-        return view('productmark', compact('products', 'selectedProductMark', 'productMarks'));
+        return view('productmark', compact('products', 'selectedProductMark', 'productMarks', 'categories'));
+    }
+
+    /*
+    * Laat alle producten van de geselecteerde categorie zien
+    */
+    public function categoryShow($slug)
+    {
+        $selectedCategory = Category::where('slug', $slug)->first();
+        $products = Product::where('category_id', $selectedCategory->id)->where('online', 1)->paginate(12);
+        $productMarks = ProductMark::orderBy('product_mark_name')->get();
+        $categories = Category::orderBy('category_name')->get();
+        
+        return view('category', compact('products', 'selectedCategory', 'productMarks', 'categories'));
     }
 
     /*

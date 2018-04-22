@@ -19,6 +19,7 @@ Route::group(['namespace' => 'User'], function(){
     Route::get('producten', 'ProductsController@index')->name('producten.index');
     Route::get('producten/{product}', 'ProductsController@show')->name('producten.show');
     Route::get('productmerk/{productmerk}', 'ProductsController@productMarkShow')->name('productmerk.show');
+    Route::get('categorie/{categorie}', 'ProductsController@categoryShow')->name('categorie.show');
     Route::post('voeg-item-toe/{id}', 'ProductsController@addTocart')->name('producten.addtocart');
     Route::get('winkelwagen', 'ProductsController@cart')->name('producten.cart');
     Route::get('kassa', 'ProductsController@getCheckout')->middleware('auth')->name('producten.checkout');

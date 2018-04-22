@@ -53,6 +53,7 @@ class CategoriesController extends Controller
         // Creeer Category
         $category = new Category;
         $category->category_name = $request->input('category_name');
+        $category->slug = str_slug($category->category_name);
         if (null !== $request->input('online')) {
             $category->online = 1;
         } else {
@@ -105,6 +106,7 @@ class CategoriesController extends Controller
         // Update Category
         $category = Category::find($id);
         $category->category_name = $request->input('category_name');
+        $category->slug = str_slug($category->category_name);
         if (null !== $request->input('online')) {
             $category->online = 1;
         } else {
