@@ -72,8 +72,7 @@ class CustomerAccountController extends Controller
     {
         $this->validate($request, [
             'old_password' => 'required',
-            'new_password' => 'required',
-            'new_password_confirmation' => 'required'
+            'new_password' => 'required|confirmed'
         ]);
         
         $customer = User::find($id);
@@ -81,17 +80,13 @@ class CustomerAccountController extends Controller
         // Controle oud en nieuw wachtwoord
         $old_password = $request->input('old_password');
         $new_password = $request->input('new_password');
-        $new_password_confirmation = $request->input('new_password_confirmation');
         
         if (!Hash::check($old_password, $customer->password)) {
-            dd($old_password, $customer->password);
-            // return redirect()->route('account.edit-password', compact('password', 'id'))->with('error', 'Oud wachtwoord is onjuist!');
+            return redirect()->route('account.edit-password', compact('id'))->with('error', 'Oud wachtwoord is onjuist!');
         }
-        if ($old_password == $new_password) {
-            return redirect()->route('account.edit-password', compact('password', 'id'))->with('error', 'Oud en nieuw wachtwoord zijn niet verschillend!');            
-        }
-        if ($new_password != $new_password_confirmation) {
-            return redirect()->route('account.edit-password', compact('password', 'id'))->with('error', 'Nieuw wachtwoord is niet juist bevestigd!');            
+
+        if ( $old_password == $new_password) {
+            return redirect()->route('account.edit-password', compact('id'))->with('error', 'Oud en nieuw wachtwoord zijn gelijk!');
         }
 
         $customer->password = Hash::make($new_password);
