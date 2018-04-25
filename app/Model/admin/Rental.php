@@ -20,4 +20,13 @@ class Rental extends Model
     {
         return $this->belongsTo('App\Model\admin\ProductMark');
     }
+
+    public function create()
+    {
+        return Product::select('products.id', 'product_mark_id', 'product_name', 'rent_money')
+            ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
+            ->orderBy('product_mark_name', 'asc')
+            ->orderBy('product_name', 'asc')
+            ->get();
+    }
 }

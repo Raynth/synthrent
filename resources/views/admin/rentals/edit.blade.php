@@ -79,7 +79,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="datepicker1" name="date_from" value="{{ $rental->date_from }}">
+                                            <input type="text" class="form-control pull-right" id="date_from" name="date_from" value="{{ $rental->date_from }}" onchange="dateCheck()">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -90,7 +90,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="datepicker2" name="date_to" value="{{ $rental->date_to }}">
+                                            <input type="text" class="form-control pull-right" id="date_to" name="date_to" value="{{ $rental->date_to }}" onchange="dateCheck()">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -98,24 +98,32 @@
                                 </div>
                                 <!-- /.row -->
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="total_rent_money">Huurprijs</label>
+                                    <div class="form-group col-md-4">
+                                        <label for="total_rent_money">Huurprijs per dag</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">&euro;</span>
-                                            <input type="number" class="form-control" id="total_rent_money" name="total_rent_money" value="{{ $rental->total_rent_money }}" step="0.05" onfocus="calculateRental()">
+                                            <input type="number" class="form-control" id="rent_money" name="rent_money" step="0.05" value="{{ $rental->product->rent_money }}">
                                         </div>
                                         <!-- /.input-group -->
                                     </div>
                                     <!-- /.form-group -->
-                                    <div class="form-group col-md-6">
-                                        <div class="form-group checkbox">
-                                            <label for="bring_back">
-                                                <input type="checkbox" id="bring_back" name="bring_back" value="$product->bring_back" {{ ($product->bring_back == 1) ? 'checked' : '' }}> Teruggebracht
-                                            </label>
+                                    <div class="form-group col-md-4">
+                                        <label for="total_rent_money">Aantal dagen</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="days" name="days" value="{{ $rental->days }}">
                                         </div>
-                                        <!-- /.checkbox -->
+                                        <!-- /.input-group -->
                                     </div>
                                     <!-- /.form-group -->
+                                    <div class="form-group col-md-4">
+                                        <label for="total_rent_money">Totale huurprijs</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">&euro;</span>
+                                            <input type="number" class="form-control" id="total_rent_money" name="total_rent_money" step="0.05" value="{{ $rental->total_rent_money }}">
+                                        </div>
+                                        <!-- /.input-group -->
+                                    </div>
+                                    <!-- /.form-group -->   
                                 </div>
                                 <!-- /.row -->
                             </div>
@@ -136,63 +144,69 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-    <script>
-        // Bereken totaal huurprijs: aantal dagen x huurprijs
-        function calculateRental() {
-            // Haal gekozen product uit de <SELECT>
-            var productId = document.getElementById("product").value
-            // Haal alle proudcten en zet deze om naar JSON-formaat
-            var products = JSON.parse('<?php echo $products; ?>')
-            // Zoek de sleutel waar product_id gelijk is aan id van alle producten
-            for (i = 0; i < products.length; i++) {
-                if (products[i].id == productId) {
-                    var key = i
-                    break
-                }
-            }
-            // Haal de huurprijs van de gekozen product uit alle producten
-            var rentMoney = products[key].rent_money
-            // Haal de datums 'van' en 'tot'      
-            var dateFrom = Date.parse(document.getElementById("datepicker1").value)
-            var dateTo = Date.parse(document.getElementById("datepicker2").value)
-            // Bereken het aantal milliseconden tussen deze 2 datums
-            var timeDiff = dateTo - dateFrom
-            // Bereken aantal dagen van het aantal milliseconden
-            var daysTotal = Math.floor(timeDiff / (1000 * 60 * 60 * 24))
-            // Bereken totale huurprijs: aantal dagen x huurprijs
-            var totalRentMoney = daysTotal * rentMoney
-            document.getElementById("total_rent_money").value = totalRentMoney.toFixed(2)
-        }
-    </script>
-
 @endsection
 
 @section('footerSection')
-    <!-- CKEditor -->
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace( 'article-ckeditor' );
-    </script>
     <!-- bootstrap datepicker -->
     <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js') }}" charset="UTF-8"></script>
     <script>
         $(function () {
-            //Date picker
-            $('#datepicker1').datepicker({
+            //Date picker 'date_from'
+            $('#date_from').datepicker({
                 autoclose: true,
                 startDate: '+1d',
                 format: 'yyyy-mm-dd',
                 language: 'nl'
             })
-            //Date picker
-            $('#datepicker2').datepicker({
+			//Date picker 'date_to'
+            $('#date_to').datepicker({
                 autoclose: true,
                 startDate: '+1d',
                 format: 'yyyy-mm-dd',
                 language: 'nl'
             })
         })
+    </script>
+    <script>
+        var products = JSON.parse('<?php echo $products; ?>')
+        // Toon de huurprijs per dag voor de geselecteerde product
+        function selectedProduct() {
+            var productId = document.getElementById('product_id').value
+            // Haal alle proudcten en zet deze om naar JSON-formaat
+            var products = JSON.parse('<?php echo $products; ?>')
+            // Zoek de index van de sleutel 'product_id' waar de waarde van bekend is
+            for (i = 0; i < products.length; i++) {
+                if (products[i].id == productId) {
+                    var key = i
+                    break
+                }
+            }
+            //
+            var rentMoney = products[key].rent_money
+            document.getElementById('rent_money').value = rentMoney
+        }
+        // Controleer of date_from en date_to zijn ingevuld en bereken het aantal dagen tussen deze 2 datums
+        function dateCheck() {
+            // Haal de datums 'van' en 'tot'      
+            var dateFrom = document.getElementById("date_from").value
+            var dateTo = document.getElementById("date_to").value
+            // Controleer of beide datums zijn ingevuld, voordat het aantal dagen berekend kan worden
+            if (dateFrom != '' && dateTo != '') {
+                dateFrom = Date.parse(dateFrom)
+                dateTo = Date.parse(dateTo)
+                // Bereken het aantal milliseconden tussen deze 2 datums
+                var timeDiff = dateTo - dateFrom
+                // Bereken aantal dagen van het aantal milliseconden
+                var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24))
+                document.getElementById('days').value = days
+                // Bereken totale huurprijs: aantal dagen x huurprijs
+                var rentMoney = document.getElementById("rent_money").value
+                var totalRentMoney = days * rentMoney
+                document.getElementById("total_rent_money").value = totalRentMoney.toFixed(2)
+            }
+            
+            console.log(dateFrom, dateTo)
+        }
     </script>
 @endsection

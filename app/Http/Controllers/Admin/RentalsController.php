@@ -36,7 +36,11 @@ class RentalsController extends Controller
     public function create()
     {
         $customers = User::all();
-        $products = Product::all();
+        $products = Product::select('products.id', 'product_mark_id', 'product_mark_name', 'product_name', 'rent_money')
+                            ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
+                            ->orderBy('product_mark_name', 'asc')
+                            ->orderBy('product_name', 'asc')
+                            ->get();
 
         return view('admin.rentals.create', compact('customers', 'products'));
     }
@@ -54,6 +58,7 @@ class RentalsController extends Controller
             'product_id' => 'required',
             'date_from' => 'required|date',
             'date_to' => 'required|date|after:date_from',
+            'days' => 'required',
             'total_rent_money' => 'required'
         ]);
 
@@ -62,11 +67,12 @@ class RentalsController extends Controller
         $rental->product_id = $request->input('product_id');
         $rental->date_from = $request->input('date_from');
         $rental->date_to = $request->input('date_to');
+        $rental->days = $request->input('days');
         $rental->total_rent_money = $request->input('total_rent_money');
         $rental->bring_back = 0;
         
         // Controle of het gekozen product al is verhuurd in de gekozen periode
-        $productRented = Product::isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
+        $productRented = Product::isProductRentedStore($rental->product_id, $rental->date_from, $rental->date_to);
         if ($productRented->count() > 0)
         {
             $message = Product::find($rental->product_id)->product_name.' is al '.$productRented->count().' keer verhuurd.<br>';
@@ -103,7 +109,11 @@ class RentalsController extends Controller
     {
         $rental = Rental::find($id);
         $customers = User::all();
-        $products = Product::all();
+        $products = Product::select('products.id', 'product_mark_id', 'product_name', 'rent_money')
+                            ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
+                            ->orderBy('product_mark_name', 'asc')
+                            ->orderBy('product_name', 'asc')
+                            ->get();
 
         return view('admin.rentals.edit', compact('rental', 'customers', 'products')); 
     }
@@ -122,6 +132,7 @@ class RentalsController extends Controller
             'product_id' => 'required',
             'date_from' => 'required|date',
             'date_to' => 'required|date|after:date_from',
+            'days' => 'required',
             'total_rent_money' => 'required'
         ]);
 
@@ -130,6 +141,7 @@ class RentalsController extends Controller
         $rental->product_id = $request->input('product_id');
         $rental->date_from = $request->input('date_from');
         $rental->date_to = $request->input('date_to');
+        $rental->days = $request->input('days');
         $rental->total_rent_money = $request->input('total_rent_money');
         if (null !== $request->input('bring_back')) {
             $rental->bring_back = 1;
@@ -138,8 +150,8 @@ class RentalsController extends Controller
         };
 
         // Controle of het gekozen product al is verhuurd in de gekozen periode
-        $productRented = Product::isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
-        if ($productRented)
+        $productRented = Product::isProductRentedUpdate($id, $rental->product_id, $rental->date_from, $rental->date_to);
+        if ($productRented->count() > 0)
         {
             $message = Product::find($rental->product_id)->product_name.' is al '.$productRented->count().' keer verhuurd.<br>';
             foreach($productRented as $productRent){
