@@ -19,6 +19,7 @@ class CreateRentalsTable extends Migration
             $table->integer('product_id');
             $table->date('date_from');
             $table->date('date_to');
+            $table->integer('days');
             $table->decimal('total_rent_money', 5, 2);
             $table->boolean('bring_back');
             $table->timestamps();
