@@ -52,8 +52,8 @@ class RentalsController extends Controller
         $this->validate($request, [
             'customer_id' => 'required',
             'product_id' => 'required',
-            'date_from' => 'required',
-            'date_to' => 'required',
+            'date_from' => 'required|date',
+            'date_to' => 'required|date|after:date_from',
             'total_rent_money' => 'required'
         ]);
 
@@ -120,8 +120,8 @@ class RentalsController extends Controller
         $this->validate($request, [
             'customer_id' => 'required',
             'product_id' => 'required',
-            'date_from' => 'required',
-            'date_to' => 'required',
+            'date_from' => 'required|date',
+            'date_to' => 'required|date|after:date_from',
             'total_rent_money' => 'required'
         ]);
 
