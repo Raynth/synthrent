@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('account_number');
             $table->string('identification');
             $table->integer('discount');
+            $table->text('comment');
             $table->timestamps();
         });
     }

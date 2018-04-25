@@ -15,7 +15,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('users.index') }}">Gebruikers</a></li>
+                <li><a href="{{ route('admins.index') }}">Gebruikers</a></li>
                 <li class="active">Overzicht</li>
             </ol>
         </section>
@@ -31,11 +31,11 @@
                     @endif
                     <!-- Als er records in de gebruikers-tabel staan, toon tabel -->
                     <!-- Als er geen records in de gebruikers-tabel staan, toon melding -->
-                    @if (count($users) > 0)
+                    @if (count($admins) > 0)
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title">Overzicht gebruikers</h3>
-                                <a href="{{ route('users.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                                <a href="{{ route('admins.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -45,24 +45,22 @@
                                             <th>Id</th>
                                             <th>Naam</th>
                                             <th>E-mail</th>
-                                            <th>Wachtwoord</th>
                                             <th>Telefoon</th>
-                                            <th>Staus</th>
+                                            <th>Rol</th>
                                             <th>Actie</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $user)
+                                        @foreach ($admins as $admin)
                                             <tr>
-                                                <td>{{ $user->id }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->password }}</td>
-                                                <td>{{ $user->phone }}</td>
-                                                <td>{{ $user->status }}</td>
+                                                <td>{{ $admin->id }}</td>
+                                                <td>{{ $admin->name }}</td>
+                                                <td>{{ $admin->email }}</td>
+                                                <td>{{ $admin->phone }}</td>
+                                                <td>{{ $admin->role->name }}</td>
                                                 <td>
-                                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
+                                                    <a href="{{ route('admins.show', $admin->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                                                    <a href="{{ route('admins.edit', $admin->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                                     <span class="fa fa-trash">
                                                     </button>
@@ -75,9 +73,8 @@
                                             <th>Id</th>
                                             <th>Naam</th>
                                             <th>E-mail</th>
-                                            <th>Wachtwoord</th>
                                             <th>Telefoon</th>
-                                            <th>Staus</th>
+                                            <th>Rol</th>
                                             <th>Actie</th>
                                         </tr>
                                     </tfoot>
@@ -91,7 +88,7 @@
                             <h4>Geen gebruikers in het bestand!</h4>
                             <p>Op dit moment bevinden er zich geen gebruikers in het bestand.</p>
                         </div>
-                        <a href="{{ route('users.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('admins.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->
@@ -117,8 +114,8 @@
                 </div>
                 <!-- /.modal-body -->
                 <div class="modal-footer">
-                    @if (count($users) > 0)
-                        <form action="{{ route('users.destroy', $user->id) }}" method="post" class="pull-left">
+                    @if (count($admins) > 0)
+                        <form action="{{ route('admins.destroy', $admin->id) }}" method="post" class="pull-left">
                             @csrf
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Verwijderen</button>

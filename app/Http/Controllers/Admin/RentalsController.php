@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\admin\Customer;
+use App\Model\admin\User;
 use App\Model\admin\Product;
 use App\Model\admin\Rental;
 use DateTime;
@@ -25,7 +25,6 @@ class RentalsController extends Controller
     public function index()
     {
         $rentals = Rental::all();
-        dd($rentals);
         return view('admin.rentals.index', compact('rentals'));
     }
 
@@ -36,7 +35,7 @@ class RentalsController extends Controller
      */
     public function create()
     {
-        $customers = Customer::all();
+        $customers = User::all();
         $products = Product::all();
 
         return view('admin.rentals.create', compact('customers', 'products'));
@@ -103,7 +102,7 @@ class RentalsController extends Controller
     public function edit($id)
     {
         $rental = Rental::find($id);
-        $customers = Customer::all();
+        $customers = User::all();
         $products = Product::all();
 
         return view('admin.rentals.edit', compact('rental', 'customers', 'products')); 
@@ -123,8 +122,7 @@ class RentalsController extends Controller
             'product_id' => 'required',
             'date_from' => 'required',
             'date_to' => 'required',
-            'total_rent_money' => 'required',
-            'bring_back' => 'required'
+            'total_rent_money' => 'required'
         ]);
 
         $rental = Rental::find($id);
@@ -140,7 +138,7 @@ class RentalsController extends Controller
         };
 
         // Controle of het gekozen product al is verhuurd in de gekozen periode
-        $productRented = $Product::isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
+        $productRented = Product::isProductRented($rental->product_id, $rental->date_from, $rental->date_to);
         if ($productRented)
         {
             $message = Product::find($rental->product_id)->product_name.' is al '.$productRented->count().' keer verhuurd.<br>';

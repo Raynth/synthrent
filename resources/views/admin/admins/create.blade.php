@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('users.index') }}">Gebruikers</a></li>
+                <li><a href="{{ route('admins.index') }}">Gebruikers</a></li>
                 <li class="active">Toevoegen</li>
             </ol>
         </section>
@@ -37,7 +37,7 @@
                             <h3 class="box-title">Voeg een gebruiker toe</h3>
                         </div>
                         <!-- /.box-header -->
-                        <form action="{{ route('users.store') }}" enctype="multipart/form-data" method="post">
+                        <form action="{{ route('admins.store') }}" enctype="multipart/form-data" method="post">
                             @csrf
                             <div class="box-body">
                                 <div class="col-md-12">
@@ -52,41 +52,26 @@
                                     </div>
                                     <!-- /.form-group -->                    
                                     <div class="form-group">
-                                        <label for="password">Wachtwoord</label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Voor wachtwoord in">
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label for="confirm_password">Bevestig wachtwoord</label>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Bevestig wachtwoord">
-                                    </div>
-                                    <!-- /.form-group -->                  
-                                    <div class="form-group">
                                         <label for="phone">Telefoonnummer</label>
                                         <input type="text" class="form-control" id="phone" name="phone" placeholder="Voor telefoonnummer in">
                                     </div>
                                     <!-- /.form-group -->                    
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <input type="text" class="form-control" id="status" name="status" placeholder="Voor status in">
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
                                         <label for="role">Rol</label>
-                                        <select class="form-control" id="role" name="role">
-                                            <option value="1">Inzien</option>
-                                            <option value="2">Bewerken</option>
-                                            <option value="9">Alles</option>
+                                        <select class="form-control select2" style="width: 100%;" id="role" name="role_id">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                    <!-- /.form-group -->                  
+                                    <!-- /.form-group -->
                                 </div>
                                 <!-- /.col -->
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                                <a href="{{ route('users.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('admins.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->
                         </form>

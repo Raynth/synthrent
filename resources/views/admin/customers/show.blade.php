@@ -68,6 +68,10 @@
                             <th>Korting:</th>
                             <td>{{ $customer->discount }}%</td>
                         </tr>
+                        <tr>
+                            <th>Opmerking:</th>
+                            <td>{!! $customer->comment !!}</td>
+                        </tr>
                     </table>
                 </div>
                 <!-- /.box-body -->

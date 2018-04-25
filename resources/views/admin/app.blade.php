@@ -170,7 +170,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('users.index') }}">
+                        <a href="{{ route('admins.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Gebruikers</span>
                         </a>
                     </li>

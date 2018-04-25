@@ -77,6 +77,8 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
+            
+            <!-- Overzicht van de omzet per maand van de laatste 6 maanden in een grafiek -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
@@ -85,25 +87,13 @@
     
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-wrench"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <p class="text-center">
                                         <strong>Verhuur: <span id="firstPeriod"></span> - <span id="lastPeriod"></span></strong>
                                     </p>
@@ -123,9 +113,41 @@
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
-
             </div>
             <!-- /.row -->
+
+            <!-- Overzicht van niet teruggebrachte producten, waarvan de einddatum verstreken is -->
+            @if (count($notBringBacks) > 0)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <i class="fa fa-warning"></i>
+                                <h3 class="box-title">Niet teruggebracthen producten, waarvan de einddatum verstreken is</h3>
+        
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                @foreach ($notBringBacks as $notBringBack)
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <h4><i class="icon fa fa-ban"></i> {{ $notBringBack->product->product_mark->product_mark_name }} {{ $notBringBack->product->product_name }}</h4>
+                                        Einddatum: {{ date("d-m-Y", strtotime($notBringBack->date_to)) }} | Klant: <a href="{{ route('customers.show', $notBringBack->customer_id) }}">{{ $notBringBack->customer->forename }} {{ $notBringBack->customer->lastname }}</a>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <!-- ./box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            @endif
         </section>
         <!-- /.content -->
 
@@ -164,10 +186,8 @@
                         datasets : [
                             {
                                 label: 'Omzet',
-                                backgroundColor: 'rgba(200, 200, 200, 0.75)',
-                                borderColor: 'rgba(200, 200, 200, 0.75)',
-                                hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
-                                hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                                backgroundColor: 'rgba(100, 0, 255, 0.5)',
+                                hoverBackgroundColor: 'rgba(100, 0, 255, 0.75)',
                                 data: sum
                             },
                         ]
@@ -183,9 +203,22 @@
                                 yAxes: [{
                                     ticks: {
                                         beginAtZero: true
+                                    },
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Omzet in €'
+                                    }
+                                }],
+                                xAxes: [{
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Maand'
                                     }
                                 }]
-                            }
+                            },
+                            legend: {
+                                display: false
+                            },
                         }
                     });
                 },

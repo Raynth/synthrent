@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Model\admin\Customer;
+use App\Model\admin\User;
 use App\Model\admin\Rental;
 
 class CustomersController extends Controller
@@ -23,7 +23,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = Customer::get();
+        $customers = User::get();
 
         return view('admin.customers.index', compact('customers'));
     }
@@ -58,7 +58,7 @@ class CustomersController extends Controller
         ]);
 
         // Creeer customer
-        $customer = new Customer;
+        $customer = new User;
         $customer->forename = $request->input('forename');
         $customer->lastname = $request->input('lastname');
         $customer->street = $request->input('street');
@@ -73,7 +73,7 @@ class CustomersController extends Controller
         $customer->comment = $request->input('comment');
         $customer->save();
 
-        return redirect('/customers')->with('success', 'Klant toegevoegd');
+        return redirect()->route('customers.index')->with('success', 'Klant toegevoegd');
     }
 
     /**
@@ -84,7 +84,7 @@ class CustomersController extends Controller
      */
     public function show($id)
     {
-        $customer = Customer::find($id);
+        $customer = User::find($id);
         $rentals = Rental::where('customer_id', $id)->get();
 
         return view('admin.customers.show', compact('customer', 'rentals'));
@@ -98,7 +98,7 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::find($id);
+        $customer = User::find($id);
 
         return view('admin.customers.edit', compact('customer', 'categories')); 
     }
@@ -124,7 +124,7 @@ class CustomersController extends Controller
         ]);
         
         // Update Customer
-        $customer = Customer::find($id);
+        $customer = User::find($id);
         $customer->forename = $request->input('forename');
         $customer->lastname = $request->input('lastname');
         $customer->street = $request->input('street');
@@ -139,7 +139,7 @@ class CustomersController extends Controller
         $customer->comment = $request->input('comment');
         $customer->save();
 
-        return redirect('/customers')->with('success', 'Klant bijgewerkt');
+        return redirect()->route('customers.index')->with('success', 'Klant bijgewerkt');
     }
 
     /**
@@ -150,9 +150,9 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        $customer = Customer::find($id);
+        $customer = User::find($id);
         $customer->delete();
 
-        return redirect('/customers')->with('success', 'Klant verwijderd');
+        return redirect()->route('customers.index')->with('success', 'Klant verwijderd');
     }
 }

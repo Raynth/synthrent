@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Model\admin\Admin;
+use App\Model\admin\Role;
 
-class UsersController extends Controller
+class AdminsController extends Controller
 {
     // Deze construct zorgt ervoor dat de Gebruikers-pagina alleen benaderd kan worden als men is ingelogd.
     public function __construct()
@@ -22,9 +23,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = Admin::get();
+        $admins = Admin::get();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.admins.index', compact('admins'));
     }
 
     /**
@@ -34,7 +35,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::all();
+
+        return view('admin.admins.create', compact('roles'));
     }
 
     /**
@@ -48,21 +51,18 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
-            'phone' => 'required',
-            'status' => 'required'
+            'role_id' => 'required'
         ]);
 
-        // Creeer user
-        $user = new User;
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        $user->phone = $request->input('phone');
-        $user->status = $request->input('status');
-        $user->save();
+        // Creeer admin
+        $admin = new Admin;
+        $admin->name = $request->input('name');
+        $admin->email = $request->input('email');
+        $admin->phone = $request->input('phone');
+        $admin->role_id = $request->input('role_id');
+        $admin->save();
 
-        return redirect('/users')->with('success', 'Gebruiker toegevoegd');
+        return redirect()->route('admins.index')->with('success', 'Gebruiker toegevoegd');
     }
 
     /**
@@ -73,9 +73,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = Admin::find($id);
+        $admin = Admin::find($id);
 
-        return view('admin.users.show', compact('user'));
+        return view('admin.admins.show', compact('admin'));
     }
 
     /**
@@ -86,9 +86,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = Admin::find($id);
+        $admin = Admin::find($id);
+        $roles = Role::all();
 
-        return view('admin.users.edit', compact('user')); 
+        return view('admin.admins.edit', compact('admin', 'roles')); 
     }
 
     /**
@@ -103,21 +104,18 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
-            'phone' => 'required',
-            'status' => 'required'
+            'role_id' => 'required'
         ]);
         
-        // Update User
-        $user = Admin::find($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        $user->phone = $request->input('phone');
-        $user->status = $request->input('status');
-        $user->save();
+        // Update admin
+        $admin = Admin::find($id);
+        $admin->name = $request->input('name');
+        $admin->email = $request->input('email');
+        $admin->phone = $request->input('phone');
+        $admin->role_id = $request->input('role_id');
+        $admin->save();
 
-        return redirect('/users')->with('success', 'Gebruiker bijgewerkt');
+        return redirect()->route('admins.index')->with('success', 'Gebruiker bijgewerkt');
     }
 
     /**
@@ -128,9 +126,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = Admin::find($id);
-        $user->delete();
+        $admin = Admin::find($id);
+        $admin->delete();
 
-        return redirect('/users')->with('success', 'Gebruiker verwijderd');
+        return redirect()->route('admins.index')->with('success', 'Gebruiker verwijderd');
     }
 }

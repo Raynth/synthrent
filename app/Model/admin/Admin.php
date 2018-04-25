@@ -8,4 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Admin extends Authenticatable
 {
     use Notifiable;
+
+    public function role()
+    {
+        return $this->belongsTo('App\Model\admin\Role');
+    }
 }

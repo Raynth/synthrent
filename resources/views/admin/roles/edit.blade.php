@@ -43,13 +43,8 @@
                             {{ method_field('PUT') }}
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="category_name">Rol titel</label>
-                                    <input type="text" class="form-control" id="category_name" name="category_name" value="{{ $category->category_name }}" placeholder="Voor category naam in">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="online" value="$category->online" {{ ($category->online == 1) ? 'checked' : '' }}> Online
-                                    </label>
+                                    <label for="name">Rol titel</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ $role->name }}" placeholder="Voor rol naam in">
                                 </div>
                             </div>
                             <!-- /.box-body -->

@@ -10,6 +10,7 @@ use App\Model\user\User;
 use App\Model\admin\Product;
 use App\Model\admin\Rental;
 use DateTime;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -32,9 +33,18 @@ class DashboardController extends Controller
         $products = Product::count();
         $rentals = Rental::count();
         
-        return view('admin.dashboard.index', compact('categories', 'customers', 'products', 'rentals'));
+        // Overzicht van producten die niet zijn teruggebracht op de einddatum
+        $notBringBacks = Rental::where([
+            ['bring_back', 0],
+            ['date_to', '<', Carbon::now()]
+        ])->get();
+
+        return view('admin.dashboard.index', compact('categories', 'customers', 'products', 'rentals', 'notBringBacks'));
     }
 
+    /*
+    * Overzicht van de omzet per maand, gedurende de laatste 6 maanden in een grafiek.
+    */
     public function chartSales()
     {
         // Query voor omzet per maand voor gebruik Chart.js
