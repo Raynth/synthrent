@@ -132,7 +132,7 @@
 														<img src="{{ asset('storage/cover_images/'.$item['foto']) }}" alt="">
 													</div>
 													<div class="product-body">
-														<h3 class="product-price">&euro; {{ number_format($item['totaalHuurprijs'], 2, ',', '.') }}</h3>
+														<h3 class="product-price">&euro; {{ number_format($item['totale_huurprijs'], 2, ',', '.') }}</h3>
 														<h2 class="product-name"><a href="#">{{ $item['merk'] }} {{ $item['naam'] }}</a></h2>
 													</div>
 													<button class="cancel-btn"><i class="fa fa-trash"></i></button>

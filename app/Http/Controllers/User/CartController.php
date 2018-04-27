@@ -30,9 +30,10 @@ class CartController extends Controller
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         if (isset($oldCart)) {
             foreach ($oldCart->items as $item) {
-                if ($id == $item->id) {
-                    if (!($item->einddatum < $begindatum || $item->begindatum > $einddatum)) {
-                        $message = Product::find($id)->naam.' met de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' overlapt met de periode in uw winkelwagen!';
+                if ($id == $item['id']) {
+                    if (!($item['einddatum'] < $begindatum || $item['begindatum'] > $einddatum)) {
+                        $product = Product::find($id);
+                        $message = $product->product_mark->naam.' '.$product->naam.' met de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' overlapt met de periode in uw winkelwagen!';
                         return redirect()->route('winkelwagen.show')->with('itemInWinkelwagen', $message);
                     }
                 }
@@ -43,7 +44,8 @@ class CartController extends Controller
         $productRented = Product::isProductRented($id, $begindatum, $einddatum);
         if ($productRented->count() > 0)
         {
-            $message = Product::find($id)->naam.' is in de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' verhuurd. Zie bovenstaande gegevens.';
+            $product = Product::find($id);
+            $message = $product->product_mark->naam.' '.$product->naam.' is in de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' verhuurd. Zie bovenstaande gegevens.';
             return redirect()->route('producten.show', $id)->with('productRented', $message);
         }
 

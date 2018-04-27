@@ -28,18 +28,18 @@ class Cart
         $storedItem['foto'] = $item->foto;
         $storedItem['begindatum'] = $begindatum;
         $storedItem['einddatum'] = $einddatum;
-        $storedItem['aantalDagen'] = date_diff(date_create($begindatum), date_create($einddatum))->format('%d');
+        $storedItem['dagen'] = date_diff(date_create($begindatum), date_create($einddatum))->format('%d');
         $storedItem['huurprijs'] = $item->huurprijs;
-        $storedItem['totaalHuurprijs'] = $item->huurprijs * $storedItem['aantalDagen'];
+        $storedItem['totale_huurprijs'] = $item->huurprijs * $storedItem['dagen'];
         $this->aantalItems++;
         $this->items[$this->aantalItems] = $storedItem;
-        $this->totalPrice += $storedItem['totaalHuurprijs'];
+        $this->totalPrice += $storedItem['totale_huurprijs'];
     }
 
     public function removeItem($id)
     {
         $this->aantalItems--;
-        $this->totalPrice -= $this->items[$id]->totaalHuurprijs;
+        $this->totalPrice -= $this->items[$id]->totale_huurprijs;
         unset($this->items[$id]);
     }
 }
