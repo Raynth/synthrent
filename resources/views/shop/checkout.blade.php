@@ -28,7 +28,7 @@
                         <form action="{{ route('producten.checkout') }}" method="post" id="checkout-form" class="clearfix">
                             @csrf
                             <div class="form-group">
-                                <input id="name" type="text" class="input" name="name" placeholder="Naam" required autofocus>
+                                <input id="naam" type="text" class="input" name="naam" placeholder="Naam" required autofocus>
                             </div>
                             <div class="form-group">
                                 <input id="address" type="text" class="input" name="address" placeholder="Adres" required>

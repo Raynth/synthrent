@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('products.index') }}">Producten</a></li>
+                <li><a href="{{ route('producten.index') }}">Producten</a></li>
                 <li class="active">Bewerken</li>
             </ol>
         </section>
@@ -38,7 +38,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('products.update', $product->id) }}" method="post">
+                        <form role="form" action="{{ route('producten.update', $product->id) }}" method="post">
                             @csrf
                             {{ method_field('PUT') }}
                             <div class="box-body">
@@ -46,7 +46,7 @@
                                     <label for="category">Categorie</label>
                                     <select class="form-control select2" style="width: 100%;" id="category" name="category_id">
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" {{ ($product->category_id == $category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>
+                                            <option value="{{ $category->id }}" {{ ($product->category_id == $category->id) ? 'selected' : '' }}>{{ $category->naam }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -55,24 +55,24 @@
                                     <label for="product_mark">Productmerk</label>
                                     <select class="form-control select2" style="width: 100%;" id="product_mark" name="product_mark_id">
                                         @foreach ($productMarks as $productMark)
-                                            <option value="{{ $productMark->id }}" {{ ($product->product_mark_id == $productMark->id) ? 'selected' : '' }}>{{ $productMark->product_mark_name }}</option>
+                                            <option value="{{ $productMark->id }}" {{ ($product->product_mark_id == $productMark->id) ? 'selected' : '' }}>{{ $productMark->naam }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="product_name">Product naam</label>
-                                    <input type="text" class="form-control" id="product_name" name="product_name" value="{{ $product->product_name }}" placeholder="Voor product naam in">
+                                    <label for="naam">Product naam</label>
+                                    <input type="text" class="form-control" id="naam" name="naam" value="{{ $product->naam }}" placeholder="Voor product naam in">
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="rent_money">Huurprijs per dag</label>
-                                    <input type="text" class="form-control" id="rent_money" name="rent_money" value="{{ $product->rent_money }}" placeholder="Voer huurprijs per dag in">
+                                    <label for="huurprijs">Huurprijs per dag</label>
+                                    <input type="text" class="form-control" id="huurprijs" name="huurprijs" value="{{ $product->huurprijs }}" placeholder="Voer huurprijs per dag in">
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
                                     <label>Omschrijving</label>
-                                    <textarea class="form-control" rows="3" id="description" name="description" placeholder="Voer een omschrijving in">{{ $product->description }}</textarea>
+                                    <textarea class="form-control" rows="3" id="omschrijving" name="omschrijving" placeholder="Voer een omschrijving in">{{ $product->omschrijving }}</textarea>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
@@ -81,8 +81,8 @@
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="cover_image">Afbeelding invoer</label>
-                                    <input type="file" id="cover_image" name="cover_image" value="{{ $product->cover_image }}">
+                                    <label for="foto">Afbeelding invoer</label>
+                                    <input type="file" id="foto" name="foto" value="{{ $product->foto }}">
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="checkbox">
@@ -96,7 +96,7 @@
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Bewerken</button>
-                                <a href="{{ route('products.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('producten.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->                        
                         </form>
@@ -116,7 +116,7 @@
     <!-- CKEditor -->
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace( 'omschrijving' );
         CKEDITOR.replace( 'details' );
     </script>
 @endsection

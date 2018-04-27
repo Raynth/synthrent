@@ -25,6 +25,12 @@
 							<div class="section-title">
 								<h3 class="title">Winkelwagen</h3>
                             </div>
+                            <!-- Geef melding als het product verhuurd is -->
+							@if (session('itemInWinkelwagen'))
+								<div class="alert alert-warning">
+									{!! session('itemInWinkelwagen') !!}
+								</div>
+							@endif
                             @if(Session::has('cart'))
                                 <table class="shopping-cart-table table">
                                     <thead>
@@ -40,18 +46,18 @@
                                     <tbody>
                                         @foreach($items as $key => $item)
                                             <tr>
-                                                <td class="thumb"><img src="{{ asset('storage/cover_images/'.$item->cover_image) }}" alt=""></td>
+                                                <td class="thumb"><img src="{{ asset('storage/cover_images/'.$item->foto) }}" alt=""></td>
                                                 <td class="details">
-                                                    <a href="{{ route('producten.show', $item->id) }}">{{ $item->productMarkName }} {{ $item->product_name }}</a>
+                                                    <a href="{{ route('producten.show', $item->id) }}">{{ $item->productMarkName }} {{ $item->naam }}</a>
                                                     <ul>
-                                                        <li><span>Van: {{ date("d-m-Y", strtotime($item->dateFrom)) }}</span></li>
-                                                        <li><span>Tot: {{ date("d-m-Y", strtotime($item->dateTo)) }}</span></li>
+                                                        <li><span>Van: {{ date("d-m-Y", strtotime($item->begindatum)) }}</span></li>
+                                                        <li><span>Tot: {{ date("d-m-Y", strtotime($item->einddatum)) }}</span></li>
                                                     </ul>
                                                 </td>
-                                                <td class="price text-center"><strong>&euro; {{ number_format($item->rent_money, 2, ',', '.') }}</strong></td>
+                                                <td class="price text-center"><strong>&euro; {{ number_format($item->huurprijs, 2, ',', '.') }}</strong></td>
                                                 <td class="days text-center"><strong>{{ $item->totalDays }}</strong></td>
                                                 <td class="total text-center"><strong class="primary-color">&euro; {{ number_format($item->totalRentMoney, 2, ',', '.') }}</strong></td>
-                                                <td class="text-right"><a href="{{ route('producten.removeitem', $key) }}" class="main-btn icon-btn"><i class="fa fa-close"></i></a></td>
+                                                <td class="text-right"><a href="{{ route('winkelwagen.itemverwijderen', $key) }}" class="main-btn icon-btn"><i class="fa fa-close"></i></a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

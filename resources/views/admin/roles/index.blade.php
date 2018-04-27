@@ -51,7 +51,7 @@
                                         @foreach ($roles as $role)
                                             <tr>
                                                 <td>{{ $role->id }}</td>
-                                                <td>{{ $role->name }}</td>
+                                                <td>{{ $role->naam }}</td>
                                                 <td>
                                                     <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">

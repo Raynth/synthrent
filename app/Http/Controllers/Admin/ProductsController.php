@@ -24,9 +24,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $producten = Product::all();
         
-        return view('admin.products.index', compact('products'));
+        return view('admin.producten.index', compact('producten'));
     }
 
     /**
@@ -36,10 +36,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Category::orderBy('category_name')->get();
-        $productMarks = ProductMark::orderBy('product_mark_name')->get();
+        $categories = Category::orderBy('naam')->get();
+        $productMarks = ProductMark::orderBy('naam')->get();
 
-        return view('admin.products.create', compact('categories', 'productMarks'));
+        return view('admin.producten.create', compact('categories', 'productMarks'));
     }
 
     /**
@@ -53,15 +53,15 @@ class ProductsController extends Controller
         $this->validate($request, [
             'category_id' => 'required',
             'product_mark_id' => 'required',
-            'product_name' => 'required',
-            'rent_money' => 'required',
-            'description' => 'required'
+            'naam' => 'required',
+            'huurprijs' => 'required',
+            'omschrijving' => 'required'
         ]);
 
         // Handle File Upload
-        if ($request->hasFile('cover_image')) {
-            $filename = $request->cover_image->getClientOriginalName();
-            $request->cover_image->storeAs('public/cover_images', $filename);
+        if ($request->hasFile('foto')) {
+            $filename = $request->foto->getClientOriginalName();
+            $request->foto->storeAs('public/cover_images', $filename);
         } else {
             $filename = 'noimage.jpg';
         }
@@ -70,11 +70,11 @@ class ProductsController extends Controller
         $product = new Product;
         $product->category_id = $request->input('category_id');
         $product->product_mark_id = $request->input('product_mark_id');
-        $product->product_name = $request->input('product_name');
-        $product->rent_money = $request->input('rent_money');
-        $product->description = $request->input('description');
+        $product->naam = $request->input('naam');
+        $product->huurprijs = $request->input('huurprijs');
+        $product->omschrijving = $request->input('omschrijving');
         $product->details = $request->input('details');
-        $product->cover_image = $filename;
+        $product->foto = $filename;
         $product->online = $request->input('online');
         if (null !== $request->input('online')) {
             $product->online = 1;
@@ -83,7 +83,7 @@ class ProductsController extends Controller
         };
         $product->save();
 
-        return redirect()->route('products.index')->with('success', 'Product toegevoegd');
+        return redirect()->route('producten.index')->with('success', 'Product toegevoegd');
     }
 
     /**
@@ -96,7 +96,7 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
 
-        return view('admin.products.show', compact('product'));
+        return view('admin.producten.show', compact('product'));
     }
 
     /**
@@ -108,10 +108,10 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $categories = Category::orderBy('category_name')->get();
-        $productMarks = ProductMark::orderBy('product_mark_name')->get();
+        $categories = Category::orderBy('naam')->get();
+        $productMarks = ProductMark::orderBy('naam')->get();
         
-        return view('admin.products.edit', compact('product', 'categories', 'productMarks')); 
+        return view('admin.producten.edit', compact('product', 'categories', 'productMarks')); 
     }
 
     /**
@@ -126,27 +126,27 @@ class ProductsController extends Controller
         $this->validate($request, [
             'category_id' => 'required',
             'product_mark_id' => 'required',
-            'product_name' => 'required',
-            'rent_money' => 'required',
-            'description' => 'required'
+            'naam' => 'required',
+            'huurprijs' => 'required',
+            'omschrijving' => 'required'
         ]);
         
         // Handle File Upload
-        if ($request->hasFile('cover_image')) {
-            $filename = $request->cover_image->getClientOriginalName();
-            $request->cover_image->storeAs('public/cover_images', $filename);
+        if ($request->hasFile('foto')) {
+            $filename = $request->foto->getClientOriginalName();
+            $request->foto->storeAs('public/cover_images', $filename);
         }
 
         // Update Post
         $product = Product::find($id);
         $product->category_id = $request->input('category_id');
         $product->product_mark_id = $request->input('product_mark_id');
-        $product->product_name = $request->input('product_name');
-        $product->rent_money = $request->input('rent_money');
-        $product->description = $request->input('description');
+        $product->naam = $request->input('naam');
+        $product->huurprijs = $request->input('huurprijs');
+        $product->omschrijving = $request->input('omschrijving');
         $product->details = $request->input('details');
-        if ($request->hasFile('cover_image')) {
-            $product->cover_image = $filename;
+        if ($request->hasFile('foto')) {
+            $product->foto = $filename;
         }
         $product->online = $request->input('online');
         if (null !== $request->input('online')) {
@@ -156,7 +156,7 @@ class ProductsController extends Controller
         };
         $product->save();
 
-        return redirect()->route('products.index')->with('success', 'Product bijgewerkt');
+        return redirect()->route('producten.index')->with('success', 'Product bijgewerkt');
     }
 
     /**
@@ -169,12 +169,12 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
 
-        if($product->cover_image != 'noimage.jpg'){
+        if($product->foto != 'noimage.jpg'){
             // Delete Image
-            Storage::delete('public/cover_images/'.$product->cover_image);
+            Storage::delete('public/cover_images/'.$product->foto);
         }
 
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Product verwijderd');
+        return redirect()->route('producten.index')->with('success', 'Product verwijderd');
     }
 }

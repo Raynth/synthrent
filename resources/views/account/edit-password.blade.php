@@ -26,7 +26,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('account.update-password', $customer->id) }}">
+                <form method="POST" action="{{ route('account.update-password', $klant->id) }}">
                     @csrf
 
                     <div class="form-group">

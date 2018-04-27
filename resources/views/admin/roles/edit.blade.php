@@ -43,8 +43,8 @@
                             {{ method_field('PUT') }}
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="name">Rol titel</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ $role->name }}" placeholder="Voor rol naam in">
+                                    <label for="naam">Rol titel</label>
+                                    <input type="text" class="form-control" id="naam" name="naam" value="{{ $role->naam }}" placeholder="Voor rol naam in">
                                 </div>
                             </div>
                             <!-- /.box-body -->

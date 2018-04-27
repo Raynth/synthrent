@@ -29,17 +29,17 @@ class DashboardController extends Controller
     {
         // Tel totaal aantal rijen van elke tabel
         $categories = Category::count();
-        $customers = User::count();
-        $products = Product::count();
-        $rentals = Rental::count();
+        $klanten = User::count();
+        $producten = Product::count();
+        $verhuren = Rental::count();
         
         // Overzicht van producten die niet zijn teruggebracht op de einddatum
-        $notBringBacks = Rental::where([
-            ['bring_back', 0],
-            ['date_to', '<', Carbon::now()]
+        $nietTeruggebrachten = Rental::where([
+            ['teruggebracht', 0],
+            ['einddatum', '<', Carbon::now()]
         ])->get();
 
-        return view('admin.dashboard.index', compact('categories', 'customers', 'products', 'rentals', 'notBringBacks'));
+        return view('admin.dashboard.index', compact('categories', 'klanten', 'producten', 'verhuren', 'nietTeruggebrachten'));
     }
 
     /*
@@ -52,7 +52,7 @@ class DashboardController extends Controller
         $result = DB::table('rentals')
                     ->selectRaw('MONTH(created_at) AS month')
                     ->selectRaw('YEAR(created_at) AS year')
-                    ->selectRaw('SUM(total_rent_money) AS sum')
+                    ->selectRaw('SUM(totale_huurprijs) AS sum')
                     ->groupBy('month')
                     ->orderBy('year', 'asc')
                     ->orderBy('month', 'asc')

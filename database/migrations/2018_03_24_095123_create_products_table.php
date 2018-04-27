@@ -17,11 +17,11 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->integer('category_id');
             $table->integer('product_mark_id');
-            $table->string('product_name');
-            $table->decimal('rent_money', 5, 2);
-            $table->text('description');
+            $table->string('naam');
+            $table->decimal('huurprijs', 5, 2);
+            $table->text('omschrijving');
             $table->text('details');
-            $table->string('cover_image');
+            $table->string('foto');
             $table->boolean('online');
             $table->timestamps();
         });

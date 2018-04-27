@@ -14,7 +14,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('customers.index') }}">Klanten</a></li>
+                <li><a href="{{ route('klanten.index') }}">Klanten</a></li>
                 <li class="active">Bekijken</li>
             </ol>
         </section>
@@ -38,46 +38,46 @@
                     <table class="table table-bordered table-striped">
                         <tr>
                             <th width="200px">Naam:</th>
-                            <td>{{ $customer->forename }} {{ $customer->lastname }}</td>
+                            <td>{{ $klant->voornaam }} {{ $klant->achternaam }}</td>
                         </tr>
                         <tr>
                             <th>Adres:</th>
-                            <td>{{ $customer->street }} {{ $customer->number }}</td>
+                            <td>{{ $klant->straat }} {{ $klant->huisnummer }}</td>
                         </tr>
                         <tr>
                             <th>Postcode en woonplaats:</th>
-                            <td>{{ $customer->zipcode}} {{ $customer->city }}</td>
+                            <td>{{ $klant->postcode}} {{ $klant->woonplaats }}</td>
                         </tr>
                         <tr>
                             <th>Telefoonnummer:</th>
-                            <td>{{ $customer->phone}}</td>
+                            <td>{{ $klant->telefoon}}</td>
                         </tr>
                         <tr>
                             <th>Email:</th>
-                            <td>{{ $customer->email}}</td>
+                            <td>{{ $klant->email}}</td>
                         </tr>
                         <tr>
                             <th>Bankrekening:</th>
-                            <td> {{ $customer->account_number }}</td>
+                            <td> {{ $klant->rekeningnummer }}</td>
                         </tr>
                         <tr>
                             <th>Identificatie:</th>
-                            <td>{{ $customer->identification }}</td>
+                            <td>{{ $klant->identificatie }}</td>
                         </tr>
                         <tr>
                             <th>Korting:</th>
-                            <td>{{ $customer->discount }}%</td>
+                            <td>{{ $klant->korting }}%</td>
                         </tr>
                         <tr>
                             <th>Opmerking:</th>
-                            <td>{!! $customer->comment !!}</td>
+                            <td>{!! $klant->opmerking !!}</td>
                         </tr>
                     </table>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning">Bewerken</a>
-                    <a href="{{ route('customers.index') }}" class="btn btn-default">Annuleren</a>
+                    <a href="{{ route('klanten.edit', $klant->id) }}" class="btn btn-warning">Bewerken</a>
+                    <a href="{{ route('klanten.index') }}" class="btn btn-default">Annuleren</a>
                 </div>
                 <!-- /.box-footer-->
             </div>
@@ -96,7 +96,7 @@
                     @endif
                     <!-- Als er records in de klanten-tabel staan, toon tabel -->
                     <!-- Als er geen records in de klanten-tabel staan, toon melding -->
-                    @if (count($rentals) > 0)
+                    @if (count($verhuren) > 0)
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title">Huurgeschiedenis</h3>
@@ -115,15 +115,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($rentals as $rental)
+                                        @foreach ($verhuren as $verhuur)
                                             <tr>
-                                                <td>{{ $rental->id }}</td>
-                                                <td>{{ $rental->product->product_name }}</td>
-                                                <td>{{ $rental->date_from }}</td>
-                                                <td>{{ $rental->date_to }}</td>
-                                                <td>&euro; {{ number_format($rental->total_rent_money, 2, ',', '.') }}</td>
+                                                <td>{{ $verhuur->id }}</td>
+                                                <td>{{ $verhuur->product->naam }}</td>
+                                                <td>{{ $verhuur->begindatum }}</td>
+                                                <td>{{ $verhuur->einddatum }}</td>
+                                                <td>&euro; {{ number_format($verhuur->totale_huurprijs, 2, ',', '.') }}</td>
                                                 <td>
-                                                    @if ($rental->bring_back == 1)
+                                                    @if ($verhuur->teruggebracht == 1)
                                                         <span class="fa fa-check"></span>
                                                     @endif
                                                 </td>
@@ -150,7 +150,7 @@
                             <h4>Geen verhuren in het bestand!</h4>
                             <p>Op dit moment bevinden er zich geen verhuren in het bestand.</p>
                         </div>
-                        <a href="{{ route('rentals.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('verhuren.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->

@@ -25,7 +25,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Verhuren</span>
-                            <span class="info-box-number">{{ $rentals }}</span>
+                            <span class="info-box-number">{{ $verhuren }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -38,7 +38,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Klanten</span>
-                            <span class="info-box-number">{{ $customers }}</span>
+                            <span class="info-box-number">{{ $klanten }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -51,11 +51,11 @@
 
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box">
-                        <span class="info-box-icon bg-green"><i class="ion-headphone"></i></span>
+                        <span class="info-box-icon bg-green"><i class="ion-headtelefoon"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">Producten</span>
-                            <span class="info-box-number">{{ $products }}</span>
+                            <span class="info-box-number">{{ $producten }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -117,7 +117,7 @@
             <!-- /.row -->
 
             <!-- Overzicht van niet teruggebrachte producten, waarvan de einddatum verstreken is -->
-            @if (count($notBringBacks) > 0)
+            @if (count($nietTeruggebrachten) > 0)
                 <div class="row">
                     <div class="col-md-12">
                         <div class="box">
@@ -132,11 +132,11 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                @foreach ($notBringBacks as $notBringBack)
+                                @foreach ($nietTeruggebrachten as $nietTeruggebracht)
                                     <div class="alert alert-danger alert-dismissible">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                        <h4><i class="icon fa fa-ban"></i> {{ $notBringBack->product->product_mark->product_mark_name }} {{ $notBringBack->product->product_name }}</h4>
-                                        Einddatum: {{ date("d-m-Y", strtotime($notBringBack->date_to)) }} | Klant: <a href="{{ route('customers.show', $notBringBack->customer_id) }}">{{ $notBringBack->customer->forename }} {{ $notBringBack->customer->lastname }}</a>
+                                        <h4><i class="icon fa fa-ban"></i> {{ $nietTeruggebracht->product->product_mark->naam }} {{ $nietTeruggebracht->product->naam }}</h4>
+                                        Einddatum: {{ date("d-m-Y", strtotime($nietTeruggebracht->einddatum)) }} | Klant: <a href="{{ route('klanten.show', $nietTeruggebracht->klant_id) }}">{{ $nietTeruggebracht->klant->voornaam }} {{ $nietTeruggebracht->klant->achternaam }}</a>
                                     </div>
                                 @endforeach
                             </div>

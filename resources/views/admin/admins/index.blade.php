@@ -54,10 +54,10 @@
                                         @foreach ($admins as $admin)
                                             <tr>
                                                 <td>{{ $admin->id }}</td>
-                                                <td>{{ $admin->name }}</td>
+                                                <td>{{ $admin->naam }}</td>
                                                 <td>{{ $admin->email }}</td>
-                                                <td>{{ $admin->phone }}</td>
-                                                <td>{{ $admin->role->name }}</td>
+                                                <td>{{ $admin->telefoon }}</td>
+                                                <td>{{ $admin->role->naam }}</td>
                                                 <td>
                                                     <a href="{{ route('admins.show', $admin->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
                                                     <a href="{{ route('admins.edit', $admin->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>

@@ -36,7 +36,7 @@ class PaymentsController extends Controller
         $payment = Mollie::api()->payments()->create([
             "amount"      => $total,
             "description" => "Factuurnummer: " . $orderNumber,
-            "redirectUrl" => "{{ route('producten.cart') }}",
+            "redirectUrl" => "{{ route('winkelwagen.show') }}",
         ]);
         
         $payment = Mollie::api()->payments()->get($payment->id);

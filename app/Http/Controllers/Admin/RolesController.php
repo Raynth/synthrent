@@ -44,11 +44,11 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'naam' => 'required'
         ]);
 
         $role = new Role;
-        $role->name = $request->input('name');
+        $role->naam = $request->input('naam');
         $role->save();
 
         return redirect()->route('roles.index')->with('success', 'Rol toegevoegd');
@@ -90,12 +90,12 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'naam' => 'required',
         ]);
         
         // Update Role
         $role = Role::find($id);
-        $role->name = $request->input('name');
+        $role->naam = $request->input('naam');
         $role->save();
 
         return redirect()->route('roles.index')->with('success', 'Rol bijgewerkt');

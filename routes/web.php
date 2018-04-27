@@ -14,17 +14,18 @@
 
 
 // Customer Routes
-Route::group(['namespace' => 'User'], function(){
+Route::group(['namespace' => 'User'], function() {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('producten', 'ProductsController@index')->name('producten.index');
     Route::get('producten/{product}', 'ProductsController@show')->name('producten.show');
     Route::get('productmerk/{productmerk}', 'ProductsController@productMarkShow')->name('productmerk.show');
     Route::get('categorie/{categorie}', 'ProductsController@categoryShow')->name('categorie.show');
-    Route::post('voeg-item-toe/{id}', 'ProductsController@addTocart')->name('producten.addtocart');
-    Route::get('winkelwagen', 'ProductsController@cart')->name('producten.cart');
+    
+    Route::get('winkelwagen', 'CartController@cart')->name('winkelwagen.show');
+    Route::post('item-toevoegen/{id}', 'CartController@addTocart')->name('winkelwagen.itemtoevoegen');
+    Route::get('item-verwijderen/{id}', 'CartController@removeItem')->name('winkelwagen.itemverwijderen');
+    
     Route::get('kassa', 'PaymentsController@getPayment')->middleware('auth')->name('kassa.betalen');
-    Route::post('kassa', 'ProductsController@postCheckout')->middleware('auth')->name('producten.checkout');
-    Route::get('verwijder-item/{id}', 'ProductsController@removeItem')->name('producten.removeitem');
     Route::get('account', 'CustomerAccountController@index')->name('account.index');
     Route::get('account-bewerken', 'CustomerAccountController@edit')->name('account.edit');
     Route::post('account-bewerken/{id}', 'CustomerAccountController@update')->name('account.update');
@@ -33,15 +34,15 @@ Route::group(['namespace' => 'User'], function(){
 });
 
 // Admin Routes
-Route::group(['namespace' => 'Admin'], function(){
+Route::group(['namespace' => 'Admin'], function() {
     Route::get('admin/home', 'DashboardController@index')->name('admin.home');    
     Route::get('admin/dashboard', 'DashboardController@index')->name('admin');
     Route::get('admin/dashboard/index', 'DashboardController@index')->name('dashboard.index');
     Route::get('admin/dashboard/chartsales', 'DashboardController@chartSales')->name('dashboard.chartsales');
-    Route::resource('admin/products', 'ProductsController');
+    Route::resource('admin/producten', 'ProductsController', ['as' => 'admin']);
     Route::resource('admin/categories', 'CategoriesController');
-    Route::resource('admin/customers', 'CustomersController');
-    Route::resource('admin/rentals', 'RentalsController');
+    Route::resource('admin/klanten', 'CustomersController');
+    Route::resource('admin/verhuren', 'RentalsController');
     Route::resource('admin/productmarks', 'ProductMarksController');
     Route::resource('admin/admins', 'AdminsController');
     Route::resource('admin/roles', 'RolesController');

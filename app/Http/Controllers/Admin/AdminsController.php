@@ -49,16 +49,16 @@ class AdminsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'naam' => 'required',
             'email' => 'required',
             'role_id' => 'required'
         ]);
 
         // Creeer admin
         $admin = new Admin;
-        $admin->name = $request->input('name');
+        $admin->naam = $request->input('naam');
         $admin->email = $request->input('email');
-        $admin->phone = $request->input('phone');
+        $admin->telefoon = $request->input('telefoon');
         $admin->role_id = $request->input('role_id');
         $admin->save();
 
@@ -102,16 +102,16 @@ class AdminsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'naam' => 'required',
             'email' => 'required',
             'role_id' => 'required'
         ]);
         
         // Update admin
         $admin = Admin::find($id);
-        $admin->name = $request->input('name');
+        $admin->naam = $request->input('naam');
         $admin->email = $request->input('email');
-        $admin->phone = $request->input('phone');
+        $admin->telefoon = $request->input('telefoon');
         $admin->role_id = $request->input('role_id');
         $admin->save();
 

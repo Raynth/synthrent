@@ -43,8 +43,8 @@
                             {{ method_field('PUT') }}
                             <div class="box-body">
                                 <div class="form-group">
-                                <label for="product_mark_name">Productmerk naam</label>
-                                <input type="text" class="form-control" id="product_mark_name" name="product_mark_name" value="{{ $productMark->product_mark_name }}" placeholder="Voor proudctmerk naam in">
+                                <label for="naam">Productmerk naam</label>
+                                <input type="text" class="form-control" id="naam" name="naam" value="{{ $productMark->naam }}" placeholder="Voor proudctmerk naam in">
                                 </div>
                                 <div class="checkbox">
                                 <label>

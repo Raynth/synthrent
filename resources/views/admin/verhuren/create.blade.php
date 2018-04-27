@@ -1,8 +1,8 @@
 @extends('admin.app')
 
 @section('headSection')
-    <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
 @endsection
 
 @section('main-content')
@@ -11,20 +11,20 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Verhuur bewerken
+                Verhuur toevoegen
                 <small></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="{{ route('verhuren.index') }}">Verhuren</a></li>
-                <li class="active">Bewerken</li>
+                <li class="active">Toevoegen</li>
             </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <!-- column -->
+                <!-- left column -->
                 <div class="col-md-8 col-md-offset-2">
                     <!-- Display validation errors -->
                     @if ($errors->any())
@@ -36,42 +36,44 @@
                             </ul>
                         </div>
                     @endif
+                    <!-- Geef melding als het product verhuurd is -->
+                    @if (session('productRented'))
+                        <div class="alert alert-warning">
+                            {!! session('productRented') !!}
+                        </div>
+                    @endif
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Een verhuur bewerken</h3>
+                            <h3 class="box-title">Voeg een verhuur toe</h3>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('verhuren.update', $verhuur->id) }}" method="post">
-                            @csrf
-                            {{ method_field('PUT') }}
-                            <input type="hidden" name="_method" value="put">
+                        <form action="{{ route('verhuren.store') }}" enctype="multipart/form-data" method="post">
+                            {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label for="klant">Klant</label>
                                         <select class="form-control select2" style="width: 100%;" id="klant" name="klant_id">
                                             @foreach ($klanten as $klant)
-                                                <option value="{{ $klant->id }}" {{ ($verhuur->klant_id == $klant->id) ? 'selected' : '' }}>{{$klant->voornaam }} {{ $klant->achternaam }}</option>
+                                                <option value="{{ $klant->id }}">{{ $klant->voornaam }} {{ $klant->achternaam }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <!-- /.form-group -->
                                 </div>
-                                <!-- /.row -->
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label for="product">Product</label>
-                                        <select class="form-control select2" style="width: 100%;" id="product" name="product_id">
+                                        <select class="form-control select2" style="width: 100%;" id="product_id" name="product_id" onchange="selectedProduct()">
                                             @foreach ($producten as $product)
-                                                <option value="{{ $product->id }}" {{ ($verhuur->product_id == $product->id) ? 'selected' : '' }}>{{ $product->product_mark->naam }} {{ $product->naam }}</option>
+                                                <option value="{{ $product->id }}">{{ $product->product_mark->naam }} {{ $product->naam }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <!-- /.form-group -->
                                 </div>
-                                <!-- /.row -->
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="begindatum">Datum: vanaf</label>
@@ -79,7 +81,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="begindatum" name="begindatum" value="{{ $verhuur->begindatum }}" onchange="dateCheck()">
+                                            <input type="text" class="form-control pull-right" id="begindatum" name="begindatum" onchange="dateCheck()">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -90,7 +92,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="einddatum" name="einddatum" value="{{ $verhuur->einddatum }}" onchange="dateCheck()">
+                                            <input type="text" class="form-control pull-right" id="einddatum" name="einddatum" onchange="dateCheck()">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -102,7 +104,7 @@
                                         <label for="totale_huurprijs">Huurprijs per dag</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">&euro;</span>
-                                            <input type="number" class="form-control" id="huurprijs" name="huurprijs" step="0.05" value="{{ $verhuur->product->huurprijs }}">
+                                            <input type="number" class="form-control" id="huurprijs" name="huurprijs" step="0.05" readonly>
                                         </div>
                                         <!-- /.input-group -->
                                     </div>
@@ -110,7 +112,7 @@
                                     <div class="form-group col-md-4">
                                         <label for="totale_huurprijs">Aantal dagen</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="dagen" name="dagen" value="{{ $verhuur->dagen }}">
+                                            <input type="number" class="form-control" id="dagen" name="dagen" readonly>
                                         </div>
                                         <!-- /.input-group -->
                                     </div>
@@ -119,7 +121,7 @@
                                         <label for="totale_huurprijs">Totale huurprijs</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">&euro;</span>
-                                            <input type="number" class="form-control" id="totale_huurprijs" name="totale_huurprijs" step="0.05" value="{{ $verhuur->totale_huurprijs }}">
+                                            <input type="number" class="form-control" id="totale_huurprijs" name="totale_huurprijs" step="0.05" readonly>
                                         </div>
                                         <!-- /.input-group -->
                                     </div>
@@ -129,11 +131,11 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Bewerken</button>
+                                <button type="submit" class="btn btn-primary">Toevoegen</button>
                                 <a href="{{ route('verhuren.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->
-                        </form> 
+                        </form>
                     </div>
                     <!-- /.box -->
                 </div>
@@ -170,6 +172,8 @@
     </script>
     <script>
         var producten = JSON.parse('<?php echo $producten; ?>')
+        var rentMoney = producten[0].huurprijs
+        document.getElementById('huurprijs').value = rentMoney
         // Toon de huurprijs per dag voor de geselecteerde product
         function selectedProduct() {
             var productId = document.getElementById('product_id').value
@@ -207,6 +211,32 @@
             }
             
             console.log(begindatum, einddatum)
+        }
+        // Bereken totaal huurprijs: aantal dagen x huurprijs
+        function calculateRental() {
+            // Haal gekozen product uit de <SELECT>
+            var productId = document.getElementById("product_id").value
+            // Haal alle proudcten en zet deze om naar JSON-formaat
+            var producten = JSON.parse('<?php echo $producten; ?>')
+            // Zoek de sleutel waar product_id gelijk is aan id van alle producten
+            for (i = 0; i < producten.length; i++) {
+                if (producten[i].id == productId) {
+                    var key = i
+                    break
+                }
+            }
+            // Haal de huurprijs van de gekozen product uit alle producten
+            var rentMoney = producten[key].huurprijs
+            // Haal de datums 'van' en 'tot'      
+            var begindatum = Date.parse(document.getElementById("begindatum").value)
+            var einddatum = Date.parse(document.getElementById("einddatum").value)
+            // Bereken het aantal milliseconden tussen deze 2 datums
+            var timeDiff = einddatum - begindatum
+            // Bereken aantal dagen van het aantal milliseconden
+            var totaalDagen = Math.floor(timeDiff / (1000 * 60 * 60 * 24))
+            // Bereken totale huurprijs: aantal dagen x huurprijs
+            var totalRentMoney = totaalDagen * rentMoney
+            document.getElementById("totale_huurprijs").value = totalRentMoney.toFixed(2)
         }
     </script>
 @endsection

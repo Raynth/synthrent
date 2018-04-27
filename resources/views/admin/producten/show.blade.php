@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('products.index') }}">Producten</a></li>
+                <li><a href="{{ route('producten.index') }}">Producten</a></li>
                 <li class="active">Bekijken</li>
             </ol>
         </section>
@@ -27,7 +27,7 @@
                             <h3 class="panel-title">Categorie</h3>
                         </div>  
                         <div class="panel-body">
-                            {{ $product->category->category_name }}
+                            {{ $product->category->naam }}
                         </div>
                     </div>
                     <!-- /.panel -->
@@ -36,7 +36,7 @@
                             <h3 class="panel-title">Productmerk</h3>
                         </div>
                         <div class="panel-body">
-                            {{ $product->product_mark->product_mark_name }}
+                            {{ $product->product_mark->naam }}
                         </div>
                     </div>
                     <!-- /.panel -->
@@ -45,7 +45,7 @@
                             <h3 class="panel-title">Product naam</h3>
                         </div>
                         <div class="panel-body">
-                            {{ $product->product_name }}
+                            {{ $product->naam }}
                         </div>
                     </div>
                     <!-- /.panel -->    
@@ -54,7 +54,7 @@
                             <h3 class="panel-title">Huurprijs per dag</h3>
                         </div>
                         <div class="panel-body">
-                            &euro; {{ number_format($product->rent_money, 2, ',', '.') }}
+                            &euro; {{ number_format($product->huurprijs, 2, ',', '.') }}
                         </div>
                     </div>
                     <!-- /.panel -->    
@@ -63,7 +63,7 @@
                             <h3 class="panel-title">Omschrijving</h3>
                         </div>
                         <div class="panel-body">
-                            {!! $product->description !!}
+                            {!! $product->omschrijving !!}
                         </div>
                     </div>
                     <!-- /.panel -->    
@@ -81,7 +81,7 @@
                             <h3 class="panel-title">Afbeelding</h3>
                         </div>
                         <div class="panel-body">
-                            <img src="{{ asset('storage/cover_images/'.$product->cover_image) }}" width="100%">
+                            <img src="{{ asset('storage/cover_images/'.$product->foto) }}" width="100%">
                         </div>
                     </div>
                     <!-- /.panel -->    
@@ -96,8 +96,8 @@
                         </div>
                     </div>
                     <!-- /.panel -->
-                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Bewerken</a>
-                    <a href="{{ route('products.index') }}" class="btn btn-default">Annuleren</a>
+                    <a href="{{ route('producten.edit', $product->id) }}" class="btn btn-warning">Bewerken</a>
+                    <a href="{{ route('producten.index') }}" class="btn btn-default">Annuleren</a>
                 </div>
                 <!--/.col -->
             </div>

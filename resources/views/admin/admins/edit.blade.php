@@ -45,8 +45,8 @@
                                 <div class="row">
                                     <div class="col-md-6 col-md-offset 3">
                                         <div class="form-group">
-                                            <label for="name">Naam</label>
-                                            <input type="text" class="form-control" id="name" name="name" value="{{ $admin->name }}" placeholder="Voor gebruiker naam in">
+                                            <label for="naam">Naam</label>
+                                            <input type="text" class="form-control" id="naam" name="naam" value="{{ $admin->naam }}" placeholder="Voor gebruiker naam in">
                                         </div>
                                         <!-- /.form-group -->
                                         <div class="form-group">
@@ -55,15 +55,15 @@
                                         </div>
                                         <!-- /.form-group -->                    
                                         <div class="form-group">
-                                            <label for="phone">Telefoonnummer</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" value="{{ $admin->phone }}" placeholder="Voor telefoonnummer in">
+                                            <label for="telefoon">Telefoonnummer</label>
+                                            <input type="text" class="form-control" id="telefoon" name="telefoon" value="{{ $admin->telefoon }}" placeholder="Voor telefoonnummer in">
                                         </div>
                                         <!-- /.form-group -->                    
                                         <div class="form-group">
                                             <label for="role">Rol</label>
                                             <select class="form-control select2" style="width: 100%;" id="role" name="role_id">
                                                 @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}" {{ ($admin->role_id == $role->id) ? 'selected' : '' }}>{{$role->name }}</option>
+                                                    <option value="{{ $role->id }}" {{ ($admin->role_id == $role->id) ? 'selected' : '' }}>{{$role->naam }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -96,6 +96,6 @@
     <!-- CKEditor -->
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'comment' );
+        CKEDITOR.replace( 'opmerking' );
     </script>
 @endsection

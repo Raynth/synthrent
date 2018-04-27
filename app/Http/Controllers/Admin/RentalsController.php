@@ -24,8 +24,8 @@ class RentalsController extends Controller
      */
     public function index()
     {
-        $rentals = Rental::all();
-        return view('admin.rentals.index', compact('rentals'));
+        $verhuren = Rental::all();
+        return view('admin.verhuren.index', compact('verhuren'));
     }
 
     /**
@@ -35,14 +35,14 @@ class RentalsController extends Controller
      */
     public function create()
     {
-        $customers = User::all();
-        $products = Product::select('products.id', 'product_mark_id', 'product_mark_name', 'product_name', 'rent_money')
+        $klanten = User::all();
+        $producten = Product::select('products.id', 'product_mark_id', 'product_marks.naam', 'products.naam', 'huurprijs')
                             ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
-                            ->orderBy('product_mark_name', 'asc')
-                            ->orderBy('product_name', 'asc')
+                            ->orderBy('product_marks.naam', 'asc')
+                            ->orderBy('products.naam', 'asc')
                             ->get();
 
-        return view('admin.rentals.create', compact('customers', 'products'));
+        return view('admin.verhuren.create', compact('klanten', 'producten'));
     }
 
     /**
@@ -54,36 +54,36 @@ class RentalsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'customer_id' => 'required',
+            'klant_id' => 'required',
             'product_id' => 'required',
-            'date_from' => 'required|date',
-            'date_to' => 'required|date|after:date_from',
-            'days' => 'required',
-            'total_rent_money' => 'required'
+            'begindatum' => 'required|date',
+            'einddatum' => 'required|date|after:begindatum',
+            'dagen' => 'required',
+            'totale_huurprijs' => 'required'
         ]);
 
-        $rental = new Rental;
-        $rental->customer_id = $request->input('customer_id');
-        $rental->product_id = $request->input('product_id');
-        $rental->date_from = $request->input('date_from');
-        $rental->date_to = $request->input('date_to');
-        $rental->days = $request->input('days');
-        $rental->total_rent_money = $request->input('total_rent_money');
-        $rental->bring_back = 0;
+        $verhuur = new Rental;
+        $verhuur->klant_id = $request->input('klant_id');
+        $verhuur->product_id = $request->input('product_id');
+        $verhuur->begindatum = $request->input('begindatum');
+        $verhuur->einddatum = $request->input('einddatum');
+        $verhuur->dagen = $request->input('dagen');
+        $verhuur->totale_huurprijs = $request->input('totale_huurprijs');
+        $verhuur->teruggebracht = 0;
         
         // Controle of het gekozen product al is verhuurd in de gekozen periode
-        $productRented = Product::isProductRentedStore($rental->product_id, $rental->date_from, $rental->date_to);
+        $productRented = Product::isProductRentedStore($verhuur->product_id, $verhuur->begindatum, $verhuur->einddatum);
         if ($productRented->count() > 0)
         {
-            $message = Product::find($rental->product_id)->product_name.' is al '.$productRented->count().' keer verhuurd.<br>';
+            $message = Product::find($verhuur->product_id)->naam.' is al '.$productRented->count().' keer verhuurd.<br>';
             foreach($productRented as $productRent){
-                $message .= 'Van '.date("d-m-Y", strtotime($productRent->date_from)).' tot '.date("d-m-Y", strtotime($productRent->date_to)).'.<br>';
+                $message .= 'Van '.date("d-m-Y", strtotime($productRent->begindatum)).' tot '.date("d-m-Y", strtotime($productRent->einddatum)).'.<br>';
             }
-            return redirect()->route('rentals.create')->with('productRented', $message);
+            return redirect()->route('verhuren.create')->with('productRented', $message);
         }
-        $rental->save();
+        $verhuur->save();
 
-        return redirect()->route('rentals.index')->with('success', 'Verhuur toegevoegd');
+        return redirect()->route('verhuren.index')->with('success', 'Verhuur toegevoegd');
     }
 
     /**
@@ -94,9 +94,9 @@ class RentalsController extends Controller
      */
     public function show($id)
     {
-        $rental = Rental::find($id);
+        $verhuur = Rental::find($id);
 
-        return view('admin.rentals.show', compact('rental'));
+        return view('admin.verhuren.show', compact('verhuur'));
     }
 
     /**
@@ -107,15 +107,15 @@ class RentalsController extends Controller
      */
     public function edit($id)
     {
-        $rental = Rental::find($id);
-        $customers = User::all();
-        $products = Product::select('products.id', 'product_mark_id', 'product_name', 'rent_money')
+        $verhuur = Rental::find($id);
+        $klanten = User::all();
+        $producten = Product::select('products.id', 'product_mark_id', 'product_marks.naam', 'products.naam', 'huurprijs')
                             ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
-                            ->orderBy('product_mark_name', 'asc')
-                            ->orderBy('product_name', 'asc')
+                            ->orderBy('product_marks.naam', 'asc')
+                            ->orderBy('products.naam', 'asc')
                             ->get();
 
-        return view('admin.rentals.edit', compact('rental', 'customers', 'products')); 
+        return view('admin.verhuren.edit', compact('verhuur', 'klanten', 'producten')); 
     }
 
     /**
@@ -128,40 +128,40 @@ class RentalsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'customer_id' => 'required',
+            'klant_id' => 'required',
             'product_id' => 'required',
-            'date_from' => 'required|date',
-            'date_to' => 'required|date|after:date_from',
-            'days' => 'required',
-            'total_rent_money' => 'required'
+            'begindatum' => 'required|date',
+            'einddatum' => 'required|date|after:begindatum',
+            'dagen' => 'required',
+            'totale_huurprijs' => 'required'
         ]);
 
-        $rental = Rental::find($id);
-        $rental->customer_id = $request->input('customer_id');
-        $rental->product_id = $request->input('product_id');
-        $rental->date_from = $request->input('date_from');
-        $rental->date_to = $request->input('date_to');
-        $rental->days = $request->input('days');
-        $rental->total_rent_money = $request->input('total_rent_money');
-        if (null !== $request->input('bring_back')) {
-            $rental->bring_back = 1;
+        $verhuur = Rental::find($id);
+        $verhuur->klant_id = $request->input('klant_id');
+        $verhuur->product_id = $request->input('product_id');
+        $verhuur->begindatum = $request->input('begindatum');
+        $verhuur->einddatum = $request->input('einddatum');
+        $verhuur->dagen = $request->input('dagen');
+        $verhuur->totale_huurprijs = $request->input('totale_huurprijs');
+        if (null !== $request->input('teruggebracht')) {
+            $verhuur->teruggebracht = 1;
         } else {
-            $rental->bring_back = 0;
+            $verhuur->teruggebracht = 0;
         };
 
         // Controle of het gekozen product al is verhuurd in de gekozen periode
-        $productRented = Product::isProductRentedUpdate($id, $rental->product_id, $rental->date_from, $rental->date_to);
+        $productRented = Product::isProductRentedUpdate($id, $verhuur->product_id, $verhuur->begindatum, $verhuur->einddatum);
         if ($productRented->count() > 0)
         {
-            $message = Product::find($rental->product_id)->product_name.' is al '.$productRented->count().' keer verhuurd.<br>';
+            $message = Product::find($verhuur->product_id)->naam.' is al '.$productRented->count().' keer verhuurd.<br>';
             foreach($productRented as $productRent){
-                $message .= 'Van '.date("d-m-Y", strtotime($productRent->date_from)).' tot '.date("d-m-Y", strtotime($productRent->date_to)).'.<br>';
+                $message .= 'Van '.date("d-m-Y", strtotime($productRent->begindatum)).' tot '.date("d-m-Y", strtotime($productRent->einddatum)).'.<br>';
             }
-            return redirect()->route('rentals.create')->with('productRented', $message);
+            return redirect()->route('verhuren.create')->with('productRented', $message);
         }
-        $rental->save();
+        $verhuur->save();
 
-        return redirect()->route('rentals.index')->with('success', 'Verhuur bijgewerkt');
+        return redirect()->route('verhuren.index')->with('success', 'Verhuur bijgewerkt');
     }
 
     /**
@@ -172,9 +172,9 @@ class RentalsController extends Controller
      */
     public function destroy($id)
     {
-        $rental = Rental::find($id);
-        $rental->delete();
+        $verhuur = Rental::find($id);
+        $verhuur->delete();
 
-        return redirect()->route('rentals.index')->with('success', 'Verhuur verwijderd');
+        return redirect()->route('verhuren.index')->with('success', 'Verhuur verwijderd');
     }
 }

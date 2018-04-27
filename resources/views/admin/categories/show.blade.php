@@ -28,7 +28,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            {{ $category->category_name }}
+                            {{ $category->naam }}
                         </div>
                         <!-- /.panel-body -->
                     </div>

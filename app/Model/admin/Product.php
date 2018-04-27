@@ -23,13 +23,13 @@ class Product extends Model
     }
 
     // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is 
-    public static function isProductRentedStore( $product_id, $date_from, $date_to ) 
+    public static function isProductRentedStore( $product_id, $begindatum, $einddatum ) 
     { 
         $product_available = DB::table('rentals') 
                         ->whereRaw(" 
                             NOT( 
-                                date_to < '{$date_from}' OR 
-                                date_from > '{$date_to}' 
+                                einddatum < '{$begindatum}' OR 
+                                begindatum > '{$einddatum}' 
                                 ) 
                         ") 
                         ->where('product_id', $product_id) 
@@ -39,13 +39,13 @@ class Product extends Model
     }
 
     // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is 
-    public static function isProductRentedUpdate( $rental_id, $product_id, $date_from, $date_to ) 
+    public static function isProductRentedUpdate( $rental_id, $product_id, $begindatum, $einddatum ) 
     { 
         $product_available = DB::table('rentals') 
                         ->whereRaw(" 
                             NOT( 
-                                date_to < '{$date_from}' OR 
-                                date_from > '{$date_to}' 
+                                einddatum < '{$begindatum}' OR 
+                                begindatum > '{$einddatum}' 
                                 ) 
                         ") 
                         ->where('product_id', $product_id)

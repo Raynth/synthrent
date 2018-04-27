@@ -20,14 +20,14 @@ class Cart
         }
     }
 
-    public function add($item, $id, $dateFrom, $dateTo)
+    public function add($item, $id, $begindatum, $einddatum)
     {
         $storedItem = $item;
-        $storedItem['dateFrom'] = $dateFrom;
-        $storedItem['dateTo'] = $dateTo;
-        $storedItem['totalDays'] = date_diff(date_create($dateFrom), date_create($dateTo))->format('%d');
-        $storedItem['totalRentMoney'] = $item->rent_money * $storedItem['totalDays'];
-        $storedItem['productMarkName'] = ProductMark::find($item->product_mark_id)->product_mark_name;
+        $storedItem['begindatum'] = $begindatum;
+        $storedItem['einddatum'] = $einddatum;
+        $storedItem['totalDays'] = date_diff(date_create($begindatum), date_create($einddatum))->format('%d');
+        $storedItem['totalRentMoney'] = $item->huurprijs * $storedItem['totalDays'];
+        $storedItem['productMarkName'] = ProductMark::find($item->product_mark_id)->naam;
         
         $this->totalQuantity++;
         $this->items[$this->totalQuantity] = $storedItem;

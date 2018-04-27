@@ -15,7 +15,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('customers.index') }}">Klanten</a></li>
+                <li><a href="{{ route('klanten.index') }}">Klanten</a></li>
                 <li class="active">Overzicht</li>
             </ol>
         </section>
@@ -31,11 +31,11 @@
                     @endif
                     <!-- Als er records in de klanten-tabel staan, toon tabel -->
                     <!-- Als er geen records in de klanten-tabel staan, toon melding -->
-                    @if (count($customers) > 0)
+                    @if (count($klanten) > 0)
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title">Overzicht klanten</h3>
-                                <a href="{{ route('customers.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                                <a href="{{ route('klanten.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -53,18 +53,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($customers as $customer)
+                                        @foreach ($klanten as $klant)
                                             <tr>
-                                                <td>{{ $customer->id }}</td>
-                                                <td>{{ $customer->forename }}</td>
-                                                <td>{{ $customer->lastname }}</td>
-                                                <td>{{ $customer->street }}</td>
-                                                <td>{{ $customer->number }}</td>
-                                                <td>{{ $customer->zipcode }}</td>
-                                                <td>{{ $customer->city }}</td>
+                                                <td>{{ $klant->id }}</td>
+                                                <td>{{ $klant->voornaam }}</td>
+                                                <td>{{ $klant->achternaam }}</td>
+                                                <td>{{ $klant->straat }}</td>
+                                                <td>{{ $klant->huisnummer }}</td>
+                                                <td>{{ $klant->postcode }}</td>
+                                                <td>{{ $klant->woonplaats }}</td>
                                                 <td>
-                                                    <a href="{{ route('customers.show', $customer->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                                                    <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
+                                                    <a href="{{ route('klanten.show', $klant->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                                                    <a href="{{ route('klanten.edit', $klant->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                                         <span class="fa fa-trash">
                                                     </button>
@@ -94,7 +94,7 @@
                             <h4>Geen klanten in het bestand!</h4>
                             <p>Op dit moment bevinden er zich geen klanten in het bestand.</p>
                         </div>
-                        <a href="{{ route('customers.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('klanten.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->
@@ -118,8 +118,8 @@
             <p>Weet u zeker dat u deze klant wilt verwijderen?</p>
             </div>
             <div class="modal-footer">
-              @if (count($customers) > 0)
-                  <form action="{{ route('customers.destroy', $customer->id) }}" method="post" class="pull-left">
+              @if (count($klanten) > 0)
+                  <form action="{{ route('klanten.destroy', $klant->id) }}" method="post" class="pull-left">
                   {{ csrf_field() }}
                   {{ method_field('DELETE') }}
                   <button type="submit" class="btn btn-danger">Verwijderen</button>

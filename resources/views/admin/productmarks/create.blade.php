@@ -41,8 +41,8 @@
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="product_mark_name">Productmerk naam</label>
-                                    <input type="text" class="form-control" id="product_mark_name" name="product_mark_name" placeholder="Voor productmerk naam in">
+                                    <label for="naam">Productmerk naam</label>
+                                    <input type="text" class="form-control" id="naam" name="naam" placeholder="Voor productmerk naam in">
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="checkbox">

@@ -129,11 +129,11 @@
 											@foreach(Session::get('cart')->items as $item)
 												<div class="product product-widget">
 													<div class="product-thumb">
-														<img src="{{ asset('storage/cover_images/'.$item->cover_image) }}" alt="">
+														<img src="{{ asset('storage/cover_images/'.$item->foto) }}" alt="">
 													</div>
 													<div class="product-body">
 														<h3 class="product-price">&euro; {{ number_format($item->totalRentMoney, 2, ',', '.') }}</h3>
-														<h2 class="product-name"><a href="#">{{ $item->productMarkName }} {{ $item->product_name }}</a></h2>
+														<h2 class="product-name"><a href="#">{{ $item->productMarkName }} {{ $item->naam }}</a></h2>
 													</div>
 													<button class="cancel-btn"><i class="fa fa-trash"></i></button>
 												</div>
@@ -141,7 +141,7 @@
 										@endif
 									</div>
 									<div class="shopping-cart-btns">
-										<a href="{{ route('producten.cart') }}" class="main-btn">Bekijk Winkelwagen</a>
+										<a href="{{ route('winkelwagen.show') }}" class="main-btn">Bekijk Winkelwagen</a>
 										<a href="{{ route('producten.checkout') }}" class="primary-btn">Bevestig Huren <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
@@ -174,7 +174,7 @@
 						<span class="category-header">Categorieën <i class="fa fa-list"></i></span>
 						<ul class="category-list">
 							@foreach ($categories as $category)
-								<li><a href="{{ route('categorie.show', str_slug($category->category_name)) }}">{{ $category->category_name }}</a></li>
+								<li><a href="{{ route('categorie.show', str_slug($category->naam)) }}">{{ $category->naam }}</a></li>
 							@endforeach
 						</ul>
 					</div>

@@ -60,14 +60,14 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                                <span class="hidden-xs">{{ Auth::user()->naam }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
                                     <p>
-                                        {{ Auth::user()->name }} - Web Developer
+                                        {{ Auth::user()->naam }} - Web Developer
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
@@ -122,7 +122,7 @@
                         <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>{{ Auth::user()->name }}</p>
+                        <p>{{ Auth::user()->naam }}</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -145,12 +145,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('rentals.index') }}">
+                        <a href="{{ route('verhuren.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Verhuren</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('products.index') }}">
+                        <a href="{{ route('producten.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Producten</span>
                         </a>
                     </li>
@@ -165,7 +165,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('customers.index') }}">
+                        <a href="{{ route('klanten.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Klanten</span>
                         </a>
                     </li>
@@ -228,7 +228,7 @@
                             <div class="menu-info">
                                 <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
 
-                                <p>New phone +1(800)555-1234</p>
+                                <p>New telefoon +1(800)555-1234</p>
                             </div>
                         </a>
                     </li>

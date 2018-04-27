@@ -20,16 +20,16 @@
                     <h3 class="title">Account gegevens wijzigen</h3>
                 </div>
 
-                <form method="POST" action="{{ route('account.update', $customer->id) }}">
+                <form method="POST" action="{{ route('account.update', $klant->id) }}">
                     @csrf
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="forename" type="text" class="input{{ $errors->has('forename') ? ' is-invalid' : '' }}" name="forename" placeholder="Voornaam" value="{{ $customer->forename }}" required autofocus>
-                                @if ($errors->has('forename'))
+                                <input id="voornaam" type="text" class="input{{ $errors->has('voornaam') ? ' is-invalid' : '' }}" name="voornaam" placeholder="Voornaam" value="{{ $klant->voornaam }}" required autofocus>
+                                @if ($errors->has('voornaam'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('forename') }}</strong>
+                                        <strong>{{ $errors->first('voornaam') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -37,10 +37,10 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="lastname" type="text" class="input{{ $errors->has('lastname') ? ' is-invalid' : '' }}" name="lastname" placeholder="Achternaam" value="{{ $customer->lastname }}" required>
-                                @if ($errors->has('lastname'))
+                                <input id="achternaam" type="text" class="input{{ $errors->has('achternaam') ? ' is-invalid' : '' }}" name="achternaam" placeholder="Achternaam" value="{{ $klant->achternaam }}" required>
+                                @if ($errors->has('achternaam'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                        <strong>{{ $errors->first('achternaam') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -48,10 +48,10 @@
 
                         <div class="col-md-4">                            
                             <div class="form-group">
-                                <input id="street" type="text" class="input{{ $errors->has('street') ? ' is-invalid' : '' }}" name="street" placeholder="Straat" value="{{ $customer->street }}">
-                                @if ($errors->has('street'))
+                                <input id="straat" type="text" class="input{{ $errors->has('straat') ? ' is-invalid' : '' }}" name="straat" placeholder="Straat" value="{{ $klant->straat }}">
+                                @if ($errors->has('straat'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('street') }}</strong>
+                                        <strong>{{ $errors->first('straat') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -59,10 +59,10 @@
 
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input id="number" type="text" class="input{{ $errors->has('number') ? ' is-invalid' : '' }}" name="number" placeholder="Huisnummer" value="{{ $customer->number }}">
-                                @if ($errors->has('number'))
+                                <input id="huisnummer" type="text" class="input{{ $errors->has('huisnummer') ? ' is-invalid' : '' }}" name="huisnummer" placeholder="Huisnummer" value="{{ $klant->huisnummer }}">
+                                @if ($errors->has('huisnummer'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('number') }}</strong>
+                                        <strong>{{ $errors->first('huisnummer') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -70,10 +70,10 @@
 
                         <div class="col-md-2">   
                             <div class="form-group">
-                                <input id="zipcode" type="text" class="input{{ $errors->has('zipcode') ? ' is-invalid' : '' }}" name="zipcode" placeholder="Postcode" value="{{ $customer->zipcode }}">
-                                @if ($errors->has('zipcode'))
+                                <input id="postcode" type="text" class="input{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" placeholder="Postcode" value="{{ $klant->postcode }}">
+                                @if ($errors->has('postcode'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('zipcode') }}</strong>
+                                        <strong>{{ $errors->first('postcode') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -81,10 +81,10 @@
 
                         <div class="col-md-4">    
                             <div class="form-group">
-                                <input id="city" type="text" class="input{{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" placeholder="Woonplaats" value="{{ $customer->city }}">
-                                @if ($errors->has('city'))
+                                <input id="woonplaats" type="text" class="input{{ $errors->has('woonplaats') ? ' is-invalid' : '' }}" name="woonplaats" placeholder="Woonplaats" value="{{ $klant->woonplaats }}">
+                                @if ($errors->has('woonplaats'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('city') }}</strong>
+                                        <strong>{{ $errors->first('woonplaats') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -92,10 +92,10 @@
 
                         <div class="col-md-6">                    
                             <div class="form-group">
-                                <input id="phone" type="text" class="input{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" placeholder="Telefoonnummer" value="{{ $customer->phone }}">
-                                @if ($errors->has('phone'))
+                                <input id="telefoon" type="text" class="input{{ $errors->has('telefoon') ? ' is-invalid' : '' }}" name="telefoon" placeholder="Telefoonnummer" value="{{ $klant->telefoon }}">
+                                @if ($errors->has('telefoon'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('phone') }}</strong>
+                                        <strong>{{ $errors->first('telefoon') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -103,10 +103,10 @@
                         
                         <div class="col-md-6">    
                             <div class="form-group">
-                                <input id="account_number" type="text" class="input{{ $errors->has('account_number') ? ' is-invalid' : '' }}" name="account_number" placeholder="Rekeningnummer" value="{{ $customer->account_number }}">
-                                @if ($errors->has('account_number'))
+                                <input id="rekeningnummer" type="text" class="input{{ $errors->has('rekeningnummer') ? ' is-invalid' : '' }}" name="rekeningnummer" placeholder="Rekeningnummer" value="{{ $klant->rekeningnummer }}">
+                                @if ($errors->has('rekeningnummer'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('account_number') }}</strong>
+                                        <strong>{{ $errors->first('rekeningnummer') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -114,10 +114,10 @@
                         
                         <div class="col-md-6">    
                             <div class="form-group">
-                                <input id="identification" type="text" class="input{{ $errors->has('identification') ? ' is-invalid' : '' }}" name="identification" placeholder="Identificatie" value="{{ $customer->identification }}" disabled>
-                                @if ($errors->has('identification'))
+                                <input id="identificatie" type="text" class="input{{ $errors->has('identificatie') ? ' is-invalid' : '' }}" name="identificatie" placeholder="Identificatie" value="{{ $klant->identificatie }}" disabled>
+                                @if ($errors->has('identificatie'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('identification') }}</strong>
+                                        <strong>{{ $errors->first('identificatie') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -125,10 +125,10 @@
                         
                         <div class="col-md-6">    
                             <div class="form-group">
-                                <input id="discount" type="text" class="input{{ $errors->has('discount') ? ' is-invalid' : '' }}" name="discount" placeholder="Korting" value="{{ $customer->discount }}" disabled>
-                                @if ($errors->has('discount'))
+                                <input id="korting" type="text" class="input{{ $errors->has('korting') ? ' is-invalid' : '' }}" name="korting" placeholder="Korting" value="{{ $klant->korting }}" disabled>
+                                @if ($errors->has('korting'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('discount') }}</strong>
+                                        <strong>{{ $errors->first('korting') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -138,7 +138,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="E-mail adres" value="{{ $customer->email }}" required>
+                                <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="E-mail adres" value="{{ $klant->email }}" required>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>

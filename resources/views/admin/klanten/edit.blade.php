@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('customers.index') }}">Klanten</a></li>
+                <li><a href="{{ route('klanten.index') }}">Klanten</a></li>
                 <li class="active">Bewerken</li>
             </ol>
         </section>
@@ -38,23 +38,23 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('customers.update', $customer->id) }}" method="post">
+                        <form role="form" action="{{ route('klanten.update', $klant->id) }}" method="post">
                             @csrf
                             {{ method_field('PUT') }}
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="forename">Voornaam</label>
-                                            <input type="text" class="form-control" id="forename" name="forename" value="{{ $customer->forename }}" placeholder="Voor klant voornaam in">
+                                            <label for="voornaam">Voornaam</label>
+                                            <input type="text" class="form-control" id="voornaam" name="voornaam" value="{{ $klant->voornaam }}" placeholder="Voor klant voornaam in">
                                         </div>
                                         <!-- /.form-group -->
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="lastname">Achternaam</label>
-                                            <input type="text" class="form-control" id="lastname" name="lastname" value="{{ $customer->lastname }}" placeholder="Voor klant achternaam in">
+                                            <label for="achternaam">Achternaam</label>
+                                            <input type="text" class="form-control" id="achternaam" name="achternaam" value="{{ $klant->achternaam }}" placeholder="Voor klant achternaam in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -64,16 +64,16 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <label for="street">Straat</label>
-                                            <input type="text" class="form-control" id="street" name="street" value="{{ $customer->street }}" placeholder="Voor straatrnaam in">
+                                            <label for="straat">Straat</label>
+                                            <input type="text" class="form-control" id="straat" name="straat" value="{{ $klant->straat }}" placeholder="Voor straatrnaam in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
                                     <!-- /.col -->                  
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="number">Huisnummer</label>
-                                            <input type="text" class="form-control" id="number" name="number" value="{{ $customer->number }}" placeholder="Voor huisnummer in">
+                                            <label for="huisnummer">Huisnummer</label>
+                                            <input type="text" class="form-control" id="huisnummer" name="huisnummer" value="{{ $klant->huisnummer }}" placeholder="Voor huisnummer in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -83,24 +83,24 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="zipcode">Postcode</label>
-                                            <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{ $customer->zipcode }}" placeholder="Voor postcode in">
+                                            <label for="postcode">Postcode</label>
+                                            <input type="text" class="form-control" id="postcode" name="postcode" value="{{ $klant->postcode }}" placeholder="Voor postcode in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
                                     <!-- /.col -->                  
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <label for="city">Woonplaats</label>
-                                            <input type="text" class="form-control" id="city" name="city" value="{{ $customer->city }}" placeholder="Voor woonplaats in">
+                                            <label for="woonplaats">Woonplaats</label>
+                                            <input type="text" class="form-control" id="woonplaats" name="woonplaats" value="{{ $klant->woonplaats }}" placeholder="Voor woonplaats in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <label for="phone">Telefoonnummer</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" value="{{ $customer->phone }}" placeholder="Voor telefoonnummer in">
+                                            <label for="telefoon">Telefoonnummer</label>
+                                            <input type="text" class="form-control" id="telefoon" name="telefoon" value="{{ $klant->telefoon }}" placeholder="Voor telefoonnummer in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -108,7 +108,7 @@
                                     <div class="col-md-9">
                                         <div class="form-group">
                                             <label for="email">Emailadres</label>
-                                            <input type="text" class="form-control" id="email" name="email" value="{{ $customer->email }}" placeholder="Voor emailadres in">
+                                            <input type="text" class="form-control" id="email" name="email" value="{{ $klant->email }}" placeholder="Voor emailadres in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -118,24 +118,24 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label for="account_number">Bankrekening</label>
-                                            <input type="text" class="form-control" id="account_number" name="account_number" value="{{ $customer->account_number }}" placeholder="Voor bankrekening in">
+                                            <label for="rekeningnummer">Bankrekening</label>
+                                            <input type="text" class="form-control" id="rekeningnummer" name="rekeningnummer" value="{{ $klant->rekeningnummer }}" placeholder="Voor bankrekening in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
                                     <!-- /.col -->                  
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label for="identification">Identificatie</label>
-                                            <input type="text" class="form-control" id="identification" name="identification" value="{{ $customer->identification }}" placeholder="Voor identificatie in">
+                                            <label for="identificatie">Identificatie</label>
+                                            <input type="text" class="form-control" id="identificatie" name="identificatie" value="{{ $klant->identificatie }}" placeholder="Voor identificatie in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
                                     <!-- /.col -->                  
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="discount">Korting</label>
-                                            <input type="text" class="form-control" id="discount" name="discount" value="{{ $customer->discount }}" placeholder="Voor korting in">
+                                            <label for="korting">Korting</label>
+                                            <input type="text" class="form-control" id="korting" name="korting" value="{{ $klant->korting }}" placeholder="Voor korting in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -145,8 +145,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="comment">Opmerking</label>
-                                            <textarea class="form-control" rows="3" id="article-ckeditor" name="comment" placeholder="Voer een opmerking in">{{ $customer->comment }}</textarea>
+                                            <label for="opmerking">Opmerking</label>
+                                            <textarea class="form-control" rows="3" id="article-ckeditor" name="opmerking" placeholder="Voer een opmerking in">{{ $klant->opmerking }}</textarea>
                                         </div>
                                         <!-- /.form-group -->
                                     </div>
@@ -158,7 +158,7 @@
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Bewerken</button>
-                                <a href="{{ route('customers.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('klanten.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                         </form>
                     </div>
@@ -177,6 +177,6 @@
     <!-- CKEditor -->
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'comment' );
+        CKEDITOR.replace( 'opmerking' );
     </script>
 @endsection

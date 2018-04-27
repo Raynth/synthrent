@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('products.index') }}">Producten</a></li>
+                <li><a href="{{ route('producten.index') }}">Producten</a></li>
                 <li class="active">Toevoegen</li>
             </ol>
         </section>
@@ -38,14 +38,14 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form action="{{ route('products.store') }}" enctype="multipart/form-data" method="post">
+                        <form action="{{ route('producten.store') }}" enctype="multipart/form-data" method="post">
                         {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="category">Categorie</label>
                                     <select class="form-control select2" style="width: 100%;" id="category" name="category_id">
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->naam }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -54,28 +54,28 @@
                                     <label for="category">Productmerk</label>
                                     <select class="form-control select2" style="width: 100%;" id="mark" name="product_mark_id">
                                         @foreach ($productMarks as $productMark)
-                                            <option value="{{ $productMark->id }}">{{ $productMark->product_mark_name }}</option>
+                                            <option value="{{ $productMark->id }}">{{ $productMark->naam }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="product_name">Product naam</label>
-                                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Voor product naam in">
+                                    <label for="naam">Product naam</label>
+                                    <input type="text" class="form-control" id="naam" name="naam" placeholder="Voor product naam in">
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="rent_money">Huurprijs per dag</label>
+                                    <label for="huurprijs">Huurprijs per dag</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">&euro;</span>
-                                        <input type="number" class="form-control" id="rent_money" name="rent_money" step="0.05" placeholder="Voer huurprijs per dag in">
+                                        <input type="number" class="form-control" id="huurprijs" name="huurprijs" step="0.05" placeholder="Voer huurprijs per dag in">
                                     </div>
                                     <!-- /.input-group -->
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
                                     <label>Omschrijving</label>
-                                    <textarea class="form-control" id="description" name="description"></textarea>
+                                    <textarea class="form-control" id="omschrijving" name="omschrijving"></textarea>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
@@ -84,8 +84,8 @@
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="cover_image">Afbeelding invoer</label>
-                                    <input type="file" id="cover_image" name="cover_image">
+                                    <label for="foto">Afbeelding invoer</label>
+                                    <input type="file" id="foto" name="foto">
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="checkbox">
@@ -98,7 +98,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                                <a href="{{ route('products.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('producten.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->
                         </form>
@@ -118,7 +118,7 @@
     <!-- CKEditor -->
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace( 'omschrijving' );
         CKEDITOR.replace( 'details' );
     </script>
 @endsection

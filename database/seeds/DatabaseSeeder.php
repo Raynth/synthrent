@@ -16,101 +16,101 @@ class DatabaseSeeder extends Seeder
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
             'product_mark_id' => 1,
-            'product_name' => str_random(10),
-            'rent_money' => 1.25,
-            'description' => str_random(10),
+            'naam' => str_random(10),
+            'huurprijs' => 1.25,
+            'omschrijving' => str_random(10),
             'details' => str_random(10),
-            'cover_image' => 'noimage.jpg',
+            'foto' => 'noimage.jpg',
             'online' => 1
         ]);
     }

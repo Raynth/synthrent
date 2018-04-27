@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('customers.index') }}">Klanten</a></li>
+                <li><a href="{{ route('klanten.index') }}">Klanten</a></li>
                 <li class="active">Toevoegen</li>
             </ol>
         </section>
@@ -37,22 +37,22 @@
                             <h3 class="box-title">Voeg een klant toe</h3>
                         </div>
                         <!-- /.box-header -->
-                        <form action="{{ route('customers.store') }}" enctype="multipart/form-data" method="post">
+                        <form action="{{ route('klanten.store') }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="forename">Voornaam</label>
-                                            <input type="text" class="form-control" id="forename" name="forename" placeholder="Voor klant voornaam in">
+                                            <label for="voornaam">Voornaam</label>
+                                            <input type="text" class="form-control" id="voornaam" name="voornaam" placeholder="Voor klant voornaam in">
                                         </div>
                                         <!-- /.form-group -->
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="lastname">Achternaam</label>
-                                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Voor klant achternaam in">
+                                            <label for="achternaam">Achternaam</label>
+                                            <input type="text" class="form-control" id="achternaam" name="achternaam" placeholder="Voor klant achternaam in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -62,16 +62,16 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <label for="street">Straat</label>
-                                            <input type="text" class="form-control" id="street" name="street" placeholder="Voor straatrnaam in">
+                                            <label for="straat">Straat</label>
+                                            <input type="text" class="form-control" id="straat" name="straat" placeholder="Voor straatrnaam in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
                                     <!-- /.col -->                  
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="number">Huisnummer</label>
-                                            <input type="text" class="form-control" id="number" name="number" placeholder="Voor huisnummer in">
+                                            <label for="huisnummer">Huisnummer</label>
+                                            <input type="text" class="form-control" id="huisnummer" name="huisnummer" placeholder="Voor huisnummer in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -81,16 +81,16 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="zipcode">Postcode</label>
-                                            <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Voor postcode in">
+                                            <label for="postcode">Postcode</label>
+                                            <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Voor postcode in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
                                     <!-- /.col -->                  
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <label for="city">Woonplaats</label>
-                                            <input type="text" class="form-control" id="city" name="city" placeholder="Voor woonplaats in">
+                                            <label for="woonplaats">Woonplaats</label>
+                                            <input type="text" class="form-control" id="woonplaats" name="woonplaats" placeholder="Voor woonplaats in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -100,8 +100,8 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label for="phone">Telefoonnummer</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Voor telefoonnummer in">
+                                            <label for="telefoon">Telefoonnummer</label>
+                                            <input type="text" class="form-control" id="telefoon" name="telefoon" placeholder="Voor telefoonnummer in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -119,24 +119,24 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label for="account_number">Bankrekening</label>
-                                            <input type="text" class="form-control" id="account_number" name="account_number" placeholder="Voor bankrekening in">
+                                            <label for="rekeningnummer">Bankrekening</label>
+                                            <input type="text" class="form-control" id="rekeningnummer" name="rekeningnummer" placeholder="Voor bankrekening in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
                                     <!-- /.col -->                  
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label for="identification">Identificatie</label>
-                                            <input type="text" class="form-control" id="identification" name="identification" placeholder="Voor identificatie in">
+                                            <label for="identificatie">Identificatie</label>
+                                            <input type="text" class="form-control" id="identificatie" name="identificatie" placeholder="Voor identificatie in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
                                     <!-- /.col -->                  
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="discount">Korting</label>
-                                            <input type="text" class="form-control" id="discount" name="discount" placeholder="Voor korting in">
+                                            <label for="korting">Korting</label>
+                                            <input type="text" class="form-control" id="korting" name="korting" placeholder="Voor korting in">
                                         </div>
                                         <!-- /.form-group -->                    
                                     </div>
@@ -146,8 +146,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="comment">Opmerking</label>
-                                            <textarea class="form-control" rows="3" id="article-ckeditor" name="comment" placeholder="Voer een opmerking in"></textarea>
+                                            <label for="opmerking">Opmerking</label>
+                                            <textarea class="form-control" rows="3" id="article-ckeditor" name="opmerking" placeholder="Voer een opmerking in"></textarea>
                                         </div>
                                         <!-- /.form-group -->
                                     </div>
@@ -158,7 +158,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                                <a href="{{ route('customers.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('klanten.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->
                         </form>

@@ -12,7 +12,7 @@
 			<ul class="breadcrumb">
 				<li><a href="{{ route('home') }}">Home</a></li>
 				<li><a href="{{ route('producten.index') }}">Producten</a></li>
-				<li class="active">{{ $product->product_mark->product_mark_name }} {{ $product->product_name }}</li>
+				<li class="active">{{ $product->product_mark->naam }} {{ $product->naam }}</li>
 			</ul>
 		</div>
 	</div>
@@ -29,7 +29,7 @@
 					<div class="col-md-6">
 						<div id="product-main-view">
 							<div class="product-view">
-								<img src="{{ asset('storage/cover_images/'.$product->cover_image) }}" alt="">
+								<img src="{{ asset('storage/cover_images/'.$product->foto) }}" alt="">
 							</div>
 						</div>
 					</div>
@@ -41,39 +41,39 @@
 									<span>Nieuw</span>
 								</div>
 							@endif
-							<h2 class="product-name">{{ $product->product_mark->product_mark_name }} {{ $product->product_name }}</h2>
-							<h3 class="product-price">&euro; {{ number_format($product->rent_money, 2, ',', '.') }}<small> per dag</small></h3>
-							<p><strong>Merk:</strong> {{ $product->product_mark->product_mark_name }}</p>
+							<h2 class="product-name">{{ $product->product_mark->naam }} {{ $product->naam }}</h2>
+							<h3 class="product-price">&euro; {{ number_format($product->huurprijs, 2, ',', '.') }}<small> per dag</small></h3>
+							<p><strong>Merk:</strong> {{ $product->product_mark->naam }}</p>
 							<div class="product-options">
 								@if ($productRented->count() > 0)
 									<p style="color: #F8694A">Dit product is al {{ $productRented->count() }} keer verhuurd:</p>
 									@foreach ($productRented as $rented)
-										<p style="color: #F8694A">Van {{ date("d-m-Y", strtotime($rented->date_from)) }} tot {{ date("d-m-Y", strtotime($rented->date_to)) }}.</p>
+										<p style="color: #F8694A">Van {{ date("d-m-Y", strtotime($rented->begindatum)) }} tot {{ date("d-m-Y", strtotime($rented->einddatum)) }}.</p>
 									@endforeach
 								@endif
 							</div>
 
 							<!-- form start -->
-							<form action="{{ route('producten.addtocart', ['id' => $product->id]) }}" enctype="multipart/form-data" method="post">
+							<form action="{{ route('winkelwagen.itemtoevoegen', ['id' => $product->id]) }}" enctype="multipart/form-data" method="post">
 								{{ csrf_field() }}
 								<div class="form-group col-md-6">
-									<label for="date_from">Datum: vanaf</label>
+									<label for="begindatum">Datum: vanaf</label>
 									<div class="input-group date">
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right" id="datepicker1" name="date_from">
+										<input type="text" class="form-control pull-right" id="datepicker1" name="begindatum">
 									</div>
 									<!-- /.input group -->
 								</div>
 								<!-- /.form group -->
 								<div class="form-group col-md-6">
-									<label for="date_to">Datum: tot</label>
+									<label for="einddatum">Datum: tot</label>
 									<div class="input-group date">
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right" id="datepicker2" name="date_to">
+										<input type="text" class="form-control pull-right" id="datepicker2" name="einddatum">
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -109,7 +109,7 @@
 							</ul>
 							<div class="tab-content">
 								<div id="tab1" class="tab-pane fade in active">
-									<p>{!! $product->description !!}</p>
+									<p>{!! $product->omschrijving !!}</p>
 								</div>
 								<div id="tab2" class="tab-pane fade in">
 									<p>Details</p>

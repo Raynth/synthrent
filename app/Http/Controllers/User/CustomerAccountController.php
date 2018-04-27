@@ -20,41 +20,41 @@ class CustomerAccountController extends Controller
     // Deze methode haalt de gegevens van eerder gehuurde producten van de klant op.
     public function index()
     {
-        $rented = Rental::where('customer_id', Auth::id())->get();
+        $rented = Rental::where('klant_id', Auth::id())->get();
         
-        return view('account.show', compact('customer', 'rented'));
+        return view('account.show', compact('klant', 'rented'));
     }
 
     // Het wijzigen van klant account gegevens
     public function edit()
     {
-        $customer = User::find(Auth::id());
+        $klant = User::find(Auth::id());
         
-        return view('account.edit', compact('customer'));
+        return view('account.edit', compact('klant'));
     }
 
     // Het opslaan van de gewijzigde klant account gegevens
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'forename' => 'required',
-            'lastname' => 'required',
+            'voornaam' => 'required',
+            'achternaam' => 'required',
             'email' => 'required'
         ]);
 
-        $customer = User::find($id);
-        $customer->forename = $request->input('forename');
-        $customer->lastname = $request->input('lastname');
-        $customer->email = $request->input('email');
-        $customer->street = $request->input('street');
-        $customer->number = $request->input('number');
-        $customer->zipcode = $request->input('zipcode');
-        $customer->city = $request->input('city');
-        $customer->phone = $request->input('phone');
-        $customer->account_number = $request->input('account_number');
-        $customer->identification = $request->input('identification');
-        $customer->discount = $request->input('discount');
-        $customer->save();
+        $klant = User::find($id);
+        $klant->voornaam = $request->input('voornaam');
+        $klant->achternaam = $request->input('achternaam');
+        $klant->email = $request->input('email');
+        $klant->straat = $request->input('straat');
+        $klant->huisnummer = $request->input('huisnummer');
+        $klant->postcode = $request->input('postcode');
+        $klant->woonplaats = $request->input('woonplaats');
+        $klant->telefoon = $request->input('telefoon');
+        $klant->rekeningnummer = $request->input('rekeningnummer');
+        $klant->identificatie = $request->input('identificatie');
+        $klant->korting = $request->input('korting');
+        $klant->save();
 
         return redirect()->route('account.index')->with('success', 'Gegevens gewijzigd');
     }
@@ -62,9 +62,9 @@ class CustomerAccountController extends Controller
     // Het wijzigen van het wachtwoord van de klant
     public function editPassword()
     {
-        $customer = User::find(Auth::id());
+        $klant = User::find(Auth::id());
         
-        return view('account.edit-password', compact('customer'));
+        return view('account.edit-password', compact('klant'));
     }
 
     // Het opslaan van de gewijzigde wachtwoord van de klant
@@ -75,13 +75,13 @@ class CustomerAccountController extends Controller
             'new_password' => 'required|confirmed'
         ]);
         
-        $customer = User::find($id);
+        $klant = User::find($id);
 
         // Controle oud en nieuw wachtwoord
         $old_password = $request->input('old_password');
         $new_password = $request->input('new_password');
         
-        if (!Hash::check($old_password, $customer->password)) {
+        if (!Hash::check($old_password, $klant->password)) {
             return redirect()->route('account.edit-password', compact('id'))->with('error', 'Oud wachtwoord is onjuist!');
         }
 
@@ -89,8 +89,8 @@ class CustomerAccountController extends Controller
             return redirect()->route('account.edit-password', compact('id'))->with('error', 'Oud en nieuw wachtwoord zijn gelijk!');
         }
 
-        $customer->password = Hash::make($new_password);
-        $customer->save();
+        $klant->password = Hash::make($new_password);
+        $klant->save();
 
         return redirect()->route('account.index')->with('success', 'Wachtwoord gewijzigd');
     }

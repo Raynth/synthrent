@@ -34,15 +34,15 @@
 					<table>
 						<tr>
 							<th width="200px">Naam:</th>
-							<td>{{ Auth::user()->forename }} {{ Auth::user()->lastname }}</td>
+							<td>{{ Auth::user()->voornaam }} {{ Auth::user()->achternaam }}</td>
 						</tr>
 						<tr>
 							<th>Adres:</th>
-                    		<td>{{ Auth::user()->street }} {{ Auth::user()->number }}</td>
+                    		<td>{{ Auth::user()->straat }} {{ Auth::user()->huisnummer }}</td>
 						</tr>
 						<tr>
 							<th>Postcode en woonplaats:</th>
-							<td>{{ Auth::user()->zipcode }} {{ Auth::user()->city }}</td>
+							<td>{{ Auth::user()->postcode }} {{ Auth::user()->woonplaats }}</td>
 						</tr>
 						<tr>
 							<th>Emailadres:</th>
@@ -56,19 +56,19 @@
 					<table>
 						<tr>
 							<th width="200px">Telefoonnummer:</th>
-							<td>{{ Auth::user()->phone }}</td>
+							<td>{{ Auth::user()->telefoon }}</td>
 						</tr>
 						<tr>
 							<th>Rekeningnummer:</th>
-							<td>{{ Auth::user()->account_number }}</td>
+							<td>{{ Auth::user()->rekeningnummer }}</td>
 						</tr>
 						<tr>
 							<th>Identificatienummer:</th>
-							<td>{{ Auth::user()->identification }}</td>
+							<td>{{ Auth::user()->identificatie }}</td>
 						</tr>
 						<tr>
 							<th>Korting:</th>
-							<td>{{ Auth::user()->discount }}</td>
+							<td>{{ Auth::user()->korting }}</td>
 						</tr>
 					</table>
                 </div>
@@ -118,21 +118,21 @@
                                     <tbody>
                                         @foreach($rented as $key => $item)
                                             <tr>
-                                                <td class="thumb"><img src="{{ asset('storage/cover_images/'.$item->product->cover_image) }}" alt=""></td>
+                                                <td class="thumb"><img src="{{ asset('storage/cover_images/'.$item->product->foto) }}" alt=""></td>
                                                 <td class="details">
-                                                    <a href="{{ route('producten.show', $item->id) }}">{{ $item->product->product_mark->product_mark_name }} {{ $item->product->product_name }}</a>
+                                                    <a href="{{ route('producten.show', $item->id) }}">{{ $item->product->product_mark->naam }} {{ $item->product->naam }}</a>
                                                     <ul>
-                                                        <li><span>Van: {{ date("d-m-Y", strtotime($item->date_from)) }}</span></li>
-                                                        <li><span>Tot: {{ date("d-m-Y", strtotime($item->date_to)) }}</span></li>
+                                                        <li><span>Van: {{ date("d-m-Y", strtotime($item->begindatum)) }}</span></li>
+                                                        <li><span>Tot: {{ date("d-m-Y", strtotime($item->einddatum)) }}</span></li>
                                                     </ul>
                                                 </td>
 												<?php
-													$totalDays = date_diff(date_create($item->date_from), date_create($item->date_to))->format('%d');
-													$rentMoney = $item->total_rent_money / $totalDays;
+													$totalDays = date_diff(date_create($item->begindatum), date_create($item->einddatum))->format('%d');
+													$rentMoney = $item->totale_huurprijs / $totalDays;
 												?>
 												<td class="price text-center"><strong>&euro; {{ number_format($rentMoney, 2, ',', '.') }}</strong></td>
                                                 <td class="days text-center"><strong>{{ $totalDays }}</strong></td>
-                                                <td class="total text-center"><strong class="primary-color">&euro; {{ number_format($item->total_rent_money, 2, ',', '.') }}</strong></td>
+                                                <td class="total text-center"><strong class="primary-color">&euro; {{ number_format($item->totale_huurprijs, 2, ',', '.') }}</strong></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

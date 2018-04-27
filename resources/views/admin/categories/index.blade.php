@@ -52,7 +52,7 @@
                                         @foreach ($categories as $category)
                                             <tr>
                                                 <td>{{ $category->id }}</td>
-                                                <td>{{ $category->category_name }}</td>
+                                                <td>{{ $category->naam }}</td>
                                                 <td>
                                                     @if ($category->online == 1)
                                                         <span class="fa fa-check"></span>

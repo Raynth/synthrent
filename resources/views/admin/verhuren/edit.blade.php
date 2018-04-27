@@ -63,7 +63,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label for="product">Product</label>
-                                        <select class="form-control select2" style="width: 100%;" id="product" name="product_id">
+                                        <select class="form-control select2" style="width: 100%;" id="product_id" name="product_id" onchange="selectedProduct()">
                                             @foreach ($producten as $product)
                                                 <option value="{{ $product->id }}" {{ ($verhuur->product_id == $product->id) ? 'selected' : '' }}>{{ $product->product_mark->naam }} {{ $product->naam }}</option>
                                             @endforeach
@@ -102,7 +102,7 @@
                                         <label for="totale_huurprijs">Huurprijs per dag</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">&euro;</span>
-                                            <input type="number" class="form-control" id="huurprijs" name="huurprijs" step="0.05" value="{{ $verhuur->product->huurprijs }}">
+                                            <input type="number" class="form-control" id="huurprijs" name="huurprijs" step="0.05" value="{{ $verhuur->product->huurprijs }}" readonly>
                                         </div>
                                         <!-- /.input-group -->
                                     </div>
@@ -110,7 +110,7 @@
                                     <div class="form-group col-md-4">
                                         <label for="totale_huurprijs">Aantal dagen</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="dagen" name="dagen" value="{{ $verhuur->dagen }}">
+                                            <input type="number" class="form-control" id="dagen" name="dagen" value="{{ $verhuur->dagen }}" readonly>
                                         </div>
                                         <!-- /.input-group -->
                                     </div>
@@ -119,7 +119,7 @@
                                         <label for="totale_huurprijs">Totale huurprijs</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">&euro;</span>
-                                            <input type="number" class="form-control" id="totale_huurprijs" name="totale_huurprijs" step="0.05" value="{{ $verhuur->totale_huurprijs }}">
+                                            <input type="number" class="form-control" id="totale_huurprijs" name="totale_huurprijs" step="0.05" value="{{ $verhuur->totale_huurprijs }}" readonly>
                                         </div>
                                         <!-- /.input-group -->
                                     </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rental extends Model
 {
-    public function customer()
+    public function klant()
     {
         return $this->belongsTo('App\Model\admin\User');
     }
@@ -23,10 +23,10 @@ class Rental extends Model
 
     public function create()
     {
-        return Product::select('products.id', 'product_mark_id', 'product_name', 'rent_money')
+        return Product::select('products.id', 'product_mark_id', 'naam', 'huurprijs')
             ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
-            ->orderBy('product_mark_name', 'asc')
-            ->orderBy('product_name', 'asc')
+            ->orderBy('naam', 'asc')
+            ->orderBy('naam', 'asc')
             ->get();
     }
 }

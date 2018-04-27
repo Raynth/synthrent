@@ -10,12 +10,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Verhuren
-                <small>overzicht van alle verhuren</small>
+                Producten
+                <small>overzicht van alle producten</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('rentals.index') }}">Verhuren</a></li>
+                <li><a href="{{ route('producten.index') }}">Producten</a></li>
                 <li class="active">Overzicht</li>
             </ol>
         </section>
@@ -31,11 +31,11 @@
                     @endif
                     <!-- Als er records in de klanten-tabel staan, toon tabel -->
                     <!-- Als er geen records in de klanten-tabel staan, toon melding -->
-                    @if (count($rentals) > 0)
+                    @if (count($producten) > 0)
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Overzicht verhuren</h3>
-                                <a href="{{ route('rentals.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                                <h3 class="box-title">Overzicht producten</h3>
+                            <a href="{{ route('producten.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -43,32 +43,30 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Klant</th>
-                                            <th>Product</th>
-                                            <th>Datum van</th>
-                                            <th>Datum tot</th>
+                                            <th>Categorie</th>
+                                            <th>Product merk</th>
+                                            <th>Product naam</th>
                                             <th>Huurprijs</th>
-                                            <th>Teruggebracht</th>
+                                            <th>Online</th>
                                             <th>Actie</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($rentals as $rental)
+                                        @foreach ($producten as $product)
                                             <tr>
-                                                <td>{{ $rental->id }}</td>
-                                                <td>{{ $rental->customer->forename }} {{ $rental->customer->lastname }}</td>
-                                                <td>{{ $rental->product->product_mark->product_mark_name }} {{ $rental->product->product_name }}</td>
-                                                <td>{{ $rental->date_from }}</td>
-                                                <td>{{ $rental->date_to }}</td>
-                                                <td>&euro; {{ number_format($rental->total_rent_money, 2, ',', '.') }}</td>
+                                                <td>{{ $product->id }}</td>
+                                                <td>{{ $product->category->naam }}</td>
+                                                <td>{{ $product->product_mark->naam }}</td>
+                                                <td>{{ $product->naam }}</td>
+                                                <td>&euro; {{ number_format($product->huurprijs, 2, ',', '.') }}</td>
                                                 <td>
-                                                    @if ($rental->bring_back == 1)
+                                                    @if ($product->online == 1)
                                                         <span class="fa fa-check"></span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('rentals.show', $rental->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                                                    <a href="{{ route('rentals.edit', $rental->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
+                                                    <a href="{{ route('producten.show', $product->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                                                    <a href="{{ route('producten.edit', $product->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                                         <span class="fa fa-trash">
                                                     </button>
@@ -79,12 +77,11 @@
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Klant</th>
-                                            <th>Product</th>
-                                            <th>Datum van</th>
-                                            <th>Datum tot</th>
+                                            <th>Categorie</th>
+                                            <th>Product merk</th>
+                                            <th>Product naam</th>
                                             <th>Huurprijs</th>
-                                            <th>Teruggebracht</th>
+                                            <th>Online</th>
                                             <th>Actie</th>
                                         </tr>
                                     </tfoot>
@@ -95,10 +92,10 @@
                         <!-- /.box -->
                     @else
                         <div class="callout callout-info">
-                            <h4>Geen verhuren in het bestand!</h4>
-                            <p>Op dit moment bevinden er zich geen verhuren in het bestand.</p>
+                            <h4>Geen producten in het bestand!</h4>
+                            <p>Op dit moment bevinden er zich geen producten in het bestand.</p>
                         </div>
-                        <a href="{{ route('rentals.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('producten.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->
@@ -112,27 +109,31 @@
     <!-- Popup verschijnt ter bevestiging verwijderen record -->
     <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Verhuur verwijderen</h4>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Product verwijderen</h4>
+                </div>
+                <!-- /.modal-header -->
+                <div class="modal-body">
+                    <p>Weet u zeker dat u deze product wilt verwijderen?</p>
+                </div>
+                <!-- /.modal-body -->
+                <div class="modal-footer">
+                    @if (count($producten) > 0)
+                        <form action="{{ route('producten.destroy', $product->id) }}" method="post" class="pull-left">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-danger">Verwijderen</button>
+                        </form>
+                    @endif
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuleren</button>
+                </div>
+                <!-- /.modal-footer -->
             </div>
-            <div class="modal-body">
-            <p>Weet u zeker dat u deze verhuur wilt verwijderen?</p>
-            </div>
-            <div class="modal-footer">
-            @if (count($rentals) > 0)
-                    <form action="{{ route('rentals.destroy', $rental->id) }}" method="post" class="pull-left">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button type="submit" class="btn btn-danger">Verwijderen</button>
-                    </form>
-                @endif
-            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuleren</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
+            <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
     </div>
@@ -146,7 +147,7 @@
     <script>
         $(function () {
             $('#example1').DataTable( {
-                "order": [[4, "dec"]],
+            "order": [[2, "asc"], [3, "asc"]],
                 "language": {
                     processing:     "Bezig...",
                     search:         "Zoeken:",

@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('rentals.index') }}">Verhuren</a></li>
+                <li><a href="{{ route('verhuren.index') }}">Verhuren</a></li>
                 <li class="active">Bekijken</li>
             </ol>
         </section>
@@ -24,7 +24,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Klant</div>
                         <div class="panel-body">
-                            {{ $rental->customer->forename }} {{ $rental->customer->lastname }}
+                            {{ $verhuur->klant->voornaam }} {{ $verhuur->klant->achternaam }}
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -32,7 +32,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Product</div>
                         <div class="panel-body">
-                            {{ $rental->product->product_mark->product_mark_name }} {{ $rental->product->product_name }}
+                            {{ $verhuur->product->product_mark->naam }} {{ $verhuur->product->naam }}
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -42,7 +42,7 @@
                             <h3 class="panel-title">Datum: van</h3>
                         </div>
                         <div class="panel-body">
-                            {{ $rental->date_from }}
+                            {{ $verhuur->begindatum }}
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -52,7 +52,7 @@
                             <h3 class="panel-title">Datum: tot</h3>
                         </div>
                         <div class="panel-body">
-                            {{ $rental->date_to }}
+                            {{ $verhuur->einddatum }}
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -62,7 +62,7 @@
                             <h3 class="panel-title">Totale huurprijs</h3>
                         </div>
                         <div class="panel-body">
-                            &euro; {{ number_format($rental->total_rent_money, 2, ',', '.') }}
+                            &euro; {{ number_format($verhuur->totale_huurprijs, 2, ',', '.') }}
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -72,15 +72,15 @@
                             <h3 class="panel-title">Teruggebracht</h3>
                         </div>
                         <div class="panel-body">
-                            @if ($rental->bring_back == 1)
+                            @if ($verhuur->teruggebracht == 1)
                                 <span class="fa fa-check"></span>
                             @endif
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <a href="{{ route('rentals.edit', $rental->id) }}" class="btn btn-warning">Bewerken</a>
-                    <a href="{{ route('rentals.index') }}" class="btn btn-default">Annuleren</a>
+                    <a href="{{ route('verhuren.edit', $verhuur->id) }}" class="btn btn-warning">Bewerken</a>
+                    <a href="{{ route('verhuren.index') }}" class="btn btn-default">Annuleren</a>
                 </div>
                 <!--/.col -->
             </div>

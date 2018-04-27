@@ -6,7 +6,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="{{ route('home') }}">Home</a></li>
-				<li class="active">{{ $selectedProductMark->product_mark_name }} producten</li>
+				<li class="active">{{ $selectedProductMark->naam }} producten</li>
 			</ul>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 							</div>
 						</div>
 						<div class="pull-right">
-							{{ $products->links('vendor.pagination.custom') }}	
+							{{ $producten->links('vendor.pagination.custom') }}	
 						</div>
 					</div>
 					<!-- /store top filter -->
@@ -49,7 +49,7 @@
 					<div id="store">
 						<!-- row -->
 						<div class="row clearfix-product">
-                            @foreach($products as $product)
+                            @foreach($producten as $product)
                                 <!-- Product Single -->
                                 <div class="col-md-4 col-sm-6 col-xs-6">
                                     <div class="product product-single">
@@ -61,11 +61,11 @@
 												</div>
 											@endif
                                             <button class="main-btn quick-view" onclick="window.location.href='{{ route('producten.show', $product->id) }}'"><i class="fa fa-search-plus"></i> Bekijk product</button>
-                                            <img src="{{ asset('storage/cover_images/'.$product->cover_image) }}" alt="Afbeelding van {{ $product->product_name }}">
+                                            <img src="{{ asset('storage/cover_images/'.$product->foto) }}" alt="Afbeelding van {{ $product->naam }}">
                                         </div>
                                         <div class="product-body">
-                                            <h3 class="product-price">&euro; {{ number_format($product->rent_money, 2, ',', '.') }}</h3>
-                                            <h2 class="product-name"><a href="#">{{ $product->product_mark->product_mark_name }} {{ $product->product_name }}</a></h2>
+                                            <h3 class="product-price">&euro; {{ number_format($product->huurprijs, 2, ',', '.') }}</h3>
+                                            <h2 class="product-name"><a href="#">{{ $product->product_mark->naam }} {{ $product->naam }}</a></h2>
                                             <div class="product-btns">
                                                 <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                                 <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
@@ -101,7 +101,7 @@
 							</div>
 						</div>
 						<div class="pull-right">
-							{{ $products->links('vendor.pagination.custom') }}
+							{{ $producten->links('vendor.pagination.custom') }}
 						</div>
 					</div>
 					<!-- /store bottom filter -->

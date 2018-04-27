@@ -23,7 +23,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('category_name', 'ASC')->get();
+        $categories = Category::orderBy('naam', 'ASC')->get();
         
         return view('admin.categories.index', compact('categories'));
     }
@@ -47,13 +47,13 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'category_name' => 'required',
+            'naam' => 'required',
         ]);
 
         // Creeer Category
         $category = new Category;
-        $category->category_name = $request->input('category_name');
-        $category->slug = str_slug($category->category_name);
+        $category->naam = $request->input('naam');
+        $category->slug = str_slug($category->naam);
         if (null !== $request->input('online')) {
             $category->online = 1;
         } else {
@@ -100,13 +100,13 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'category_name' => 'required',
+            'naam' => 'required',
         ]);
         
         // Update Category
         $category = Category::find($id);
-        $category->category_name = $request->input('category_name');
-        $category->slug = str_slug($category->category_name);
+        $category->naam = $request->input('naam');
+        $category->slug = str_slug($category->naam);
         if (null !== $request->input('online')) {
             $category->online = 1;
         } else {

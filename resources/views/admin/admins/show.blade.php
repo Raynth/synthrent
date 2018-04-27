@@ -38,7 +38,7 @@
                     <table class="table table-bordered table-striped">
                         <tr>
                             <th width="200px">Naam:</th>
-                            <td>{{ $admin->name }}</td>
+                            <td>{{ $admin->naam }}</td>
                         </tr>
                         <tr>
                             <th>Email:</th>
@@ -46,11 +46,11 @@
                         </tr>
                         <tr>
                             <th>Telefoonnummer:</th>
-                            <td>{{ $admin->phone}}</td>
+                            <td>{{ $admin->telefoon}}</td>
                         </tr>
                         <tr>
                             <th>Rol:</th>
-                            <td> {{ $admin->role->name }}</td>
+                            <td> {{ $admin->role->naam }}</td>
                         </tr>
                     </table>
                 </div>

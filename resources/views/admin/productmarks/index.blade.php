@@ -52,7 +52,7 @@
                                         @foreach ($productMarks as $productMark)
                                             <tr>
                                                 <td>{{ $productMark->id }}</td>
-                                                <td>{{ $productMark->product_mark_name }}</td>
+                                                <td>{{ $productMark->naam }}</td>
                                                 <td>
                                                     @if ($productMark->online == 1)
                                                         <span class="fa fa-check"></span>

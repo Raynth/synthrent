@@ -23,19 +23,19 @@
                     @csrf
 
                     <div class="form-group">
-                        <input id="forename" type="text" class="input{{ $errors->has('forename') ? ' is-invalid' : '' }}" name="forename" placeholder="Voornaam" value="{{ old('forename') }}" required autofocus>
-                        @if ($errors->has('forename'))
+                        <input id="voornaam" type="text" class="input{{ $errors->has('voornaam') ? ' is-invalid' : '' }}" name="voornaam" placeholder="Voornaam" value="{{ old('voornaam') }}" required autofocus>
+                        @if ($errors->has('voornaam'))
                             <span class="invalid-feedback">
-                                <strong>{{ $errors->first('forename') }}</strong>
+                                <strong>{{ $errors->first('voornaam') }}</strong>
                             </span>
                         @endif
                     </div>
 
                     <div class="form-group">
-                        <input id="lastname" type="text" class="input{{ $errors->has('lastname') ? ' is-invalid' : '' }}" name="lastname" placeholder="Achternaam" value="{{ old('lastname') }}" required autofocus>
-                        @if ($errors->has('lastname'))
+                        <input id="achternaam" type="text" class="input{{ $errors->has('achternaam') ? ' is-invalid' : '' }}" name="achternaam" placeholder="Achternaam" value="{{ old('achternaam') }}" required autofocus>
+                        @if ($errors->has('achternaam'))
                             <span class="invalid-feedback">
-                                <strong>{{ $errors->first('lastname') }}</strong>
+                                <strong>{{ $errors->first('achternaam') }}</strong>
                             </span>
                         @endif
                     </div>

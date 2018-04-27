@@ -23,9 +23,9 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = User::get();
+        $klanten = User::get();
 
-        return view('admin.customers.index', compact('customers'));
+        return view('admin.klanten.index', compact('klanten'));
     }
 
     /**
@@ -35,7 +35,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        return view('admin.customers.create', compact('categories'));
+        return view('admin.klanten.create', compact('categories'));
     }
 
     /**
@@ -47,33 +47,33 @@ class CustomersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'forename' => 'required',
-            'lastname' => 'required',
-            'street' => 'required',
-            'number' => 'required',
-            'zipcode' => 'required',
-            'city' => 'required',
-            'account_number' => 'required',
-            'identification' => 'required'
+            'voornaam' => 'required',
+            'achternaam' => 'required',
+            'straat' => 'required',
+            'huisnummer' => 'required',
+            'postcode' => 'required',
+            'woonplaats' => 'required',
+            'rekeningnummer' => 'required',
+            'identificatie' => 'required'
         ]);
 
-        // Creeer customer
-        $customer = new User;
-        $customer->forename = $request->input('forename');
-        $customer->lastname = $request->input('lastname');
-        $customer->street = $request->input('street');
-        $customer->number = $request->input('number');
-        $customer->zipcode = $request->input('zipcode');
-        $customer->city = $request->input('city');
-        $customer->phone = $request->input('phone');
-        $customer->email = $request->input('email');
-        $customer->account_number = $request->input('account_number');
-        $customer->identification = $request->input('identification');
-        $customer->discount = $request->input('discount');
-        $customer->comment = $request->input('comment');
-        $customer->save();
+        // Creeer klant
+        $klant = new User;
+        $klant->voornaam = $request->input('voornaam');
+        $klant->achternaam = $request->input('achternaam');
+        $klant->straat = $request->input('straat');
+        $klant->huisnummer = $request->input('huisnummer');
+        $klant->postcode = $request->input('postcode');
+        $klant->woonplaats = $request->input('woonplaats');
+        $klant->telefoon = $request->input('telefoon');
+        $klant->email = $request->input('email');
+        $klant->rekeningnummer = $request->input('rekeningnummer');
+        $klant->identificatie = $request->input('identificatie');
+        $klant->korting = $request->input('korting');
+        $klant->opmerking = $request->input('opmerking');
+        $klant->save();
 
-        return redirect()->route('customers.index')->with('success', 'Klant toegevoegd');
+        return redirect()->route('klanten.index')->with('success', 'Klant toegevoegd');
     }
 
     /**
@@ -84,10 +84,10 @@ class CustomersController extends Controller
      */
     public function show($id)
     {
-        $customer = User::find($id);
-        $rentals = Rental::where('customer_id', $id)->get();
+        $klant = User::find($id);
+        $verhuren = Rental::where('klant_id', $id)->get();
 
-        return view('admin.customers.show', compact('customer', 'rentals'));
+        return view('admin.klanten.show', compact('klant', 'verhuren'));
     }
 
     /**
@@ -98,9 +98,9 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        $customer = User::find($id);
+        $klant = User::find($id);
 
-        return view('admin.customers.edit', compact('customer', 'categories')); 
+        return view('admin.klanten.edit', compact('klant', 'categories')); 
     }
 
     /**
@@ -113,33 +113,33 @@ class CustomersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-           'forename' => 'required',
-            'lastname' => 'required',
-            'street' => 'required',
-            'number' => 'required',
-            'zipcode' => 'required',
-            'city' => 'required',
-            'account_number' => 'required',
-            'identification' => 'required'
+           'voornaam' => 'required',
+            'achternaam' => 'required',
+            'straat' => 'required',
+            'huisnummer' => 'required',
+            'postcode' => 'required',
+            'woonplaats' => 'required',
+            'rekeningnummer' => 'required',
+            'identificatie' => 'required'
         ]);
         
         // Update Customer
-        $customer = User::find($id);
-        $customer->forename = $request->input('forename');
-        $customer->lastname = $request->input('lastname');
-        $customer->street = $request->input('street');
-        $customer->number = $request->input('number');
-        $customer->zipcode = $request->input('zipcode');
-        $customer->city = $request->input('city');
-        $customer->phone = $request->input('phone');
-        $customer->email = $request->input('email');
-        $customer->account_number = $request->input('account_number');
-        $customer->identification = $request->input('identification');
-        $customer->discount = $request->input('discount');
-        $customer->comment = $request->input('comment');
-        $customer->save();
+        $klant = User::find($id);
+        $klant->voornaam = $request->input('voornaam');
+        $klant->achternaam = $request->input('achternaam');
+        $klant->straat = $request->input('straat');
+        $klant->huisnummer = $request->input('huisnummer');
+        $klant->postcode = $request->input('postcode');
+        $klant->woonplaats = $request->input('woonplaats');
+        $klant->telefoon = $request->input('telefoon');
+        $klant->email = $request->input('email');
+        $klant->rekeningnummer = $request->input('rekeningnummer');
+        $klant->identificatie = $request->input('identificatie');
+        $klant->korting = $request->input('korting');
+        $klant->opmerking = $request->input('opmerking');
+        $klant->save();
 
-        return redirect()->route('customers.index')->with('success', 'Klant bijgewerkt');
+        return redirect()->route('klanten.index')->with('success', 'Klant bijgewerkt');
     }
 
     /**
@@ -150,9 +150,9 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        $customer = User::find($id);
-        $customer->delete();
+        $klant = User::find($id);
+        $klant->delete();
 
-        return redirect()->route('customers.index')->with('success', 'Klant verwijderd');
+        return redirect()->route('klanten.index')->with('success', 'Klant verwijderd');
     }
 }

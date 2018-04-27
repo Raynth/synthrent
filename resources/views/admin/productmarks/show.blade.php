@@ -28,7 +28,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            {{ $productMark->product_mark_name }}
+                            {{ $productMark->naam }}
                         </div>
                         <!-- /.panel-body -->
                     </div>

@@ -42,8 +42,8 @@
                             @csrf
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="name">Rol titel</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Voor rol titel in">
+                                    <label for="naam">Rol titel</label>
+                                    <input type="text" class="form-control" id="naam" name="naam" placeholder="Voor rol titel in">
                                 </div>
                                 <!-- /.form-group -->
                             </div>

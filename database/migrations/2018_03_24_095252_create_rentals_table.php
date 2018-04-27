@@ -15,13 +15,13 @@ class CreateRentalsTable extends Migration
     {
         Schema::create('rentals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id');
+            $table->integer('klant_id');
             $table->integer('product_id');
-            $table->date('date_from');
-            $table->date('date_to');
-            $table->integer('days');
-            $table->decimal('total_rent_money', 5, 2);
-            $table->boolean('bring_back');
+            $table->date('begindatum');
+            $table->date('einddatum');
+            $table->integer('dagen');
+            $table->decimal('totale_huurprijs', 5, 2);
+            $table->boolean('teruggebracht');
             $table->timestamps();
         });
     }

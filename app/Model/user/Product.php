@@ -28,20 +28,20 @@ class Product extends Model
     { 
         $product_available = DB::table('rentals') 
                         ->where('product_id', $id)
-                        ->whereDate('date_to', '>', Carbon::now())
+                        ->whereDate('einddatum', '>', Carbon::now())
                         ->get() 
         ; 
         return $product_available; 
     }
 
     // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is 
-    public static function isProductRented( $product_id, $date_from, $date_to ) 
+    public static function isProductRented( $product_id, $begindatum, $einddatum ) 
     { 
         $product_available = DB::table('rentals') 
                         ->whereRaw(" 
                             NOT( 
-                                date_to < '{$date_from}' OR 
-                                date_from > '{$date_to}' 
+                                einddatum < '{$begindatum}' OR 
+                                begindatum > '{$einddatum}' 
                                 ) 
                         ") 
                         ->where('product_id', $product_id) 
