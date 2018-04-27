@@ -79,11 +79,11 @@ class RentalsController extends Controller
             foreach($productRented as $productRent){
                 $message .= 'Van '.date("d-m-Y", strtotime($productRent->begindatum)).' tot '.date("d-m-Y", strtotime($productRent->einddatum)).'.<br>';
             }
-            return redirect()->route('verhuren.create')->with('productRented', $message);
+            return redirect()->route('admin.verhuren.create')->with('productRented', $message);
         }
         $verhuur->save();
 
-        return redirect()->route('verhuren.index')->with('success', 'Verhuur toegevoegd');
+        return redirect()->route('admin.verhuren.index')->with('success', 'Verhuur toegevoegd');
     }
 
     /**
@@ -157,11 +157,11 @@ class RentalsController extends Controller
             foreach($productRented as $productRent){
                 $message .= 'Van '.date("d-m-Y", strtotime($productRent->begindatum)).' tot '.date("d-m-Y", strtotime($productRent->einddatum)).'.<br>';
             }
-            return redirect()->route('verhuren.create')->with('productRented', $message);
+            return redirect()->route('admin.verhuren.create')->with('productRented', $message);
         }
         $verhuur->save();
 
-        return redirect()->route('verhuren.index')->with('success', 'Verhuur bijgewerkt');
+        return redirect()->route('admin.verhuren.index')->with('success', 'Verhuur bijgewerkt');
     }
 
     /**
@@ -175,6 +175,6 @@ class RentalsController extends Controller
         $verhuur = Rental::find($id);
         $verhuur->delete();
 
-        return redirect()->route('verhuren.index')->with('success', 'Verhuur verwijderd');
+        return redirect()->route('admin.verhuren.index')->with('success', 'Verhuur verwijderd');
     }
 }

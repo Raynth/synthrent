@@ -24,6 +24,8 @@ Route::group(['namespace' => 'User'], function() {
     Route::get('winkelwagen', 'CartController@cart')->name('winkelwagen.show');
     Route::post('item-toevoegen/{id}', 'CartController@addTocart')->name('winkelwagen.itemtoevoegen');
     Route::get('item-verwijderen/{id}', 'CartController@removeItem')->name('winkelwagen.itemverwijderen');
+
+    Route::get('verhuren', 'RentalsController@store')->name('verhuren.store');    
     
     Route::get('kassa', 'PaymentsController@getPayment')->middleware('auth')->name('kassa.betalen');
     Route::get('account', 'CustomerAccountController@index')->name('account.index');
@@ -42,7 +44,7 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::resource('admin/producten', 'ProductsController', ['as' => 'admin']);
     Route::resource('admin/categories', 'CategoriesController');
     Route::resource('admin/klanten', 'CustomersController');
-    Route::resource('admin/verhuren', 'RentalsController');
+    Route::resource('admin/verhuren', 'RentalsController', ['as' => 'admin']);
     Route::resource('admin/productmarks', 'ProductMarksController');
     Route::resource('admin/admins', 'AdminsController');
     Route::resource('admin/roles', 'RolesController');

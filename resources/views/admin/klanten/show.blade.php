@@ -150,7 +150,7 @@
                             <h4>Geen verhuren in het bestand!</h4>
                             <p>Op dit moment bevinden er zich geen verhuren in het bestand.</p>
                         </div>
-                        <a href="{{ route('verhuren.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('admin.verhuren.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->

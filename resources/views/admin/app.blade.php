@@ -145,7 +145,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('verhuren.index') }}">
+                        <a href="{{ route('admin.verhuren.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Verhuren</span>
                         </a>
                     </li>
