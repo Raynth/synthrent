@@ -202,8 +202,8 @@
                 document.getElementById('dagen').value = dagen
                 // Bereken totale huurprijs: aantal dagen x huurprijs
                 var rentMoney = document.getElementById("huurprijs").value
-                var totalRentMoney = dagen * rentMoney
-                document.getElementById("totale_huurprijs").value = totalRentMoney.toFixed(2)
+                var totaalHuurprijs = dagen * rentMoney
+                document.getElementById("totale_huurprijs").value = totaalHuurprijs.toFixed(2)
             }
             
             console.log(begindatum, einddatum)
