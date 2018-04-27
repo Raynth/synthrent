@@ -25,7 +25,7 @@
                             <h3 class="title">Kassa</h3>
                         </div>
                         <h4>Uw totaalbedrag: &euro; {{ number_format($total, 2, ',', '.') }}</h4>
-                        <form action="{{ route('producten.checkout') }}" method="post" id="checkout-form" class="clearfix">
+                        <form action="{{ route('kassa.betalen') }}" method="post" id="checkout-form" class="clearfix">
                             @csrf
                             <div class="form-group">
                                 <input id="naam" type="text" class="input" name="naam" placeholder="Naam" required autofocus>

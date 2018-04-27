@@ -115,7 +115,7 @@
 								<div class="header-btns-icon">
 									<i class="fa fa-shopping-cart"></i>
 									@if (Session::has('cart'))
-										<span class="qty">{{ Session::get('cart')->totalQuantity }}</span>
+										<span class="qty">{{ Session::get('cart')->aantalItems }}</span>
 									@endif
 								</div>
 								<strong class="text-uppercase">Mijn Winkelwagen:</strong>
@@ -129,11 +129,11 @@
 											@foreach(Session::get('cart')->items as $item)
 												<div class="product product-widget">
 													<div class="product-thumb">
-														<img src="{{ asset('storage/cover_images/'.$item->foto) }}" alt="">
+														<img src="{{ asset('storage/cover_images/'.$item['foto']) }}" alt="">
 													</div>
 													<div class="product-body">
-														<h3 class="product-price">&euro; {{ number_format($item->totalRentMoney, 2, ',', '.') }}</h3>
-														<h2 class="product-name"><a href="#">{{ $item->productMarkName }} {{ $item->naam }}</a></h2>
+														<h3 class="product-price">&euro; {{ number_format($item['totaalHuurprijs'], 2, ',', '.') }}</h3>
+														<h2 class="product-name"><a href="#">{{ $item['merk'] }} {{ $item['naam'] }}</a></h2>
 													</div>
 													<button class="cancel-btn"><i class="fa fa-trash"></i></button>
 												</div>
@@ -142,7 +142,7 @@
 									</div>
 									<div class="shopping-cart-btns">
 										<a href="{{ route('winkelwagen.show') }}" class="main-btn">Bekijk Winkelwagen</a>
-										<a href="{{ route('producten.checkout') }}" class="primary-btn">Bevestig Huren <i class="fa fa-arrow-circle-right"></i></a>
+										<a href="{{ route('kassa.betalen') }}" class="primary-btn">Bevestig Huren <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 							</div>

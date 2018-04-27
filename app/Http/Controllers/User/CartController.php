@@ -28,11 +28,13 @@ class CartController extends Controller
         
         // Controle of het gekozen product in de winkelwagen al is verhuurd in de gekozen periode
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        foreach ($oldCart->items as $item) {
-            if ($id == $item->id) {
-                if (!($item->einddatum < $begindatum || $item->begindatum > $einddatum)) {
-                    $message = Product::find($id)->naam.' met de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' overlapt met de periode in uw winkelwagen!';
-                    return redirect()->route('winkelwagen.show')->with('itemInWinkelwagen', $message);
+        if (isset($oldCart)) {
+            foreach ($oldCart->items as $item) {
+                if ($id == $item->id) {
+                    if (!($item->einddatum < $begindatum || $item->begindatum > $einddatum)) {
+                        $message = Product::find($id)->naam.' met de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' overlapt met de periode in uw winkelwagen!';
+                        return redirect()->route('winkelwagen.show')->with('itemInWinkelwagen', $message);
+                    }
                 }
             }
         }
@@ -59,7 +61,7 @@ class CartController extends Controller
         $cart = new Cart($oldCart);
         $cart->removeItem($id);
 
-        if ($cart->totalQuantity > 0) {
+        if ($cart->aantalItems > 0) {
             Session::put('cart', $cart);
         } else {
             Session::forget('cart');
@@ -78,6 +80,10 @@ class CartController extends Controller
         $cart = new Cart($oldCart);
         $categories = Category::orderBy('naam')->get();
 
-        return view('shop.shopping-cart', ['items' => $cart->items, 'totalPrice' => $cart->totalPrice, 'categories' => $categories]);
+        return view('shop.shopping-cart', [
+            'items' => $cart->items,
+            'totalPrice' => $cart->totalPrice,
+            'categories' => $categories
+            ]);
     }
 }

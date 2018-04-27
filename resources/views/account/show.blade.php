@@ -127,11 +127,11 @@
                                                     </ul>
                                                 </td>
 												<?php
-													$totalDays = date_diff(date_create($item->begindatum), date_create($item->einddatum))->format('%d');
-													$rentMoney = $item->totale_huurprijs / $totalDays;
+													$aantalDagen = date_diff(date_create($item->begindatum), date_create($item->einddatum))->format('%d');
+													$rentMoney = $item->totale_huurprijs / $aantalDagen;
 												?>
 												<td class="price text-center"><strong>&euro; {{ number_format($rentMoney, 2, ',', '.') }}</strong></td>
-                                                <td class="days text-center"><strong>{{ $totalDays }}</strong></td>
+                                                <td class="days text-center"><strong>{{ $aantalDagen }}</strong></td>
                                                 <td class="total text-center"><strong class="primary-color">&euro; {{ number_format($item->totale_huurprijs, 2, ',', '.') }}</strong></td>
                                             </tr>
                                         @endforeach

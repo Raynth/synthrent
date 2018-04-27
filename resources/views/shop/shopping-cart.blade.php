@@ -46,17 +46,17 @@
                                     <tbody>
                                         @foreach($items as $key => $item)
                                             <tr>
-                                                <td class="thumb"><img src="{{ asset('storage/cover_images/'.$item->foto) }}" alt=""></td>
+                                                <td class="thumb"><img src="{{ asset('storage/cover_images/'.$item['foto']) }}" alt=""></td>
                                                 <td class="details">
-                                                    <a href="{{ route('producten.show', $item->id) }}">{{ $item->productMarkName }} {{ $item->naam }}</a>
+                                                    <a href="{{ route('admin.producten.show', $item['id']) }}">{{ $item['merk'] }} {{ $item['naam'] }}</a>
                                                     <ul>
-                                                        <li><span>Van: {{ date("d-m-Y", strtotime($item->begindatum)) }}</span></li>
-                                                        <li><span>Tot: {{ date("d-m-Y", strtotime($item->einddatum)) }}</span></li>
+                                                        <li><span>Van: {{ date("d-m-Y", strtotime($item['begindatum'])) }}</span></li>
+                                                        <li><span>Tot: {{ date("d-m-Y", strtotime($item['einddatum'])) }}</span></li>
                                                     </ul>
                                                 </td>
-                                                <td class="price text-center"><strong>&euro; {{ number_format($item->huurprijs, 2, ',', '.') }}</strong></td>
-                                                <td class="days text-center"><strong>{{ $item->totalDays }}</strong></td>
-                                                <td class="total text-center"><strong class="primary-color">&euro; {{ number_format($item->totalRentMoney, 2, ',', '.') }}</strong></td>
+                                                <td class="price text-center"><strong>&euro; {{ number_format($item['huurprijs'], 2, ',', '.') }}</strong></td>
+                                                <td class="days text-center"><strong>{{ $item['aantalDagen'] }}</strong></td>
+                                                <td class="total text-center"><strong class="primary-color">&euro; {{ number_format($item['totaalHuurprijs'], 2, ',', '.') }}</strong></td>
                                                 <td class="text-right"><a href="{{ route('winkelwagen.itemverwijderen', $key) }}" class="main-btn icon-btn"><i class="fa fa-close"></i></a></td>
                                             </tr>
                                         @endforeach
