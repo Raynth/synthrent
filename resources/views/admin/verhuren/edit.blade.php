@@ -126,6 +126,15 @@
                                     <!-- /.form-group -->   
                                 </div>
                                 <!-- /.row -->
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="teruggebracht" {{ $verhuur->teruggebracht == 1 ? 'checked' : '' }}> Teruggebracht
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
