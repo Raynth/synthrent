@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Session;
 use App\Model\admin\Rental;
+use App\Mail\Bestelling;
+use Mail;
 
 class RentalsController extends Controller
 {
@@ -33,6 +35,12 @@ class RentalsController extends Controller
             
             $verhuur->save();
         }
+
+        // Bevestigingsemail naar de klant sturen
+        $klant = Auth::user();
+        $verhuren->klant = $klant;
+        Mail::to($klant)->send(new Bestelling($verhuren));
+
         // Winkelwagen leegmaken
         Session::forget('cart');
 
