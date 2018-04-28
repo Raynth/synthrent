@@ -45,8 +45,9 @@
                                             <th>Id</th>
                                             <th>Klant</th>
                                             <th>Product</th>
-                                            <th>Datum van</th>
-                                            <th>Datum tot</th>
+                                            <th>Begindatum</th>
+                                            <th>Einddatum</th>
+                                            <th>Dagen</th>
                                             <th>Huurprijs</th>
                                             <th>Teruggebracht</th>
                                             <th>Actie</th>
@@ -60,6 +61,7 @@
                                                 <td>{{ $verhuur->product->product_mark->naam }} {{ $verhuur->product->naam }}</td>
                                                 <td>{{ $verhuur->begindatum }}</td>
                                                 <td>{{ $verhuur->einddatum }}</td>
+                                                <td>{{ $verhuur->dagen }}</td>
                                                 <td>&euro; {{ number_format($verhuur->totale_huurprijs, 2, ',', '.') }}</td>
                                                 <td>
                                                     @if ($verhuur->teruggebracht == 1)
@@ -81,8 +83,9 @@
                                             <th>Id</th>
                                             <th>Klant</th>
                                             <th>Product</th>
-                                            <th>Datum van</th>
-                                            <th>Datum tot</th>
+                                            <th>Begindatum</th>
+                                            <th>Einddatum</th>
+                                            <th>Dagen</th>
                                             <th>Huurprijs</th>
                                             <th>Teruggebracht</th>
                                             <th>Actie</th>
