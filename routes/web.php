@@ -33,6 +33,8 @@ Route::group(['namespace' => 'User'], function() {
     Route::post('account-bewerken/{id}', 'CustomerAccountController@update')->name('account.update');
     Route::get('wachtwoord-bewerken', 'CustomerAccountController@editPassword')->name('account.edit-password');
     Route::post('wachtwoord-bewerken/{id}', 'CustomerAccountController@updatePassword')->name('account.update-password');
+    Route::get('contact', 'ContactController@create')->name('contact.create');
+    Route::post('contact/{id}', 'ContactController@store')->name('contact.store');
 });
 
 // Admin Routes

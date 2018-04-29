@@ -187,6 +187,7 @@
 					<ul class="menu-list">
 						<li><a href="#">Home</a></li>
 						<li><a href="{{ route('producten.index') }}">Producten</a></li>
+						<li><a href="{{ route('contact.create') }}">Contact</a></li>						
 					</ul>
 				</div>
 				<!-- menu nav -->
