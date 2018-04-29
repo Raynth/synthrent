@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('headSection')
+    {!! $map['js'] !!}
+@endsection
+
 @section('main-content')
     <!-- BREADCRUMB -->
 	<div id="breadcrumb">
@@ -20,15 +24,16 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <p>SynthRENT</p>
                         <p>Henri Hermanslaan 356</p>
                         <p>6162 GP Geleen</p>
                         <br>
                         <p><i class="fa fa-phone"></i> 06 54 93 46 32</p>
                         <p><i class="fa fa-envelope-o"></i> info@synthrent.nl</p>
+                        {!! $map['html'] !!}
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         @if (Session::has('flash_bericht'))
                             <div class="alert alert-success">{{ Session::get('flash_bericht') }}</div>
                         @endif
