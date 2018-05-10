@@ -39,7 +39,7 @@ class Cart
     public function removeItem($id)
     {
         $this->aantalItems--;
-        $this->totalPrice -= $this->items[$id]->totale_huurprijs;
+        $this->totalPrice -= $this->items[$id]['totale_huurprijs'];
         unset($this->items[$id]);
     }
 }
