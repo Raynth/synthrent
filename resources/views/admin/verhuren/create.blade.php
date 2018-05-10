@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label for="begindatum">Datum: vanaf</label>
+                                        <label for="begindatum">Begindatum</label>
                                         <div class="input-group date">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
@@ -87,7 +87,7 @@
                                     </div>
                                     <!-- /.form group -->
                                     <div class="form-group col-md-6">
-                                        <label for="einddatum">Datum: tot</label>
+                                        <label for="einddatum">Einddatum</label>
                                         <div class="input-group date">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>

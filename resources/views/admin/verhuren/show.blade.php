@@ -49,7 +49,7 @@
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Datum: tot</h3>
+                            <h3 class="panel-title">Einddatum</h3>
                         </div>
                         <div class="panel-body">
                             {{ $verhuur->einddatum }}
