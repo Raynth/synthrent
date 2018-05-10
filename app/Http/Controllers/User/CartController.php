@@ -19,8 +19,8 @@ class CartController extends Controller
     public function addToCart(Request $request, $id)
     {
         $this->validate($request, [
-            'begindatum' => 'required',
-            'einddatum' => 'required'
+            'begindatum' => 'required|date',
+            'einddatum' => 'required|date|after:begindatum'
         ]);
 
         $begindatum = $request->input('begindatum');
@@ -61,6 +61,7 @@ class CartController extends Controller
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
+        // dd($cart);
         $cart->removeItem($id);
 
         if ($cart->aantalItems > 0) {
