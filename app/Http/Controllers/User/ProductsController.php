@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\user\Product;
 use App\Model\admin\Category;
 use App\Model\admin\ProductMark;
+use App\Model\admin\Rental;
 use App\Model\user\Cart;
 use Session;
 use Mollie;
@@ -23,8 +24,12 @@ class ProductsController extends Controller
         $producten = Product::where('online', 1)->paginate(12);
         $productMarks = ProductMark::orderBy('naam')->get();
         $categories = Category::orderBy('naam')->get();
+        $top5 = Rental::selectRaw('product_id, SUM(dagen) as somdagen')
+            ->groupBy('product_id')
+            ->orderBy('somdagen', 'DESC')
+            ->take(5)->get();
         
-        return view('producten', compact('producten', 'productMarks', 'categories'));
+        return view('producten', compact('producten', 'productMarks', 'categories', 'top5'));
     }
 
     /**
