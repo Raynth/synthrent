@@ -62,7 +62,7 @@
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right" id="datepicker1" name="begindatum">
+										<input type="text" class="form-control pull-right" id="begindatum" name="begindatum">
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -73,7 +73,7 @@
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right" id="datepicker2" name="einddatum">
+										<input type="text" class="form-control pull-right" id="einddatum" name="einddatum">
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -235,21 +235,24 @@
     <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js') }}" charset="UTF-8"></script>
     <script>
         $(function () {
-            //Date picker 1
-            $('#datepicker1').datepicker({
+            // Datepicker begindatum
+            $('#begindatum').datepicker({
                 autoclose: true,
                 startDate: '+1d',
-                format: 'yyyy-mm-dd',
+                format: 'dd-mm-yyyy',
                 language: 'nl'
             })
-			$('#datepicker1').change(function() {
-  				// Date picker 2
-				$('#datepicker2').datepicker({
-					autoclose: true,
-					startDate: new Date($(datepicker1).val()),
-					format: 'yyyy-mm-dd',
-					language: 'nl'
-				})
+			// Datepicker eindatum
+			$('#einddatum').datepicker({
+                autoclose: true,
+                startDate: '+1d',
+                format: 'dd-mm-yyyy',
+                language: 'nl'
+            })
+			// Als begindatum geselecteerd is, is de minimale datum van einddatum gelijk aan begindatum
+			$('#begindatum').change(function() {
+				var begindatum = document.getElementById('begindatum').value
+				 $('#einddatum').datepicker('setStartDate', begindatum);
 			})
         })
     </script>

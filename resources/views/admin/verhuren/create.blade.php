@@ -154,20 +154,25 @@
     <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js') }}" charset="UTF-8"></script>
     <script>
         $(function () {
-            //Date picker 'begindatum'
+            // Datepicker begindatum
             $('#begindatum').datepicker({
                 autoclose: true,
                 startDate: '+1d',
-                format: 'yyyy-mm-dd',
+                format: 'dd-mm-yyyy',
                 language: 'nl'
             })
-			//Date picker 'einddatum'
-            $('#einddatum').datepicker({
+			// Datepicker eindatum
+			$('#einddatum').datepicker({
                 autoclose: true,
                 startDate: '+1d',
-                format: 'yyyy-mm-dd',
+                format: 'dd-mm-yyyy',
                 language: 'nl'
             })
+			// Als begindatum geselecteerd is, is de minimale datum van einddatum gelijk aan begindatum
+			$('#begindatum').change(function() {
+				var begindatum = document.getElementById('begindatum').value
+				 $('#einddatum').datepicker('setStartDate', begindatum);
+			})
         })
     </script>
     <script>
