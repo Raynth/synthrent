@@ -15,7 +15,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('producten.index') }}">Producten</a></li>
+                <li><a href="{{ route('admin.producten.index') }}">Producten</a></li>
                 <li class="active">Overzicht</li>
             </ol>
         </section>
@@ -35,7 +35,7 @@
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title">Overzicht producten</h3>
-                            <a href="{{ route('producten.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                            <a href="{{ route('admin.producten.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -65,8 +65,8 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('producten.show', $product->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                                                    <a href="{{ route('producten.edit', $product->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
+                                                    <a href="{{ route('admin.producten.show', $product->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                                                    <a href="{{ route('admin.producten.edit', $product->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                                         <span class="fa fa-trash">
                                                     </button>
@@ -95,7 +95,7 @@
                             <h4>Geen producten in het bestand!</h4>
                             <p>Op dit moment bevinden er zich geen producten in het bestand.</p>
                         </div>
-                        <a href="{{ route('producten.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('admin.producten.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->
@@ -123,7 +123,7 @@
                 <!-- /.modal-body -->
                 <div class="modal-footer">
                     @if (count($producten) > 0)
-                        <form action="{{ route('producten.destroy', $product->id) }}" method="post" class="pull-left">
+                        <form action="{{ route('admin.producten.destroy', $product->id) }}" method="post" class="pull-left">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Verwijderen</button>

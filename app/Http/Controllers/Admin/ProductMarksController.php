@@ -61,7 +61,7 @@ class ProductMarksController extends Controller
         };
         $productMark->save();
 
-        return redirect()->route('productmarks.index')->with('success', 'Productmerk toegevoegd');
+        return redirect()->route('admin.productmarks.index')->with('success', 'Productmerk toegevoegd');
     }
 
     /**
@@ -114,7 +114,7 @@ class ProductMarksController extends Controller
         };
         $productMark->save();
 
-        return redirect()->route('productmarks.index')->with('success', 'Productmerk bijgewerkt');
+        return redirect()->route('admin.productmarks.index')->with('success', 'Productmerk bijgewerkt');
     }
 
     /**
@@ -128,6 +128,6 @@ class ProductMarksController extends Controller
         $productMark = ProductMark::find($id);
         $productMark->delete();
         
-        return redirect()->route('productmarks.index')->with('success', 'Productmerk verwijderd');
+        return redirect()->route('admin.productmarks.index')->with('success', 'Productmerk verwijderd');
     }
 }

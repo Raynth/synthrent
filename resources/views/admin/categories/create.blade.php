@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('categories.index') }}">Categorieën</a></li>
+                <li><a href="{{ route('admin.categories.index') }}">Categorieën</a></li>
                 <li class="active">Toevoegen</li>
             </ol>
         </section>
@@ -37,7 +37,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('categories.store') }}" method="post">
+                        <form role="form" action="{{ route('admin.categories.store') }}" method="post">
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="form-group">
@@ -53,7 +53,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                                <a href="{{ route('categories.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('admin.categories.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                         </form> 
                     </div>

@@ -16,6 +16,7 @@
 // Customer Routes
 Route::group(['namespace' => 'User'], function() {
     Route::get('/', 'HomeController@index')->name('home');
+
     Route::get('producten', 'ProductsController@index')->name('producten.index');
     Route::get('producten/{product}', 'ProductsController@show')->name('producten.show');
     Route::get('productmerk/{productmerk}', 'ProductsController@productMarkShow')->name('productmerk.show');
@@ -27,12 +28,16 @@ Route::group(['namespace' => 'User'], function() {
 
     Route::get('verhuren', 'RentalsController@store')->name('verhuren.store');    
     
-    Route::get('kassa', 'PaymentsController@getPayment')->middleware('auth')->name('kassa.betalen');
+    Route::get('kassa', 'PaymentsController@getPayment')->name('kassa.betalen');
+    Route::get('controleer-betaling', 'PaymentsController@checkPayment')->name('kassa.controleren');
+    Route::get('betaling-voltooid', 'PaymentsController@paymentCompleted')->name('kassa.voltooid');
+
     Route::get('account', 'CustomerAccountController@index')->name('account.index');
     Route::get('account-bewerken', 'CustomerAccountController@edit')->name('account.edit');
     Route::post('account-bewerken/{id}', 'CustomerAccountController@update')->name('account.update');
     Route::get('wachtwoord-bewerken', 'CustomerAccountController@editPassword')->name('account.edit-password');
     Route::post('wachtwoord-bewerken/{id}', 'CustomerAccountController@updatePassword')->name('account.update-password');
+
     Route::get('contact', 'ContactController@create')->name('contact.create');
     Route::post('contact/{id}', 'ContactController@store')->name('contact.store');
 });
@@ -44,12 +49,12 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::get('admin/dashboard/index', 'DashboardController@index')->name('dashboard.index');
     Route::get('admin/dashboard/chartsales', 'DashboardController@chartSales')->name('dashboard.chartsales');
     Route::resource('admin/producten', 'ProductsController', ['as' => 'admin']);
-    Route::resource('admin/categories', 'CategoriesController');
-    Route::resource('admin/klanten', 'CustomersController');
+    Route::resource('admin/categories', 'CategoriesController', ['as' => 'admin']);
+    Route::resource('admin/klanten', 'CustomersController', ['as' => 'admin']);
     Route::resource('admin/verhuren', 'RentalsController', ['as' => 'admin']);
-    Route::resource('admin/productmarks', 'ProductMarksController');
-    Route::resource('admin/admins', 'AdminsController');
-    Route::resource('admin/roles', 'RolesController');
+    Route::resource('admin/productmarks', 'ProductMarksController', ['as' => 'admin']);
+    Route::resource('admin/admins', 'AdminsController', ['as' => 'admin']);
+    Route::resource('admin/roles', 'RolesController', ['as' => 'admin']);
     // Admin Auth Routes
     Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('admin-login', 'Auth\LoginController@login');

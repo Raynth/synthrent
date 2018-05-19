@@ -150,32 +150,32 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('producten.index') }}">
+                        <a href="{{ route('admin.producten.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Producten</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('productmarks.index') }}">
+                        <a href="{{ route('admin.productmarks.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Productmerken</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('categories.index') }}">
+                        <a href="{{ route('admin.categories.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Categorieën</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('klanten.index') }}">
+                        <a href="{{ route('admin.klanten.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Klanten</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admins.index') }}">
+                        <a href="{{ route('admin.admins.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Gebruikers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('roles.index') }}">
+                        <a href="{{ route('admin.roles.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Rollen</span>
                         </a>
                     </li>

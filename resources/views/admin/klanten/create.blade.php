@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('klanten.index') }}">Klanten</a></li>
+                <li><a href="{{ route('admin.klanten.index') }}">Klanten</a></li>
                 <li class="active">Toevoegen</li>
             </ol>
         </section>
@@ -37,7 +37,7 @@
                             <h3 class="box-title">Voeg een klant toe</h3>
                         </div>
                         <!-- /.box-header -->
-                        <form action="{{ route('klanten.store') }}" enctype="multipart/form-data" method="post">
+                        <form action="{{ route('admin.klanten.store') }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="row">
@@ -158,7 +158,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                                <a href="{{ route('klanten.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('admin.klanten.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->
                         </form>

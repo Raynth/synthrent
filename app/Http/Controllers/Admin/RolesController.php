@@ -51,7 +51,7 @@ class RolesController extends Controller
         $role->naam = $request->input('naam');
         $role->save();
 
-        return redirect()->route('roles.index')->with('success', 'Rol toegevoegd');
+        return redirect()->route('admin.roles.index')->with('success', 'Rol toegevoegd');
     }
 
     /**
@@ -98,7 +98,7 @@ class RolesController extends Controller
         $role->naam = $request->input('naam');
         $role->save();
 
-        return redirect()->route('roles.index')->with('success', 'Rol bijgewerkt');
+        return redirect()->route('admin.roles.index')->with('success', 'Rol bijgewerkt');
     }
 
     /**
@@ -112,6 +112,6 @@ class RolesController extends Controller
         $role = Role::find($id);
         $role->delete();
         
-        return redirect()->route('roles.index')->with('success', 'Rol verwijderd');
+        return redirect()->route('admin.roles.index')->with('success', 'Rol verwijderd');
     }
 }

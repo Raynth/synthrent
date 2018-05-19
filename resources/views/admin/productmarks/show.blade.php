@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('productmarks.index') }}">Productmerken</a></li>
+                <li><a href="{{ route('admin.productmarks.index') }}">Productmerken</a></li>
                 <li class="active">Bekijken</li>
             </ol>
         </section>
@@ -46,8 +46,8 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <a href="{{ route('productmarks.edit', $productMark->id) }}" class="btn btn-warning">Bewerken</a>
-                    <a href="{{ route('productmarks.index') }}" class="btn btn-default">Annuleren</a>
+                    <a href="{{ route('admin.productmarks.edit', $productMark->id) }}" class="btn btn-warning">Bewerken</a>
+                    <a href="{{ route('admin.productmarks.index') }}" class="btn btn-default">Annuleren</a>
                 </div>
                 <!--/.col -->
             </div>

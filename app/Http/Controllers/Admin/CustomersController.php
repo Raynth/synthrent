@@ -73,7 +73,7 @@ class CustomersController extends Controller
         $klant->opmerking = $request->input('opmerking');
         $klant->save();
 
-        return redirect()->route('klanten.index')->with('success', 'Klant toegevoegd');
+        return redirect()->route('admin.klanten.index')->with('success', 'Klant toegevoegd');
     }
 
     /**
@@ -139,7 +139,7 @@ class CustomersController extends Controller
         $klant->opmerking = $request->input('opmerking');
         $klant->save();
 
-        return redirect()->route('klanten.index')->with('success', 'Klant bijgewerkt');
+        return redirect()->route('admin.klanten.index')->with('success', 'Klant bijgewerkt');
     }
 
     /**
@@ -153,6 +153,6 @@ class CustomersController extends Controller
         $klant = User::find($id);
         $klant->delete();
 
-        return redirect()->route('klanten.index')->with('success', 'Klant verwijderd');
+        return redirect()->route('admin.klanten.index')->with('success', 'Klant verwijderd');
     }
 }

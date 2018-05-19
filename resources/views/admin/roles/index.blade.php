@@ -15,7 +15,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('roles.index') }}">Rollen</a></li>
+                <li><a href="{{ route('admin.roles.index') }}">Rollen</a></li>
                 <li class="active">Overzicht</li>
             </ol>
         </section>
@@ -35,7 +35,7 @@
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title">Overzicht rollen</h3>
-                                <a href="{{ route('roles.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                                <a href="{{ route('admin.roles.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -53,7 +53,7 @@
                                                 <td>{{ $role->id }}</td>
                                                 <td>{{ $role->naam }}</td>
                                                 <td>
-                                                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
+                                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                                         <span class="fa fa-trash">
                                                     </button>
@@ -78,7 +78,7 @@
                             <h4>Geen rollen in het bestand!</h4>
                             <p>Op dit moment bevinden er zich geen rollen in het bestand.</p>
                         </div>
-                        <a href="{{ route('roles.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->
@@ -104,7 +104,7 @@
                 </div>
                 <div class="modal-footer">
                     @if (count($roles) > 0)
-                        <form action="{{ route('roles.destroy', $role->id) }}" method="post" class="pull-left">
+                        <form action="{{ route('admin.roles.destroy', $role->id) }}" method="post" class="pull-left">
                             @csrf
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Verwijderen</button>

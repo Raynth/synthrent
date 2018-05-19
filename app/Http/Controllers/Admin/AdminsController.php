@@ -62,7 +62,7 @@ class AdminsController extends Controller
         $admin->role_id = $request->input('role_id');
         $admin->save();
 
-        return redirect()->route('admins.index')->with('success', 'Gebruiker toegevoegd');
+        return redirect()->route('admin.admins.index')->with('success', 'Gebruiker toegevoegd');
     }
 
     /**
@@ -115,7 +115,7 @@ class AdminsController extends Controller
         $admin->role_id = $request->input('role_id');
         $admin->save();
 
-        return redirect()->route('admins.index')->with('success', 'Gebruiker bijgewerkt');
+        return redirect()->route('admin.admins.index')->with('success', 'Gebruiker bijgewerkt');
     }
 
     /**
@@ -129,6 +129,6 @@ class AdminsController extends Controller
         $admin = Admin::find($id);
         $admin->delete();
 
-        return redirect()->route('admins.index')->with('success', 'Gebruiker verwijderd');
+        return redirect()->route('admin.admins.index')->with('success', 'Gebruiker verwijderd');
     }
 }

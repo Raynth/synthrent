@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('roles.index') }}">Rollen</a></li>
+                <li><a href="{{ route('admin.roles.index') }}">Rollen</a></li>
                 <li class="active">Toevoegen</li>
             </ol>
         </section>
@@ -38,7 +38,7 @@
                         <!-- /.box-header -->
 
                         <!-- form start -->
-                        <form role="form" action="{{ route('roles.store') }}" method="post">
+                        <form role="form" action="{{ route('admin.roles.store') }}" method="post">
                             @csrf
                             <div class="box-body">
                                 <div class="form-group">
@@ -51,7 +51,7 @@
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                                <a href="{{ route('roles.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('admin.roles.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->              
                         </form> 

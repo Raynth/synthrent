@@ -14,7 +14,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('admins.index') }}">Gebruikers</a></li>
+                <li><a href="{{ route('admin.admins.index') }}">Gebruikers</a></li>
                 <li class="active">Bekijken</li>
             </ol>
         </section>
@@ -56,8 +56,8 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <a href="{{ route('admins.edit', $admin->id) }}" class="btn btn-warning">Bewerken</a>
-                    <a href="{{ route('admins.index') }}" class="btn btn-default">Annuleren</a>
+                    <a href="{{ route('admin.admins.edit', $admin->id) }}" class="btn btn-warning">Bewerken</a>
+                    <a href="{{ route('admin.admins.index') }}" class="btn btn-default">Annuleren</a>
                 </div>
                 <!-- /.box-footer-->
             </div>
