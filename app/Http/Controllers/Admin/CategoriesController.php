@@ -35,7 +35,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create', compact('categories'));
+        return view('admin.categories.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class CategoriesController extends Controller
         };
         $category->save();
 
-        return redirect()->route('categories.index')->with('success', 'Categorie toegevoegd');
+        return redirect()->route('admin.categories.index')->with('success', 'Categorie toegevoegd');
     }
 
     /**
@@ -114,7 +114,7 @@ class CategoriesController extends Controller
         };
         $category->save();
 
-        return redirect()->route('categories.index')->with('success', 'Categorie bijgewerkt');
+        return redirect()->route('admin.categories.index')->with('success', 'Categorie bijgewerkt');
     }
 
     /**
@@ -128,6 +128,6 @@ class CategoriesController extends Controller
         $category = Category::find($id);
         $category->delete();
         
-        return redirect()->route('categories.index')->with('success', 'Categorie verwijderd');
+        return redirect()->route('admin.categories.index')->with('success', 'Categorie verwijderd');
     }
 }
