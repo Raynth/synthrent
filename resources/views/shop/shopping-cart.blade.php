@@ -91,7 +91,7 @@
                                     </tfoot>
                                 </table>
                                 <div class="pull-right">
-                                    <a href="{{ route('verhuren.store') }}" class="primary-btn">Bevestig Huren</a>
+                                    <a href="{{ route('kassa.betalen') }}" class="primary-btn">Bevestig Huren</a>
                                 </div>
                             @else
                                 <h4>Geen producten in de winkelwagen!</h4>

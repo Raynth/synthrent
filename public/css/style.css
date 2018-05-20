@@ -817,8 +817,13 @@ textarea.input {
 }
 
 .banner h1 {
-  font-size: 46px;
-  text-transform: uppercase;
+  font-size: 60px;
+  text-shadow: 2px 2px 5px black;
+}
+
+.banner h3 {
+  font-size: 30px;
+  text-shadow: 2px 2px 5px black;
 }
 
 /*=========================================================
@@ -826,7 +831,7 @@ textarea.input {
 ===========================================================*/
 
 #home .home-wrap {
-  margin-left: 270px;
+  /* margin-left: 270px; */
 }
 
 #home-slick .banner {
@@ -1742,6 +1747,19 @@ textarea.input {
 @media only screen and (max-width: 480px) {
   [class*='col-xs'] {
     width: 100%;
+  }
+}
+
+/* Clearfix voor overzicht laatste producten */
+
+@media (min-width: 1200px) {
+  .clearfix-laatste-product .col-md-3:nth-child(4n+1) {
+    clear: left;
+  }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .clearfix-laatste-product .col-sm-6:nth-child(2n+1) {
+    clear: left;
   }
 }
 

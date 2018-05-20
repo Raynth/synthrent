@@ -17,6 +17,11 @@ class RentalsController extends Controller
         $this->middleware('auth:');
     }
 
+    /*
+    * De inhoud van de winkelwagen opslaan in de database,
+    * een bevestigingsmail naar de klant sturen en de
+    * winkelwagen leegmaken.
+    */
     public function store()
     {
         $verhuren = Session::get('cart');
@@ -32,7 +37,7 @@ class RentalsController extends Controller
             $verhuur->dagen = $item['dagen'];
             $verhuur->totale_huurprijs = $item['totale_huurprijs'];
             $verhuur->teruggebracht = 0;
-            
+
             $verhuur->save();
         }
 
@@ -41,8 +46,11 @@ class RentalsController extends Controller
         $verhuren->klant = $klant;
         Mail::to($klant)->send(new Bestelling($verhuren));
 
-        // Winkelwagen leegmaken
+        // Winkelwagen uit de sessie verwijderen
         Session::forget('cart');
+
+        // Huidige betaling uit de sessie verwijderen
+        Session::forget('betaling');
 
         return redirect()->route('winkelwagen.show')->with('success', 'Betaling in goede orde ontvanen!');
     }
