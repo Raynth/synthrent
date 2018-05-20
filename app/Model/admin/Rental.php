@@ -8,7 +8,7 @@ class Rental extends Model
 {
     public function klant()
     {
-        return $this->belongsTo('App\Model\admin\User');
+        return $this->belongsTo('App\Model\admin\Customer');
     }
 
     public function product()
@@ -28,5 +28,13 @@ class Rental extends Model
             ->orderBy('naam', 'asc')
             ->orderBy('naam', 'asc')
             ->get();
+    }
+
+    public static function top5()
+    {
+        return Rental::selectRaw('product_id, SUM(dagen) as somdagen')
+        ->groupBy('product_id')
+        ->orderBy('somdagen', 'DESC')
+        ->take(5)->get();
     }
 }
