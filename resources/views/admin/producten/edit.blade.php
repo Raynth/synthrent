@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('producten.index') }}">Producten</a></li>
+                <li><a href="{{ route('admin.producten.index') }}">Producten</a></li>
                 <li class="active">Bewerken</li>
             </ol>
         </section>
@@ -38,7 +38,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('producten.update', $product->id) }}" method="post">
+                        <form role="form" action="{{ route('admin.producten.update', $product->id) }}" method="post">
                             @csrf
                             {{ method_field('PUT') }}
                             <div class="box-body">
@@ -96,7 +96,7 @@
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Bewerken</button>
-                                <a href="{{ route('producten.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('admin.producten.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->                        
                         </form>

@@ -83,7 +83,7 @@ class ProductsController extends Controller
         };
         $product->save();
 
-        return redirect()->route('producten.index')->with('success', 'Product toegevoegd');
+        return redirect()->route('admin.producten.index')->with('success', 'Product toegevoegd');
     }
 
     /**
@@ -156,7 +156,7 @@ class ProductsController extends Controller
         };
         $product->save();
 
-        return redirect()->route('producten.index')->with('success', 'Product bijgewerkt');
+        return redirect()->route('admin.producten.index')->with('success', 'Product bijgewerkt');
     }
 
     /**
@@ -175,6 +175,6 @@ class ProductsController extends Controller
         }
 
         $product->delete();
-        return redirect()->route('producten.index')->with('success', 'Product verwijderd');
+        return redirect()->route('admin.producten.index')->with('success', 'Product verwijderd');
     }
 }
