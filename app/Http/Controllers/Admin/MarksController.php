@@ -25,7 +25,7 @@ class MarksController extends Controller
     {
         $marks = Mark::all();
         
-        return view('admin.marks.index', compact('marks'));
+        return view('admin.merken.index', compact('marks'));
     }
 
     /**
@@ -35,7 +35,7 @@ class MarksController extends Controller
      */
     public function create()
     {
-        return view('admin.marks.create');
+        return view('admin.merken.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class MarksController extends Controller
         $mark->slug = str_slug($mark->naam);
         $mark->save();
 
-        return redirect()->route('admin.marks.index')->with('success', 'Merk toegevoegd');
+        return redirect()->route('admin.merken.index')->with('success', 'Merk toegevoegd');
     }
 
     /**
@@ -69,7 +69,7 @@ class MarksController extends Controller
     {
         $mark = Mark::find($id);
 
-        return view('admin.marks.show', compact('mark'));
+        return view('admin.merken.show', compact('mark'));
     }
 
     /**
@@ -82,7 +82,7 @@ class MarksController extends Controller
     {
         $mark = Mark::find($id);
 
-        return view('admin.marks.edit', compact('mark')); 
+        return view('admin.merken.edit', compact('mark')); 
     }
 
     /**
@@ -104,7 +104,7 @@ class MarksController extends Controller
         $mark->slug = str_slug($mark->naam);
         $mark->save();
 
-        return redirect()->route('admin.marks.index')->with('success', 'Merk bijgewerkt');
+        return redirect()->route('admin.merken.index')->with('success', 'Merk bijgewerkt');
     }
 
     /**
@@ -118,6 +118,6 @@ class MarksController extends Controller
         $mark = Mark::find($id);
         $mark->delete();
         
-        return redirect()->route('admin.marks.index')->with('success', 'Merk verwijderd');
+        return redirect()->route('admin.merken.index')->with('success', 'Merk verwijderd');
     }
 }
