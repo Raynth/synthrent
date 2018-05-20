@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\user\Product;
+use App\Model\admin\Product;
 use App\Model\admin\Category;
 use App\Model\admin\ProductMark;
 use App\Model\admin\Rental;

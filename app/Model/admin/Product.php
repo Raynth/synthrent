@@ -54,4 +54,15 @@ class Product extends Model
         ; 
         return $product_available; 
     }
+
+    // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is 
+    public static function allProductRented( $id ) 
+    { 
+        $product_available = DB::table('rentals') 
+                        ->where('product_id', $id)
+                        ->whereDate('einddatum', '>', Carbon::now())
+                        ->get() 
+        ; 
+        return $product_available; 
+    }
 }
