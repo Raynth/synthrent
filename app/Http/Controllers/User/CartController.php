@@ -33,7 +33,7 @@ class CartController extends Controller
                 if ($id == $item['id']) {
                     if (!($item['einddatum'] < $begindatum || $item['begindatum'] > $einddatum)) {
                         $product = Product::find($id);
-                        $message = $product->product_mark->naam.' '.$product->naam.' met de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' overlapt met de periode in uw winkelwagen!';
+                        $message = $product->merk->naam.' '.$product->naam.' met de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' overlapt met de periode in uw winkelwagen!';
                         return redirect()->route('winkelwagen.show')->with('itemInWinkelwagen', $message);
                     }
                 }
@@ -45,7 +45,7 @@ class CartController extends Controller
         if ($productRented->count() > 0)
         {
             $product = Product::find($id);
-            $message = $product->product_mark->naam.' '.$product->naam.' is in de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' verhuurd. Zie bovenstaande gegevens.';
+            $message = $product->merk->naam.' '.$product->naam.' is in de gekozen periode van '.date("d-m-Y", strtotime($begindatum)).' tot '.date("d-m-Y", strtotime($einddatum)).' verhuurd. Zie bovenstaande gegevens.';
             return redirect()->route('producten.show', $id)->with('productRented', $message);
         }
 

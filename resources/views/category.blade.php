@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="product-body">
                                             <h3 class="product-price">&euro; {{ number_format($product->huurprijs, 2, ',', '.') }}</h3>
-                                            <h2 class="product-name"><a href="#">{{ $product->product_mark->naam }} {{ $product->naam }}</a></h2>
+                                            <h2 class="product-name"><a href="#">{{ $product->merk->naam }} {{ $product->naam }}</a></h2>
                                             <div class="product-btns">
                                                 <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                                 <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>

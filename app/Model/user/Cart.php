@@ -23,7 +23,7 @@ class Cart
     public function add($item, $id, $begindatum, $einddatum)
     {
         $storedItem['id'] = $item->id;
-        $storedItem['merk'] = $item->product_mark->naam;
+        $storedItem['merk'] = $item->merk->naam;
         $storedItem['naam'] = $item->naam;
         $storedItem['foto'] = $item->foto;
         $storedItem['begindatum'] = $begindatum;

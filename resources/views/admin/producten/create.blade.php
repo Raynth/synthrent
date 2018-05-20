@@ -52,7 +52,7 @@
                                 <!-- /.form-group -->
                                 <div class="form-group">
                                     <label for="category">Merk</label>
-                                    <select class="form-control select2" style="width: 100%;" id="mark" name="product_mark_id">
+                                    <select class="form-control select2" style="width: 100%;" id="mark" name="merk_id">
                                         @foreach ($marks as $mark)
                                             <option value="{{ $mark->id }}">{{ $mark->naam }}</option>
                                         @endforeach

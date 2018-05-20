@@ -12,7 +12,7 @@
 			<ul class="breadcrumb">
 				<li><a href="{{ route('home') }}">Home</a></li>
 				<li><a href="{{ route('producten.index') }}">Producten</a></li>
-				<li class="active">{{ $product->product_mark->naam }} {{ $product->naam }}</li>
+				<li class="active">{{ $product->merk->naam }} {{ $product->naam }}</li>
 			</ul>
 		</div>
 	</div>
@@ -41,9 +41,9 @@
 									<span>Nieuw</span>
 								</div>
 							@endif
-							<h2 class="product-name">{{ $product->product_mark->naam }} {{ $product->naam }}</h2>
+							<h2 class="product-name">{{ $product->merk->naam }} {{ $product->naam }}</h2>
 							<h3 class="product-price">&euro; {{ number_format($product->huurprijs, 2, ',', '.') }}<small> per dag</small></h3>
-							<p><strong>Merk:</strong> {{ $product->product_mark->naam }}</p>
+							<p><strong>Merk:</strong> {{ $product->merk->naam }}</p>
 							<div class="product-options">
 								@if ($productRented->count() > 0)
 									<p style="color: #F8694A">Dit product is al {{ $productRented->count() }} keer verhuurd:</p>

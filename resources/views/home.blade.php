@@ -82,7 +82,7 @@
 								</div>
 								<div class="product-body">
 									<h3 class="product-price">&euro; {{ number_format($laatsteProduct->huurprijs, 2, ',', '.') }}</h3>
-									<h2 class="product-name"><a href="#">{{ $laatsteProduct->product_mark->naam }} {{ $laatsteProduct->naam }}</a></h2>
+									<h2 class="product-name"><a href="#">{{ $laatsteProduct->merk->naam }} {{ $laatsteProduct->naam }}</a></h2>
 									<div class="product-btns">
 										<button class="primary-btn add-to-cart" onclick="window.location.href='{{ route('producten.show', $laatsteProduct->id) }}'"><i class="fa fa-shopping-cart"></i> Huren</button>
 									</div>

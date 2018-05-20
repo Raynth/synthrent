@@ -36,7 +36,7 @@
                             <h3 class="panel-title">Merk</h3>
                         </div>
                         <div class="panel-body">
-                            {{ $product->product_mark->naam }}
+                            {{ $product->merk->naam }}
                         </div>
                     </div>
                     <!-- /.panel -->

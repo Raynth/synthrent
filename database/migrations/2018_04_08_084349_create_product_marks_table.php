@@ -13,10 +13,10 @@ class CreateMarksTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_marks', function (Blueprint $table) {
+        Schema::create('marks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('product_mark');
-            $table->boolean('online');
+            $table->string('naam');
+            $table->string('slug');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateMarksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_marks');
+        Schema::dropIfExists('marks');
     }
 }

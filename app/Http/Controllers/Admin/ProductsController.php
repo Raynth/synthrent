@@ -52,7 +52,7 @@ class ProductsController extends Controller
     {
         $this->validate($request, [
             'category_id' => 'required',
-            'product_mark_id' => 'required',
+            'merk_id' => 'required',
             'naam' => 'required',
             'huurprijs' => 'required',
             'omschrijving' => 'required'
@@ -69,7 +69,7 @@ class ProductsController extends Controller
         // Creeer product
         $product = new Product;
         $product->category_id = $request->input('category_id');
-        $product->product_mark_id = $request->input('product_mark_id');
+        $product->merk_id = $request->input('merk_id');
         $product->naam = $request->input('naam');
         $product->huurprijs = $request->input('huurprijs');
         $product->omschrijving = $request->input('omschrijving');
@@ -125,7 +125,7 @@ class ProductsController extends Controller
     {
         $this->validate($request, [
             'category_id' => 'required',
-            'product_mark_id' => 'required',
+            'merk_id' => 'required',
             'naam' => 'required',
             'huurprijs' => 'required',
             'omschrijving' => 'required'
@@ -140,7 +140,7 @@ class ProductsController extends Controller
         // Update Post
         $product = Product::find($id);
         $product->category_id = $request->input('category_id');
-        $product->product_mark_id = $request->input('product_mark_id');
+        $product->merk_id = $request->input('merk_id');
         $product->naam = $request->input('naam');
         $product->huurprijs = $request->input('huurprijs');
         $product->omschrijving = $request->input('omschrijving');

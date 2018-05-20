@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),
@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),
@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),
@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),
@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),
@@ -105,7 +105,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'category_id' => 1,
-            'product_mark_id' => 1,
+            'merk_id' => 1,
             'naam' => str_random(10),
             'huurprijs' => 1.25,
             'omschrijving' => str_random(10),

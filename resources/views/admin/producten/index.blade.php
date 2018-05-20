@@ -56,7 +56,7 @@
                                             <tr>
                                                 <td>{{ $product->id }}</td>
                                                 <td>{{ $product->category->naam }}</td>
-                                                <td>{{ $product->product_mark->naam }}</td>
+                                                <td>{{ $product->merk->naam }}</td>
                                                 <td>{{ $product->naam }}</td>
                                                 <td>&euro; {{ number_format($product->huurprijs, 2, ',', '.') }}</td>
                                                 <td>

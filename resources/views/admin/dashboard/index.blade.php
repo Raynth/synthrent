@@ -135,7 +135,7 @@
                                 @foreach ($nietTeruggebrachten as $nietTeruggebracht)
                                     <div class="alert alert-danger alert-dismissible">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                        <h4><i class="icon fa fa-ban"></i> {{ $nietTeruggebracht->product->product_mark->naam }} {{ $nietTeruggebracht->product->naam }}</h4>
+                                        <h4><i class="icon fa fa-ban"></i> {{ $nietTeruggebracht->product->merk->naam }} {{ $nietTeruggebracht->product->naam }}</h4>
                                         Einddatum: {{ date("d-m-Y", strtotime($nietTeruggebracht->einddatum)) }} | Klant: <a href="{{ route('klanten.show', $nietTeruggebracht->klant_id) }}">{{ $nietTeruggebracht->klant->voornaam }} {{ $nietTeruggebracht->klant->achternaam }}</a>
                                     </div>
                                 @endforeach

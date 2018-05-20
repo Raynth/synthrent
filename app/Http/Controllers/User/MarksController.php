@@ -14,11 +14,11 @@ class MarksController extends Controller
     public function show($slug)
     {
         $selectedMark = Mark::where('slug', $slug)->first();
-        $producten = Product::where('product_mark_id', $selectedMark->id)->where('online', 1)->paginate(12);
+        $producten = Product::where('merk_id', $selectedMark->id)->where('online', 1)->paginate(12);
         $marks = Mark::orderBy('naam')->get();
         $categories = Category::orderBy('naam')->get();
         $top5 = Rental::top5();
         
-        return view('mark', compact('producten', 'selectedMark', 'marks', 'categories', 'top5'));
+        return view('merk', compact('producten', 'selectedMark', 'marks', 'categories', 'top5'));
     }
 }

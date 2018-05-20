@@ -22,7 +22,7 @@
 										<img src="{{ asset('storage/cover_images/'.$item->product->foto) }}" alt="">
 									</div>
 									<div class="product-body">
-										<h2 class="product-name"><a href="#">{{ $item->product->product_mark->naam }} {{ $item->product->naam }}</a></h2>
+										<h2 class="product-name"><a href="#">{{ $item->product->merk->naam }} {{ $item->product->naam }}</a></h2>
 										<h3 class="product-price">&euro; {{ number_format($item->product->huurprijs, 2, ',', '.') }}</h3>
 									</div>
 								</div>

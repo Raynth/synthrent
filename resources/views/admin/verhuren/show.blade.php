@@ -32,7 +32,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Product</div>
                         <div class="panel-body">
-                            {{ $verhuur->product->product_mark->naam }} {{ $verhuur->product->naam }}
+                            {{ $verhuur->product->merk->naam }} {{ $verhuur->product->naam }}
                         </div>
                         <!-- /.panel-body -->
                     </div>

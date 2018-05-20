@@ -16,15 +16,15 @@ class Rental extends Model
         return $this->belongsTo('App\Model\admin\Product');
     }
     
-    public function product_mark()
+    public function merk()
     {
         return $this->belongsTo('App\Model\admin\Mark');
     }
 
     public function create()
     {
-        return Product::select('products.id', 'product_mark_id', 'naam', 'huurprijs')
-            ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
+        return Product::select('products.id', 'merk_id', 'naam', 'huurprijs')
+            ->join('marks', 'marks.id', '=', 'products.merk_id')
             ->orderBy('naam', 'asc')
             ->orderBy('naam', 'asc')
             ->get();

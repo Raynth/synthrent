@@ -68,7 +68,7 @@
                                         <label for="product">Product</label>
                                         <select class="form-control select2" style="width: 100%;" id="product_id" name="product_id" onchange="selectedProduct()">
                                             @foreach ($producten as $product)
-                                                <option value="{{ $product->id }}">{{ $product->product_mark->naam }} {{ $product->naam }}</option>
+                                                <option value="{{ $product->id }}">{{ $product->merk->naam }} {{ $product->naam }}</option>
                                             @endforeach
                                         </select>
                                     </div>

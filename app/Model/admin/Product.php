@@ -13,7 +13,7 @@ class Product extends Model
         return $this->belongsTo('App\Model\admin\Category');
     }
 
-    public function product_mark()
+    public function merk()
     {
         return $this->belongsTo('App\Model\admin\Mark');
     }

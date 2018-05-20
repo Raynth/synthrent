@@ -36,9 +36,9 @@ class RentalsController extends Controller
     public function create()
     {
         $klanten = Customer::all();
-        $producten = Product::select('products.id', 'product_mark_id', 'product_marks.naam', 'products.naam', 'huurprijs')
-                            ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
-                            ->orderBy('product_marks.naam', 'asc')
+        $producten = Product::select('products.id', 'merk_id', 'marks.naam', 'products.naam', 'huurprijs')
+                            ->join('marks', 'marks.id', '=', 'products.merk_id')
+                            ->orderBy('marks.naam', 'asc')
                             ->orderBy('products.naam', 'asc')
                             ->get();
 
@@ -109,9 +109,9 @@ class RentalsController extends Controller
     {
         $verhuur = Rental::find($id);
         $klanten = Customer::all();
-        $producten = Product::select('products.id', 'product_mark_id', 'product_marks.naam', 'products.naam', 'huurprijs')
-                            ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
-                            ->orderBy('product_marks.naam', 'asc')
+        $producten = Product::select('products.id', 'merk_id', 'marks.naam', 'products.naam', 'huurprijs')
+                            ->join('marks', 'marks.id', '=', 'products.merk_id')
+                            ->orderBy('marks.naam', 'asc')
                             ->orderBy('products.naam', 'asc')
                             ->get();
 

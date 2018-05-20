@@ -120,7 +120,7 @@
                                             <tr>
                                                 <td class="thumb"><img src="{{ asset('storage/cover_images/'.$item->product->foto) }}" alt=""></td>
                                                 <td class="details">
-                                                    <a href="{{ route('producten.show', $item->id) }}">{{ $item->product->product_mark->naam }} {{ $item->product->naam }}</a>
+                                                    <a href="{{ route('producten.show', $item->id) }}">{{ $item->product->merk->naam }} {{ $item->product->naam }}</a>
                                                     <ul>
                                                         <li><span>Van: {{ date("d-m-Y", strtotime($item->begindatum)) }}</span></li>
                                                         <li><span>Tot: {{ date("d-m-Y", strtotime($item->einddatum)) }}</span></li>

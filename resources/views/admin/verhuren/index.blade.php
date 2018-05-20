@@ -58,7 +58,7 @@
                                             <tr>
                                                 <td>{{ $verhuur->id }}</td>
                                                 <td>{{ $verhuur->klant->voornaam }} {{ $verhuur->klant->achternaam }}</td>
-                                                <td>{{ $verhuur->product->product_mark->naam }} {{ $verhuur->product->naam }}</td>
+                                                <td>{{ $verhuur->product->merk->naam }} {{ $verhuur->product->naam }}</td>
                                                 <td>{{ $verhuur->begindatum }}</td>
                                                 <td>{{ $verhuur->einddatum }}</td>
                                                 <td>{{ $verhuur->dagen }}</td>
