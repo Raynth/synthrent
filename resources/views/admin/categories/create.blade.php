@@ -44,11 +44,6 @@
                                     <label for="naam">Categorie naam</label>
                                     <input type="text" class="form-control" id="naam" name="naam" placeholder="Voor category naam in">
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="online"> Online
-                                    </label>
-                                </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">

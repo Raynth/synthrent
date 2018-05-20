@@ -33,19 +33,6 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Online</h3>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            @if ($productMark->online == 1)
-                                <span class="fa fa-check"></span>
-                            @endif
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
                     <a href="{{ route('admin.productmarks.edit', $productMark->id) }}" class="btn btn-warning">Bewerken</a>
                     <a href="{{ route('admin.productmarks.index') }}" class="btn btn-default">Annuleren</a>
                 </div>

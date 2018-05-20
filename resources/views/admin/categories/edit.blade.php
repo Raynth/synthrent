@@ -46,11 +46,6 @@
                                     <label for="naam">Categorie naam</label>
                                     <input type="text" class="form-control" id="naam" name="naam" value="{{ $category->naam }}" placeholder="Voor category naam in">
                                 </div>
-                                <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="online" value="$category->online" {{ ($category->online == 1) ? 'checked' : '' }}> Online
-                                </label>
-                                </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">

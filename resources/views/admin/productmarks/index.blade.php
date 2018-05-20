@@ -44,7 +44,6 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Productmerk naam</th>
-                                            <th>Online</th>
                                             <th>Actie</th>
                                         </tr>
                                     </thead>
@@ -53,11 +52,6 @@
                                             <tr>
                                                 <td>{{ $productMark->id }}</td>
                                                 <td>{{ $productMark->naam }}</td>
-                                                <td>
-                                                    @if ($productMark->online == 1)
-                                                        <span class="fa fa-check"></span>
-                                                    @endif
-                                                </td>
                                                 <td>
                                                     <a href="{{ route('admin.productmarks.show', $productMark->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
                                                     <a href="{{ route('admin.productmarks.edit', $productMark->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
@@ -72,7 +66,6 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Productmerk naam</th>
-                                            <th>Online</th>
                                             <th>Actie</th>
                                         </tr>
                                     </tfoot>

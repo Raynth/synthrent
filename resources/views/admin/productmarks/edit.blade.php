@@ -44,12 +44,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                 <label for="naam">Productmerk naam</label>
-                                <input type="text" class="form-control" id="naam" name="naam" value="{{ $productMark->naam }}" placeholder="Voor proudctmerk naam in">
-                                </div>
-                                <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="online" value="$productMark->online" {{ ($productMark->online == 1) ? 'checked' : '' }}> Online
-                                </label>
+                                    <input type="text" class="form-control" id="naam" name="naam" value="{{ $productMark->naam }}" placeholder="Voor proudctmerk naam in">
                                 </div>
                             </div>
                             <!-- /.box-body -->

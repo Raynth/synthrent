@@ -54,11 +54,6 @@ class CategoriesController extends Controller
         $category = new Category;
         $category->naam = $request->input('naam');
         $category->slug = str_slug($category->naam);
-        if (null !== $request->input('online')) {
-            $category->online = 1;
-        } else {
-            $category->online = 0;
-        };
         $category->save();
 
         return redirect()->route('admin.categories.index')->with('success', 'Categorie toegevoegd');
@@ -107,11 +102,6 @@ class CategoriesController extends Controller
         $category = Category::find($id);
         $category->naam = $request->input('naam');
         $category->slug = str_slug($category->naam);
-        if (null !== $request->input('online')) {
-            $category->online = 1;
-        } else {
-            $category->online = 0;
-        };
         $category->save();
 
         return redirect()->route('admin.categories.index')->with('success', 'Categorie bijgewerkt');

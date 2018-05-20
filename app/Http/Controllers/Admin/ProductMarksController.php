@@ -54,11 +54,6 @@ class ProductMarksController extends Controller
         $productMark = new ProductMark;
         $productMark->naam = $request->input('naam');
         $productMark->slug = str_slug($productMark->naam);
-        if (null !== $request->input('online')) {
-            $productMark->online = 1;
-        } else {
-            $productMark->online = 0;
-        };
         $productMark->save();
 
         return redirect()->route('admin.productmarks.index')->with('success', 'Productmerk toegevoegd');
@@ -107,11 +102,6 @@ class ProductMarksController extends Controller
         $productMark = ProductMark::find($id);
         $productMark->naam = $request->input('naam');
         $productMark->slug = str_slug($productMark->naam);
-        if (null !== $request->input('online')) {
-            $productMark->online = 1;
-        } else {
-            $productMark->online = 0;
-        };
         $productMark->save();
 
         return redirect()->route('admin.productmarks.index')->with('success', 'Productmerk bijgewerkt');

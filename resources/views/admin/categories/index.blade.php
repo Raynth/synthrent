@@ -44,7 +44,6 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Categorie naam</th>
-                                            <th>Online</th>
                                             <th>Actie</th>
                                         </tr>
                                     </thead>
@@ -53,11 +52,6 @@
                                             <tr>
                                                 <td>{{ $category->id }}</td>
                                                 <td>{{ $category->naam }}</td>
-                                                <td>
-                                                    @if ($category->online == 1)
-                                                        <span class="fa fa-check"></span>
-                                                    @endif
-                                                </td>
                                                 <td>
                                                     <a href="{{ route('admin.categories.show', $category->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
                                                     <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
@@ -72,7 +66,6 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Categorie naam</th>
-                                            <th>Online</th>
                                             <th>Actie</th>
                                         </tr>
                                     </tfoot>

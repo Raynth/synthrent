@@ -33,18 +33,6 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Online</h3>
-                        </div>
-                        <div class="panel-body">
-                            @if ($category->online == 1)
-                                <span class="fa fa-check"></span>
-                            @endif
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
                     <a href="{{ route('admin.categories.edit',$category->id) }}" class="btn btn-warning">Bewerken</a>
                     <a href="{{ route('admin.categories.index') }}" class="btn btn-default">Annuleren</a>
                 </div>

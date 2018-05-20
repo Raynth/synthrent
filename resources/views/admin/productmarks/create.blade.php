@@ -45,12 +45,6 @@
                                     <input type="text" class="form-control" id="naam" name="naam" placeholder="Voor productmerk naam in">
                                 </div>
                                 <!-- /.form-group -->
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="online"> Online
-                                    </label>
-                                </div>
-                                <!-- /.checkbox -->
                             </div>
                             <!-- /.box-body -->
 
