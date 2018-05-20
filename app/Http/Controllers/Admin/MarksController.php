@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Model\admin\Product;
-use App\Model\admin\ProductMark;
+use App\Model\admin\Mark;
 
-class ProductMarksController extends Controller
+class MarksController extends Controller
 {
-    // Deze construct zorgt ervoor dat de Productmerken-pagina alleen benaderd kan worden als men is ingelogd.
+    // Deze construct zorgt ervoor dat de Merken-pagina alleen benaderd kan worden als men is ingelogd.
     public function __construct()
     {
         $this->middleware('auth:admin');
@@ -23,9 +23,9 @@ class ProductMarksController extends Controller
      */
     public function index()
     {
-        $productMarks = ProductMark::all();
+        $marks = Mark::all();
         
-        return view('admin.productmarks.index', compact('productMarks'));
+        return view('admin.marks.index', compact('marks'));
     }
 
     /**
@@ -35,7 +35,7 @@ class ProductMarksController extends Controller
      */
     public function create()
     {
-        return view('admin.productmarks.create');
+        return view('admin.marks.create');
     }
 
     /**
@@ -50,13 +50,13 @@ class ProductMarksController extends Controller
             'naam' => 'required',
         ]);
 
-        // Creeer Productmerk
-        $productMark = new ProductMark;
-        $productMark->naam = $request->input('naam');
-        $productMark->slug = str_slug($productMark->naam);
-        $productMark->save();
+        // Creeer Merk
+        $mark = new Mark;
+        $mark->naam = $request->input('naam');
+        $mark->slug = str_slug($mark->naam);
+        $mark->save();
 
-        return redirect()->route('admin.productmarks.index')->with('success', 'Productmerk toegevoegd');
+        return redirect()->route('admin.marks.index')->with('success', 'Merk toegevoegd');
     }
 
     /**
@@ -67,9 +67,9 @@ class ProductMarksController extends Controller
      */
     public function show($id)
     {
-        $productMark = ProductMark::find($id);
+        $mark = Mark::find($id);
 
-        return view('admin.productmarks.show', compact('productMark'));
+        return view('admin.marks.show', compact('mark'));
     }
 
     /**
@@ -80,9 +80,9 @@ class ProductMarksController extends Controller
      */
     public function edit($id)
     {
-        $productMark = ProductMark::find($id);
+        $mark = Mark::find($id);
 
-        return view('admin.productmarks.edit', compact('productMark')); 
+        return view('admin.marks.edit', compact('mark')); 
     }
 
     /**
@@ -98,13 +98,13 @@ class ProductMarksController extends Controller
             'naam' => 'required',
         ]);
         
-        // Update Productmerk
-        $productMark = ProductMark::find($id);
-        $productMark->naam = $request->input('naam');
-        $productMark->slug = str_slug($productMark->naam);
-        $productMark->save();
+        // Update Merk
+        $mark = Mark::find($id);
+        $mark->naam = $request->input('naam');
+        $mark->slug = str_slug($mark->naam);
+        $mark->save();
 
-        return redirect()->route('admin.productmarks.index')->with('success', 'Productmerk bijgewerkt');
+        return redirect()->route('admin.marks.index')->with('success', 'Merk bijgewerkt');
     }
 
     /**
@@ -115,9 +115,9 @@ class ProductMarksController extends Controller
      */
     public function destroy($id)
     {
-        $productMark = ProductMark::find($id);
-        $productMark->delete();
+        $mark = Mark::find($id);
+        $mark->delete();
         
-        return redirect()->route('admin.productmarks.index')->with('success', 'Productmerk verwijderd');
+        return redirect()->route('admin.marks.index')->with('success', 'Merk verwijderd');
     }
 }

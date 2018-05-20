@@ -51,10 +51,10 @@
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="category">Productmerk</label>
+                                    <label for="category">Merk</label>
                                     <select class="form-control select2" style="width: 100%;" id="mark" name="product_mark_id">
-                                        @foreach ($productMarks as $productMark)
-                                            <option value="{{ $productMark->id }}">{{ $productMark->naam }}</option>
+                                        @foreach ($marks as $mark)
+                                            <option value="{{ $mark->id }}">{{ $mark->naam }}</option>
                                         @endforeach
                                     </select>
                                 </div>

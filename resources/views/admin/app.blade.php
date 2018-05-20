@@ -155,8 +155,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.productmarks.index') }}">
-                            <i class="fa fa-dashboard"></i> <span>Productmerken</span>
+                        <a href="{{ route('admin.marks.index') }}">
+                            <i class="fa fa-dashboard"></i> <span>Merken</span>
                         </a>
                     </li>
                     <li>

@@ -6,12 +6,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Productmerk bekijken
+                Merk bekijken
                 <small></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('admin.productmarks.index') }}">Productmerken</a></li>
+                <li><a href="{{ route('admin.marks.index') }}">Merken</a></li>
                 <li class="active">Bekijken</li>
             </ol>
         </section>
@@ -24,17 +24,17 @@
                 <!-- general form elements -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Productmerk</h3>
+                            <h3 class="panel-title">Merk</h3>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            {{ $productMark->naam }}
+                            {{ $mark->naam }}
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <a href="{{ route('admin.productmarks.edit', $productMark->id) }}" class="btn btn-warning">Bewerken</a>
-                    <a href="{{ route('admin.productmarks.index') }}" class="btn btn-default">Annuleren</a>
+                    <a href="{{ route('admin.marks.edit', $mark->id) }}" class="btn btn-warning">Bewerken</a>
+                    <a href="{{ route('admin.marks.index') }}" class="btn btn-default">Annuleren</a>
                 </div>
                 <!--/.col -->
             </div>

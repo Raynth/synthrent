@@ -6,7 +6,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="{{ route('home') }}">Home</a></li>
-				<li class="active">{{ $selectedProductMark->naam }} producten</li>
+				<li class="active">{{ $selectedMark->naam }} producten</li>
 			</ul>
 		</div>
 	</div>

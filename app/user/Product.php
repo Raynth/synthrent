@@ -8,6 +8,6 @@ class Product extends Model
 {
     public function product_mark()
     {
-        return $this->belongsTo('App\Model\user\ProductMark');
+        return $this->belongsTo('App\Model\user\Mark');
     }
 }

@@ -4,7 +4,7 @@ namespace App\user;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductMark extends Model
+class Mark extends Model
 {
     public function products()
     {

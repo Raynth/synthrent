@@ -20,7 +20,7 @@ Route::group(['namespace' => 'User'], function() {
     Route::get('producten', 'ProductsController@index')->name('producten.index');
     Route::get('producten/{product}', 'ProductsController@show')->name('producten.show');
     
-    Route::get('productmerk/{productmerk}', 'MarksController@show')->name('productmerk.show');
+    Route::get('merk/{merk}', 'MarksController@show')->name('merk.show');
     
     Route::get('categorie/{categorie}', 'CategoriesController@show')->name('categorie.show');
     
@@ -51,10 +51,10 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::get('admin/dashboard/index', 'DashboardController@index')->name('dashboard.index');
     Route::get('admin/dashboard/chartsales', 'DashboardController@chartSales')->name('dashboard.chartsales');
     Route::resource('admin/producten', 'ProductsController', ['as' => 'admin']);
-    Route::resource('admin/categories', 'CategoriesController', ['as' => 'admin']);
+    Route::resource('admin/categorieen', 'CategoriesController', ['as' => 'admin']);
     Route::resource('admin/klanten', 'CustomersController', ['as' => 'admin']);
     Route::resource('admin/verhuren', 'RentalsController', ['as' => 'admin']);
-    Route::resource('admin/productmarks', 'ProductMarksController', ['as' => 'admin']);
+    Route::resource('admin/marken', 'MarksController', ['as' => 'admin']);
     Route::resource('admin/admins', 'AdminsController', ['as' => 'admin']);
     Route::resource('admin/roles', 'RolesController', ['as' => 'admin']);
     // Admin Auth Routes

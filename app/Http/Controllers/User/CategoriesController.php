@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\admin\Category;
 use App\Model\admin\Product;
-use App\Model\admin\ProductMark;
+use App\Model\admin\Mark;
 use App\Model\admin\Rental;
 
 class CategoriesController extends Controller
@@ -18,10 +18,10 @@ class CategoriesController extends Controller
     {
         $selectedCategory = Category::where('slug', $slug)->first();
         $producten = Product::where('category_id', $selectedCategory->id)->where('online', 1)->paginate(12);
-        $productMarks = ProductMark::orderBy('naam')->get();
+        $marks = Mark::orderBy('naam')->get();
         $categories = Category::orderBy('naam')->get();
         $top5 = Rental::top5();
         
-        return view('category', compact('producten', 'selectedCategory', 'productMarks', 'categories', 'top5'));
+        return view('category', compact('producten', 'selectedCategory', 'marks', 'categories', 'top5'));
     }
 }

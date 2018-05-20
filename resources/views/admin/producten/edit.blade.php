@@ -52,10 +52,10 @@
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="product_mark">Productmerk</label>
+                                    <label for="product_mark">Merk</label>
                                     <select class="form-control select2" style="width: 100%;" id="product_mark" name="product_mark_id">
-                                        @foreach ($productMarks as $productMark)
-                                            <option value="{{ $productMark->id }}" {{ ($product->product_mark_id == $productMark->id) ? 'selected' : '' }}>{{ $productMark->naam }}</option>
+                                        @foreach ($marks as $mark)
+                                            <option value="{{ $mark->id }}" {{ ($product->product_mark_id == $mark->id) ? 'selected' : '' }}>{{ $mark->naam }}</option>
                                         @endforeach
                                     </select>
                                 </div>

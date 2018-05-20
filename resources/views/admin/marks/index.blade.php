@@ -10,12 +10,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Productmerken
-                <small>overzicht van alle productmerken</small>
+                Merken
+                <small>overzicht van alle merken</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('admin.productmarks.index') }}">Productmerken</a></li>
+                <li><a href="{{ route('admin.marks.index') }}">Merken</a></li>
                 <li class="active">Overzicht</li>
             </ol>
         </section>
@@ -31,11 +31,11 @@
                     @endif
                     <!-- Als er records in de klanten-tabel staan, toon tabel -->
                     <!-- Als er geen records in de klanten-tabel staan, toon melding -->
-                    @if (count($productMarks) > 0)
+                    @if (count($marks) > 0)
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Overzicht productmerken</h3>
-                                <a href="{{ route('admin.productmarks.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                                <h3 class="box-title">Overzicht merken</h3>
+                                <a href="{{ route('admin.marks.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -43,18 +43,18 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Productmerk naam</th>
+                                            <th>Merk naam</th>
                                             <th>Actie</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($productMarks as $productMark)
+                                        @foreach ($marks as $mark)
                                             <tr>
-                                                <td>{{ $productMark->id }}</td>
-                                                <td>{{ $productMark->naam }}</td>
+                                                <td>{{ $mark->id }}</td>
+                                                <td>{{ $mark->naam }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.productmarks.show', $productMark->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                                                    <a href="{{ route('admin.productmarks.edit', $productMark->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
+                                                    <a href="{{ route('admin.marks.show', $mark->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                                                    <a href="{{ route('admin.marks.edit', $mark->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                                         <span class="fa fa-trash">
                                                     </button>
@@ -65,7 +65,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Productmerk naam</th>
+                                            <th>Merk naam</th>
                                             <th>Actie</th>
                                         </tr>
                                     </tfoot>
@@ -76,10 +76,10 @@
                         <!-- /.box -->
                     @else
                         <div class="callout callout-info">
-                            <h4>Geen productmerken in het bestand!</h4>
-                            <p>Op dit moment bevinden er zich geen productmerken in het bestand.</p>
+                            <h4>Geen merken in het bestand!</h4>
+                            <p>Op dit moment bevinden er zich geen merken in het bestand.</p>
                         </div>
-                        <a href="{{ route('admin.productmarks.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('admin.marks.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->
@@ -97,14 +97,14 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Productmerk verwijderen</h4>
+                    <h4 class="modal-title">Merk verwijderen</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Weet u zeker dat u deze productmerk wilt verwijderen?</p>
+                    <p>Weet u zeker dat u deze merk wilt verwijderen?</p>
                 </div>
                 <div class="modal-footer">
-                    @if (count($productMarks) > 0)
-                        <form action="{{ route('admin.productmarks.destroy', $productMark->id) }}" method="post" class="pull-left">
+                    @if (count($marks) > 0)
+                        <form action="{{ route('admin.marks.destroy', $mark->id) }}" method="post" class="pull-left">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Verwijderen</button>

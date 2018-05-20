@@ -6,11 +6,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Productmerk toevoegen
+                Merk toevoegen
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('admin.productmarks.index') }}">Productmerken</a></li>
+                <li><a href="{{ route('admin.marks.index') }}">Merken</a></li>
                 <li class="active">Toevoegen</li>
             </ol>
         </section>
@@ -32,17 +32,17 @@
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Voeg een productmerk toe</h3>
+                            <h3 class="box-title">Voeg een merk toe</h3>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
                         {{--  <form role="form">  --}}
-                        <form action="{{ route('admin.productmarks.store') }}" enctype="multipart/form-data" method="post">
+                        <form action="{{ route('admin.marks.store') }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="naam">Productmerk naam</label>
-                                    <input type="text" class="form-control" id="naam" name="naam" placeholder="Voor productmerk naam in">
+                                    <label for="naam">Merk naam</label>
+                                    <input type="text" class="form-control" id="naam" name="naam" placeholder="Voor merk naam in">
                                 </div>
                                 <!-- /.form-group -->
                             </div>
@@ -50,7 +50,7 @@
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                                <a href="{{ route('admin.productmarks.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('admin.marks.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->
                         </form> 

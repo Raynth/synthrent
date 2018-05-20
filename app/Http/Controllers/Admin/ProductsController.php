@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Model\admin\Category;
 use App\Model\admin\Product;
-use App\Model\admin\ProductMark;
+use App\Model\admin\Mark;
 
 class ProductsController extends Controller
 {
@@ -37,9 +37,9 @@ class ProductsController extends Controller
     public function create()
     {
         $categories = Category::orderBy('naam')->get();
-        $productMarks = ProductMark::orderBy('naam')->get();
+        $marks = Mark::orderBy('naam')->get();
 
-        return view('admin.producten.create', compact('categories', 'productMarks'));
+        return view('admin.producten.create', compact('categories', 'marks'));
     }
 
     /**
@@ -109,9 +109,9 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         $categories = Category::orderBy('naam')->get();
-        $productMarks = ProductMark::orderBy('naam')->get();
+        $marks = Mark::orderBy('naam')->get();
         
-        return view('admin.producten.edit', compact('product', 'categories', 'productMarks')); 
+        return view('admin.producten.edit', compact('product', 'categories', 'marks')); 
     }
 
     /**

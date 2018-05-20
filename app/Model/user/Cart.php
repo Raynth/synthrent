@@ -2,7 +2,7 @@
 
 namespace App\Model\user;
 
-use App\Model\admin\ProductMark;
+use App\Model\admin\Mark;
 
 class Cart
 {

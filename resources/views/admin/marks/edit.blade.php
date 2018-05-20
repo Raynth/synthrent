@@ -6,12 +6,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Productmerk bewerken
+                Merk bewerken
                 <small></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('admin.productmarks.index') }}">Productmerken</a></li>
+                <li><a href="{{ route('admin.marks.index') }}">Merken</a></li>
                 <li class="active">Bewerken</li>
             </ol>
         </section>
@@ -34,24 +34,24 @@
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Een productmerk bewerken</h3>
+                            <h3 class="box-title">Een merk bewerken</h3>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('admin.productmarks.update', $productMark->id) }}" method="post">
+                        <form role="form" action="{{ route('admin.marks.update', $mark->id) }}" method="post">
                             @csrf
                             {{ method_field('PUT') }}
                             <div class="box-body">
                                 <div class="form-group">
-                                <label for="naam">Productmerk naam</label>
-                                    <input type="text" class="form-control" id="naam" name="naam" value="{{ $productMark->naam }}" placeholder="Voor proudctmerk naam in">
+                                <label for="naam">Merk naam</label>
+                                    <input type="text" class="form-control" id="naam" name="naam" value="{{ $mark->naam }}" placeholder="Voor proudctmerk naam in">
                                 </div>
                             </div>
                             <!-- /.box-body -->
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Bewerken</button>
-                                <a href="{{ route('admin.productmarks.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('admin.marks.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                         </form>
                     </div>

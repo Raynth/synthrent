@@ -4,8 +4,8 @@
 					<div class="aside">
 						<h3 class="aside-title">Filter op merk</h3>
 						<ul class="list-links">
-							@foreach($productMarks as $productMark)
-								<li><a href="{{ route('productmerk.show', str_slug($productMark->naam)) }}">{{ $productMark->naam }}</a></li>
+							@foreach($marks as $mark)
+								<li><a href="{{ route('merk.show', str_slug($mark->naam)) }}">{{ $mark->naam }}</a></li>
 							@endforeach
 						</ul>
 					</div>
