@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Model\admin\User;
+use App\Model\admin\Customer;
 use App\Model\admin\Rental;
 
 class CustomersController extends Controller
@@ -23,7 +23,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $klanten = User::get();
+        $klanten = Customer::get();
 
         return view('admin.klanten.index', compact('klanten'));
     }
@@ -58,7 +58,7 @@ class CustomersController extends Controller
         ]);
 
         // Creeer klant
-        $klant = new User;
+        $klant = new Customer;
         $klant->voornaam = $request->input('voornaam');
         $klant->achternaam = $request->input('achternaam');
         $klant->straat = $request->input('straat');
@@ -84,7 +84,7 @@ class CustomersController extends Controller
      */
     public function show($id)
     {
-        $klant = User::find($id);
+        $klant = Customer::find($id);
         $verhuren = Rental::where('klant_id', $id)->get();
 
         return view('admin.klanten.show', compact('klant', 'verhuren'));
@@ -98,7 +98,7 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        $klant = User::find($id);
+        $klant = Customer::find($id);
 
         return view('admin.klanten.edit', compact('klant', 'categories')); 
     }
@@ -124,7 +124,7 @@ class CustomersController extends Controller
         ]);
         
         // Update Customer
-        $klant = User::find($id);
+        $klant = Customer::find($id);
         $klant->voornaam = $request->input('voornaam');
         $klant->achternaam = $request->input('achternaam');
         $klant->straat = $request->input('straat');
@@ -150,7 +150,7 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        $klant = User::find($id);
+        $klant = Customer::find($id);
         $klant->delete();
 
         return redirect()->route('admin.klanten.index')->with('success', 'Klant verwijderd');

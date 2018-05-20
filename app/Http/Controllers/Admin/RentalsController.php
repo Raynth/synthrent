@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\admin\User;
+use App\Model\admin\Customer;
 use App\Model\admin\Product;
 use App\Model\admin\Rental;
 use DateTime;
@@ -35,7 +35,7 @@ class RentalsController extends Controller
      */
     public function create()
     {
-        $klanten = User::all();
+        $klanten = Customer::all();
         $producten = Product::select('products.id', 'product_mark_id', 'product_marks.naam', 'products.naam', 'huurprijs')
                             ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
                             ->orderBy('product_marks.naam', 'asc')
@@ -108,7 +108,7 @@ class RentalsController extends Controller
     public function edit($id)
     {
         $verhuur = Rental::find($id);
-        $klanten = User::all();
+        $klanten = Customer::all();
         $producten = Product::select('products.id', 'product_mark_id', 'product_marks.naam', 'products.naam', 'huurprijs')
                             ->join('product_marks', 'product_marks.id', '=', 'products.product_mark_id')
                             ->orderBy('product_marks.naam', 'asc')
