@@ -160,7 +160,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.categories.index') }}">
+                        <a href="{{ route('admin.categorieen.index') }}">
                             <i class="fa fa-dashboard"></i> <span>Categorieën</span>
                         </a>
                     </li>

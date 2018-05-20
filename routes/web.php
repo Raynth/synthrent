@@ -54,7 +54,7 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::resource('admin/categorieen', 'CategoriesController', ['as' => 'admin']);
     Route::resource('admin/klanten', 'CustomersController', ['as' => 'admin']);
     Route::resource('admin/verhuren', 'RentalsController', ['as' => 'admin']);
-    Route::resource('admin/marken', 'MarksController', ['as' => 'admin']);
+    Route::resource('admin/merken', 'MarksController', ['as' => 'admin']);
     Route::resource('admin/admins', 'AdminsController', ['as' => 'admin']);
     Route::resource('admin/roles', 'RolesController', ['as' => 'admin']);
     // Admin Auth Routes

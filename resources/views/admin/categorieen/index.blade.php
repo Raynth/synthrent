@@ -15,7 +15,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('admin.categories.index') }}">Categorieën</a></li>
+                <li><a href="{{ route('admin.categorieen.index') }}">Categorieën</a></li>
                 <li class="active">Overzicht</li>
             </ol>
         </section>
@@ -35,7 +35,7 @@
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title">Overzicht categorieën</h3>
-                                <a href="{{ route('admin.categories.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                                <a href="{{ route('admin.categorieen.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -53,8 +53,8 @@
                                                 <td>{{ $category->id }}</td>
                                                 <td>{{ $category->naam }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.categories.show', $category->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                                                    <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
+                                                    <a href="{{ route('admin.categorieen.show', $category->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
+                                                    <a href="{{ route('admin.categorieen.edit', $category->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                                         <span class="fa fa-trash">
                                                     </button>
@@ -79,7 +79,7 @@
                             <h4>Geen categorieën in het bestand!</h4>
                             <p>Op dit moment bevinden er zich geen categorieën in het bestand.</p>
                         </div>
-                        <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">Toevoegen</a>
+                        <a href="{{ route('admin.categorieen.create') }}" class="btn btn-primary">Toevoegen</a>
                     @endif
                 </div>
                 <!-- /.col -->
@@ -105,7 +105,7 @@
                 </div>
                 <div class="modal-footer">
                     @if (count($categories) > 0)
-                        <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post" class="pull-left">
+                        <form action="{{ route('admin.categorieen.destroy', $category->id) }}" method="post" class="pull-left">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Verwijderen</button>
