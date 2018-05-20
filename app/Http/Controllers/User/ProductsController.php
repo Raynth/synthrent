@@ -4,8 +4,8 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\admin\Product;
 use App\Model\admin\Category;
+use App\Model\admin\Product;
 use App\Model\admin\ProductMark;
 use App\Model\admin\Rental;
 use App\Model\user\Cart;
@@ -24,10 +24,7 @@ class ProductsController extends Controller
         $producten = Product::where('online', 1)->paginate(12);
         $productMarks = ProductMark::orderBy('naam')->get();
         $categories = Category::orderBy('naam')->get();
-        $top5 = Rental::selectRaw('product_id, SUM(dagen) as somdagen')
-            ->groupBy('product_id')
-            ->orderBy('somdagen', 'DESC')
-            ->take(5)->get();
+        $top5 = Rental::top5();
         
         return view('producten', compact('producten', 'productMarks', 'categories', 'top5'));
     }
@@ -60,18 +57,5 @@ class ProductsController extends Controller
         $categories = Category::orderBy('naam')->get();
         
         return view('productmark', compact('producten', 'selectedProductMark', 'productMarks', 'categories'));
-    }
-
-    /*
-    * Laat alle producten van de geselecteerde categorie zien
-    */
-    public function categoryShow($slug)
-    {
-        $selectedCategory = Category::where('slug', $slug)->first();
-        $producten = Product::where('category_id', $selectedCategory->id)->where('online', 1)->paginate(12);
-        $productMarks = ProductMark::orderBy('naam')->get();
-        $categories = Category::orderBy('naam')->get();
-        
-        return view('category', compact('producten', 'selectedCategory', 'productMarks', 'categories'));
     }
 }

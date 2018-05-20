@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\admin\Category;
 use Mail;
 use GMaps;
 
@@ -11,6 +12,8 @@ class ContactController extends Controller
 {
     public function create()
     {
+        $categories = Category::orderBy('naam')->get();        
+
         // Configuratie voor Google Maps
         $config['center'] = 'Henri Hermanslaan 356, 6162 GP Geleen';
         $config['zoom'] = '15';
@@ -26,7 +29,7 @@ class ContactController extends Controller
 
         $map = GMaps::create_map();
         
-        return view('contact', compact('map'));
+        return view('contact', compact('categories', 'map'));
     }
 
     public function store(Request $request)
