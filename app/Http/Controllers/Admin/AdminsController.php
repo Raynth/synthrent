@@ -50,7 +50,7 @@ class AdminsController extends Controller
     {
         $this->validate($request, [
             'naam' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'role_id' => 'required'
         ]);
 
@@ -103,7 +103,7 @@ class AdminsController extends Controller
     {
         $this->validate($request, [
             'naam' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'role_id' => 'required'
         ]);
         
