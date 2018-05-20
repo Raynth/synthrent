@@ -45,17 +45,4 @@ class ProductsController extends Controller
 
         return view('product', compact('product', 'productRented', 'categories'));
     }
-
-    /*
-    * Laat alle producten van de geselecteerde productmerk zien
-    */
-    public function productMarkShow($slug)
-    {
-        $selectedProductMark = ProductMark::where('slug', $slug)->first();
-        $producten = Product::where('product_mark_id', $selectedProductMark->id)->where('online', 1)->paginate(12);
-        $productMarks = ProductMark::orderBy('naam')->get();
-        $categories = Category::orderBy('naam')->get();
-        
-        return view('productmark', compact('producten', 'selectedProductMark', 'productMarks', 'categories'));
-    }
 }

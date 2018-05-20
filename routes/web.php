@@ -19,7 +19,8 @@ Route::group(['namespace' => 'User'], function() {
 
     Route::get('producten', 'ProductsController@index')->name('producten.index');
     Route::get('producten/{product}', 'ProductsController@show')->name('producten.show');
-    Route::get('productmerk/{productmerk}', 'ProductsController@productMarkShow')->name('productmerk.show');
+    
+    Route::get('productmerk/{productmerk}', 'MarksController@show')->name('productmerk.show');
     
     Route::get('categorie/{categorie}', 'CategoriesController@show')->name('categorie.show');
     
