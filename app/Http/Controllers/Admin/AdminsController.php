@@ -23,7 +23,7 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        $admins = Admin::get();
+        $admins = Admin::all();
 
         return view('admin.admins.index', compact('admins'));
     }
