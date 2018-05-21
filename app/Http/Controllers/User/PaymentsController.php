@@ -68,25 +68,27 @@ class PaymentsController extends Controller
                 $betaling = Session::get('betaling');
                 $betaling_id = $betaling->id;
                 $checkBetaling = Mollie::api()->payments()->get($betaling_id);
-                if ($checkBetaling->isPaid())
+                $status = $checkBetaling->status;
+
+                if ($status == 'paid')
                 {
                     return redirect()->route('verhuren.store');
                 }
-                elseif ($checkBetaling->isOpen())
+                elseif ($status == 'open')
                 {
-                    return redirect()->route('winkelwagen.show')->with('warning', 'De betaling staat nog open!');
+                    return redirect()->route('winkelwagen.show')->with('danger', 'De betaling staat nog open!');
                 }
-                elseif ($checkBetaling->isCanceled())
+                elseif ($status == 'canceled')
                 {
-                    return redirect()->route('winkelwagen.show')->with('warning', 'De betaling is geannuleerd!');
+                    return redirect()->route('winkelwagen.show')->with('danger', 'De betaling is geannuleerd!');
                 }            
-                elseif ($checkBetaling->isExpired())
+                elseif ($status == 'expired')
                 {
-                    return redirect()->route('winkelwagen.show')->with('warning', 'De betaling is verlopen, mogelijk heeft u de betaling geannuleerd!');
+                    return redirect()->route('winkelwagen.show')->with('danger', 'De betaling is verlopen, mogelijk heeft u de betaling geannuleerd!');
                 }
-                elseif ($checkBetaling->isFailed())
+                elseif ($status == 'failed')
                 {
-                    return redirect()->route('winkelwagen.show')->with('warning', 'De betaling is mislukt en kan niet worden voltooid met een andere betaalmethode!');
+                    return redirect()->route('winkelwagen.show')->with('danger', 'De betaling is mislukt en kan niet worden voltooid met een andere betaalmethode!');
                 }            
             }
             return redirect()->route('winkelwagen.show');

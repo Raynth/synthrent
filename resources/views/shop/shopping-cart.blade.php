@@ -29,10 +29,17 @@
                             </div>
                         @endif
 
-                        <!-- Geef melding als het product verhuurd is -->
+                        <!-- Geef melding als de betaling voltooid is -->
                         @if (session('success'))
-                            <div class="alert alert-warning">
+                            <div class="alert alert-success">
                                 {!! session('success') !!}
+                            </div>
+                        @endif
+
+                        <!-- Geef melding als de status van de betaling niet betaald is -->
+                        @if (session('danger'))
+                            <div class="alert alert-danger">
+                                {!! session('danger') !!}
                             </div>
                         @endif
                         
