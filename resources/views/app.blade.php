@@ -185,7 +185,7 @@
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="#">Home</a></li>
+						<li><a href="{{ route('home') }}">Home</a></li>
 						<li><a href="{{ route('producten.index') }}">Producten</a></li>
 						<li><a href="{{ route('contact.create') }}">Contact</a></li>						
 					</ul>
