@@ -101,7 +101,7 @@
                                 <!-- /.row -->
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label for="totale_huurprijs">Huurprijs per dag</label>
+                                        <label for="huurprijs">Huurprijs per dag</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">&euro;</span>
                                             <input type="number" class="form-control" id="huurprijs" name="huurprijs" step="0.05" readonly>
@@ -110,7 +110,7 @@
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group col-md-4">
-                                        <label for="totale_huurprijs">Aantal dagen</label>
+                                        <label for="dagen">Aantal dagen</label>
                                         <div class="input-group">
                                             <input type="number" class="form-control" id="dagen" name="dagen" readonly>
                                         </div>
