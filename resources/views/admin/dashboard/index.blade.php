@@ -10,7 +10,7 @@
                 <small>Version 1.0</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="{{ route('admin.home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Dashboard</li>
             </ol>
         </section>
@@ -136,7 +136,7 @@
                                     <div class="alert alert-danger alert-dismissible">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                         <h4><i class="icon fa fa-ban"></i> {{ $nietTeruggebracht->product->merk->naam }} {{ $nietTeruggebracht->product->naam }}</h4>
-                                        Einddatum: {{ date("d-m-Y", strtotime($nietTeruggebracht->einddatum)) }} | Klant: <a href="{{ route('klanten.show', $nietTeruggebracht->klant_id) }}">{{ $nietTeruggebracht->klant->voornaam }} {{ $nietTeruggebracht->klant->achternaam }}</a>
+                                        Einddatum: {{ date("d-m-Y", strtotime($nietTeruggebracht->einddatum)) }} | Klant: <a href="{{ route('admin.klanten.show', $nietTeruggebracht->klant_id) }}">{{ $nietTeruggebracht->klant->voornaam }} {{ $nietTeruggebracht->klant->achternaam }}</a>
                                     </div>
                                 @endforeach
                             </div>
