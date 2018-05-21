@@ -74,19 +74,18 @@ class CartController extends Controller
         
     }
 
-    public function cart()
+    public function show()
     {
+        $categories = Category::orderBy('naam')->get();
         if (!Session::has('cart')) {
-            return view('shop.shopping-cart');
+            return view('shop.shopping-cart', compact('categories'));
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        $categories = Category::orderBy('naam')->get();
-
+        
         return view('shop.shopping-cart', [
             'items' => $cart->items,
-            'totalPrice' => $cart->totalPrice,
-            'categories' => $categories
-            ]);
+            'totalPrice' => $cart->totalPrice
+        ], compact('top5', 'categories'));
     }
 }

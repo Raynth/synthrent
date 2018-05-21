@@ -24,7 +24,7 @@ Route::group(['namespace' => 'User'], function() {
     
     Route::get('categorie/{categorie}', 'CategoriesController@show')->name('categorie.show');
     
-    Route::get('winkelwagen', 'CartController@cart')->name('winkelwagen.show');
+    Route::get('winkelwagen', 'CartController@show')->name('winkelwagen.show');
     Route::post('item-toevoegen/{id}', 'CartController@addTocart')->name('winkelwagen.itemtoevoegen');
     Route::get('item-verwijderen/{id}', 'CartController@removeItem')->name('winkelwagen.itemverwijderen');
 
