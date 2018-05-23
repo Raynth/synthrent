@@ -69,7 +69,7 @@
                                     <label for="huurprijs">Huurprijs per dag</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">&euro;</span>
-                                        <input type="number" class="form-control" id="huurprijs" name="huurprijs" value="{{ $product->huurprijs }}" placeholder="Voor prijs per dag in">
+                                        <input type="number" class="form-control" id="huurprijs" name="huurprijs" step="0.05" value="{{ $product->huurprijs }}" placeholder="Voor prijs per dag in">
                                     </div>
                                 </div>
                                 <!-- /.form-group -->
