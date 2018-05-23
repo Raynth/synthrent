@@ -124,7 +124,7 @@
                 <div class="modal-footer">
                     @if (count($producten) > 0)
                         <form action="{{ route('admin.producten.destroy', $product->id) }}" method="post" class="pull-left">
-                            {{ csrf_field() }}
+                            @csrf
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Verwijderen</button>
                         </form>

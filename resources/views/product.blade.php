@@ -55,7 +55,7 @@
 
 							<!-- form start -->
 							<form action="{{ route('winkelwagen.itemtoevoegen', ['id' => $product->id]) }}" enctype="multipart/form-data" method="post">
-								{{ csrf_field() }}
+								@csrf
 								<div class="form-group col-md-6">
 									<label for="begindatum">Begindatum</label>
 									<div class="input-group date">

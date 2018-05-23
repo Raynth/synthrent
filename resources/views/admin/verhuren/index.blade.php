@@ -115,27 +115,27 @@
     <!-- Popup verschijnt ter bevestiging verwijderen record -->
     <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Verhuur verwijderen</h4>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Verhuur verwijderen</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Weet u zeker dat u deze verhuur wilt verwijderen?</p>
+                    </div>
+                    <div class="modal-footer">
+                        @if (count($verhuren) > 0)
+                            <form action="{{ route('admin.verhuren.destroy', $verhuur->id) }}" method="post" class="pull-left">
+                                @csrf
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-danger">Verwijderen</button>
+                            </form>
+                        @endif
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuleren</button>
+                </div>
             </div>
-            <div class="modal-body">
-            <p>Weet u zeker dat u deze verhuur wilt verwijderen?</p>
-            </div>
-            <div class="modal-footer">
-            @if (count($verhuren) > 0)
-                    <form action="{{ route('admin.verhuren.destroy', $verhuur->id) }}" method="post" class="pull-left">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button type="submit" class="btn btn-danger">Verwijderen</button>
-                    </form>
-                @endif
-            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuleren</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
+            <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
     </div>

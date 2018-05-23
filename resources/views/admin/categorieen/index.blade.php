@@ -106,7 +106,7 @@
                 <div class="modal-footer">
                     @if (count($categories) > 0)
                         <form action="{{ route('admin.categorieen.destroy', $category->id) }}" method="post" class="pull-left">
-                            {{ csrf_field() }}
+                            @csrf
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Verwijderen</button>
                         </form>

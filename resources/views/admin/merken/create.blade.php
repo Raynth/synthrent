@@ -38,7 +38,7 @@
                         <!-- form start -->
                         {{--  <form role="form">  --}}
                         <form action="{{ route('admin.merken.store') }}" enctype="multipart/form-data" method="post">
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="naam">Merk naam</label>
