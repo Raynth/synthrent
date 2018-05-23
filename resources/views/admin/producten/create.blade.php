@@ -39,7 +39,7 @@
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form action="{{ route('admin.producten.store') }}" enctype="multipart/form-data" method="post">
-                        {{ csrf_field() }}
+                            @csrf
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="category">Categorie</label>

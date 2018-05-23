@@ -38,7 +38,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('admin.producten.update', $product->id) }}" method="post">
+                        <form role="form" action="{{ route('admin.producten.update', $product->id) }}" enctype="multipart/form-data" method="post">
                             @csrf
                             {{ method_field('PUT') }}
                             <div class="box-body">
@@ -69,7 +69,7 @@
                                     <label for="huurprijs">Huurprijs per dag</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">&euro;</span>
-                                        <input type="number" class="form-control" id="huurprijs" name="huurprijs" value="{{ $product->huurprijs }}" placeholder="Voor prijs per dag in">
+                                        <input type="number" class="form-control" id="huurprijs" name="huurprijs" step="0.05" value="{{ $product->huurprijs }}" placeholder="Voor prijs per dag in">
                                     </div>
                                 </div>
                                 <!-- /.form-group -->

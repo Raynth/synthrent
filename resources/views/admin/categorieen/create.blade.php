@@ -38,7 +38,7 @@
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form role="form" action="{{ route('admin.categorieen.store') }}" method="post">
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="naam">Categorie naam</label>

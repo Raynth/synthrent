@@ -38,7 +38,7 @@
                         </div>
                         <!-- /.box-header -->
                         <form action="{{ route('admin.klanten.store') }}" enctype="multipart/form-data" method="post">
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-6">

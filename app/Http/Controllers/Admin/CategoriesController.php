@@ -25,7 +25,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::orderBy('naam', 'ASC')->get();
         
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.categorieen.index', compact('categories'));
     }
 
     /**
@@ -35,7 +35,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.categorieen.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class CategoriesController extends Controller
         $category->slug = str_slug($category->naam);
         $category->save();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Categorie toegevoegd');
+        return redirect()->route('admin.categorieen.index')->with('success', 'Categorie toegevoegd');
     }
 
     /**
@@ -69,7 +69,7 @@ class CategoriesController extends Controller
     {
         $category = Category::find($id);
 
-        return view('admin.categories.show', compact('category'));
+        return view('admin.categorieen.show', compact('category'));
     }
 
     /**
@@ -82,7 +82,7 @@ class CategoriesController extends Controller
     {
         $category = Category::find($id);
 
-        return view('admin.categories.edit', compact('category')); 
+        return view('admin.categorieen.edit', compact('category')); 
     }
 
     /**
@@ -104,7 +104,7 @@ class CategoriesController extends Controller
         $category->slug = str_slug($category->naam);
         $category->save();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Categorie bijgewerkt');
+        return redirect()->route('admin.categorieen.index')->with('success', 'Categorie bijgewerkt');
     }
 
     /**
@@ -118,6 +118,6 @@ class CategoriesController extends Controller
         $category = Category::find($id);
         $category->delete();
         
-        return redirect()->route('admin.categories.index')->with('success', 'Categorie verwijderd');
+        return redirect()->route('admin.categorieen.index')->with('success', 'Categorie verwijderd');
     }
 }
