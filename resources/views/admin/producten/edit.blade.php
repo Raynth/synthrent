@@ -38,7 +38,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('admin.producten.update', $product->id) }}" method="post">
+                        <form role="form" action="{{ route('admin.producten.update', $product->id) }}" enctype="multipart/form-data" method="post">
                             @csrf
                             {{ method_field('PUT') }}
                             <div class="box-body">
