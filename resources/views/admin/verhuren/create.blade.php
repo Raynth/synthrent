@@ -158,14 +158,14 @@
             $('#begindatum').datepicker({
                 autoclose: true,
                 startDate: '+1d',
-                format: 'dd-mm-yyyy',
+                format: 'yyyy-mm-dd',
                 language: 'nl'
             })
 			// Datepicker eindatum
 			$('#einddatum').datepicker({
                 autoclose: true,
                 startDate: '+1d',
-                format: 'dd-mm-yyyy',
+                format: 'yyyy-mm-dd',
                 language: 'nl'
             })
 			// Als begindatum geselecteerd is, is de minimale datum van einddatum gelijk aan begindatum
