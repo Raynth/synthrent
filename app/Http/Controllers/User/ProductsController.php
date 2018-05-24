@@ -45,4 +45,52 @@ class ProductsController extends Controller
 
         return view('product', compact('product', 'productRented', 'categories'));
     }
+
+    /*
+     * Laat alle producten tonen gesorteerd op nieuwste eerst
+     */
+    public function showNew()
+    {
+        $producten = Product::where('online', 1)->orderBy('created_at', 'desc')->paginate(12);
+        $marks = Mark::orderBy('naam')->get();
+        $categories = Category::orderBy('naam')->get();
+        $top5 = Rental::top5();
+        $sorteer = 1;
+
+        return view('producten', compact('producten', 'marks', 'categories', 'top5', 'sorteer'));
+    }
+
+    /*
+     * Laat alle producten tonen gesorteerd op merk en product
+     */
+    public function showName()
+    {
+        $producten = Product::select('products.id', 'merk_id', 'marks.naam', 'products.naam', 'huurprijs', 'foto')
+            ->join('marks', 'marks.id', '=', 'products.merk_id')
+            ->orderBy('marks.naam')
+            ->orderBy('products.naam')
+            ->where('online', 1)
+            ->paginate(12);
+        $marks = Mark::orderBy('naam')->get();
+        $categories = Category::orderBy('naam')->get();
+        $top5 = Rental::top5();
+        $sorteer = 2;
+        
+        return view('producten', compact('producten', 'marks', 'categories', 'top5', 'sorteer'));
+    }
+
+    /*
+     * Laat alle producten tonen gesorteerd op beoordelingen
+     * Beste beoordelingen als eerste
+     */
+    public function showReview()
+    {
+        // $producten = Product::where('online', 1)->orderBy('created_at', 'desc')->paginate(12);
+        $marks = Mark::orderBy('naam')->get();
+        $categories = Category::orderBy('naam')->get();
+        $top5 = Rental::top5();
+        $sorteer = 3;
+
+        return view('producten', compact('producten', 'marks', 'categories', 'top5', 'sorteer'));
+    }
 }

@@ -24,19 +24,14 @@
 				<div id="main" class="col-md-9">
 					<!-- store top filter -->
 					<div class="store-filter clearfix">
-						<div class="pull-left">
-							<div class="row-filter">
-								<a href="#"><i class="fa fa-th-large"></i></a>
-								<a href="#" class="active"><i class="fa fa-bars"></i></a>
-							</div>
+						<div class="pull-left">	
 							<div class="sort-filter">
-								<span class="text-uppercase">Sort By:</span>
-								<select class="input">
-										<option value="0">Position</option>
-										<option value="0">Price</option>
-										<option value="0">Rating</option>
-									</select>
-								<a href="#" class="main-btn icon-btn"><i class="fa fa-arrow-down"></i></a>
+								<span class="text-uppercase">Gesorteerd op:</span>
+								<select class="input" onchange="location = this.value">
+									<option value="{{ route('producten.showNew') }}" {{ ($sorteer == 1) ? 'selected' : '' }}>Nieuwste</option>
+									<option value="{{ route('producten.showName') }}" {{ ($sorteer == 2) ? 'selected' : '' }}>Naam</option>
+									<option value="{{ route('producten.showReview') }}" {{ ($sorteer == 3) ? 'selected' : '' }}>Beoordeling</option>
+								</select>
 							</div>
 						</div>
 						<div class="pull-right">
@@ -86,17 +81,13 @@
 					<!-- store bottom filter -->
 					<div class="store-filter clearfix">
 						<div class="pull-left">
-							<div class="row-filter">
-								<a href="#"><i class="fa fa-th-large"></i></a>
-								<a href="#" class="active"><i class="fa fa-bars"></i></a>
-							</div>
 							<div class="sort-filter">
-								<span class="text-uppercase">Sort By:</span>
-								<select class="input">
-										<option value="0">Position</option>
-										<option value="0">Price</option>
-										<option value="0">Rating</option>
-									</select>
+								<span class="text-uppercase">Gesorteerd op:</span>
+								<select class="input" onchange="location = this.value">
+									<option value="{{ route('producten.showNew') }}" {{ ($sorteer == 1) ? 'selected' : '' }}>Nieuwste</option>
+									<option value="{{ route('producten.showName') }}" {{ ($sorteer == 2) ? 'selected' : '' }}>Naam</option>
+									<option value="{{ route('producten.showReview') }}" {{ ($sorteer == 3) ? 'selected' : '' }}>Beoordeling</option>
+								</select>
 								<a href="#" class="main-btn icon-btn"><i class="fa fa-arrow-down"></i></a>
 							</div>
 						</div>
