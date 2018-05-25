@@ -14,19 +14,18 @@ use Mollie;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+    /*
+     * Laat alle producten tonen gesorteerd op nieuwste eerst
      */
     public function index()
     {
-        $producten = Product::where('online', 1)->paginate(12);
+        $producten = Product::where('online', 1)->orderBy('created_at', 'desc')->paginate(12);
         $marks = Mark::orderBy('naam')->get();
         $categories = Category::orderBy('naam')->get();
         $top5 = Rental::top5();
-        
-        return view('producten', compact('producten', 'marks', 'categories', 'top5'));
+        $sorteer = 1;
+
+        return view('producten', compact('producten', 'marks', 'categories', 'top5', 'sorteer'));
     }
 
     /**
@@ -44,20 +43,6 @@ class ProductsController extends Controller
         $productRented = Product::allProductRented($id);
 
         return view('product', compact('product', 'productRented', 'categories'));
-    }
-
-    /*
-     * Laat alle producten tonen gesorteerd op nieuwste eerst
-     */
-    public function showNew()
-    {
-        $producten = Product::where('online', 1)->orderBy('created_at', 'desc')->paginate(12);
-        $marks = Mark::orderBy('naam')->get();
-        $categories = Category::orderBy('naam')->get();
-        $top5 = Rental::top5();
-        $sorteer = 1;
-
-        return view('producten', compact('producten', 'marks', 'categories', 'top5', 'sorteer'));
     }
 
     /*
