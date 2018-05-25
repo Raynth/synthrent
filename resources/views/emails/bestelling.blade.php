@@ -43,7 +43,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td align="right"><strong>&euro; {{ number_format($verhuren->totalPrice, 2, ',', '.') }}</strong></td>
+                        <td align="right"><strong>&euro; {{ number_format($verhuren->subTotaal, 2, ',', '.') }}</strong></td>
                     </tr>
                 </table>
                 <br>

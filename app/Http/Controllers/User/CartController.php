@@ -10,6 +10,7 @@ use App\Model\admin\Mark;
 use App\Model\user\Cart;
 use Session;
 use Mollie;
+use Auth;
 
 class CartController extends Controller
 {
@@ -61,7 +62,6 @@ class CartController extends Controller
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        // dd($cart);
         $cart->removeItem($id);
 
         if ($cart->aantalItems > 0) {
@@ -82,10 +82,14 @@ class CartController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        
-        return view('shop.shopping-cart', [
-            'items' => $cart->items,
-            'totalPrice' => $cart->totalPrice
-        ], compact('top5', 'categories'));
+        $items = $cart->items;
+        $subTotaal = $cart->subTotaal;
+        $kortingPerc = 0;
+        if (Auth::check()) {
+            $kortingPerc = Auth::user()->korting;
+        }
+        $korting = round($subTotaal * $kortingPerc / 100, 2);
+        $teBetalen = $subTotaal - $korting;        
+        return view('shop.shopping-cart', compact('categories', 'korting', 'kortingPerc', 'items', 'teBetalen', 'subTotaal'));
     }
 }

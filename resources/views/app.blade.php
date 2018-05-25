@@ -120,7 +120,7 @@
 								</div>
 								<strong class="text-uppercase">Mijn Winkelwagen:</strong>
 								<br>
-								<span>&euro; {{ Session::has('cart') ? number_format(Session::get('cart')->totalPrice, 2, ',', '.') : 0 }}</span>
+								<span>&euro; {{ Session::has('cart') ? number_format(Session::get('cart')->subTotaal, 2, ',', '.') : 0 }}</span>
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
@@ -142,7 +142,7 @@
 									</div>
 									<div class="shopping-cart-btns">
 										<a href="{{ route('winkelwagen.show') }}" class="main-btn">Bekijk Winkelwagen</a>
-										<a href="{{ route('kassa.betalen') }}" class="primary-btn">Bevestig Huren <i class="fa fa-arrow-circle-right"></i></a>
+										<a href="{{ route('kassa.betalen') }}" class="primary-btn">Betalen <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 							</div>

@@ -8,15 +8,14 @@ class Cart
 {
     public $items = null;
     public $aantalItems = 0;
-    public $totalPrice = 0;
+    public $subTotaal = 0;
 
     public function __construct($oldCart)
     {
         if ($oldCart) {
             $this->items = $oldCart->items;
             $this->aantalItems = $oldCart->aantalItems;
-            $this->totalPrice = $oldCart->totalPrice;
-
+            $this->subTotaal = $oldCart->subTotaal;
         }
     }
 
@@ -33,13 +32,13 @@ class Cart
         $storedItem['totale_huurprijs'] = $item->huurprijs * $storedItem['dagen'];
         $this->aantalItems++;
         $this->items[$this->aantalItems] = $storedItem;
-        $this->totalPrice += $storedItem['totale_huurprijs'];
+        $this->subTotaal += $storedItem['totale_huurprijs'];
     }
 
     public function removeItem($id)
     {
         $this->aantalItems--;
-        $this->totalPrice -= $this->items[$id]['totale_huurprijs'];
+        $this->subTotaal -= $this->items[$id]['totale_huurprijs'];
         unset($this->items[$id]);
     }
 }

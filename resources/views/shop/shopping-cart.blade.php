@@ -83,22 +83,22 @@
                                         <tr>
                                             <th class="empty" colspan="3"></th>
                                             <th>SUBTOTAAL</th>
-                                            <th colspan="2" class="sub-total">&euro; {{ number_format($totalPrice, 2, ',', '.') }}</th>
+                                            <th colspan="2" class="sub-total">&euro; {{ number_format($subTotaal, 2, ',', '.') }}</th>
                                         </tr>
                                         <tr>
-                                            <th class="empty" colspan="3"></th>
-                                            <th>KORTING</th>
-                                            <td colspan="2">Free Shipping</td>
+                                            <td class="empty" colspan="3"></td>
+                                            <td>KORTING {{ $kortingPerc }}%</td>
+                                            <td colspan="2" class="sub-total">&euro; {{ number_format($korting, 2, ',', '.') }} &minus;</td>
                                         </tr>
                                         <tr>
                                             <th class="empty" colspan="3"></th>
                                             <th>TOTAAL</th>
-                                            <th colspan="2" class="total">&euro; {{ number_format($totalPrice, 2, ',', '.') }}</th>
+                                            <th colspan="2" class="total">&euro; {{ number_format($teBetalen, 2, ',', '.') }}</th>
                                         </tr>
                                     </tfoot>
                                 </table>
                                 <div class="pull-right">
-                                    <a href="{{ route('kassa.betalen') }}" class="primary-btn">Bevestig Huren</a>
+                                    <a href="{{ route('kassa.betalen') }}" class="primary-btn">Betalen</a>
                                 </div>
                             @else
                                 <h4>Geen producten in de winkelwagen!</h4>

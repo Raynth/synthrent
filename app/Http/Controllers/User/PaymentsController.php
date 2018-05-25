@@ -32,7 +32,7 @@ class PaymentsController extends Controller
                 // De haal de gegevens uit de winkelwagen op.
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);
-                $total = $cart->totalPrice;
+                $total = $cart->subTotaal;
                 $orderNumber = time();
     
                 // Maak de betaling klaar met Mollie.
