@@ -28,6 +28,9 @@
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
+	<!-- jQuery UI -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -70,6 +73,15 @@
 						</a>
 					</div>
 					<!-- /Logo -->
+					<!-- Search -->
+					<div class="header-search">
+						<form>
+							<input class="input search-input" type="text" name="keyword" id="keyword" placeholder="Voer uw trefwoord in">
+							<button class="search-btn"><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+					<!-- /Search -->
+
 				</div>
 				<div class="pull-right">
 					<ul class="header-btns">
@@ -307,7 +319,20 @@
 	<script src="{{ asset('js/nouislider.min.js') }}"></script>
 	<script src="{{ asset('js/jquery.zoom.min.js') }}"></script>
 	<script src="{{ asset('js/main.js') }}"></script>
-
+	<!-- jQuery UI -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script>
+		$(function() {
+			$("#keyword").autocomplete({
+				source: '{{ route('producten.search') }}',
+				select: function (event, ui) {
+					route = '{{ route('producten.show', ':id') }}'
+					route = route.replace(':id', ui.item.id)
+					window.location = route
+				}
+			});
+		});
+  	</script>
 	@section('footerSection')
   		@show
 </body>
