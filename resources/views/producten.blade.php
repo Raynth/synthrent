@@ -88,7 +88,6 @@
 									<option value="{{ route('producten.showName') }}" {{ ($sorteer == 2) ? 'selected' : '' }}>Naam</option>
 									<option value="{{ route('producten.showReview') }}" {{ ($sorteer == 3) ? 'selected' : '' }}>Beoordeling</option>
 								</select>
-								<a href="#" class="main-btn icon-btn"><i class="fa fa-arrow-down"></i></a>
 							</div>
 						</div>
 						<div class="pull-right">
