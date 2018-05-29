@@ -25,9 +25,9 @@ class RedirectIfAuthenticated
                 }
                 break;
             default:
-                // Als de klant is ingelogd, dan wordt via login direct doorverwezen naar /home
+                // Als de klant is ingelogd, dan wordt via login direct doorverwezen naar /
                 if (Auth::guard($guard)->check()) {
-                    return redirect('/home');
+                    return redirect('/');
                 }
         }
 
