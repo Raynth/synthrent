@@ -58,7 +58,7 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::get('admin/dashboard/chartsales', 'DashboardController@chartSales')->name('dashboard.chartsales');
     Route::resource('admin/producten', 'ProductsController', ['as' => 'admin']);
     Route::resource('admin/categorieen', 'CategoriesController', ['as' => 'admin']);
-    Route::resource('admin/klanten', 'CustomersController', ['as' => 'admin']);
+    Route::resource('admin/klanten', 'UsersController', ['as' => 'admin']);
     Route::resource('admin/verhuren', 'RentalsController', ['as' => 'admin']);
     Route::resource('admin/merken', 'MarksController', ['as' => 'admin']);
     Route::resource('admin/admins', 'AdminsController', ['as' => 'admin']);

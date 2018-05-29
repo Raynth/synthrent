@@ -8,7 +8,7 @@ class Rental extends Model
 {
     public function klant()
     {
-        return $this->belongsTo('App\Model\admin\Customer');
+        return $this->belongsTo('App\Model\admin\User');
     }
 
     public function product()

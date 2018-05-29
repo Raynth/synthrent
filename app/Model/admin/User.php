@@ -4,7 +4,7 @@ namespace App\Model\admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class User extends Model
 {
     public function rentals()
     {
