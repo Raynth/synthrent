@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 use Mollie;
 use Session;
 use App\Model\user\Cart;
@@ -25,26 +26,25 @@ class PaymentsController extends Controller
     {
         try
         {
-            if (Session::has('betaling'))
-            {
-                $payment = Session::get('betaling');
-            } else {
-                // De haal de gegevens uit de winkelwagen op.
-                $oldCart = Session::get('cart');
-                $cart = new Cart($oldCart);
-                $total = $cart->subTotaal;
-                $orderNumber = time();
-    
-                // Maak de betaling klaar met Mollie.
-                $payment = Mollie::api()->payments()->create([
-                    "amount"      => $total,
-                    "description" => 'Betalingnr. ' . $orderNumber,
-                    "redirectUrl" => route('kassa.controleren', $orderNumber),
-                    "metadata" => array(
-                        "order_id" => $orderNumber
-                    )
-                ]);
-            }
+            // De haal de gegevens uit de winkelwagen op.
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+            $subTotaal = $cart->subTotaal;
+            $kortingPerc = Auth::user()->korting;
+            $korting = round($subTotaal * $kortingPerc / 100, 2);
+            $teBetalen = $subTotaal - $korting; 
+            $orderNumber = time();
+
+            // Maak de betaling klaar met Mollie.
+            $payment = Mollie::api()->payments()->create([
+                "amount"      => $teBetalen,
+                "description" => 'Betalingnr. ' . $orderNumber,
+                "redirectUrl" => route('kassa.controleren', $orderNumber),
+                "metadata" => array(
+                    "order_id" => $orderNumber
+                )
+            ]);
+
             return redirect($payment->getPaymentUrl())->with('betaling', $payment);
         }
         catch (Mollie_API_Exception $e)
