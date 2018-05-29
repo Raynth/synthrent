@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\admin\Customer;
+use App\Model\admin\User;
 use App\Model\admin\Product;
 use App\Model\admin\Rental;
 use DateTime;
@@ -35,7 +35,7 @@ class RentalsController extends Controller
      */
     public function create()
     {
-        $klanten = Customer::all();
+        $klanten = User::all();
         $producten = Product::select('products.id', 'merk_id', 'marks.naam', 'products.naam', 'huurprijs')
                             ->join('marks', 'marks.id', '=', 'products.merk_id')
                             ->orderBy('marks.naam', 'asc')
@@ -69,6 +69,8 @@ class RentalsController extends Controller
         $verhuur->einddatum = $request->input('einddatum');
         $verhuur->dagen = $request->input('dagen');
         $verhuur->totale_huurprijs = $request->input('totale_huurprijs');
+        $verhuur->korting = $request->input('korting');
+        $verhuur->te_betalen = $request->input('te_betalen');
         $verhuur->teruggebracht = 0;
         
         // Controle of het gekozen product al is verhuurd in de gekozen periode
@@ -108,7 +110,7 @@ class RentalsController extends Controller
     public function edit($id)
     {
         $verhuur = Rental::find($id);
-        $klanten = Customer::all();
+        $klanten = User::all();
         $producten = Product::select('products.id', 'merk_id', 'marks.naam', 'products.naam', 'huurprijs')
                             ->join('marks', 'marks.id', '=', 'products.merk_id')
                             ->orderBy('marks.naam', 'asc')
@@ -143,6 +145,8 @@ class RentalsController extends Controller
         $verhuur->einddatum = $request->input('einddatum');
         $verhuur->dagen = $request->input('dagen');
         $verhuur->totale_huurprijs = $request->input('totale_huurprijs');
+        $verhuur->korting = $request->input('korting');
+        $verhuur->te_betalen = $request->input('te_betalen');
         if (null !== $request->input('teruggebracht')) {
             $verhuur->teruggebracht = 1;
         } else {
