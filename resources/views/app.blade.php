@@ -75,8 +75,8 @@
 					<!-- /Logo -->
 					<!-- Search -->
 					<div class="header-search">
-						<form>
-							<input class="input search-input" type="text" name="keyword" id="keyword" placeholder="Voer uw trefwoord in">
+						<form action="{{ route('producten.search') }}" method="get">
+							<input class="input search-input" type="text" name="trefwoord" id="trefwoord" placeholder="Voer uw trefwoord in">
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
 					</div>
@@ -323,8 +323,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script>
 		$(function() {
-			$("#keyword").autocomplete({
-				source: '{{ route('producten.search') }}',
+			$("#trefwoord").autocomplete({
+				source: '{{ route('producten.searchAutocomplete') }}',
 				select: function (event, ui) {
 					route = '{{ route('producten.show', ':id') }}'
 					route = route.replace(':id', ui.item.id)

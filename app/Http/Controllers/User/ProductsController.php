@@ -79,12 +79,10 @@ class ProductsController extends Controller
         return view('producten', compact('producten', 'marks', 'categories', 'top5', 'sorteer'));
     }
 
-    public function search(Request $request)
+    public function searchAutocomplete(Request $request)
     {
         $trefwoord = $request->term;
-        // dd($trefwoord);
-        $resultaat = Product::where('naam', 'LIKE', '%'.$trefwoord.'%')->get();
-        // return $resultaat;
+        $resultaat = Product::where('online', 1)->where('naam', 'LIKE', '%'.$trefwoord.'%')->orderBy('naam')->get();
         if (count($resultaat) == 0) {
             $zoekResultaat[] = 'Geen producten gevonden';
         } else {
@@ -93,5 +91,18 @@ class ProductsController extends Controller
             }
         }
         return $zoekResultaat;
+    }
+
+    public function search(Request $request)
+    {
+        $marks = Mark::orderBy('naam')->get();
+        $categories = Category::orderBy('naam')->get();
+        $top5 = Rental::top5();
+        $sorteer = 2;
+        
+        $trefwoord = $request->trefwoord;
+        $producten = Product::where('online', 1)->where('naam', 'LIKE', '%'.$trefwoord.'%')->paginate(12);
+
+        return view('zoeken', compact('producten', 'marks', 'categories', 'top5', 'sorteer'));
     }
 }

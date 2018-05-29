@@ -21,7 +21,8 @@ Route::group(['namespace' => 'User'], function() {
     Route::get('producten/{product}', 'ProductsController@show')->name('producten.show');
     Route::get('producten_naam', 'ProductsController@showName')->name('producten.showName');
     Route::get('producten_beoordeling', 'ProductsController@showReview')->name('producten.showReview');
-    Route::get('zoeken', 'ProductsController@search')->name('producten.search');
+    Route::get('zoeken', 'ProductsController@searchAutocomplete')->name('producten.searchAutocomplete');
+    Route::get('zoek', 'ProductsController@search')->name('producten.search');
 
     Route::get('over_ons', 'AboutUsController@index')->name('over_ons');
     
