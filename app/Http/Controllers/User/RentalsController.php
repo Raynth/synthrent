@@ -36,6 +36,9 @@ class RentalsController extends Controller
             $verhuur->einddatum = $item['einddatum'];
             $verhuur->dagen = $item['dagen'];
             $verhuur->totale_huurprijs = $item['totale_huurprijs'];
+            $kortingPerc = Auth::user()->korting;
+            $verhuur->korting = round($verhuur->totale_huurprijs * $kortingPerc / 100, 2);
+            $verhuur->te_betalen = $verhuur->totale_huurprijs - $verhuur->korting;
             $verhuur->teruggebracht = 0;
 
             $verhuur->save();

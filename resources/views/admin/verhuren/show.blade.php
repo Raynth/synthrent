@@ -69,6 +69,26 @@
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            <h3 class="panel-title">Korting</h3>
+                        </div>
+                        <div class="panel-body">
+                            &euro; {{ number_format($verhuur->korting, 2, ',', '.') }}
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Te betalen</h3>
+                        </div>
+                        <div class="panel-body">
+                            &euro; {{ number_format($verhuur->te_betalen, 2, ',', '.') }}
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
                             <h3 class="panel-title">Teruggebracht</h3>
                         </div>
                         <div class="panel-body">

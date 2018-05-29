@@ -54,8 +54,8 @@
                             <div class="box-body">
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label for="klant">Klant</label>
-                                        <select class="form-control select2" style="width: 100%;" id="klant" name="klant_id">
+                                        <label for="klant_id">Klant</label>
+                                        <select class="form-control select2" style="width: 100%;" id="klant_id" name="klant_id" onchange="selectKlant()">
                                             @foreach ($klanten as $klant)
                                                 <option value="{{ $klant->id }}">{{ $klant->voornaam }} {{ $klant->achternaam }}</option>
                                             @endforeach
@@ -81,7 +81,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="begindatum" name="begindatum" onchange="dateCheck()">
+                                            <input type="text" class="form-control pull-right" id="begindatum" name="begindatum" onchange="berekenPrijs()">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -92,7 +92,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="einddatum" name="einddatum" onchange="dateCheck()">
+                                            <input type="text" class="form-control pull-right" id="einddatum" name="einddatum" onchange="berekenPrijs()">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -111,10 +111,7 @@
                                     <!-- /.form-group -->
                                     <div class="form-group col-md-4">
                                         <label for="dagen">Aantal dagen</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="dagen" name="dagen" readonly>
-                                        </div>
-                                        <!-- /.input-group -->
+                                        <input type="number" class="form-control" id="dagen" name="dagen" readonly>
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group col-md-4">
@@ -122,6 +119,36 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">&euro;</span>
                                             <input type="number" class="form-control" id="totale_huurprijs" name="totale_huurprijs" step="0.05" readonly>
+                                        </div>
+                                        <!-- /.input-group -->
+                                    </div>
+                                    <!-- /.form-group -->   
+                                </div>
+                                <!-- /.row -->
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label for="korting_perc">Korting percentage</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="korting_perc" name="korting_perc" readonly>
+                                            <span class="input-group-addon">&#37;</span>
+                                        </div>
+                                        <!-- /.input-group -->
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="form-group col-md-4">
+                                        <label for="korting">Korting</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">&euro;</span>
+                                            <input type="number" class="form-control" id="korting" name="korting" step="0.05" readonly>
+                                        </div>
+                                        <!-- /.input-group -->
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="form-group col-md-4">
+                                        <label for="te_betalen">Te betalen</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">&euro;</span>
+                                            <input type="number" class="form-control" id="te_betalen" name="te_betalen" step="0.05" readonly>
                                         </div>
                                         <!-- /.input-group -->
                                     </div>
@@ -161,29 +188,52 @@
                 format: 'yyyy-mm-dd',
                 language: 'nl'
             })
-			// Datepicker eindatum
-			$('#einddatum').datepicker({
+            // Datepicker eindatum
+            $('#einddatum').datepicker({
                 autoclose: true,
                 startDate: '+1d',
                 format: 'yyyy-mm-dd',
                 language: 'nl'
             })
-			// Als begindatum geselecteerd is, is de minimale datum van einddatum gelijk aan begindatum
-			$('#begindatum').change(function() {
-				var begindatum = document.getElementById('begindatum').value
-				 $('#einddatum').datepicker('setStartDate', begindatum);
-			})
+            // Als begindatum geselecteerd is, is de minimale datum van einddatum gelijk aan begindatum
+            $('#begindatum').change(function() {
+                var begindatum = document.getElementById('begindatum').value
+                $('#einddatum').datepicker('setStartDate', begindatum)
+            })
         })
-    </script>
-    <script>
+
+        // Haal alle proudcten en zet deze om naar JSON-formaat
         var producten = JSON.parse('<?php echo $producten; ?>')
+        // Toon de huurprijs van het eerste product
         var rentMoney = producten[0].huurprijs
         document.getElementById('huurprijs').value = rentMoney
+
+        // Haal alle klanten en zet deze om naar JSON-formaat
+        var klanten = JSON.parse('<?php echo $klanten; ?>')
+        // Toon de kortingspercentage van de eerste klant
+        var kortingPerc = klanten[0].korting
+        document.getElementById('korting_perc').value = kortingPerc
+
+        // Toon de kortingspercentage van de geselecteerde klant
+        function selectKlant() {
+            klantId = document.getElementById('klant_id').value
+            // Zoek de index van de sleutel 'klant_id' waar de waarde van bekend is
+            for (i = 0; i < klanten.length; i++) {
+                if (klanten[i].id == klantId) {
+                    var key = i
+                    break
+                }
+            }
+            // Toon de kortingspercentage
+            kortingPerc = klanten[key].korting
+            document.getElementById('korting_perc').value = kortingPerc
+            // Bereken opnieuw de prijs
+            this.berekenPrijs()            
+        }
+
         // Toon de huurprijs per dag voor de geselecteerde product
         function selectedProduct() {
             var productId = document.getElementById('product_id').value
-            // Haal alle proudcten en zet deze om naar JSON-formaat
-            var producten = JSON.parse('<?php echo $producten; ?>')
             // Zoek de index van de sleutel 'product_id' waar de waarde van bekend is
             for (i = 0; i < producten.length; i++) {
                 if (producten[i].id == productId) {
@@ -191,12 +241,15 @@
                     break
                 }
             }
-            //
-            var rentMoney = producten[key].huurprijs
+            // Toon de huurprijs
+            rentMoney = producten[key].huurprijs
             document.getElementById('huurprijs').value = rentMoney
+            // Bereken opnieuw de prijs
+            this.berekenPrijs()
         }
+
         // Controleer of begindatum en einddatum zijn ingevuld en bereken het aantal dagen tussen deze 2 datums
-        function dateCheck() {
+        function berekenPrijs() {
             // Haal de datums 'van' en 'tot'      
             var begindatum = document.getElementById("begindatum").value
             var einddatum = document.getElementById("einddatum").value
@@ -211,37 +264,15 @@
                 document.getElementById('dagen').value = dagen
                 // Bereken totale huurprijs: aantal dagen x huurprijs
                 var rentMoney = document.getElementById("huurprijs").value
-                var totaalHuurprijs = dagen * rentMoney
-                document.getElementById("totale_huurprijs").value = totaalHuurprijs.toFixed(2)
+                var totaalHuurprijs = (dagen * rentMoney).toFixed(2)
+                document.getElementById("totale_huurprijs").value = totaalHuurprijs
+                // Bereken de korting
+                var korting = (totaalHuurprijs * kortingPerc / 100).toFixed(2)
+                document.getElementById("korting").value = korting
+                // Bereken de te betalen prijs
+                var teBetalen = (totaalHuurprijs - korting).toFixed(2)
+                document.getElementById("te_betalen").value = teBetalen
             }
-            
-            console.log(begindatum, einddatum)
-        }
-        // Bereken totaal huurprijs: aantal dagen x huurprijs
-        function calculateRental() {
-            // Haal gekozen product uit de <SELECT>
-            var productId = document.getElementById("product_id").value
-            // Haal alle proudcten en zet deze om naar JSON-formaat
-            var producten = JSON.parse('<?php echo $producten; ?>')
-            // Zoek de sleutel waar product_id gelijk is aan id van alle producten
-            for (i = 0; i < producten.length; i++) {
-                if (producten[i].id == productId) {
-                    var key = i
-                    break
-                }
-            }
-            // Haal de huurprijs van de gekozen product uit alle producten
-            var rentMoney = producten[key].huurprijs
-            // Haal de datums 'van' en 'tot'      
-            var begindatum = Date.parse(document.getElementById("begindatum").value)
-            var einddatum = Date.parse(document.getElementById("einddatum").value)
-            // Bereken het aantal milliseconden tussen deze 2 datums
-            var timeDiff = einddatum - begindatum
-            // Bereken aantal dagen van het aantal milliseconden
-            var totaalDagen = Math.floor(timeDiff / (1000 * 60 * 60 * 24))
-            // Bereken totale huurprijs: aantal dagen x huurprijs
-            var totaalHuurprijs = totaalDagen * rentMoney
-            document.getElementById("totale_huurprijs").value = totaalHuurprijs.toFixed(2)
         }
     </script>
 @endsection
