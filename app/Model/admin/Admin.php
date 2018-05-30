@@ -9,7 +9,7 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
-    public function role()
+    public function rol()
     {
         return $this->belongsTo('App\Model\admin\Role');
     }

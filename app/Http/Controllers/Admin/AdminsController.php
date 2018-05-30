@@ -35,9 +35,9 @@ class AdminsController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $rollen = Role::all();
 
-        return view('admin.admins.create', compact('roles'));
+        return view('admin.admins.create', compact('rollen'));
     }
 
     /**
@@ -51,7 +51,7 @@ class AdminsController extends Controller
         $this->validate($request, [
             'naam' => 'required',
             'email' => 'required|email',
-            'role_id' => 'required'
+            'rol_id' => 'required'
         ]);
 
         // Creeer admin
@@ -59,7 +59,7 @@ class AdminsController extends Controller
         $admin->naam = $request->input('naam');
         $admin->email = $request->input('email');
         $admin->telefoon = $request->input('telefoon');
-        $admin->role_id = $request->input('role_id');
+        $admin->rol_id = $request->input('rol_id');
         $admin->save();
 
         return redirect()->route('admin.admins.index')->with('success', 'Gebruiker toegevoegd');
@@ -87,9 +87,9 @@ class AdminsController extends Controller
     public function edit($id)
     {
         $admin = Admin::find($id);
-        $roles = Role::all();
+        $rollen = Role::all();
 
-        return view('admin.admins.edit', compact('admin', 'roles')); 
+        return view('admin.admins.edit', compact('admin', 'rollen')); 
     }
 
     /**
@@ -104,7 +104,7 @@ class AdminsController extends Controller
         $this->validate($request, [
             'naam' => 'required',
             'email' => 'required|email',
-            'role_id' => 'required'
+            'rol_id' => 'required'
         ]);
         
         // Update admin
@@ -112,7 +112,7 @@ class AdminsController extends Controller
         $admin->naam = $request->input('naam');
         $admin->email = $request->input('email');
         $admin->telefoon = $request->input('telefoon');
-        $admin->role_id = $request->input('role_id');
+        $admin->rol_id = $request->input('rol_id');
         $admin->save();
 
         return redirect()->route('admin.admins.index')->with('success', 'Gebruiker bijgewerkt');

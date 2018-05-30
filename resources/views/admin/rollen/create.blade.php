@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('admin.roles.index') }}">Rollen</a></li>
+                <li><a href="{{ route('admin.rollen.index') }}">Rollen</a></li>
                 <li class="active">Toevoegen</li>
             </ol>
         </section>
@@ -38,20 +38,50 @@
                         <!-- /.box-header -->
 
                         <!-- form start -->
-                        <form role="form" action="{{ route('admin.roles.store') }}" method="post">
+                        <form role="form" action="{{ route('admin.rollen.store') }}" method="post">
                             @csrf
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="naam">Rol titel</label>
-                                    <input type="text" class="form-control" id="naam" name="naam" placeholder="Voor rol titel in">
+                                    <label for="naam">Naam</label>
+                                    <input type="text" class="form-control" id="naam" name="naam" placeholder="Voor maam in">
                                 </div>
                                 <!-- /.form-group -->
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="admin" name="admin"> Adminstrator
+                                    </label>
+                                </div>
+                                <!-- /.checkbox -->
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="bekijken" name="bekijken"> Bekijken
+                                    </label>
+                                </div>
+                                <!-- /.checkbox -->
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="toevoegen" name="toevoegen"> Toevoegen
+                                    </label>
+                                </div>
+                                <!-- /.checkbox -->
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="wijzigen" name="wijzigen"> Wijzigen
+                                    </label>
+                                </div>
+                                <!-- /.checkbox -->
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="verwijderen" name="verwijderen"> Verwijderen
+                                    </label>
+                                </div>
+                                <!-- /.checkbox -->
                             </div>
                             <!-- /.box-body -->
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
-                                <a href="{{ route('admin.roles.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('admin.rollen.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                             <!-- /.box-footer -->              
                         </form> 

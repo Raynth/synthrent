@@ -57,7 +57,7 @@
                                                 <td>{{ $admin->naam }}</td>
                                                 <td>{{ $admin->email }}</td>
                                                 <td>{{ $admin->telefoon }}</td>
-                                                <td>{{ $admin->role->naam }}</td>
+                                                <td>{{ $admin->rol->naam }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.admins.show', $admin->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
                                                     <a href="{{ route('admin.admins.edit', $admin->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>

@@ -50,7 +50,7 @@
                         </tr>
                         <tr>
                             <th>Rol:</th>
-                            <td> {{ $admin->role->naam }}</td>
+                            <td> {{ $admin->rol->naam }}</td>
                         </tr>
                     </table>
                 </div>

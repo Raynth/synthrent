@@ -57,10 +57,10 @@
                                     </div>
                                     <!-- /.form-group -->                    
                                     <div class="form-group">
-                                        <label for="role">Rol</label>
-                                        <select class="form-control select2" style="width: 100%;" id="role" name="role_id">
-                                            @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}">{{ $role->naam }}</option>
+                                        <label for="rol_id">Rol</label>
+                                        <select class="form-control select2" style="width: 100%;" id="rol_id" name="rol_id">
+                                            @foreach ($rollen as $rol)
+                                                <option value="{{ $rol->id }}">{{ $rol->naam }}</option>
                                             @endforeach
                                         </select>
                                     </div>

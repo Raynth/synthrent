@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\admin\Role;
+use Auth;
 
 class RolesController extends Controller
 {
@@ -21,8 +22,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('admin.roles.index', compact('roles'));
+        $rollen = Role::all();
+        return view('admin.rollen.index', compact('rollen'));
     }
 
     /**
@@ -32,7 +33,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('admin.roles.create');
+        return view('admin.rollen.create');
     }
 
     /**
@@ -47,11 +48,16 @@ class RolesController extends Controller
             'naam' => 'required'
         ]);
 
-        $role = new Role;
-        $role->naam = $request->input('naam');
-        $role->save();
+        $rol = new Role;
+        $rol->naam = $request->input('naam');
+        $rol->admin = ($request->input('admin') == 'on') ? 1 : 0;
+        $rol->bekijken = ($request->input('bekijken') == 'on') ? 1 : 0;
+        $rol->toevoegen = ($request->input('toevoegen') == 'on') ? 1 : 0;
+        $rol->wijzigen = ($request->input('wijzigen') == 'on') ? 1 : 0;
+        $rol->verwijderen = ($request->input('verwijderen') == 'on') ? 1 : 0;
+        $rol->save();
 
-        return redirect()->route('admin.roles.index')->with('success', 'Rol toegevoegd');
+        return redirect()->route('admin.rollen.index')->with('success', 'Rol toegevoegd');
     }
 
     /**
@@ -62,9 +68,9 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-        $role = Role::find($id);
+        $rol = Role::find($id);
 
-        return view('admin.roles.show', compact('role'));
+        return view('admin.rollen.show', compact('rol'));
     }
 
     /**
@@ -75,9 +81,9 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
+        $rol = Role::find($id);
 
-        return view('admin.roles.edit', compact('role')); 
+        return view('admin.rollen.edit', compact('rol')); 
     }
 
     /**
@@ -94,11 +100,16 @@ class RolesController extends Controller
         ]);
         
         // Update Role
-        $role = Role::find($id);
-        $role->naam = $request->input('naam');
-        $role->save();
+        $rol = Role::find($id);
+        $rol->naam = $request->input('naam');
+        $rol->admin = ($request->input('admin') == 'on') ? 1 : 0;
+        $rol->bekijken = ($request->input('bekijken') == 'on') ? 1 : 0;
+        $rol->toevoegen = ($request->input('toevoegen') == 'on') ? 1 : 0;
+        $rol->wijzigen = ($request->input('wijzigen') == 'on') ? 1 : 0;
+        $rol->verwijderen = ($request->input('verwijderen') == 'on') ? 1 : 0;
+        $rol->save();
 
-        return redirect()->route('admin.roles.index')->with('success', 'Rol bijgewerkt');
+        return redirect()->route('admin.rollen.index')->with('success', 'Rol bijgewerkt');
     }
 
     /**
@@ -109,9 +120,9 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        $role = Role::find($id);
-        $role->delete();
+        $rol = Role::find($id);
+        $rol->delete();
         
-        return redirect()->route('admin.roles.index')->with('success', 'Rol verwijderd');
+        return redirect()->route('admin.rollen.index')->with('success', 'Rol verwijderd');
     }
 }
