@@ -35,7 +35,9 @@
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title">Overzicht verhuren</h3>
-                                <a href="{{ route('admin.verhuren.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                                @if(Auth::user()->rol->toevoegen == 1)
+                                    <a href="{{ route('admin.verhuren.create') }}" class="btn btn-primary pull-right">Toevoegen</a>
+                                @endif
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -70,10 +72,14 @@
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('admin.verhuren.show', $verhuur->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
-                                                    <a href="{{ route('admin.verhuren.edit', $verhuur->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
-                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
-                                                        <span class="fa fa-trash">
-                                                    </button>
+                                                    @if(Auth::user()->rol->wijzigen == 1)
+                                                        <a href="{{ route('admin.verhuren.edit', $verhuur->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
+                                                    @endif
+                                                    @if(Auth::user()->rol->verwijderen == 1)
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
+                                                            <span class="fa fa-trash">
+                                                        </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

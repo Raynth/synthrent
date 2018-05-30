@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="{{ route('admins.index') }}">Gebruikers</a></li>
+                <li><a href="{{ route('admin.admins.index') }}">Gebruikers</a></li>
                 <li class="active">Bewerken</li>
             </ol>
         </section>
@@ -38,7 +38,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('admins.update', $admin->id) }}" method="post">
+                        <form role="form" action="{{ route('admin.admins.update', $admin->id) }}" method="post">
                             @csrf
                             {{ method_field('PUT') }}
                             <div class="box-body">
@@ -60,10 +60,10 @@
                                         </div>
                                         <!-- /.form-group -->                    
                                         <div class="form-group">
-                                            <label for="role">Rol</label>
-                                            <select class="form-control select2" style="width: 100%;" id="role" name="role_id">
-                                                @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}" {{ ($admin->role_id == $role->id) ? 'selected' : '' }}>{{$role->naam }}</option>
+                                            <label for="rol_id">Rol</label>
+                                            <select class="form-control select2" style="width: 100%;" id="rol_id" name="rol_id">
+                                                @foreach ($rollen as $rol)
+                                                    <option value="{{ $rol->id }}" {{ ($admin->rol_id == $rol->id) ? 'selected' : '' }}>{{$rol->naam }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -77,7 +77,7 @@
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Bewerken</button>
-                                <a href="{{ route('admins.index') }}" class="btn btn-default">Annuleren</a>
+                                <a href="{{ route('admin.admins.index') }}" class="btn btn-default">Annuleren</a>
                             </div>
                         </form> 
                     </div>

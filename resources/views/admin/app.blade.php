@@ -169,16 +169,18 @@
                             <i class="fa fa-dashboard"></i> <span>Klanten</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('admin.admins.index') }}">
-                            <i class="fa fa-dashboard"></i> <span>Gebruikers</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.roles.index') }}">
-                            <i class="fa fa-dashboard"></i> <span>Rollen</span>
-                        </a>
-                    </li>
+                    @if (Auth::user()->rol->admin == 1)
+                        <li>
+                            <a href="{{ route('admin.admins.index') }}">
+                                <i class="fa fa-dashboard"></i> <span>Gebruikers</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.rollen.index') }}">
+                                <i class="fa fa-dashboard"></i> <span>Rollen</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </section>
             <!-- /.sidebar -->
