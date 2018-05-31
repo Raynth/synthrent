@@ -169,6 +169,11 @@
                             <i class="fa fa-dashboard"></i> <span>Klanten</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.reviews.index') }}">
+                            <i class="fa fa-dashboard"></i> <span>Reviews</span>
+                        </a>
+                    </li>
                     @if (Auth::user()->rol->admin == 1)
                         <li>
                             <a href="{{ route('admin.admins.index') }}">

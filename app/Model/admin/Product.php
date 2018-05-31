@@ -23,6 +23,11 @@ class Product extends Model
         return $this->hasMany('App\Model\admin\Rental');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany('App\Model\admin\Review');
+    }
+
     // Controleer of het geselecteerde product voor de gekozen periode beschikbaar is 
     public static function isProductRentedStore( $product_id, $begindatum, $einddatum ) 
     { 

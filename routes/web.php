@@ -48,6 +48,8 @@ Route::group(['namespace' => 'User'], function() {
 
     Route::get('contact', 'ContactController@create')->name('contact.create');
     Route::post('contact/{id}', 'ContactController@store')->name('contact.store');
+
+    Route::post('reviews', 'ReviewsController@store')->name('reviews.store');
 });
 
 // Admin Routes
@@ -62,6 +64,7 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::resource('admin/merken', 'MarksController', ['as' => 'admin']);
     Route::resource('admin/admins', 'AdminsController', ['as' => 'admin']);
     Route::resource('admin/rollen', 'RolesController', ['as' => 'admin']);
+    Route::resource('admin/reviews', 'ReviewsController', ['as' => 'admin'])->except(['create', 'store']);    
     // Admin Auth Routes
     Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('admin-login', 'Auth\LoginController@login');

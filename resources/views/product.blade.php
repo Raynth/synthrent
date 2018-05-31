@@ -105,7 +105,7 @@
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Omschrijving</a></li>
 								<li><a data-toggle="tab" href="#tab2">Details</a></li>
-								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+								<li><a data-toggle="tab" href="#tab3">Beoordelingen ({{ $reviewsAmount }})</a></li>
 							</ul>
 							<div class="tab-content">
 								<div id="tab1" class="tab-pane fade in active">
@@ -119,94 +119,66 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="product-reviews">
-												<div class="single-review">
-													<div class="review-heading">
-														<div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-														<div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-														<div class="review-rating pull-right">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o empty"></i>
+												@if ($reviews->count() > 0)
+													@foreach ($reviews as $review)
+														<div class="single-review">
+															<div class="review-heading">
+																<div><a href="#"><i class="fa fa-user-o"></i> {{ $review->naam }}</a></div>
+																<div><a href="#"><i class="fa fa-clock-o"></i> {{ $review->created_at }}</a></div>
+																<div class="review-rating pull-right">
+																	@for ($i = 0; $i < $review->waardering; $i++)
+																		<i class="fa fa-star"></i>
+																	@endfor
+																	@for ($i = $review->waardering; $i < 5; $i++)
+																		<i class="fa fa-star-o empty"></i>
+																	@endfor
+																</div>
+															</div>
+															<div class="review-body">
+																<p>{{ $review->beoordeling }}</p>
+															</div>
+														</div>
+													@endforeach
+												@else
+													<div class="single-review">
+														<div class="review-body">
+															<p>Dit product heeft nog geen beoordeling.</p>
 														</div>
 													</div>
-													<div class="review-body">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-															irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-													</div>
-												</div>
-
-												<div class="single-review">
-													<div class="review-heading">
-														<div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-														<div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-														<div class="review-rating pull-right">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o empty"></i>
-														</div>
-													</div>
-													<div class="review-body">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-															irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-													</div>
-												</div>
-
-												<div class="single-review">
-													<div class="review-heading">
-														<div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-														<div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-														<div class="review-rating pull-right">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o empty"></i>
-														</div>
-													</div>
-													<div class="review-body">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-															irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-													</div>
-												</div>
-
-												<ul class="reviews-pages">
-													<li class="active">1</li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-												</ul>
+												@endif
 											</div>
+												
+													{{ $reviews->links('vendor.pagination.custom') }}
+												
 										</div>
 										<div class="col-md-6">
-											<h4 class="text-uppercase">Write Your Review</h4>
-											<p>Your email address will not be published.</p>
-											<form class="review-form">
+											<h4 class="text-uppercase">Schrijf uw review</h4>
+											<p>Uw e-mailadres wordt niet gepubliceerd.</p>
+											<form class="review-form" action="{{ route('reviews.store') }}" method="post">
+												@csrf
+												<input type="hidden" name="product_id" value="{{ $product->id }}">
 												<div class="form-group">
-													<input class="input" type="text" placeholder="Your Name" />
+													<input class="input" type="text" name="naam" placeholder="Uw naam" @auth value="{{ Auth::user()->voornaam }}" readonly @endauth/>
 												</div>
 												<div class="form-group">
-													<input class="input" type="email" placeholder="Email Address" />
+													<input class="input" type="email" name="email" placeholder="E-mail adres" @auth value="{{ Auth::user()->email }}" readonly @endauth />
 												</div>
 												<div class="form-group">
-													<textarea class="input" placeholder="Your review"></textarea>
+													<textarea class="input" name="beoordeling" placeholder="Uw beoordeling"></textarea>
 												</div>
 												<div class="form-group">
 													<div class="input-rating">
-														<strong class="text-uppercase">Your Rating: </strong>
+														<strong class="text-uppercase">Uw waardering: </strong>
 														<div class="stars">
-															<input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-															<input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-															<input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-															<input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-															<input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+															<input type="radio" id="star5" name="waardering" value="5" /><label for="star5"></label>
+															<input type="radio" id="star4" name="waardering" value="4" /><label for="star4"></label>
+															<input type="radio" id="star3" name="waardering" value="3" /><label for="star3"></label>
+															<input type="radio" id="star2" name="waardering" value="2" /><label for="star2"></label>
+															<input type="radio" id="star1" name="waardering" value="1" /><label for="star1"></label>
 														</div>
 													</div>
 												</div>
-												<button class="primary-btn">Submit</button>
+												<button class="primary-btn" type="submit">Toevoegen</button>
 											</form>
 										</div>
 									</div>

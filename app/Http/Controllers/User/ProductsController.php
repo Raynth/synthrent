@@ -9,6 +9,7 @@ use App\Model\admin\Product;
 use App\Model\admin\Mark;
 use App\Model\admin\Rental;
 use App\Model\user\Cart;
+use App\Model\Review;
 use Session;
 use Mollie;
 
@@ -38,11 +39,13 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         $categories = Category::orderBy('naam')->get();
+        $reviews = Review::where('product_id', $id)->paginate(3);
+        $reviewsAmount = Review::where('product_id', $id)->count();
 
         // Controle of het gekozen product al is verhuurd in de gekozen periode
         $productRented = Product::allProductRented($id);
 
-        return view('product', compact('product', 'productRented', 'categories'));
+        return view('product', compact('product', 'productRented', 'categories', 'reviews', 'reviewsAmount'));
     }
 
     /*
