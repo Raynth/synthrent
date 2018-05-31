@@ -8,10 +8,7 @@ use App\Model\admin\Category;
 use App\Model\admin\Product;
 use App\Model\admin\Mark;
 use App\Model\admin\Rental;
-use App\Model\user\Cart;
 use App\Model\Review;
-use Session;
-use Mollie;
 
 class ProductsController extends Controller
 {
@@ -29,11 +26,8 @@ class ProductsController extends Controller
         return view('producten', compact('producten', 'marks', 'categories', 'top5', 'sorteer'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+    /*
+     * Toont de specificaties van een geselecteerde product
      */
     public function show($id)
     {
@@ -68,20 +62,8 @@ class ProductsController extends Controller
     }
 
     /*
-     * Laat alle producten tonen gesorteerd op beoordelingen
-     * Beste beoordelingen als eerste
+     * Zoek functie toont producten aan de hand van ingetypte trefwoord
      */
-    public function showReview()
-    {
-        // $producten = Product::where('online', 1)->orderBy('created_at', 'desc')->paginate(12);
-        $marks = Mark::orderBy('naam')->get();
-        $categories = Category::orderBy('naam')->get();
-        $top5 = Rental::top5();
-        $sorteer = 3;
-
-        return view('producten', compact('producten', 'marks', 'categories', 'top5', 'sorteer'));
-    }
-
     public function searchAutocomplete(Request $request)
     {
         $trefwoord = $request->term;
@@ -96,6 +78,9 @@ class ProductsController extends Controller
         return $zoekResultaat;
     }
 
+    /*
+     * Zoekt alle producten aan de hand van trefwoord, nadat op enter is gedrukt
+     */
     public function search(Request $request)
     {
         $marks = Mark::orderBy('naam')->get();

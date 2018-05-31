@@ -6,10 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\admin\Product;
 use App\Model\admin\Category;
-use App\Model\admin\Mark;
 use App\Model\user\Cart;
 use Session;
-use Mollie;
 use Auth;
 
 class CartController extends Controller
