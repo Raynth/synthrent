@@ -61,9 +61,13 @@
                                                 <td>
                                                     <a href="{{ route('admin.admins.show', $admin->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
                                                     <a href="{{ route('admin.admins.edit', $admin->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
-                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
-                                                    <span class="fa fa-trash">
-                                                    </button>
+                                                    <form action="{{ route('admin.admins.destroy', $admin->id) }}" method="post" style="display:inline">
+                                                        @csrf
+                                                        {{ method_field('DELETE') }}
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">
+                                                            <span class="fa fa-trash">
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -100,7 +104,7 @@
     <!-- /.content-wrapper -->
 
     <!-- Popup verschijnt ter bevestiging verwijderen record -->
-    <div class="modal fade" id="modal-default">
+    <div class="modal modal-danger fade" id="confirmDelete">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -114,16 +118,10 @@
                 </div>
                 <!-- /.modal-body -->
                 <div class="modal-footer">
-                    @if (count($admins) > 0)
-                        <form action="{{ route('admin.admins.destroy', $admin->id) }}" method="post" class="pull-left">
-                            @csrf
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger">Verwijderen</button>
-                        </form>
-                    @endif
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuleren</button>
+                    <button type="button" class="btn btn-outline" id="confirm">Verwijderen</button>
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Annuleren</button>
                 </div>
-            <!-- /.modal-footer -->                
+                <!-- /.modal-footer -->                
             </div>
             <!-- /.modal-content -->
         </div>
@@ -137,6 +135,24 @@
     <script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
+        // Modal voor bevestiging voor verwijderen
+        $('#confirmDelete').on('show.bs.modal', function (e) {
+            $message = $(e.relatedTarget).attr('data-message');
+            $(this).find('.modal-body p').text($message);
+            $title = $(e.relatedTarget).attr('data-title');
+            $(this).find('.modal-title').text($title);
+        
+            // Pass form reference to modal for submission on yes/ok
+            var form = $(e.relatedTarget).closest('form');
+            $(this).find('.modal-footer #confirm').data('form', form);
+        });
+        
+        // Form confirm (yes/ok) handler, submits form
+        $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
+            $(this).data('form').submit();
+        });
+
+        // dataTable gesorteerd op 'naam', in het Nederlands
         $(function () {
             $('#example1').DataTable( {
                 "order": [[2, "asc"]],

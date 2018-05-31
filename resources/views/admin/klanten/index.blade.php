@@ -70,9 +70,13 @@
                                                         <a href="{{ route('admin.klanten.edit', $klant->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
                                                     @endif
                                                     @if(Auth::user()->rol->verwijderen == 1)
-                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
-                                                            <span class="fa fa-trash">
-                                                        </button>
+                                                        <form action="{{ route('admin.klanten.destroy', $klant->id) }}" method="post" style="display:inline">
+                                                            @csrf
+                                                            {{ method_field('DELETE') }}
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">
+                                                                <span class="fa fa-trash">
+                                                            </button>
+                                                        </form>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -112,7 +116,7 @@
     <!-- /.content-wrapper -->
 
     <!-- Popup verschijnt ter bevestiging verwijderen record -->
-    <div class="modal fade" id="modal-default">
+    <div class="modal modal-danger fade" id="confirmDelete">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -124,15 +128,10 @@
                     <p>Weet u zeker dat u deze klant wilt verwijderen?</p>
                 </div>
                 <div class="modal-footer">
-                    @if (count($klanten) > 0)
-                        <form action="{{ route('admin.klanten.destroy', $klant->id) }}" method="post" class="pull-left">
-                            @csrf
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger">Verwijderen</button>
-                        </form>
-                    @endif
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuleren</button>
+                    <button type="button" class="btn btn-outline" id="confirm">Verwijderen</button>
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Annuleren</button>
                 </div>
+                <!-- /.modal-footer -->
             </div>
             <!-- /.modal-content -->
         </div>
@@ -146,32 +145,50 @@
     <script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
-    $(function () {
-        $('#example1').DataTable( {
-          "order": [[2, "asc"]],
-            "language": {
-                processing:     "Bezig...",
-                search:         "Zoeken:",
-                lengthMenu:     "_MENU_ resultaten weergeven",
-                info:           "Er worden _START_ tot _END_ van _TOTAL_ resultaten weergegeven",
-                infoEmpty:      "Geen resultaten om weer te geven",
-                infoFiltered:   " (gefilterd uit _MAX_ resultaten)",
-                infoPostFix:    "",
-                loadingRecords: "Een moment geduld aub - bezig met laden...",
-                zeroRecords:    "Geen overeenkomende resultaten gevonden",
-                emptyTable:     "Geen resultaten aanwezig in de tabel",
-                paginate: {
-                    first:      "Eerste",
-                    previous:   "Vorige",
-                    next:       "Volgende",
-                    last:       "Laatste"
-                },
-                aria: {
-                    sortAscending:  ": activeer om kolom oplopend te sorteren",
-                    sortDescending: ": activeer om kolom aflopend te sorteren"
-                }
-            }
+        // Modal voor bevestiging voor verwijderen
+        $('#confirmDelete').on('show.bs.modal', function (e) {
+            $message = $(e.relatedTarget).attr('data-message');
+            $(this).find('.modal-body p').text($message);
+            $title = $(e.relatedTarget).attr('data-title');
+            $(this).find('.modal-title').text($title);
+        
+            // Pass form reference to modal for submission on yes/ok
+            var form = $(e.relatedTarget).closest('form');
+            $(this).find('.modal-footer #confirm').data('form', form);
         });
-    });
+        
+        // Form confirm (yes/ok) handler, submits form
+        $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
+            $(this).data('form').submit();
+        });
+
+        // dataTable gesorteerd op 'achternaam' nieuwste bovenaan in het Nederlands
+        $(function () {
+            $('#example1').DataTable( {
+            "order": [[2, "asc"]],
+                "language": {
+                    processing:     "Bezig...",
+                    search:         "Zoeken:",
+                    lengthMenu:     "_MENU_ resultaten weergeven",
+                    info:           "Er worden _START_ tot _END_ van _TOTAL_ resultaten weergegeven",
+                    infoEmpty:      "Geen resultaten om weer te geven",
+                    infoFiltered:   " (gefilterd uit _MAX_ resultaten)",
+                    infoPostFix:    "",
+                    loadingRecords: "Een moment geduld aub - bezig met laden...",
+                    zeroRecords:    "Geen overeenkomende resultaten gevonden",
+                    emptyTable:     "Geen resultaten aanwezig in de tabel",
+                    paginate: {
+                        first:      "Eerste",
+                        previous:   "Vorige",
+                        next:       "Volgende",
+                        last:       "Laatste"
+                    },
+                    aria: {
+                        sortAscending:  ": activeer om kolom oplopend te sorteren",
+                        sortDescending: ": activeer om kolom aflopend te sorteren"
+                    }
+                }
+            });
+        });
     </script>
 @endsection

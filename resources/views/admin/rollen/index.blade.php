@@ -57,6 +57,13 @@
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                                                         <span class="fa fa-trash">
                                                     </button>
+                                                    <form action="{{ route('admin.rollen.destroy', $rol->id) }}" method="post" style="display:inline">
+                                                        @csrf
+                                                        {{ method_field('DELETE') }}
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">
+                                                            <span class="fa fa-trash">
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -90,7 +97,7 @@
     <!-- /.content-wrapper -->
 
     <!-- Popup verschijnt ter bevestiging verwijderen record -->
-    <div class="modal fade" id="modal-default">
+    <div class="modal modal-danger fade" id="confirmDelete">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -99,19 +106,16 @@
                     </button>
                     <h4 class="modal-title">Rol verwijderen</h4>
                 </div>
+                <!-- /.modal-header -->
                 <div class="modal-body">
                     <p>Weet u zeker dat u deze rol wilt verwijderen?</p>
                 </div>
+                <!-- /.modal-body -->
                 <div class="modal-footer">
-                    @if (count($rollen) > 0)
-                        <form action="{{ route('admin.rollen.destroy', $rol->id) }}" method="post" class="pull-left">
-                            @csrf
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger">Verwijderen</button>
-                        </form>
-                    @endif
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuleren</button>
+                    <button type="button" class="btn btn-outline" id="confirm">Verwijderen</button>
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Annuleren</button>
                 </div>
+                <!-- /.modal-footer -->
             </div>
             <!-- /.modal-content -->
         </div>
