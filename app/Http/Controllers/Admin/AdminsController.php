@@ -54,12 +54,21 @@ class AdminsController extends Controller
             'rol_id' => 'required'
         ]);
 
+        // Handle File Upload
+        if ($request->hasFile('foto')) {
+            $filename = $request->foto->getClientOriginalName();
+            $request->foto->storeAs('public/cover_images', $filename);
+        } else {
+            $filename = 'noimage.jpg';
+        }
+
         // Creeer admin
         $admin = new Admin;
         $admin->naam = $request->input('naam');
         $admin->email = $request->input('email');
         $admin->telefoon = $request->input('telefoon');
         $admin->rol_id = $request->input('rol_id');
+        $admin->foto = $filename;
         $admin->save();
 
         return redirect()->route('admin.admins.index')->with('success', 'Gebruiker toegevoegd');
@@ -107,12 +116,21 @@ class AdminsController extends Controller
             'rol_id' => 'required'
         ]);
         
+        // Handle File Upload
+        if ($request->hasFile('foto')) {
+            $filename = $request->foto->getClientOriginalName();
+            $request->foto->storeAs('public/cover_images', $filename);
+        }
+
         // Update admin
         $admin = Admin::find($id);
         $admin->naam = $request->input('naam');
         $admin->email = $request->input('email');
         $admin->telefoon = $request->input('telefoon');
         $admin->rol_id = $request->input('rol_id');
+        if ($request->hasFile('foto')) {
+            $admin->foto = $filename;
+        }
         $admin->save();
 
         return redirect()->route('admin.admins.index')->with('success', 'Gebruiker bijgewerkt');

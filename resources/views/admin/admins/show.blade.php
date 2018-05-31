@@ -50,7 +50,11 @@
                         </tr>
                         <tr>
                             <th>Rol:</th>
-                            <td> {{ $admin->rol->naam }}</td>
+                            <td>{{ $admin->rol->naam }}</td>
+                        </tr>
+                        <tr>
+                            <th>Foto:</th>
+                            <td><img src="{{ asset('storage/cover_images/'.$admin->foto) }}" width="100%"></td>
                         </tr>
                     </table>
                 </div>

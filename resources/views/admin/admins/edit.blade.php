@@ -38,7 +38,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('admin.admins.update', $admin->id) }}" method="post">
+                        <form role="form" action="{{ route('admin.admins.update', $admin->id) }}" enctype="multipart/form-data" method="post">
                             @csrf
                             {{ method_field('PUT') }}
                             <div class="box-body">
@@ -66,6 +66,11 @@
                                                     <option value="{{ $rol->id }}" {{ ($admin->rol_id == $rol->id) ? 'selected' : '' }}>{{$rol->naam }}</option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                        <!-- /.form-group -->
+                                        <div class="form-group">
+                                            <label for="foto">Afbeelding invoer</label>
+                                            <input type="file" id="foto" name="foto" value="{{ $admin->foto }}">
                                         </div>
                                         <!-- /.form-group -->
                                     </div>

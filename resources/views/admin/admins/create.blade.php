@@ -65,6 +65,11 @@
                                         </select>
                                     </div>
                                     <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label for="foto">Afbeelding invoer</label>
+                                        <input type="file" id="foto" name="foto">
+                                    </div>
+                                    <!-- /.form-group -->
                                 </div>
                                 <!-- /.col -->
                             </div>
