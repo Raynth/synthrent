@@ -30,7 +30,6 @@
 								<select class="input" onchange="location = this.value">
 									<option value="{{ route('producten.index') }}" {{ ($sorteer == 1) ? 'selected' : '' }}>Nieuwste</option>
 									<option value="{{ route('producten.showName') }}" {{ ($sorteer == 2) ? 'selected' : '' }}>Naam</option>
-									<option value="{{ route('producten.showReview') }}" {{ ($sorteer == 3) ? 'selected' : '' }}>Beoordeling</option>
 								</select>
 							</div>
 						</div>
@@ -86,7 +85,6 @@
 								<select class="input" onchange="location = this.value">
 									<option value="{{ route('producten.index') }}" {{ ($sorteer == 1) ? 'selected' : '' }}>Nieuwste</option>
 									<option value="{{ route('producten.showName') }}" {{ ($sorteer == 2) ? 'selected' : '' }}>Naam</option>
-									<option value="{{ route('producten.showReview') }}" {{ ($sorteer == 3) ? 'selected' : '' }}>Beoordeling</option>
 								</select>
 							</div>
 						</div>
