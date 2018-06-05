@@ -6,7 +6,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="{{ route('home') }}">Home</a></li>
-				<li class="active">{{ $selectedMark->naam }} producten</li>
+				<li class="active">Merk: {{ $selectedMark->naam }}</li>
 			</ul>
 		</div>
 	</div>
@@ -26,11 +26,7 @@
 					<div class="store-filter clearfix">
 						<div class="pull-left">
 							<div class="sort-filter">
-								<span class="text-uppercase">Gesorteerd op:</span>
-								<select class="input" onchange="location = this.value">
-									<option value="{{ route('producten.index') }}" {{ ($sorteer == 1) ? 'selected' : '' }}>Nieuwste</option>
-									<option value="{{ route('producten.showName') }}" {{ ($sorteer == 2) ? 'selected' : '' }}>Naam</option>
-								</select>
+								<span class="text-uppercase">Merk: {{ $selectedMark->naam }}</span>
 							</div>
 						</div>
 						<div class="pull-right">
@@ -81,11 +77,7 @@
 					<div class="store-filter clearfix">
 						<div class="pull-left">
 							<div class="sort-filter">
-								<span class="text-uppercase">Gesorteerd op:</span>
-								<select class="input" onchange="location = this.value">
-									<option value="{{ route('producten.index') }}" {{ ($sorteer == 1) ? 'selected' : '' }}>Nieuwste</option>
-									<option value="{{ route('producten.showName') }}" {{ ($sorteer == 2) ? 'selected' : '' }}>Naam</option>
-								</select>
+								<span class="text-uppercase">Merk: {{ $selectedMark->naam }}</span>
 							</div>
 						</div>
 						<div class="pull-right">
