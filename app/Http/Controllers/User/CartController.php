@@ -13,7 +13,7 @@ use Auth;
 class CartController extends Controller
 {
     /*
-    * Voeg een verhuur toe aan de winkelwagen
+    * Voeg een item toe aan de winkelwagen
     */
     public function addToCart(Request $request, $id)
     {
@@ -56,6 +56,9 @@ class CartController extends Controller
         return redirect()->route('winkelwagen.show');
     }
 
+    /*
+    * Verwijder een iten uit de winkelwagen
+    */
     public function removeItem($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -69,9 +72,11 @@ class CartController extends Controller
         }
         
         return redirect()->route('winkelwagen.show');
-        
     }
 
+    /*
+    * Laat alle items in de winkelwagen tonen
+    */
     public function show()
     {
         $categories = Category::orderBy('naam')->get();
