@@ -21,15 +21,6 @@ class Rental extends Model
         return $this->belongsTo('App\Model\admin\Mark');
     }
 
-    public function create()
-    {
-        return Product::select('products.id', 'merk_id', 'naam', 'huurprijs')
-            ->join('marks', 'marks.id', '=', 'products.merk_id')
-            ->orderBy('naam', 'asc')
-            ->orderBy('naam', 'asc')
-            ->get();
-    }
-
     public static function top5()
     {
         return Rental::selectRaw('product_id, SUM(dagen) as somdagen')
