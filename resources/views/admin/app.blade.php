@@ -73,9 +73,9 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-right">
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                        <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                             class="btn btn-default btn-flat">Uitloggen</a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
                                     </div>
@@ -112,12 +112,12 @@
                     </li>
                     <li>
                         <a href="{{ route('admin.verhuren.index') }}">
-                            <i class="fa fa-dashboard"></i> <span>Verhuren</span>
+                            <i class="fa fa-cart-arrow-down"></i> <span>Verhuren</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.producten.index') }}">
-                            <i class="fa fa-dashboard"></i> <span>Producten</span>
+                            <i class="fa fa-music"></i> <span>Producten</span>
                         </a>
                     </li>
                     <li>
@@ -127,17 +127,17 @@
                     </li>
                     <li>
                         <a href="{{ route('admin.categorieen.index') }}">
-                            <i class="fa fa-dashboard"></i> <span>Categorieën</span>
+                            <i class="fa fa-filter"></i> <span>Categorieën</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.klanten.index') }}">
-                            <i class="fa fa-dashboard"></i> <span>Klanten</span>
+                            <i class="fa fa-user"></i> <span>Klanten</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.reviews.index') }}">
-                            <i class="fa fa-dashboard"></i> <span>Reviews</span>
+                            <i class="fa fa-comment"></i> <span>Reviews</span>
                         </a>
                     </li>
                     @if (Auth::user()->rol->admin == 1)
