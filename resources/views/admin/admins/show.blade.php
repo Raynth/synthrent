@@ -71,38 +71,3 @@
     </div>
     <!-- /.content-wrapper -->
 @endsection
-
-@section('footerSection')
-    <!-- DataTables -->
-    <script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-    <script>
-        $(function () {
-            $('#example1').DataTable( {
-                "order": [[3, "dec"]],
-                "language": {
-                    processing:     "Bezig...",
-                    search:         "Zoeken:",
-                    lengthMenu:     "_MENU_ resultaten weergeven",
-                    info:           "Er worden _START_ tot _END_ van _TOTAL_ resultaten weergegeven",
-                    infoEmpty:      "Geen resultaten om weer te geven",
-                    infoFiltered:   " (gefilterd uit _MAX_ resultaten)",
-                    infoPostFix:    "",
-                    loadingRecords: "Een moment geduld aub - bezig met laden...",
-                    zeroRecords:    "Geen overeenkomende resultaten gevonden",
-                    emptyTable:     "Geen resultaten aanwezig in de tabel",
-                    paginate: {
-                        first:      "Eerste",
-                        previous:   "Vorige",
-                        next:       "Volgende",
-                        last:       "Laatste"
-                    },
-                    aria: {
-                        sortAscending:  ": activeer om kolom oplopend te sorteren",
-                        sortDescending: ": activeer om kolom aflopend te sorteren"
-                    }
-                }
-            });
-        });
-    </script>
-@endsection
