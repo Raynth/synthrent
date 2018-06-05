@@ -75,7 +75,6 @@ class ProductsController extends Controller
         $product->omschrijving = $request->input('omschrijving');
         $product->details = $request->input('details');
         $product->foto = $filename;
-        $product->online = $request->input('online');
         if (null !== $request->input('online')) {
             $product->online = 1;
         } else {
@@ -148,7 +147,6 @@ class ProductsController extends Controller
         if ($request->hasFile('foto')) {
             $product->foto = $filename;
         }
-        $product->online = $request->input('online');
         if (null !== $request->input('online')) {
             $product->online = 1;
         } else {
