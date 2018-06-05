@@ -62,7 +62,7 @@
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right" id="begindatum" name="begindatum">
+										<input type="text" class="form-control pull-right" id="begindatum" name="begindatum" onchange="berekenPrijs()">
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -73,11 +73,15 @@
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right" id="einddatum" name="einddatum">
+										<input type="text" class="form-control pull-right" id="einddatum" name="einddatum" onchange="berekenPrijs()">
 									</div>
 									<!-- /.input group -->
 								</div>
 								<!-- /.form group -->
+								<div>
+									<h4>Huurprijs voor <span id="dagen">0</span> dagen:</h4>
+									<h3 id="totale_huurprijs" class="primary-color">&euro; 0,00</h3>
+								</div>
 								<div class="form-group">
 									<button type="submit" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Huren</button>
 								</div>
@@ -227,5 +231,29 @@
 				 $('#einddatum').datepicker('setStartDate', begindatum);
 			})
         })
+
+        var huurprijs = JSON.parse('{{ $product->huurprijs }}')
+		var dagen = 0
+		var totaalHuurprijs = 0
+
+		// Controleer of begindatum en einddatum zijn ingevuld en bereken het aantal dagen tussen deze 2 datums
+        function berekenPrijs() {
+            // Haal de datums 'van' en 'tot'      
+            var begindatum = document.getElementById("begindatum").value
+            var einddatum = document.getElementById("einddatum").value
+            // Controleer of beide datums zijn ingevuld, voordat het aantal dagen berekend kan worden
+            if (begindatum != '' && einddatum != '') {
+                begindatum = Date.parse(begindatum)
+                einddatum = Date.parse(einddatum)
+                // Bereken het aantal milliseconden tussen deze 2 datums
+                var timeDiff = einddatum - begindatum
+                // Bereken aantal dagen van het aantal milliseconden
+                dagen = Math.floor(timeDiff / (1000 * 60 * 60 * 24))
+                document.getElementById('dagen').innerHTML = dagen
+                // Bereken totale huurprijs: aantal dagen x huurprijs
+                totaalHuurprijs = (dagen * huurprijs).toFixed(2)
+                document.getElementById("totale_huurprijs").innerHTML = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(totaalHuurprijs);
+            }
+        }
     </script>
 @endsection
