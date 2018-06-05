@@ -68,7 +68,7 @@
 				<div class="row clearfix-laatste-product">
 					@foreach($laatsteProducten as $laatsteProduct)
 						<!-- Product Single -->
-						<div class="col-md-3 col-sm-6 col-xs-6">
+						<div class="col-md-3 col-sm-4 col-xs-6">
 							<div class="product product-single">
 								<div class="product-thumb">
 									<!-- Label 'Nieuw' verschijnt alleen als het product binnen 2 maanden is toegevoegd -->
