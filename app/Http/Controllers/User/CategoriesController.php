@@ -12,16 +12,16 @@ use App\Model\admin\Rental;
 class CategoriesController extends Controller
 {
     /*
-    * Laat alle producten van de geselecteerde categorie zien
-    */
-    public function show($slug)
+     * Laat alle producten tonen gesorteerd op nieuwste eerst
+     */
+    public function index($slug)
     {
         $selectedCategory = Category::where('slug', $slug)->first();
-        $producten = Product::where('category_id', $selectedCategory->id)->where('online', 1)->paginate(12);
+        $producten = Product::where('category_id', $selectedCategory->id)->where('online', 1)->orderBy('created_at', 'desc')->paginate(12);
         $marks = Mark::orderBy('naam')->get();
         $categories = Category::orderBy('naam')->get();
         $top5 = Rental::top5();
-        
+
         return view('category', compact('producten', 'selectedCategory', 'marks', 'categories', 'top5'));
     }
 }
