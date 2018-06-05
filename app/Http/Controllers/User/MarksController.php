@@ -11,7 +11,7 @@ use App\Model\admin\Rental;
 
 class MarksController extends Controller
 {
-    public function show($slug)
+    public function index($slug)
     {
         $selectedMark = Mark::where('slug', $slug)->first();
         $producten = Product::where('merk_id', $selectedMark->id)->where('online', 1)->paginate(12);
