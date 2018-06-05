@@ -47,7 +47,7 @@ class ProductsController extends Controller
      */
     public function showName()
     {
-        $producten = Product::select('products.id', 'merk_id', 'marks.naam', 'products.naam', 'huurprijs', 'foto')
+        $producten = Product::select('products.id', 'merk_id', 'marks.naam', 'products.naam', 'huurprijs', 'foto', 'products.created_at')
             ->join('marks', 'marks.id', '=', 'products.merk_id')
             ->orderBy('marks.naam')
             ->orderBy('products.naam')
