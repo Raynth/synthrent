@@ -5,7 +5,7 @@
 						<h3 class="aside-title">Filter op merk</h3>
 						<ul class="list-links">
 							@foreach($marks as $mark)
-								<li><a href="{{ route('merk.show', str_slug($mark->naam)) }}">{{ $mark->naam }}</a></li>
+								<li><a href="{{ route('merk.index', str_slug($mark->naam)) }}">{{ $mark->naam }}</a></li>
 							@endforeach
 						</ul>
 					</div>
