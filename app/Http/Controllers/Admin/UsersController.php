@@ -100,7 +100,7 @@ class UsersController extends Controller
     {
         $klant = User::find($id);
 
-        return view('admin.klanten.edit', compact('klant', 'categories')); 
+        return view('admin.klanten.edit', compact('klant')); 
     }
 
     /**
@@ -113,7 +113,7 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-           'voornaam' => 'required',
+            'voornaam' => 'required',
             'achternaam' => 'required',
             'straat' => 'required',
             'huisnummer' => 'required',
