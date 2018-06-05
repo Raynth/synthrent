@@ -25,9 +25,9 @@ Route::group(['namespace' => 'User'], function() {
 
     Route::get('over_ons', 'AboutUsController@index')->name('over_ons');
     
-    Route::get('merk/{merk}', 'MarksController@show')->name('merk.show');
+    Route::get('merk/{merk}', 'MarksController@index')->name('merk.index');
     
-    Route::get('categorie/{categorie}', 'CategoriesController@show')->name('categorie.show');
+    Route::get('categorie/{categorie}', 'CategoriesController@index')->name('categorieen.index');
     
     Route::get('winkelwagen', 'CartController@show')->name('winkelwagen.show');
     Route::post('item-toevoegen/{id}', 'CartController@addTocart')->name('winkelwagen.itemtoevoegen');
@@ -67,5 +67,6 @@ Route::group(['namespace' => 'Admin'], function() {
     // Admin Auth Routes
     Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('admin-login', 'Auth\LoginController@login');
+    Route::post('admin-logout', 'Auth\LoginController@logout')->name('admin.logout');
 });
 Auth::routes();
