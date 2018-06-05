@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Model\admin\Category;
 use App\Model\admin\Rental;
 use App\Model\user\User;
 use Illuminate\Support\Facades\Hash;
@@ -21,16 +22,18 @@ class CustomerAccountController extends Controller
     public function index()
     {
         $rented = Rental::where('klant_id', Auth::id())->get();
+        $categories = Category::orderBy('naam')->get();
         
-        return view('account.show', compact('klant', 'rented'));
+        return view('account.show', compact('rented', 'categories'));
     }
 
     // Het wijzigen van klant account gegevens
     public function edit()
     {
         $klant = User::find(Auth::id());
+        $categories = Category::orderBy('naam')->get();        
         
-        return view('account.edit', compact('klant'));
+        return view('account.edit', compact('klant', 'categories'));
     }
 
     // Het opslaan van de gewijzigde klant account gegevens
@@ -63,8 +66,9 @@ class CustomerAccountController extends Controller
     public function editPassword()
     {
         $klant = User::find(Auth::id());
+        $categories = Category::orderBy('naam')->get();
         
-        return view('account.edit-password', compact('klant'));
+        return view('account.edit-password', compact('klant', 'categories'));
     }
 
     // Het opslaan van de gewijzigde wachtwoord van de klant
