@@ -186,7 +186,7 @@
 						<span class="category-header">Categorieën <i class="fa fa-list"></i></span>
 						<ul class="category-list">
 							@foreach ($categories as $category)
-								<li><a href="{{ route('categorie.show', str_slug($category->naam)) }}">{{ $category->naam }}</a></li>
+								<li><a href="{{ route('categorieen.index', str_slug($category->naam)) }}">{{ $category->naam }}</a></li>
 							@endforeach
 						</ul>
 					</div>
@@ -199,7 +199,8 @@
 					<ul class="menu-list">
 						<li><a href="{{ route('home') }}">Home</a></li>
 						<li><a href="{{ route('producten.index') }}">Producten</a></li>
-						<li><a href="{{ route('contact.create') }}">Contact</a></li>						
+						<li><a href="{{ route('contact.create') }}">Contact</a></li>					
+						<li><a href="{{ route('over_ons') }}">Over Ons</a></li>					
 					</ul>
 				</div>
 				<!-- menu nav -->
@@ -269,7 +270,7 @@
 					<div class="footer">
 						<h3 class="footer-header">Klanten Service</h3>
 						<ul class="list-links">
-							<li><a href="#">Over Ons</a></li>
+							<li><a href="{{ route('over_ons') }}">Over Ons</a></li>
 							<li><a href="#">Algemene Voorwaarden</a></li>
 							<li><a href="#">FAQ</a></li>
 						</ul>
