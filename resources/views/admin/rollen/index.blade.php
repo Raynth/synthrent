@@ -53,10 +53,8 @@
                                                 <td>{{ $rol->id }}</td>
                                                 <td>{{ $rol->naam }}</td>
                                                 <td>
+                                                <a href="{{ route('admin.rollen.show', $rol->id) }}" class="btn btn-primary"><span class="fa fa-search-plus"></a>
                                                     <a href="{{ route('admin.rollen.edit', $rol->id) }}" class="btn btn-warning"><span class="fa fa-edit"></a>
-                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
-                                                        <span class="fa fa-trash">
-                                                    </button>
                                                     <form action="{{ route('admin.rollen.destroy', $rol->id) }}" method="post" style="display:inline">
                                                         @csrf
                                                         {{ method_field('DELETE') }}
@@ -115,7 +113,7 @@
                     <button type="button" class="btn btn-outline" id="confirm">Verwijderen</button>
                     <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Annuleren</button>
                 </div>
-                <!-- /.modal-footer -->
+                <!-- /.modal-footer -->                
             </div>
             <!-- /.modal-content -->
         </div>
